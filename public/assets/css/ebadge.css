@@ -1,0 +1,11 @@
+@media print {
+    .btn-outline-primary,
+    .btn-outline-secondary,
+    .btn-outline-info {
+        display: none;
+    }
+}
+
+@page {
+    size: 266mm 165mm;
+}

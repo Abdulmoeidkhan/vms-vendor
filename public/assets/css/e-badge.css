@@ -1,0 +1,89 @@
+@media screen, print {
+    .container {
+        font-size: 14px;
+    }
+    .container-first-child {
+        border-bottom: 1px dashed #000;
+    }
+    .parent-print-program div {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .parent-logo {
+        display: grid;
+        grid-template-columns: 1fr 1fr 2fr;
+    }
+    .logo-child {
+        margin: 20px auto;
+    }
+
+    .logo-img {
+        width: 150px;
+        height: 140px;
+    }
+    .qr-code {
+        width: 128px;
+        margin: 0 auto;
+    }
+    #barCode {
+        margin: 0 auto;
+    }
+    .card-border {
+        /* border: 1px solid #000; */
+        height: 500px;
+    }
+    .parent-print-program:first-child {
+        border-right: 1px dashed black;
+        /* border-left: 1px dashed black ; */
+    }
+    .list-rules {
+        padding-inline-start: 0px !important;
+    }
+    .list-rules > li {
+        margin-bottom: 5px;
+    }
+    /* .badge-box-height {
+        height: 750px;
+    } */
+    .badge-box {
+        padding-top: 3em;
+        padding-bottom: 4em;
+    }
+    .badge-box-2 {
+        padding-top: 3em;
+        padding-bottom: 4em;
+        padding-left: 4em;
+    }
+}
+@media screen {
+    .container {
+        margin-top: 50px;
+    }
+    .parent-print-Badge {
+        margin: 20pt auto;
+        width: 400px;
+        height: 480px;
+        border: 1px solid #000;
+    }
+    .btn-parent {
+        text-align: center;
+        margin-top: 20px;
+    }
+}
+
+@media print {
+    .btn-outline-primary,
+    .btn-outline-secondary,
+    .btn-outline-info,
+    .btn-contain {
+        display: none;
+    }
+    .container-fluid {
+        margin-top: -20px !important;
+        padding-top: -20px !important;
+    }
+}
+
+@page {
+    size: 210mm 297mm;
+}
