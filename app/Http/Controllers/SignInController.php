@@ -44,13 +44,13 @@ class SignInController extends Controller
                     session()->put('user', $user);
                     return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
                 } else {
-                    return redirect()->route('signIn')->with('error', "Password credentials do not match our records.");
+                    return redirect()->route('login')->with('error', "Password credentials do not match our records.");
                 }
             } else {
                 return redirect()->route('accountActivation')->with('error', "User is not activated");
             }
         } else {
-            return redirect()->route('signIn')->with('error', "User does not exist");
+            return redirect()->route('login')->with('error', "User does not exist");
         }
     }
 }

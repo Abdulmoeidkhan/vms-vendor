@@ -6,15 +6,18 @@ use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\ProfileImageController;
+use App\Http\Controllers\UserPanelController;
+use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\UserFullProfileController;
 
-
-Route::get('/signIn', function () {
+Route::get('/login', function () {
     if (auth()?->user()?->uid) {
         return redirect()->route('pages.dashboard');
     } else {
         return view('pages.signIn');
     }
-})->name("signIn");
+})->name("login");
 
 Route::get('/accountActivation', function () {
     if (auth()?->user()?->uid) {
@@ -24,12 +27,17 @@ Route::get('/accountActivation', function () {
     }
 })->name("accountActivation");
 
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
+
+    Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
+    Route::post('/imageUpload', [ProfileImageController::class, 'imageBlobUpload'])->name('request.imageUpload');
+    Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
 });
 
 Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
+Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
 Route::post('/activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
-

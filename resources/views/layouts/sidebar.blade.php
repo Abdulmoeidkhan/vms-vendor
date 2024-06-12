@@ -28,11 +28,11 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a class="sidebar-link" href="{{route('pages.dashboard')}}" aria-expanded="false">
+                    <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
                         <span>
-                            <i class="ti ti-layout-dashboard"></i>
+                            <i class="ti ti-users"></i>
                         </span>
-                        <span class="hide-menu">Organisation</span>
+                        <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
             </ul>

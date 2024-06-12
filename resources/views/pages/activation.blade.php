@@ -35,7 +35,7 @@
                                 <input type="submit" name="Activation" value="Activate" value="Sign Up" class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />
                                 <div class="d-flex align-items-center justify-content-center">
                                     <p class="fs-4 mb-0 fw-bold">Already have an Account?</p>
-                                    <a class="text-badar fw-bold ms-2" href="{{route('signIn')}}">Sign In</a>
+                                    <a class="text-badar fw-bold ms-2" href="{{route('login')}}">Sign In</a>
                                 </div>
                             </form>
                             <br/>
