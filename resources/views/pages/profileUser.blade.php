@@ -121,20 +121,12 @@
                             @csrf
                             <div class="mb-3">
                                 <label for="roleSelect" class="form-label">Roles</label>
-                                <!-- @if($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor")
-                                <select id="roleSelect" name="roles" class="form-select" <?php echo $user->uid === auth()->user()->uid ? 'disabled' : ($user->roles[0]->name == "delegate" || $user->roles[0]->name == "liason" || $user->roles[0]->name == "interpreter" || $user->roles[0]->name == "receiving" || $user->roles[0]->name == "hotels" || $user->roles[0]->name == "airport" || $user->roles[0]->name == "vendor" ? 'disabled' : ''); ?>>
-                                    @foreach($roles as $role)
-                                    <option value="{{$role->name}}" <?php echo $user->roles[0]->name === $role->name ? 'selected' : '' ?>>{{$role->display_name}}</option>
-                                    @endforeach
-                                </select>
-                                @else -->
                                 <select id="roleSelect" name="roles" class="form-select">
                                     @foreach($selectiveRoles as $selectiveRole)
                                     <option value="{{$selectiveRole->name}}" <?php echo $user->roles[0]->name === $selectiveRole->name ? 'selected' : '' ?>>{{$selectiveRole->display_name}}</option>
                                     {{$selectiveRole->name}}
                                     @endforeach
                                 </select>
-                                <!-- @endif -->
                             </div>
 
                             <input type="hidden" name="uid" value="{{$user->uid}}" required/>
@@ -201,61 +193,6 @@
         dwn.classList.remove('hide');
         dwn.download = 'imagename.png';
         dwn.setAttribute('href', imgSrc);
-    });
-</script>
-<script>
-    // vars
-    let result_representatives = document.querySelector('.result-representatives'),
-        img_result_representatives = document.querySelector('.img-result-representatives'),
-        save_representatives = document.querySelector('.save-representatives'),
-        cropped_representatives = document.querySelector('.cropped-representatives'),
-        img_w_representatives = document.querySelector('.img-w-representatives'),
-        dwn_representatives = document.querySelector('.download-representatives'),
-        upload_representatives = document.querySelector('#rep_picture'),
-        cropper_representatives = '';
-
-    // on change show image with crop options
-    upload_representatives.addEventListener('change', e => {
-        if (e.target.files.length) {
-            // start file reader
-            const reader = new FileReader();
-            reader.onload = e => {
-                if (e.target.result) {
-                    // create new image
-                    let img = document.createElement('img');
-                    img.id = 'image';
-                    img.src = e.target.result;
-                    // clean result before
-                    result_representatives.innerHTML = '';
-                    // append new image
-                    result_representatives.appendChild(img);
-                    // show save btn and options
-                    save_representatives.classList.remove('hide-representatives');
-                    // options.classList.remove('hide');
-                    // init cropper
-                    cropper_representatives = new Cropper(img);
-                }
-            };
-            reader.readAsDataURL(e.target.files[0]);
-        }
-    });
-
-    // save on click
-    save_representatives.addEventListener('click', e => {
-        e.preventDefault();
-        // get result to data uri
-        let imgSrc = cropper_representatives.getCroppedCanvas({
-            width: img_w_representatives.value // input value
-        }).toDataURL();
-        // remove hide class of img
-        cropped_representatives.classList.remove('hide-representatives');
-        img_result_representatives.classList.remove('hide-representatives');
-        // show image cropped
-        cropped_representatives.src = imgSrc;
-        document.getElementById('rep_saved_picture').value = imgSrc;
-        dwn_representatives.classList.remove('hide-representatives');
-        dwn_representatives.download = 'imagename.png';
-        dwn_representatives.setAttribute('href', imgSrc);
     });
 </script>
 @endsection

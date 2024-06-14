@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ImageBlob;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,6 +42,7 @@ class SignInController extends Controller
                     //     default:
                     //         return redirect()->back()->with('error', 'Something Went Wrong');
                     // }
+                    $user->images = ImageBlob::where('uid', Auth::user()->uid)->first();
                     session()->put('user', $user);
                     return redirect()->route('pages.dashboard')->with('message', "You have successfully Signed In")->with('flash_message', "If you need to install this App please click below");
                 } else {

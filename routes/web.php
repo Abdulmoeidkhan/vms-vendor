@@ -6,9 +6,11 @@ use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
 
 Route::get('/login', function () {
@@ -29,12 +31,26 @@ Route::get('/accountActivation', function () {
 
 
 Route::group(['middleware' => 'auth'], function () {
+
+    // Dashboard Routes
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
 
+
+    // User Panel Routes
     Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
+    Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::post('/imageUpload', [ProfileImageController::class, 'imageBlobUpload'])->name('request.imageUpload');
-    Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
+
+    // My profile
+    Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
+    Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
+    
+    // Organization 
+    Route::get('/organization', [OrganizationController::class, 'render'])->name('pages.organization');
+
+
+    // Logout Routes
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
 });
 

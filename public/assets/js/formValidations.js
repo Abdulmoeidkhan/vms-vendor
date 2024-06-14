@@ -64,14 +64,6 @@ authorityUpdateForm.addEventListener("submit", getAuthority);
 
 function getAuthority(event) {
     event.preventDefault();
-    // let reqObj = {'rolesAndPermissionRequest':true};
-    // for (val of event.target) {
-    //     // console.log(val['checked'])
-    //     reqObj = {
-    //         ...reqObj,
-    //         [val["name"]]: val["value"] == "on" ? val["checked"] : val["value"],
-    //     };
-    // }
     let permissionsArray = (elementsRecieved) => {
         let permissionArray = []
         for (valuesRecieved in elementsRecieved) {
@@ -85,9 +77,6 @@ function getAuthority(event) {
         uid: authorityUpdateForm.elements["uid"].value,
         permissions: permissionsArray(authorityUpdateForm.elements)
     };
-    // console.log(authorityUpdateForm.elements["uid"]);
-    // console.log(authorityUpdateForm.elements['create'].name,authorityUpdateForm.elements['create'].checked);
-    // console.log(reqObj);
     axios
         .post("/updateAuthority", reqObj)
         .then(function (response) {

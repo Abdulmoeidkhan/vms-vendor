@@ -14,6 +14,7 @@
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
+            @if(session()->get('user')->roles[0]->name =="admin")
             <ul id="sidebarnav">
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -35,7 +36,26 @@
                         <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
+                        <span class="d-flex">
+                            <i class="ti ti-building-factory-2"></i>
+                        </span>
+                        <span class="hide-menu">Vendor</span>
+                    </a>
+                    <ul aria-expanded="false" class="collapse first-level">
+                        <li class="sidebar-item">
+                            <a href="{{route('pages.organization')}}" class="sidebar-link">
+                                <div class="round-16 d-flex align-items-center justify-content-center">
+                                    <i class="ti ti-building"></i>
+                                </div>
+                                <span class="hide-menu">Organisation</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
             </ul>
+            @endif
             <br />
             <br />
             <br />

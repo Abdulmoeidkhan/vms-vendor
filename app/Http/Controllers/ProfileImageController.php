@@ -22,7 +22,7 @@ class ProfileImageController extends Controller
         }
     }
 
-    protected function imageBlobUpload(Request $req)
+    function imageBlobUpload(Request $req)
     {
         if ($req->savedpicture) {
             $imgBlob = new ImageBlob();
@@ -38,7 +38,7 @@ class ProfileImageController extends Controller
         }
     }
 
-    protected function imageBlobUpdate($file, $id)
+    function imageBlobUpdate($file, $id)
     {
         $imageBlob = $file;
         $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);

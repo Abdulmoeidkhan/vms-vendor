@@ -17,6 +17,8 @@ class UserFullProfileController extends Controller
         $selectiveRoles = Role::all();
         $permissions = Permission::all();
         $user = User::with('roles', 'permissions')->where('uid', $id)->first();
+        $image = ImageBlob::where('uid', $id)->first();
+        $user->images = $image;
         return view('pages.profileUser', ['user' => $user, 'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
     }
     public function renderMyProfile(Request $req)
