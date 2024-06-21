@@ -12,7 +12,26 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('uid')->primary();
+            $table->string('company_category');
+            $table->string('company_name');
+            $table->string('company_address');
+            $table->string('company_type');
+            $table->string('company_city');
+            $table->string('company_country');
+            $table->bigInteger('company_contact')->unique();
+            $table->bigInteger('company_ntn')->unique();
+            $table->string('company_owner');
+            $table->string('company_owner_designation');
+            $table->bigInteger('company_owner_contact')->unique();
+
+            $table->string('company_rep_name');
+            $table->string('company_rep_designation');
+            $table->string('company_rep_dept')->unique();
+            $table->string('company_rep_contact')->unique();
+            $table->string('company_rep_email')->unique();
+            $table->string('company_rep_phone')->unique();
+            $table->uuid('company_rep_uid')->nullable();
             $table->timestamps();
         });
     }

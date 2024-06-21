@@ -45,9 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
     // My profile
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
-    
+
     // Organization 
     Route::get('/organization', [OrganizationController::class, 'render'])->name('pages.organization');
+    Route::get('/addOrganization', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
+    Route::get('/getOrganization', [OrganizationController::class, 'getOrganization'])->name('request.getOrganization');
+    Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
 
 
     // Logout Routes
