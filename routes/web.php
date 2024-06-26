@@ -48,9 +48,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     // Organization 
     Route::get('/organization', [OrganizationController::class, 'render'])->name('pages.organization');
-    Route::get('/addOrganization', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
     Route::get('/getOrganization', [OrganizationController::class, 'getOrganization'])->name('request.getOrganization');
+
+    Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
+    
     Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
+    Route::post('/updateOrganizationRequest/{id?}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
 
 
     // Logout Routes

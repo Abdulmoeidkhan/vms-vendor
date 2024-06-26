@@ -29,7 +29,7 @@
             <div class="card-body p-4">
                 <h5 class="card-ti tle fw-semibold mb-4">New Organization</h5>
                 <div class="table-responsive">
-                    <form name="organizationInfo" id="organizationInfo" method="POST" action="{{isset($organization->uid)? route('request.updateOfficer',$organization->uid):route('request.addOrganization')}}">
+                    <form name="organizationInfo" id="organizationInfo" method="POST" action="{{isset($organization->uid)? route('request.updateOrganization',$organization->uid):route('request.addOrganization')}}">
                         <fieldset>
                             <legend>Add Organization Form</legend>
                             @csrf
@@ -39,8 +39,14 @@
                                         <div class="mb-3">
                                             <label for="company_category" class="form-label">Company Category</label>
                                             <select name="company_category" id="company_category" class="form-select">
+                                                @if(isset($organization->uid))
+                                                <option value="Test" {{$organization->company_category == 'Test'?'selected':''}}> Test 1</option>
+                                                <option value="Test2" {{$organization->company_category == 'Test2'?'selected':''}}> Test 2</option>
+                                                @else
                                                 <option value="" selected disabled hidden> Select Category </option>
-                                                <option value="Test"> Test </option>
+                                                <option value="Test"> Test 1</option>
+                                                <option value="Test2"> Test 2</option>
+                                                @endif
                                                 <!-- foreach (\App\Models\Rank::all() as $renderRank) -->
                                                 <!-- <option value="renderRank->ranks_uid" {{isset($organization->company_category) ? ($organization->company_category ? 'selected' : '') : ''}}>{{isset($organization->company_category) ?$organization->company_category:''}}</option> -->
                                                 <!-- endforeach -->
@@ -66,8 +72,14 @@
                                         <div class="mb-3">
                                             <label for="company_type" class="form-label">Type</label>
                                             <select name="company_type" id="company_type" class="form-select" {{isset($organization->company_type)?$organization->company_type:''}}>
+                                                @if(isset($organization->uid))
+                                                <option value="Test" {{$organization->company_type == 'Test'?'selected':''}}> Test 1</option>
+                                                <option value="Test2" {{$organization->company_type == 'Test2'?'selected':''}}> Test 2</option>
+                                                @else
                                                 <option value="" selected disabled hidden> Select Type </option>
-                                                <option value="Test"> Test </option>
+                                                <option value="Test"> Test 1</option>
+                                                <option value="Test2"> Test 2</option>
+                                                @endif
                                                 <!-- foreach (\App\Models\Rank::all() as $renderRank) -->
                                                 <!-- <option value="{{isset($organization->company_type) ? $organization->company_type  : ''}}"> {{isset($organization->company_type) ?$organization->company_type:""}} </option> -->
                                                 <!-- endforeach -->

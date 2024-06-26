@@ -74,7 +74,7 @@
                             <th data-filter-control="input" data-field="company_category" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Category</th>
                             <th data-filter-control="input" data-field="company_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Owner Name</th>
                             <th data-filter-control="input" data-field="company_address" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Address </th>
-                            <th data-filter-control="input" data-field="company_type " data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Company Type</th>
+                            <th data-filter-control="input" data-field="company_type" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Type</th>
                             <th data-filter-control="input" data-field="company_city" data-sortable="true" data-formatter="operateText">City</th>
                             <th data-filter-control="input" data-field="company_country" data-sortable="true" data-formatter="operateText">Country</th>
                             <th data-filter-control="input" data-field="company_contact" data-sortable="true" data-formatter="operateInvitedBy">Contact</th>
@@ -91,7 +91,7 @@
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             @if(session()->get('user')->roles[0]->name === "admin")
-                            <th data-field="uid" data-formatter="operateDelegation">Edit</th>
+                            <th data-field="uid" data-formatter="operateEdit">Edit</th>
                             @endif
                         </tr>
                     </thead>
@@ -319,11 +319,11 @@
         }
     }
 
-    function operateDelegation(value, row, index) {
+    function operateEdit(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-success" href="addDelegationPage/' + value + '">',
+                '<a class="btn btn-success" href="addOrganization/' + value + '">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
                 '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',
