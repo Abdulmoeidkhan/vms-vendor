@@ -38,10 +38,10 @@ Route::middleware([Authenticate::class])->group(function () {
     // Dashboard Routes
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
 
-
     // Logout Routes
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
 });
+
 Route::middleware([Authenticate::class, Admin::class])->group(function () {
 
     // User Panel Routes
