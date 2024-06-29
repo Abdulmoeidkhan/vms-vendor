@@ -61,29 +61,38 @@
             @if(session()->get('user')->roles[0]->name === "admin")
             <div class="row">
                 <div class="d-flex">
-                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add Staff</a>
+                    <a type="button" href="{{route('pages.addOrganization')}}" class="btn btn-primary">Add Organisation</a>
                 </div>
             </div>
             @endif
             <br />
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff')}}">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizations')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="staff_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Category</th>
-                            <th data-filter-control="input" data-field="staff_identity" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Owner Name</th>
-                            <th data-filter-control="input" data-field="staff_contact" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Address </th>
-                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Type</th>
-                            <th data-filter-control="input" data-field="staff_type" data-sortable="true" data-formatter="operateText">City</th>
-                            <th data-filter-control="input" data-field="staff_address" data-sortable="true" data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="staff_city" data-sortable="true" data-formatter="operateInvitedBy">Contact</th>
-                            <th data-filter-control="input" data-field="staff_country" data-sortable="true" data-formatter="operateText">NTN</th>
-                            <th data-filter-control="input" data-field="staff_remarks" data-formatter="operateSelf">Company Owner Name</th>
+                            <th data-filter-control="input" data-field="company_category" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Category</th>
+                            <th data-filter-control="input" data-field="company_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Owner Name</th>
+                            <th data-filter-control="input" data-field="company_address" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Address </th>
+                            <th data-filter-control="input" data-field="company_type" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Type</th>
+                            <th data-filter-control="input" data-field="company_city" data-sortable="true" data-formatter="operateText">City</th>
+                            <th data-filter-control="input" data-field="company_country" data-sortable="true" data-formatter="operateText">Country</th>
+                            <th data-filter-control="input" data-field="company_contact" data-sortable="true" data-formatter="operateInvitedBy">Contact</th>
+                            <th data-filter-control="input" data-field="company_ntn" data-sortable="true" data-formatter="operateText">NTN</th>
+                            <th data-filter-control="input" data-field="company_owner" data-formatter="operateSelf">Company Owner Name</th>
+                            <th data-filter-control="input" data-field="company_owner_designation" data-sortable="true" data-formatter="operateText">Company Owner Designation</th>
+                            <th data-filter-control="input" data-field="company_owner_contact" data-sortable="true" data-formatter="statusFormatter">Company Owner Contact</th>
+                            <th data-filter-control="input" data-field="company_rep_name" data-sortable="true" data-formatter="operateText">Company Rep Name</th>
+                            <th data-filter-control="input" data-field="company_rep_designation" data-sortable="true" data-formatter="operateText">Company Rep Designation</th>
+                            <th data-filter-control="input" data-field="company_rep_dept" data-formatter="operateText">Company Rep Designation</th>
+                            <th data-filter-control="input" data-field="company_rep_contact" data-formatter="operateText">Company Rep Contact</th>
+                            <th data-filter-control="input" data-field="company_rep_email" data-formatter="operateText">Company Rep Email</th>
+                            <th data-filter-control="input" data-field="company_rep_phone" data-formatter="operateText">Company Rep Phone</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             @if(session()->get('user')->roles[0]->name === "admin")
-                            <th data-field="uid" data-formatter="operateEdit">Edit</th>
+                            <th data-field="uid" data-formatter="operateEdit">Staff</th>
+                            <th data-field="uid" data-formatter="operateOrganization">Edit</th>
                             @endif
                         </tr>
                     </thead>
@@ -124,11 +133,24 @@
         }
     }
 
+
     function operateEdit(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-success" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',
+                '<a class="btn btn-primary" href="organization/' + value + '">',
+                '<i class="ti ti-users" style="font-size:22px; widht:24px; height:24px;"></i>',
+                '</a>',
+                '</div>'
+            ].join('')
+        }
+    }
+
+    function operateOrganization(value, row, index) {
+        if (value) {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-success" href="addOrganization/' + value + '">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
                 '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',

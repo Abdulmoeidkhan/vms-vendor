@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Organization;
+use App\Models\OrganizationStaff;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -36,7 +37,9 @@ class OrganizationController extends Controller
         $user->givePermissions(['read', 'create', 'update', 'delete']);
     }
 
-    public function newUserCreate($username, $email,$uid)
+    // User Creatuib on request
+
+    public function newUserCreate($username, $email, $uid)
     {
         // $uid = (string) Str::uuid();
         $pass = Str::password(12, true, true, true, false);
@@ -64,17 +67,89 @@ class OrganizationController extends Controller
     }
 
 
+    // Main Organizations Request
+
     public function render()
     {
-        return view('pages.organization');
+        return view('pages.organizations');
     }
 
-    public function getOrganization()
+    public function getOrganizations()
     {
         $organization = Organization::all();
         return $organization;
     }
 
+    // Organization and staff render page 
+    public function renderOrganisation($id)
+    {
+        return view('pages.organization', ['id' => $id]);
+    }
+
+    public function getOrganizationStaff()
+    {
+        $organizationStaff = OrganizationStaff::all();
+        return $organizationStaff;
+    }
+
+    public function addOrganizationStaffRender($id, $staffId = null)
+    {
+        if ($staffId) {
+            $staff = OrganizationStaff::where('uid', $staffId)->first();
+            return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staff' => $staff]);
+        } else {
+            return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staffId' => $staffId]);
+        }
+    }
+
+    public function addOrganizationStaff(Request $req, $id, $staffId = null)
+    {
+        $organizationStaff = new OrganizationStaff();
+        $organizationStaff->uid = (string) Str::uuid();
+        $organizationStaff->company_uid = $id;
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                $organizationStaff[$key] = $value;
+            }
+        }
+        try {
+            $organizationStaffSaved = $organizationStaff->save();
+            if ($organizationStaffSaved) {
+                return $req->submitMore ? redirect()->route('pages.addOrganizationStaff', $staffId)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $id)->with('message', 'Staff has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    public function updateOrganizationStaff(Request $req, $id, $company_uid)
+    {
+        $arrayToBeUpdate = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                $arrayToBeUpdate[$key] = $value;
+            }
+        }
+        try {
+            $updatedOrganisationStaff = OrganizationStaff::where('uid', $id)->update($arrayToBeUpdate);
+            if ($updatedOrganisationStaff) {
+                return $req->submitMore ? redirect()->route('pages.addOrganizationStaff', $id)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $company_uid)->with('message', 'Staff has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+
+    // Organization Add/Update Form Render & Request
     public function addOrganizationRender($id = null)
     {
         if ($id) {
@@ -97,9 +172,9 @@ class OrganizationController extends Controller
         }
         try {
             $organizationSaved = $organization->save();
-            $userCreated = $this->newUserCreate($organization->company_rep_name, $organization->company_rep_email,$organization->uid);
+            $userCreated = $this->newUserCreate($organization->company_rep_name, $organization->company_rep_email, $organization->uid);
             if ($organizationSaved && $userCreated) {
-                return $req->submitMore ? redirect()->route('pages.addOrganization')->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization')->with('message', 'Organization has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addOrganization')->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organizations')->with('message', 'Organization has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -114,14 +189,14 @@ class OrganizationController extends Controller
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+            if ($key != 'submit' && $key !=  'company_rep_email' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $arrayToBeUpdate[$key] = $value;
             }
         }
         try {
             $updatedOrganisation = Organization::where('uid', $id)->update($arrayToBeUpdate);
             if ($updatedOrganisation) {
-                return $req->submitMore ? redirect()->route('pages.addOrganization', $id)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization')->with('message', 'Organization has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addOrganization', $id)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organizations')->with('message', 'Organization has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

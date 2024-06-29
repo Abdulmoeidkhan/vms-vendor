@@ -45,14 +45,26 @@
                     </a>
                     <ul aria-expanded="false" class="collapse first-level">
                         <li class="sidebar-item">
-                            <a href="{{route('pages.organization')}}" class="sidebar-link">
+                            <a href="{{route('pages.organizations')}}" class="sidebar-link">
                                 <div class="round-16 d-flex align-items-center justify-content-center">
                                     <i class="ti ti-building"></i>
                                 </div>
-                                <span class="hide-menu">Organisation</span>
+                                <span class="hide-menu">Organizations And Rep's</span>
                             </a>
                         </li>
                     </ul>
+                </li>
+            </ul>
+            @endif
+            @if(session()->get('user')->roles[0]->name =="OrgRep")
+            <ul aria-expanded="false" class="collapse first-level">
+                <li class="sidebar-item">
+                    <a href="{{route('pages.organization')}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-building"></i>
+                        </div>
+                        <span class="hide-menu">Organization</span>
+                    </a>
                 </li>
             </ul>
             @endif

@@ -184,7 +184,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="company_rep_email" class="form-label">Company Rep Email</label>
-                                            <input name="company_rep_email" type="text" class="form-control" id="company_rep_email" placeholder="Company Rep Email" value="{{isset($organization) ? $organization->company_rep_email  : ''}}" required />
+                                            <input name="company_rep_email" type="text" class="form-control" id="company_rep_email" placeholder="Company Rep Email" value="{{isset($organization) ? $organization->company_rep_email  : ''}}" required disabled />
                                         </div>
                                     </div>
                                     <div class="col-md-4">

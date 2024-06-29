@@ -12,6 +12,9 @@ use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
+use App\Http\Middleware\Admin;
+use App\Http\Middleware\Organization;
+use App\Http\Middleware\Authenticate;
 
 Route::get('/login', function () {
     if (auth()?->user()?->uid) {
@@ -30,11 +33,16 @@ Route::get('/accountActivation', function () {
 })->name("accountActivation");
 
 
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware([Authenticate::class])->group(function () {
 
     // Dashboard Routes
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
 
+
+    // Logout Routes
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
+});
+Route::middleware([Authenticate::class, Admin::class])->group(function () {
 
     // User Panel Routes
     Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
@@ -46,18 +54,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
 
-    // Organization 
-    Route::get('/organization', [OrganizationController::class, 'render'])->name('pages.organization');
-    Route::get('/getOrganization', [OrganizationController::class, 'getOrganization'])->name('request.getOrganization');
-
+    // Organizations
+    Route::get('/organizations', [OrganizationController::class, 'render'])->name('pages.organizations');
+    Route::get('/getOrganizations', [OrganizationController::class, 'getOrganizations'])->name('request.getOrganizations');
     Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
-    
     Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
-    Route::post('/updateOrganizationRequest/{id?}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
+    Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
+});
 
-
-    // Logout Routes
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
+Route::middleware([Authenticate::class, Organization::class])->group(function () {
+    // Organization
+    Route::get('/organization/{id}', [OrganizationController::class, 'renderOrganisation'])->name('pages.organization');
+    Route::get('/getOrganizationStaff', [OrganizationController::class, 'getOrganizationStaff'])->name('request.getOrganizationStaff');
+    Route::get('/organization/{id}/addOrganizationStaff/{staffId?}', [OrganizationController::class, 'addOrganizationStaffRender'])->name('pages.addOrganizationStaff');
+    Route::post('/addOrganizationStaffRequest/{id}', [OrganizationController::class, 'addOrganizationStaff'])->name('request.addOrganizationStaff');
+    Route::post('/organization/{id}/updateOrganizationStaffRequest', [OrganizationController::class, 'updateOrganizationStaff'])->name('request.updateOrganizationStaff');
 });
 
 Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');

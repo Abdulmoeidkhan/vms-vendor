@@ -7,6 +7,5 @@
 
 <livewire:user-list-component />
 
-
 @endsection
 @endauth
