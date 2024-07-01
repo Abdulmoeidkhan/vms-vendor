@@ -86,20 +86,16 @@ class OrganizationController extends Controller
         return view('pages.organization', ['id' => $id]);
     }
 
-    public function getOrganizationStaff()
+    public function getOrganizationStaff($id)
     {
-        $organizationStaff = OrganizationStaff::all();
+        $organizationStaff = OrganizationStaff::where('company_uid', $id)->get();
         return $organizationStaff;
     }
 
     public function addOrganizationStaffRender($id, $staffId = null)
     {
-        if ($staffId) {
-            $staff = OrganizationStaff::where('uid', $staffId)->first();
-            return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staff' => $staff]);
-        } else {
-            return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staffId' => $staffId]);
-        }
+        $staff = $staffId ? OrganizationStaff::where('uid', $staffId)->first() : null;
+        return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staff' => $staff]);
     }
 
     public function addOrganizationStaff(Request $req, $id, $staffId = null)
@@ -126,7 +122,7 @@ class OrganizationController extends Controller
         }
     }
 
-    public function updateOrganizationStaff(Request $req, $id, $company_uid)
+    public function updateOrganizationStaff(Request $req, $staffId)
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
@@ -135,9 +131,10 @@ class OrganizationController extends Controller
             }
         }
         try {
-            $updatedOrganisationStaff = OrganizationStaff::where('uid', $id)->update($arrayToBeUpdate);
+            $updatedOrganisationStaff = OrganizationStaff::where('uid', $staffId)->update($arrayToBeUpdate);
+            $company_uid = OrganizationStaff::where('uid', $staffId)->first('company_uid');
             if ($updatedOrganisationStaff) {
-                return $req->submitMore ? redirect()->route('pages.addOrganizationStaff', $id)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $company_uid)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addOrganizationStaff', ['id' => $company_uid->company_uid, 'staffId' => $staffId])->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $company_uid->company_uid)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

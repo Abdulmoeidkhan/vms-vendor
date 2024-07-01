@@ -58,7 +58,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "orgRep")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add Staff</a>
@@ -67,7 +67,7 @@
             @endif
             <br />
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff')}}">
+                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
@@ -77,14 +77,12 @@
                             <th data-filter-control="input" data-field="staff_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Type</th>
                             <th data-filter-control="input" data-field="staff_type" data-sortable="true" data-formatter="operateText">City</th>
                             <th data-filter-control="input" data-field="staff_address" data-sortable="true" data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="staff_city" data-sortable="true" data-formatter="operateInvitedBy">Contact</th>
+                            <th data-filter-control="input" data-field="staff_city" data-sortable="true" data-formatter="operateText">Contact</th>
                             <th data-filter-control="input" data-field="staff_country" data-sortable="true" data-formatter="operateText">NTN</th>
                             <th data-filter-control="input" data-field="staff_remarks" data-formatter="operateSelf">Company Owner Name</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                            @if(session()->get('user')->roles[0]->name === "admin")
                             <th data-field="uid" data-formatter="operateEdit">Edit</th>
-                            @endif
                         </tr>
                     </thead>
                 </table>

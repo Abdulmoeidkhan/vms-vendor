@@ -14,8 +14,15 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        $middleware->web(append: [Admin::class]);
-        $middleware->web(append: [Organization::class]);
+        $middleware->appendToGroup('orgCheck', [
+            Organization::class,
+        ]);
+        $middleware->appendToGroup('adminCheck', [
+            Admin::class,
+        ]);
+        // $middleware->append([Admin::class, Organization::class]);
+        // $middleware->web(append: [Admin::class]);
+        // $middleware->web(append: [Organization::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

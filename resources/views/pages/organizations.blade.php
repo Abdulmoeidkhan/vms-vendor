@@ -77,7 +77,7 @@
                             <th data-filter-control="input" data-field="company_type" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Type</th>
                             <th data-filter-control="input" data-field="company_city" data-sortable="true" data-formatter="operateText">City</th>
                             <th data-filter-control="input" data-field="company_country" data-sortable="true" data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="company_contact" data-sortable="true" data-formatter="operateInvitedBy">Contact</th>
+                            <th data-filter-control="input" data-field="company_contact" data-sortable="true" data-formatter="operateText">Contact</th>
                             <th data-filter-control="input" data-field="company_ntn" data-sortable="true" data-formatter="operateText">NTN</th>
                             <th data-filter-control="input" data-field="company_owner" data-formatter="operateSelf">Company Owner Name</th>
                             <th data-filter-control="input" data-field="company_owner_designation" data-sortable="true" data-formatter="operateText">Company Owner Designation</th>

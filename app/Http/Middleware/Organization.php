@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
 class Organization
@@ -15,8 +17,9 @@ class Organization
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $isOrg = session()->get('user')->roles[0]->name === 'orgRep' ||session()->get('user')->roles[0]->name === 'admin' ? true : false;
-
+        // $isOrg = session()->get('user')->roles[0]->name === 'orgRep' || session()->get('user')->roles[0]->name === 'admin' ? true : false;
+        $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
+        $isOrg = $user->roles[0]->name == 'orgRep' ||$user->roles[0]->name == 'admin'? true : false;
         if (!$isOrg) {
             return abort(403);
         }

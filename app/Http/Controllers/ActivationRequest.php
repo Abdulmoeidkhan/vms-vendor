@@ -14,6 +14,7 @@ class ActivationRequest extends Controller
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
+        // return $credentials;
         try {
             $userVerified = Auth::attempt($credentials);
             if ($userVerified) {

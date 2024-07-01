@@ -32,45 +32,51 @@ Route::get('/accountActivation', function () {
     }
 })->name("accountActivation");
 
+Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
+Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
+Route::post('/activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');
 
-Route::middleware([Authenticate::class])->group(function () {
+
+Route::group(['middleware' => 'auth'], function () {
 
     // Dashboard Routes
     Route::get('/', [DashboardController::class, 'renderView'])->name("pages.dashboard");
 
-    // Logout Routes
-    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
-});
 
-Route::middleware([Authenticate::class, Admin::class])->group(function () {
-
-    // User Panel Routes
-    Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
     Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
     Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
     Route::post('/imageUpload', [ProfileImageController::class, 'imageBlobUpload'])->name('request.imageUpload');
+    Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
+    Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
+    Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
 
-    // My profile
-    Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
-    Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
+    // Logout Routes
+    Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');
 
-    // Organizations
-    Route::get('/organizations', [OrganizationController::class, 'render'])->name('pages.organizations');
-    Route::get('/getOrganizations', [OrganizationController::class, 'getOrganizations'])->name('request.getOrganizations');
-    Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
-    Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
-    Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
+    Route::middleware('adminCheck')->group(function () {
+
+        // User Panel Routes
+        Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
+
+
+        // My profile
+        Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
+        Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
+
+        // Organizations
+        Route::get('/organizations', [OrganizationController::class, 'render'])->name('pages.organizations');
+        Route::get('/getOrganizations', [OrganizationController::class, 'getOrganizations'])->name('request.getOrganizations');
+        Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
+        Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
+        Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
+    });
+
+    Route::middleware('orgCheck')->group(function () {
+        // Organization
+        Route::get('/organization/{id}', [OrganizationController::class, 'renderOrganisation'])->name('pages.organization');
+        Route::get('/getOrganizationStaff/{id}', [OrganizationController::class, 'getOrganizationStaff'])->name('request.getOrganizationStaff');
+        Route::get('/organization/{id}/addOrganizationStaff/{staffId?}', [OrganizationController::class, 'addOrganizationStaffRender'])->name('pages.addOrganizationStaff');
+        Route::post('/addOrganizationStaffRequest/{id}', [OrganizationController::class, 'addOrganizationStaff'])->name('request.addOrganizationStaff');
+        Route::post('/organization/{id}/updateOrganizationStaffRequest/{staffId?}', [OrganizationController::class, 'updateOrganizationStaff'])->name('request.updateOrganizationStaff');
+    });
 });
-
-Route::middleware([Authenticate::class, Organization::class])->group(function () {
-    // Organization
-    Route::get('/organization/{id}', [OrganizationController::class, 'renderOrganisation'])->name('pages.organization');
-    Route::get('/getOrganizationStaff', [OrganizationController::class, 'getOrganizationStaff'])->name('request.getOrganizationStaff');
-    Route::get('/organization/{id}/addOrganizationStaff/{staffId?}', [OrganizationController::class, 'addOrganizationStaffRender'])->name('pages.addOrganizationStaff');
-    Route::post('/addOrganizationStaffRequest/{id}', [OrganizationController::class, 'addOrganizationStaff'])->name('request.addOrganizationStaff');
-    Route::post('/organization/{id}/updateOrganizationStaffRequest', [OrganizationController::class, 'updateOrganizationStaff'])->name('request.updateOrganizationStaff');
-});
-
-Route::post('/signInRequest', [SignInController::class, 'signIn'])->name('request.signIn');
-Route::post('/signUpRequest', [SignUpController::class, 'signUp'])->name('request.signUp');
-Route::post('/activationRequest', [ActivationRequest::class, 'activation'])->name('request.activation');

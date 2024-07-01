@@ -14,7 +14,6 @@
         </div>
         <!-- Sidebar navigation-->
         <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
-            @if(session()->get('user')->roles[0]->name =="admin")
             <ul id="sidebarnav">
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
@@ -28,6 +27,7 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
+                @if(session()->get('user')->roles[0]->name =="admin")
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
                         <span>
@@ -54,20 +54,18 @@
                         </li>
                     </ul>
                 </li>
-            </ul>
-            @endif
-            @if(session()->get('user')->roles[0]->name =="OrgRep")
-            <ul aria-expanded="false" class="collapse first-level">
+                @endif
+                @if(session()->get('user')->roles[0]->name =="orgRep")
                 <li class="sidebar-item">
-                    <a href="{{route('pages.organization')}}" class="sidebar-link">
+                    <a href="{{route('pages.organization',session()->get('user')->uid)}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-building"></i>
                         </div>
                         <span class="hide-menu">Organization</span>
                     </a>
                 </li>
+                @endif
             </ul>
-            @endif
             <br />
             <br />
             <br />
