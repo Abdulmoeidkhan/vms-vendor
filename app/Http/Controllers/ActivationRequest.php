@@ -24,7 +24,7 @@ class ActivationRequest extends Controller
                     $req->session()->regenerate();
                     $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
                     session()->put('user', $user);
-                    return $activated ? redirect()->route('pages.profileActivation')->with('message', 'Profile has been activated') : redirect()->back()->with('error', 'Something Went Wrong');
+                    return $activated ? redirect()->route('pages.dashboard')->with('message', 'Profile has been activated') : redirect()->back()->with('error', 'Something Went Wrong');
                 } else {
                     Auth::logout();
                     return redirect()->back()->with('error', 'Activation Code is not correct');

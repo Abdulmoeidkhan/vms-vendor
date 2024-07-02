@@ -20,9 +20,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->appendToGroup('adminCheck', [
             Admin::class,
         ]);
-        // $middleware->append([Admin::class, Organization::class]);
-        // $middleware->web(append: [Admin::class]);
-        // $middleware->web(append: [Organization::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

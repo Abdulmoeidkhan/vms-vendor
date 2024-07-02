@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('organization_staff', function (Blueprint $table) {
             $table->uuid('uid')->primary();
+            $table->id()->unique();
             $table->string('staff_first_name');
             $table->string('staff_last_name');
             $table->string('staff_designation');
@@ -30,7 +31,7 @@ return new class extends Migration
             $table->date('staff_doj');
             $table->string('employee_type');
             $table->string('staff_status');
-            $table->string('staff_remarks');
+            $table->string('staff_remarks')->nullable();
             $table->uuid('company_uid');
             $table->timestamps();
         });

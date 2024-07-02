@@ -12,9 +12,6 @@ use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
-use App\Http\Middleware\Admin;
-use App\Http\Middleware\Organization;
-use App\Http\Middleware\Authenticate;
 
 Route::get('/login', function () {
     if (auth()?->user()?->uid) {
@@ -44,7 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
-    Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.profileActivation');
+    Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.dashboard');
+    Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::post('/imageUpload', [ProfileImageController::class, 'imageBlobUpload'])->name('request.imageUpload');
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
@@ -60,7 +58,6 @@ Route::group(['middleware' => 'auth'], function () {
 
 
         // My profile
-        Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
 
         // Organizations

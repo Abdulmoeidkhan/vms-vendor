@@ -61,6 +61,6 @@ class ActivateProfileController extends Controller
     public function renderProfileActivation()
     {
         $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
-        return view('pages.profileActivation', ['user' => $user]);
+        return view('pages.dashboard', ['user' => $user]);
     }
 }

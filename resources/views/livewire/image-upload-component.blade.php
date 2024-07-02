@@ -2,21 +2,22 @@
     <form wire:submit="save">
         <div class="mb-3 col-lg-10">
             <label for="delegation_picture" class="form-label">Picture</label>
-            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture" accept="image/png, image/jpeg" required>
-            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" wire:model="savedpicture" required>
-            <input name="xyz" wire:model='xyz'/>
-            <div class="box-2">
+            <input name="delegation_picture" type="file" class="form-control" id="delegation_picture"
+                accept="image/png, image/jpeg" required>
+            <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" wire:model="savedpicture"
+                required>
+            <div class="box-2" wire:ignore>
                 <div class="result"></div>
-            </div>
-            <div class="box-2 img-result {{isset($delegationHead->delegation_picture) ? ($delegationHead?->delegation_picture?->img_blob ? '' : 'hide') : ''}}">
-                <img class="cropped" src="{{isset($delegationHead->delegation_picture)? $delegationHead?->delegation_picture?->img_blob:''}}" alt="" />
-            </div>
-            <div class="box">
-                <div class="options hide">
-                    <label>Width</label>
-                    <input type="number" class="img-w" value="300" min="100" max="1200" required />
+                <div class="box-2 img-result">
+                    <img class="cropped" src="" alt="" />
                 </div>
-                <button class="btn save hide">Save</button>
+                <div class="box">
+                    <div class="options hide">
+                        <label>Width</label>
+                        <input type="number" class="img-w" value="300" min="100" max="1200" required />
+                    </div>
+                    <button class="btn save hide">Save</button>
+                </div>
             </div>
             <button class="btn btn-outline-danger" type="submit">Upload</button>
         </div>
@@ -29,7 +30,6 @@
             save = document.querySelector('.save'),
             cropped = document.querySelector('.cropped'),
             img_w = document.querySelector('.img-w'),
-            dwn = document.querySelector('.download'),
             upload = document.querySelector('#delegation_picture'),
             cropper = '';
 
@@ -72,9 +72,7 @@
             // show image cropped
             cropped.src = imgSrc;
             document.getElementById('savedpicture').value = imgSrc;
-            dwn.classList.remove('hide');
-            dwn.download = 'imagename.png';
-            dwn.setAttribute('href', imgSrc);
+            @this.set('savedpicture', imgSrc);
         });
     </script>
 </div>

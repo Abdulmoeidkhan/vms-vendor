@@ -4,43 +4,42 @@ namespace App\Livewire;
 
 use App\Models\StaffImages;
 use Livewire\Component;
-use Livewire\Attributes\Validate;
 
 class ImageUploadComponent extends Component
 {
 
-    protected function imageBlobUpload($file, $id)
+    protected function imageBlobUpload($file, $uid)
     {
         $imageBlob = $file;
         $imgBlob = new StaffImages();
         $imgBlob->img_blob = $imageBlob;
-        $imgBlob->uid = $id;
+        $imgBlob->uid = $uid;
         $imgSaved = $imgBlob->save();
         return $imgSaved;
     }
 
-    protected function imageBlobUpdate($file, $id)
+    protected function imageBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $updateImageBlob = StaffImages::where('uid', $id)->first() ? StaffImages::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
+        $updateImageBlob = StaffImages::where('uid', $uid)->first() ? StaffImages::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
     }
 
 
-    public $savedpicture;
     public $uid;
-    public $xyz;
+    public $savedpicture;
+
+
 
     public function mount($uid = null)
     {
         $this->uid = $uid;
     }
 
-
     public function save()
     {
-        return [$this->xyz, $this->savedpicture];
-        // $this->imageBlobUpdate($this->image, $this->uid) ? $this->js("alert('User Added Successfully!')") : $this->js("alert('Something Went Wrong!')");
+        $this->imageBlobUpdate($this->savedpicture, $this->uid) ? $this->js("alert('Image Updated Successfully!')") : $this->js("alert('Something Went Wrong!')");
+        $this->dispatch('image-updated', uid: $this->uid);
     }
 
     public function render()
