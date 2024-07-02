@@ -26,7 +26,7 @@
               </div>
               @endif
               <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                <img src="{{asset('images/icons/ideas_logo_2024.png')}}" width="180" alt="IDEAS">
+                <img src="{{asset('assets/images/icons/Badar-Logo-Black.png')}}" width="180" alt="IDEAS">
               </a>
               <p class="text-center">Vendor Management System</p>
               <form action="{{route('request.signIn')}}" method="POST">
@@ -55,7 +55,7 @@
                 </div>
               </form>
               <br />
-              <img style="width:445px;width:-webkit-fill-available;" src="{{asset('images/icons/Partners.png')}}" alt="Partners LOGO" />
+              <img style="width:445px;width:-webkit-fill-available;" src="{{asset('assets/images/icons/Partners.png')}}" alt="Partners LOGO" />
             </div>
           </div>
         </div>

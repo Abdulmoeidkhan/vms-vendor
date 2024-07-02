@@ -13,14 +13,23 @@ return new class extends Migration
     {
         Schema::create('organization_staff', function (Blueprint $table) {
             $table->uuid('uid')->primary();
-            $table->string('staff_name');
-            $table->string('staff_identity')->unique();
+            $table->string('staff_first_name');
+            $table->string('staff_last_name');
             $table->string('staff_designation');
+            $table->string('staff_department');
+            $table->string('staff_job_type');
+            $table->string('staff_nationality');
+            $table->string('staff_identity')->unique();
+            $table->date('staff_identity_expiry');
             $table->bigInteger('staff_contact')->unique();
             $table->string('staff_type');
             $table->string('staff_address');
             $table->string('staff_city');
             $table->string('staff_country');
+            $table->date('staff_dob');
+            $table->date('staff_doj');
+            $table->string('employee_type');
+            $table->string('staff_status');
             $table->string('staff_remarks');
             $table->uuid('company_uid');
             $table->timestamps();

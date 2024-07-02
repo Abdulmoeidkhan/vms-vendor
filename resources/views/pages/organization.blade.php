@@ -71,15 +71,23 @@
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="staff_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Category</th>
-                            <th data-filter-control="input" data-field="staff_identity" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Owner Name</th>
-                            <th data-filter-control="input" data-field="staff_contact" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Address </th>
-                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Company Type</th>
-                            <th data-filter-control="input" data-field="staff_type" data-sortable="true" data-formatter="operateText">City</th>
-                            <th data-filter-control="input" data-field="staff_address" data-sortable="true" data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="staff_city" data-sortable="true" data-formatter="operateText">Contact</th>
-                            <th data-filter-control="input" data-field="staff_country" data-sortable="true" data-formatter="operateText">NTN</th>
-                            <th data-filter-control="input" data-field="staff_remarks" data-formatter="operateSelf">Company Owner Name</th>
+                            <th data-filter-control="input" data-field="staff_first_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Staff Name</th>
+                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Staff Designation </th>
+                            <th data-filter-control="input" data-field="staff_department" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Staff Department</th>
+                            <th data-filter-control="input" data-field="staff_job_type" data-sortable="true" data-formatter="operateText">Staff Job Type</th>
+                            <th data-filter-control="input" data-field="staff_nationality" data-sortable="true" data-formatter="operateText">Staff Nationality</th>
+                            <th data-filter-control="input" data-field="staff_identity" data-sortable="true" data-formatter="operateText">Staff Identity</th>
+                            <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true" data-formatter="operateText">Identity Expiry</th>
+                            <th data-filter-control="input" data-field="staff_contact" data-sortable="true" data-formatter="operateText">Staff Contact</th>
+                            <th data-filter-control="input" data-field="staff_type" data-sortable="true" data-formatter="operateText">Staff Type</th>
+                            <th data-filter-control="input" data-field="staff_address" data-sortable="true" data-formatter="operateText">Staff Address</th>
+                            <th data-filter-control="input" data-field="staff_city" data-sortable="true" data-formatter="operateText">Staff City</th>
+                            <th data-filter-control="input" data-field="staff_country" data-sortable="true" data-formatter="operateText">Staff Country</th>
+                            <th data-filter-control="input" data-field="staff_dob" data-sortable="true" data-formatter="operateText">Staff DOB</th>
+                            <th data-filter-control="input" data-field="staff_doj" data-sortable="true" data-formatter="operateText">Staff DOJ</th>
+                            <th data-filter-control="input" data-field="employee_type" data-sortable="true" data-formatter="operateText">Employee Type</th>
+                            <th data-filter-control="input" data-field="staff_status" data-sortable="true" data-formatter="statusFormatter">Staff Status</th>
+                            <th data-filter-control="input" data-field="staff_remarks" data-sortable="true" data-formatter="operateText">Staff Remarks</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
                             <th data-field="uid" data-formatter="operateEdit">Edit</th>
@@ -97,7 +105,7 @@
     }
 
     function operateFirstAndLastName(value, row, index) {
-        return `${row.first_Name} ${row.last_Name}`;
+        return `${row.staff_first_name} ${row.staff_last_name}`;
     }
 
     function statusChangerFormatter(value, row, index) {
