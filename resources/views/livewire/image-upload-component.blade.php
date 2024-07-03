@@ -1,9 +1,13 @@
 <div>
-    <form wire:submit="save">
+    <div>
+        <img src="{{$picture?$picture->img_blob:asset('assets/images/profile/user-1.jpg')}}" width="200px"
+            height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
+    </div>
+    <form name="picture_upload" id="picture_upload" wire:submit="save">
         <div class="mb-3 col-lg-10">
             <label for="delegation_picture" class="form-label">Picture</label>
             <input name="delegation_picture" type="file" class="form-control" id="delegation_picture"
-                accept="image/png, image/jpeg" required>
+                wire:model='pictureToBeUpdate' accept="image/png, image/jpeg" required>
             <input name="savedpicture" type="hidden" class="form-control" id="savedpicture" wire:model="savedpicture"
                 required>
             <div class="box-2" wire:ignore>
@@ -19,7 +23,7 @@
                     <button class="btn save hide">Save</button>
                 </div>
             </div>
-            <button class="btn btn-outline-danger" type="submit">Upload</button>
+            <button class="btn btn-outline-danger" type="submit" onclick="uploadFunc()">Upload</button>
         </div>
     </form>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
@@ -74,5 +78,12 @@
             document.getElementById('savedpicture').value = imgSrc;
             @this.set('savedpicture', imgSrc);
         });
+
+        // function uploadFunc() {
+        //     document.getElementById("picture_upload").submit().preventDefault();
+        //     cropped.src="";
+        //     save.classList.add('hide')
+        //     img_result.classList.add('hide')
+        // }
     </script>
 </div>

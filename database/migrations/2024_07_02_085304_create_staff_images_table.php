@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('staff_images', function (Blueprint $table) {
-            $table->uuid('uid')->primary();
+            $table->id()->primary();
+            $table->uuid('uid')->unique();
             $table->binary('img_blob');
             $table->timestamps();
         });

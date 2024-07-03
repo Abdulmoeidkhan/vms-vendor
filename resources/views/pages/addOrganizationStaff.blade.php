@@ -255,7 +255,6 @@
                 <div class="mb-4">
                     <h5 class="card-title fw-semibold">Profile Picture</h5>
                 </div>
-                <livewire:show-image-component :uid="$staff->uid" />
                 <br />
                 <livewire:image-upload-component :uid="$staff->uid" />
             </div>
