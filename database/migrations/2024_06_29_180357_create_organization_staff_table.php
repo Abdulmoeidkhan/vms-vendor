@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('organization_staff', function (Blueprint $table) {
-            $table->uuid('uid')->primary();
-            $table->id()->unique();
+            $table->id()->primary();
+            $table->uuid('uid')->unique();
             $table->string('staff_first_name');
             $table->string('staff_last_name');
             $table->string('staff_designation');

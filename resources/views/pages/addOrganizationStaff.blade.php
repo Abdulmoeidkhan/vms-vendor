@@ -248,15 +248,26 @@
     </div>
 </div>
 @if(isset($staff->uid))
+<script src='https://cdnjs.cloudflare.com/ajax/libs/cropperjs/0.8.1/cropper.min.js'></script>
 <div class="row">
     <div class="col-lg-4 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
-                <div class="mb-4">
-                    <h5 class="card-title fw-semibold">Profile Picture</h5>
-                </div>
-                <br />
-                <livewire:image-upload-component :uid="$staff->uid" />
+                <livewire:image-upload-component :uid="$staff->uid" title="Staff Image" name="staff_picture" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <livewire:image-upload-component :uid="$staff->uid" title="CNIC Front" name="cnic_front_picture" />
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <livewire:image-upload-component :uid="$staff->uid" title="CNIC Back" name="cnic_back_picture" />
             </div>
         </div>
     </div>
