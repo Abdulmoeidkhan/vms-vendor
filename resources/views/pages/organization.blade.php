@@ -58,39 +58,79 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "orgRep")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ===
+            "orgRep")
             <div class="row">
                 <div class="d-flex">
-                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add Staff</a>
+                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add
+                        Staff</a>
                 </div>
             </div>
             @endif
             <br />
             <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true" data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true" data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true" data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}">
+                <table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
+                    data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
+                    data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
+                    data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="staff_first_name" data-sortable="true" data-fixed-columns="true" data-formatter="operateFirstAndLastName">Staff Name</th>
-                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Staff Designation </th>
-                            <th data-filter-control="input" data-field="staff_department" data-sortable="true" data-fixed-columns="true" data-formatter="operateText">Staff Department</th>
-                            <th data-filter-control="input" data-field="staff_job_type" data-sortable="true" data-formatter="operateText">Staff Job Type</th>
-                            <th data-filter-control="input" data-field="staff_nationality" data-sortable="true" data-formatter="operateText">Staff Nationality</th>
-                            <th data-filter-control="input" data-field="staff_identity" data-sortable="true" data-formatter="operateText">Staff Identity</th>
-                            <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true" data-formatter="operateText">Identity Expiry</th>
-                            <th data-filter-control="input" data-field="staff_contact" data-sortable="true" data-formatter="operateText">Staff Contact</th>
-                            <th data-filter-control="input" data-field="staff_type" data-sortable="true" data-formatter="operateText">Staff Type</th>
-                            <th data-filter-control="input" data-field="staff_address" data-sortable="true" data-formatter="operateText">Staff Address</th>
-                            <th data-filter-control="input" data-field="staff_city" data-sortable="true" data-formatter="operateText">Staff City</th>
-                            <th data-filter-control="input" data-field="staff_country" data-sortable="true" data-formatter="operateText">Staff Country</th>
-                            <th data-filter-control="input" data-field="staff_dob" data-sortable="true" data-formatter="operateText">Staff DOB</th>
-                            <th data-filter-control="input" data-field="staff_doj" data-sortable="true" data-formatter="operateText">Staff DOJ</th>
-                            <th data-filter-control="input" data-field="employee_type" data-sortable="true" data-formatter="operateText">Employee Type</th>
-                            <th data-filter-control="input" data-field="staff_status" data-sortable="true" data-formatter="statusFormatter">Staff Status</th>
-                            <th data-filter-control="input" data-field="staff_remarks" data-sortable="true" data-formatter="operateText">Staff Remarks</th>
+                            <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Company Name</th>
+                            <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
+                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
+                            <th data-filter-control="input" data-field="staff_department" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Department</th>
+                            <th data-filter-control="input" data-field="staff_job_type" data-sortable="true"
+                                data-formatter="operateText">Job Type</th>
+                            <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
+                                data-formatter="operateText">Nationality</th>
+                            <th data-filter-control="input" data-field="staff_identity" data-sortable="true"
+                                data-formatter="operateText">Identity</th>
+                            <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true"
+                                data-formatter="operateText">Identity Expiry</th>
+                            <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
+                                data-formatter="operateText">Contact</th>
+                            <th data-filter-control="input" data-field="staff_type" data-sortable="true"
+                                data-formatter="operateText">Type</th>
+                            <th data-filter-control="input" data-field="staff_address" data-sortable="true"
+                                data-formatter="operateText">Address</th>
+                            <th data-filter-control="input" data-field="staff_city" data-sortable="true"
+                                data-formatter="operateText">City</th>
+                            <th data-filter-control="input" data-field="staff_country" data-sortable="true"
+                                data-formatter="operateText">Country</th>
+                            <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
+                                data-formatter="operateText">DOB</th>
+                            <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
+                                data-formatter="operateText">DOJ</th>
+                            <th data-filter-control="input" data-field="employee_type" data-sortable="true"
+                                data-formatter="operateText">Employee Type</th>
+                            <th data-field="picture.img_blob" data-width="100" data-width-unit="px" data-formatter="operatepicture">
+                                Picture</th>
+                            <th data-field="cnicfront.img_blob" data-width="150" data-width-unit="px" data-formatter="operatecnic">
+                                CNIC front</th>
+                            <th data-field="cnicback.img_blob" data-width="150"  data-width-unit="px" data-formatter="operatecnic">
+                                CNIC back</th>
+                            {{-- <th data-field="picture.img_blob" data-formatter="operateblob" data-visible="false"
+                                data-force-export="true">Staff
+                                Picture</th>
+                            <th data-field="cnicfront.img_blob" data-formatter="operateblob" data-visible="false"
+                                data-force-export="true">CNIC front
+                            </th>
+                            <th data-field="cnicback.img_blob" data-formatter="operateblob" data-visible="false"
+                                data-force-export="true">CNIC back
+                            </th> --}}
+                            <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"
+                                data-formatter="operateText">Remarks</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated</th>
-                            <th data-field="uid" data-formatter="operateEdit">Edit</th>
+                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated
+                            </th>
+                            <th data-field="uid" data-formatter="operateEdit" data-force-hide="true">Edit</th>
                         </tr>
                     </thead>
                 </table>
@@ -127,6 +167,17 @@
     function statusFormatter(value, row, index) {
         if (value != null) {
             return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
+        }
+    }
+
+    function operatepicture(value, row, index) {
+        if (value != null) {
+            return value ? `<img width="100px" height="120px" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+        }
+    }
+    function operatecnic(value, row, index) {
+        if (value != null) {
+            return value ? `<img width="150px" height="100px" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
     }
 
@@ -178,12 +229,22 @@
             return {}
         }
 
+        // $(val).bootstrapTable({
+        //     exportOptions: {
+        //         fileName: 'List Of All Organisation'
+        //     }
+        // });
         $(val).bootstrapTable({
-            exportOptions: {
-                fileName: 'List Of All Organisation'
-            }
-        });
-    }))
+        // exportDataType: $(this).val(),
+        exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
+        exportOptions: {
+            fileName: 'List Of All Organisation',
+            type: 'pdf',
+            jspdf: {orientation: 'l'}
+        }
+      })
+    }
+    ))
 </script>
 @endsection
 @endauth

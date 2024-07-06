@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Organization;
 use App\Models\OrganizationStaff;
+use App\Models\StaffImages;
+use App\Models\CnicBack;
+use App\Models\CnicFront;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -89,6 +92,12 @@ class OrganizationController extends Controller
     public function getOrganizationStaff($id)
     {
         $organizationStaff = OrganizationStaff::where('company_uid', $id)->get();
+        foreach ($organizationStaff as $key => $staff) {
+            $organizationStaff[$key]->companyName = Organization::where('uid', $staff->company_uid)->first('company_name');
+            $organizationStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
+            $organizationStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
+            $organizationStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
+        }
         return $organizationStaff;
     }
 

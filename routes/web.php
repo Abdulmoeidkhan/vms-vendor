@@ -13,6 +13,8 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
 
+use Illuminate\Support\Facades\Mail;
+
 Route::get('/login', function () {
     if (auth()?->user()?->uid) {
         return redirect()->route('pages.dashboard');
@@ -76,4 +78,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addOrganizationStaffRequest/{id}', [OrganizationController::class, 'addOrganizationStaff'])->name('request.addOrganizationStaff');
         Route::post('/updateOrganizationStaffRequest/{staffId?}', [OrganizationController::class, 'updateOrganizationStaff'])->name('request.updateOrganizationStaff');
     });
+});
+
+Route::get('/send-mail', function () {
+    Mail::raw('This is a test email', function ($message) {
+        $message->to('abdul.moeid@badarexpo.com')->subject('Test Email');
+    });
+
+    return 'Email sent!';
 });
