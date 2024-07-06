@@ -82,6 +82,8 @@
                             <th data-filter-control="input" data-field="company_owner" data-formatter="operateSelf">Company Owner Name</th>
                             <th data-filter-control="input" data-field="company_owner_designation" data-sortable="true" data-formatter="operateText">Company Owner Designation</th>
                             <th data-filter-control="input" data-field="company_owner_contact" data-sortable="true" data-formatter="statusFormatter">Company Owner Contact</th>
+                            <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
+                                data-formatter="operateText">Allowed Quantity</th>
                             <th data-filter-control="input" data-field="company_rep_name" data-sortable="true" data-formatter="operateText">Company Rep Name</th>
                             <th data-filter-control="input" data-field="company_rep_designation" data-sortable="true" data-formatter="operateText">Company Rep Designation</th>
                             <th data-filter-control="input" data-field="company_rep_dept" data-formatter="operateText">Company Rep Designation</th>

@@ -66,6 +66,27 @@
                         Staff</a>
                 </div>
             </div>
+            <br />
+            <div class="row">
+                <div class="d-flex col-4">
+                </div>
+                <div class="d-flex col-4">
+                    <div class="card overflow-hidden">
+                        <div class="card-body p-4">
+                            <h5 class="card-title mb-9 fw-semibold">Functionary Staff Limit</h5>
+                            <h4 class="d-flex justify-content-center mb-9 fw-semibold">8</h4>
+                            <div class="align-items-center">
+                                <div class="d-flex justify-content-center">
+                                    <br />
+                                    <p>
+                                        You can Add Upto <b>8</b> Functionary Staff
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @endif
             <br />
             <div class="table-responsive">
@@ -77,9 +98,11 @@
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}">
                     <thead>
                         <tr>
-                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
+                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
+                            </th>
                             <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company Name</th>
+                                data-fixed-columns="true" data-formatter="operateText">Company
+                                Name</th>
                             <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
@@ -110,11 +133,14 @@
                                 data-formatter="operateText">DOJ</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText">Employee Type</th>
-                            <th data-field="picture.img_blob" data-width="100" data-width-unit="px" data-formatter="operatepicture">
+                            <th data-field="picture.img_blob" data-width="100" data-width-unit="px"
+                                data-formatter="operatepicture">
                                 Picture</th>
-                            <th data-field="cnicfront.img_blob" data-width="150" data-width-unit="px" data-formatter="operatecnic">
+                            <th data-field="cnicfront.img_blob" data-width="150" data-width-unit="px"
+                                data-formatter="operatecnic">
                                 CNIC front</th>
-                            <th data-field="cnicback.img_blob" data-width="150"  data-width-unit="px" data-formatter="operatecnic">
+                            <th data-field="cnicback.img_blob" data-width="150" data-width-unit="px"
+                                data-formatter="operatecnic">
                                 CNIC back</th>
                             {{-- <th data-field="picture.img_blob" data-formatter="operateblob" data-visible="false"
                                 data-force-export="true">Staff
@@ -127,8 +153,10 @@
                             </th> --}}
                             <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"
                                 data-formatter="operateText">Remarks</th>
-                            <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated
+                            <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At
+                            </th>
+                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last
+                                Updated
                             </th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true">Edit</th>
                         </tr>

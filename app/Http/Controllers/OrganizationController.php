@@ -104,7 +104,9 @@ class OrganizationController extends Controller
     public function addOrganizationStaffRender($id, $staffId = null)
     {
         $staff = $staffId ? OrganizationStaff::where('uid', $staffId)->first() : null;
-        return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staff' => $staff]);
+        $functionaryStaffLimit = Organization::where('uid', $id)->first('staff_quantity');
+        $functionaryStaffSaturated = OrganizationStaff::where('company_uid', $id)->where('staff_type', 'Functionary')->count() < $functionaryStaffLimit->staff_quantity ? false : true;
+        return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
     }
 
     public function addOrganizationStaff(Request $req, $id, $staffId = null)
@@ -120,7 +122,7 @@ class OrganizationController extends Controller
         try {
             $organizationStaffSaved = $organizationStaff->save();
             if ($organizationStaffSaved) {
-                return $req->submitMore ? redirect()->route('pages.addOrganizationStaff', $staffId)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $id)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect('organization/' . $id . '/' . 'addOrganizationStaff/' . $organizationStaff->uid)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $id)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

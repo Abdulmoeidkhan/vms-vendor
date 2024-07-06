@@ -149,6 +149,14 @@
 
                                     </div>
                                     <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="staff_quantity" class="form-label">Functionary Staff
+                                                Quantity</label>
+                                            <input name="staff_quantity" type="number" class="form-control"
+                                                id="staff_quantity" placeholder="5"
+                                                value="{{isset($organization) ? $organization->staff_quantity : ''}}"
+                                                title="Staff Quanity" min="1" max="99" maxlength="2" required />
+                                        </div>
                                     </div>
                                 </div>
                                 <br />

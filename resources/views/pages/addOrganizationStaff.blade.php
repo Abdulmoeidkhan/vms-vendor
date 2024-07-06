@@ -182,20 +182,24 @@
                                             </select>
                                         </div>
                                     </div>
+                                    @if(isset($staff->staff_type)?$staff->staff_type !="PreEvent":true)
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_type" class="form-label">Staff Type</label>
                                             <select name="staff_type" id="staff_type" class="form-select">
                                                 <option value="" {{isset($staff->staff_type)?'':'selected'}} disabled
                                                     hidden> Staff Type </option>
+                                                @if(!$functionaryStaffSaturated)
                                                 <option value="Functionary" {{isset($staff->
                                                     staff_type)?$staff->staff_type ==
                                                     'Functionary'?'selected':'':''}}>Functionary</option>
-                                                <option value="Preevent" {{isset($staff->staff_type)?$staff->staff_type
-                                                    == 'Preevent'?'selected':'':''}}>Preevent</option>
+                                                @endif
+                                                <option value="PreEvent" {{isset($staff->staff_type)?$staff->staff_type
+                                                    == 'PreEvent'?'selected':'':''}}>PreEvent</option>
                                             </select>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">

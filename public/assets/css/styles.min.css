@@ -16491,7 +16491,7 @@ fieldset:disabled .btn {
     }
 }
 .left-sidebar {
-    width: 350px;
+    width: 250px;
     background-color: #fff;
     position: absolute;
     -webkit-transition: 0.2s ease-in;
@@ -16831,11 +16831,11 @@ fieldset:disabled .btn {
     }
     #main-wrapper[data-layout="vertical"][data-header-position="fixed"]
         .app-header {
-        width: calc(100% - 350px);
+        width: calc(100% - 250px);
     }
     #main-wrapper[data-layout="vertical"][data-sidebartype="full"]
         .body-wrapper {
-        margin-left: 350px;
+        margin-left: 250px;
     }
 }
 @media (max-width: 1199px) {
@@ -16843,7 +16843,7 @@ fieldset:disabled .btn {
         .left-sidebar,
     #main-wrapper[data-layout="vertical"][data-sidebartype="mini-sidebar"]
         .left-sidebar {
-        left: -350px;
+        left: -250px;
     }
     #main-wrapper[data-layout="vertical"][data-sidebartype="full"].show-sidebar
         .left-sidebar,

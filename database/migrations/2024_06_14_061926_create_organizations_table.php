@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('company_owner');
             $table->string('company_owner_designation');
             $table->bigInteger('company_owner_contact')->unique();
-
+            $table->bigInteger('staff_quantity');
             $table->string('company_rep_name');
             $table->string('company_rep_designation');
             $table->string('company_rep_dept')->unique();
