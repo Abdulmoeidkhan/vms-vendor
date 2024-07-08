@@ -57,6 +57,10 @@
                 <td>Otp</td>
                 <td>{{$user->activation_code}}</td>
             </tr>
+            <tr>
+                <td>Portal</td>
+                <td>{{url('')}}</td>
+            </tr>
         </table>
     </div>
 </body>

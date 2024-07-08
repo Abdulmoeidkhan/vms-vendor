@@ -26,7 +26,7 @@
               </div>
               @endif
               <a href="{{route('pages.dashboard')}}" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                <img src="{{asset('assets/images/icons/Badar-Logo-Black.png')}}" width="180" alt="IDEAS">
+                <img src="{{asset('assets/images/icons/Badar-Logo-Black.png')}}" width="180" alt="Badar">
               </a>
               <p class="text-center">Vendor Management System</p>
               <form action="{{route('request.signIn')}}" method="POST">
