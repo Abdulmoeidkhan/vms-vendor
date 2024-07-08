@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('uid')->unique();
             $table->string('staff_first_name');
             $table->string('staff_last_name');
+            $table->string('staff_father_name');
             $table->string('staff_designation');
             $table->string('staff_department');
             $table->string('staff_job_type');

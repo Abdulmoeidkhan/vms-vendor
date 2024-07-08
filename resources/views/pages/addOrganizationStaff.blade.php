@@ -32,44 +32,53 @@
                     <form name="staffInfo" id="staffInfo" method="POST"
                         action="{{isset($staff->uid)? route('request.updateOrganizationStaff',$staff->uid):route('request.addOrganizationStaff',$company_uid)}}">
                         <fieldset>
-                            <legend>Add Staff Form</legend>
+                            <legend>Add Form</legend>
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_first_name" class="form-label">Staff First Name</label>
+                                            <label for="staff_first_name" class="form-label">First Name</label>
                                             <input name="staff_first_name" type="text" class="form-control"
-                                                id="staff_first_name" placeholder="Staff First Name"
+                                                id="staff_first_name" placeholder="First Name"
                                                 value="{{isset($staff) ? $staff->staff_first_name : ''}}" required />
                                         </div>
                                     </div>
+
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_last_name" class="form-label">Staff Last Name</label>
+                                            <label for="staff_last_name" class="form-label">Last Name</label>
                                             <input name="staff_last_name" type="text" class="form-control"
-                                                id="staff_last_name" placeholder="Staff Last Name"
+                                                id="staff_last_name" placeholder="Last Name"
                                                 value="{{isset($staff) ? $staff->staff_last_name : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_designation" class="form-label">Staff Designation</label>
-                                            <input name="staff_designation" type="text" class="form-control"
-                                                id="staff_designation" placeholder="Staff Designation"
-                                                value="{{isset($staff) ? $staff->staff_designation : ''}}" required />
+                                            <label for="staff_father_name" class="form-label">Father Name</label>
+                                            <input name="staff_father_name" type="text" class="form-control"
+                                                id="staff_father_name" placeholder="Father Name"
+                                                value="{{isset($staff) ? $staff->staff_father_name : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_department" class="form-label">Staff Department</label>
-                                            <input name="staff_department" type="text" class="form-control"
-                                                id="staff_department" placeholder="Staff Department"
-                                                value="{{isset($staff) ? $staff->staff_department : ''}}" required />
+                                            <label for="staff_designation" class="form-label">Designation</label>
+                                            <input name="staff_designation" type="text" class="form-control"
+                                                id="staff_designation" placeholder="Designation"
+                                                value="{{isset($staff) ? $staff->staff_designation : ''}}" required />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="staff_department" class="form-label">Department</label>
+                                            <input name="staff_department" type="text" class="form-control"
+                                                id="staff_department" placeholder="Department"
+                                                value="{{isset($staff) ? $staff->staff_department : ''}}" required />
+                                        </div>
+                                    </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_job_type" class="form-label">Job Type</label>
@@ -90,7 +99,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_nationality" class="form-label">Staff Nationality</label>
+                                            <label for="staff_nationality" class="form-label">Nationality</label>
                                             <input name="staff_nationality" type="text" class="form-control"
                                                 id="staff_nationality"
                                                 value="{{isset($staff) ? $staff->staff_nationality : ''}}" required />
@@ -98,30 +107,31 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_identity" class="form-label">Staff Identity</label>
+                                            <label for="staff_identity" class="form-label">Identity</label>
                                             <input name="staff_identity" type="text" class="form-control"
-                                                id="staff_identity" placeholder="Staff Identity "
+                                                id="staff_identity" placeholder="Identity "
                                                 value="{{isset($staff) ? $staff->staff_identity : ''}}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="mb-3">
-                                            <label for="staff_identity_expiry" class="form-label">Staff Identity
-                                                Expiry</label>
-                                            <input name="staff_identity_expiry" type="date" class="form-control"
-                                                id="staff_identity_expiry" placeholder="Staff Identity Expiry "
-                                                value="{{isset($staff) ? $staff->staff_identity_expiry : ''}}"
-                                                required />
-                                        </div>
-                                    </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_contact" class="form-label">Staff Contact Number</label>
+                                            <label for="staff_identity_expiry" class="form-label">Identity
+                                                Expiry</label>
+                                            <input name="staff_identity_expiry" type="date" class="form-control"
+                                                id="staff_identity_expiry" placeholder="Identity Expiry "
+                                                value="{{isset($staff) ? $staff->staff_identity_expiry : ''}}"
+                                                required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="staff_contact" class="form-label">Contact Number</label>
                                             <input name="staff_contact" type="text" minlength='0' maxlength='14'
                                                 class="form-control" id="staff_contact"
-                                                placeholder="Staff Contact Number"
+                                                placeholder="Contact Number"
                                                 value="{{isset($staff) ? $staff->staff_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"
                                                 title="14 DIGIT PHONE NUMBET" data-inputmask="'mask': '+99-9999999999'"
@@ -143,6 +153,9 @@
                                                 value="{{isset($staff) ? $staff->staff_city : ''}}" required />
                                         </div>
                                     </div>
+
+                                </div>
+                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_country" class="form-label">Country</label>
@@ -151,18 +164,16 @@
                                                 value="{{isset($staff) ? $staff->staff_country : ''}}" required />
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_dob" class="form-label">Staff Date Of Birth</label>
+                                            <label for="staff_dob" class="form-label">Date Of Birth</label>
                                             <input name="staff_dob" type="date" class="form-control" id="staff_dob"
                                                 value="{{isset($staff) ? $staff->staff_dob : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_doj" class="form-label">Staff Date Of Joining</label>
+                                            <label for="staff_doj" class="form-label">Date Of Joining</label>
                                             <input name="staff_doj" type="date" class="form-control" id="staff_doj"
                                                 value="{{isset($staff) ? $staff->staff_doj : ''}}" required />
                                         </div>
@@ -182,26 +193,26 @@
                                             </select>
                                         </div>
                                     </div>
-                                    @if(isset($staff->staff_type)?$staff->staff_type !="PreEvent":true)
-                                    <div class="col-md-3">
+                                </div>
+                                <div class="row">
+                                    {{-- if(isset($staff->staff_type)?$staff->staff_type !="PreEvent":true) --}}
+                                    <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="staff_type" class="form-label">Staff Type</label>
+                                            <label for="staff_type" class="form-label">Pass Type</label>
                                             <select name="staff_type" id="staff_type" class="form-select">
                                                 <option value="" {{isset($staff->staff_type)?'':'selected'}} disabled
-                                                    hidden> Staff Type </option>
+                                                    hidden> Pass Type </option>
                                                 @if(!$functionaryStaffSaturated)
                                                 <option value="Functionary" {{isset($staff->
                                                     staff_type)?$staff->staff_type ==
                                                     'Functionary'?'selected':'':''}}>Functionary</option>
                                                 @endif
-                                                <option value="PreEvent" {{isset($staff->staff_type)?$staff->staff_type
-                                                    == 'PreEvent'?'selected':'':''}}>PreEvent</option>
+                                                <option value="Temporary" {{isset($staff->staff_type)?$staff->staff_type
+                                                    == 'Temporary'?'selected':'':''}}>Temporary</option>
                                             </select>
                                         </div>
                                     </div>
-                                    @endif
-                                </div>
-                                <div class="row">
+                                    {{-- endif --}}
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="staff_status" class="form-label">Staus</label>
@@ -217,7 +228,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="staff_remarks" class="form-label">Staff Remarks</label>
+                                            <label for="staff_remarks" class="form-label">Remarks</label>
                                             <textarea name="staff_remarks" class="form-control"
                                                 id="staff_remarks">{{isset($staff) ? $staff->staff_remarks : ''}}</textarea>
                                         </div>
@@ -237,7 +248,7 @@
                                         <div class="mb-3">
                                             <input type="submit" name="submitMore"
                                                 class="btn {{isset($staff->uid )?'btn-primary':'btn-success'}}"
-                                                value="{{isset($staff->uid)?'Update Staff & More':'Add Staff & More'}}" />
+                                                value="{{isset($staff->uid)?'Update & More':'Add & More'}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-8">
@@ -257,7 +268,7 @@
     <div class="col-lg-4 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
-                <livewire:image-upload-component :uid="$staff->uid" title="Staff Image" name="staff_picture" />
+                <livewire:image-upload-component :uid="$staff->uid" title="Image" name="staff_picture" />
             </div>
         </div>
     </div>

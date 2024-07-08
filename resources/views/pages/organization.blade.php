@@ -66,20 +66,21 @@
                         Staff</a>
                 </div>
             </div>
-            <br />
+            {{-- <br /> --}}
             <div class="row">
                 <div class="d-flex col-4">
                 </div>
                 <div class="d-flex col-4">
                     <div class="card overflow-hidden">
                         <div class="card-body p-4">
-                            <h5 class="card-title mb-9 fw-semibold">Functionary Staff Limit</h5>
-                            <h4 class="d-flex justify-content-center mb-9 fw-semibold">8</h4>
+                            <h5 class="card-title text-center mb-9 fw-semibold">Functionary Pass Limit</h5>
+                            <h4 class="d-flex justify-content-center mb-9 fw-semibold">
+                                {{$functionaryStaffLimit->staff_quantity}}</h4>
                             <div class="align-items-center">
                                 <div class="d-flex justify-content-center">
-                                    <br />
+                                    {{-- <br /> --}}
                                     <p>
-                                        You can Add Upto <b>8</b> Functionary Staff
+                                        You have <b>{{$functionaryStaffRemaing}}</b> Remaining Functionary Pass(es) Left
                                     </p>
                                 </div>
                             </div>
@@ -88,7 +89,7 @@
                 </div>
             </div>
             @endif
-            <br />
+            {{-- <br /> --}}
             <div class="table-responsive">
                 <table id="table" data-filter-control-multiple-search="true"
                     data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
@@ -108,31 +109,31 @@
                             <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
                             <th data-filter-control="input" data-field="staff_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Department</th>
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department</th>
                             <th data-filter-control="input" data-field="staff_job_type" data-sortable="true"
-                                data-formatter="operateText">Job Type</th>
+                                data-formatter="operateText" data-force-hide="true">Job Type</th>
                             <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
-                                data-formatter="operateText">Nationality</th>
+                                data-formatter="operateText" data-force-hide="true">Nationality</th>
                             <th data-filter-control="input" data-field="staff_identity" data-sortable="true"
-                                data-formatter="operateText">Identity</th>
+                                data-formatter="operateText" >Identity</th>
                             <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true"
-                                data-formatter="operateText">Identity Expiry</th>
+                                data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
                             <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
                                 data-formatter="operateText">Contact</th>
                             <th data-filter-control="input" data-field="staff_type" data-sortable="true"
-                                data-formatter="operateText">Type</th>
+                                data-formatter="operateText" data-force-hide="true">Pass Type</th>
                             <th data-filter-control="input" data-field="staff_address" data-sortable="true"
                                 data-formatter="operateText">Address</th>
                             <th data-filter-control="input" data-field="staff_city" data-sortable="true"
-                                data-formatter="operateText">City</th>
+                                data-formatter="operateText" data-force-hide="true">City</th>
                             <th data-filter-control="input" data-field="staff_country" data-sortable="true"
-                                data-formatter="operateText">Country</th>
+                                data-formatter="operateText" data-force-hide="true">Country</th>
                             <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
-                                data-formatter="operateText">DOB</th>
+                                data-formatter="operateText" data-force-hide="true">DOB</th>
                             <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
-                                data-formatter="operateText">DOJ</th>
+                                data-formatter="operateText" data-force-hide="true">DOJ</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
-                                data-formatter="operateText">Employee Type</th>
+                                data-formatter="operateText" data-force-hide="true">Employee Type</th>
                             <th data-field="picture.img_blob" data-width="100" data-width-unit="px"
                                 data-formatter="operatepicture">
                                 Picture</th>
@@ -142,23 +143,14 @@
                             <th data-field="cnicback.img_blob" data-width="150" data-width-unit="px"
                                 data-formatter="operatecnic">
                                 CNIC back</th>
-                            {{-- <th data-field="picture.img_blob" data-formatter="operateblob" data-visible="false"
-                                data-force-export="true">Staff
-                                Picture</th>
-                            <th data-field="cnicfront.img_blob" data-formatter="operateblob" data-visible="false"
-                                data-force-export="true">CNIC front
-                            </th>
-                            <th data-field="cnicback.img_blob" data-formatter="operateblob" data-visible="false"
-                                data-force-export="true">CNIC back
-                            </th> --}}
                             <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"
-                                data-formatter="operateText">Remarks</th>
-                            <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At
+                                data-formatter="operateText" data-force-hide="true">Remarks</th>
+                            <th data-filter-control="input" data-field="created_at" data-sortable="true" data-force-hide="true">Created At
                             </th>
-                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last
+                            <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-force-hide="true">Last
                                 Updated
                             </th>
-                            <th data-field="uid" data-formatter="operateEdit" data-force-hide="true">Edit</th>
+                            <th data-field="uid" data-formatter="operateEdit" data-force-hide="true" data-force-hide="true">Edit</th>
                         </tr>
                     </thead>
                 </table>

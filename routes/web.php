@@ -13,7 +13,7 @@ use App\Http\Controllers\SignUpController;
 use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
 
-use Illuminate\Support\Facades\Mail;
+// use Illuminate\Support\Facades\Mail;
 
 Route::get('/login', function () {
     if (auth()?->user()?->uid) {
@@ -80,10 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
     });
 });
 
-Route::get('/send-mail', function () {
-    Mail::raw('This is a test email', function ($message) {
-        $message->to('abdul.moeid@badarexpo.com')->subject('Test Email');
-    });
-
-    return 'Email sent!';
-});
+// Route::get('/send-mail', function () {
+//     Mail::raw('This is a test email', function ($message) {
+//         $message->to('mohammadzaidi.0334@gmail.com')->subject('Test Email');
+//     });
+// });

@@ -155,7 +155,7 @@
                                             <input name="staff_quantity" type="number" class="form-control"
                                                 id="staff_quantity" placeholder="5"
                                                 value="{{isset($organization) ? $organization->staff_quantity : ''}}"
-                                                title="Staff Quanity" min="1" max="99" maxlength="2" required />
+                                                title="Staff Quanity" min="1" max="500" maxlength="3" required />
                                         </div>
                                     </div>
                                 </div>
