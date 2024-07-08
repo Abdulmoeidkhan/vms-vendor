@@ -159,6 +159,20 @@ class OrganizationController extends Controller
         }
     }
 
+    public function updateOrganisationStaffSecurityStatus(Request $req)
+    {
+        try {
+            $updatedOrganisationStaff = OrganizationStaff::whereIn('uid', $req->uidArray)->update(['staff_security_status' => $req->status]);
+            return $updatedOrganisationStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
 
     // Organization Add/Update Form Render & Request
     public function addOrganizationRender($id = null)

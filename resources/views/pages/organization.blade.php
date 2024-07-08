@@ -63,10 +63,18 @@
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add
-                        Staff</a>
+                        Staff</a>&nbsp;
+                    @if(session()->get('user')->roles[0]->name === "admin")
+                    <button id="sent" class="status-action-button btn btn-danger">Sent For
+                        Approval</button>&nbsp;
+                    <button id="pending" class="status-action-button btn btn-warning">Not Sent For
+                        Approval</button>&nbsp;
+                    <button id="approved" class="status-action-button btn btn-success">Approved</button>&nbsp;
+                    <button id="rejected" class="status-action-button btn btn-badar">Rejected</button>
+                    @endif
                 </div>
             </div>
-            {{-- <br /> --}}
+            <br />
             <div class="row">
                 <div class="d-flex col-4">
                 </div>
@@ -90,8 +98,8 @@
             </div>
             @endif
             {{-- <br /> --}}
-            <div class="table-responsive">
-                <table id="table" data-filter-control-multiple-search="true"
+            <div class="table-responsive text-capitalize">
+                <table id="table" data-filter-control-multiple-search="true" data-click-to-select="true"
                     data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                     data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
                     data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
@@ -99,6 +107,7 @@
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}">
                     <thead>
                         <tr>
+                            <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
                             </th>
                             <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
@@ -109,13 +118,14 @@
                             <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
                             <th data-filter-control="input" data-field="staff_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department</th>
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
+                            </th>
                             <th data-filter-control="input" data-field="staff_job_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Job Type</th>
                             <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Nationality</th>
                             <th data-filter-control="input" data-field="staff_identity" data-sortable="true"
-                                data-formatter="operateText" >Identity</th>
+                                data-formatter="operateText">Identity</th>
                             <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
                             <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
@@ -134,23 +144,28 @@
                                 data-formatter="operateText" data-force-hide="true">DOJ</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
-                            <th data-field="picture.img_blob" data-width="100" data-width-unit="px"
+                            <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">Security Status</th>
+                            <th data-field="picture.img_blob" data-width="150" data-width-unit="px"
                                 data-formatter="operatepicture">
                                 Picture</th>
-                            <th data-field="cnicfront.img_blob" data-width="150" data-width-unit="px"
+                            <th data-field="cnicfront.img_blob" data-width="200" data-width-unit="px"
                                 data-formatter="operatecnic">
                                 CNIC front</th>
-                            <th data-field="cnicback.img_blob" data-width="150" data-width-unit="px"
+                            <th data-field="cnicback.img_blob" data-width="200" data-width-unit="px"
                                 data-formatter="operatecnic">
                                 CNIC back</th>
                             <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Remarks</th>
-                            <th data-filter-control="input" data-field="created_at" data-sortable="true" data-force-hide="true">Created At
+                            <th data-filter-control="input" data-field="created_at" data-sortable="true"
+                                data-force-hide="true">Created At
                             </th>
-                            <th data-filter-control="input" data-field="updated_at" data-sortable="true" data-force-hide="true">Last
+                            <th data-filter-control="input" data-field="updated_at" data-sortable="true"
+                                data-force-hide="true">Last
                                 Updated
                             </th>
-                            <th data-field="uid" data-formatter="operateEdit" data-force-hide="true" data-force-hide="true">Edit</th>
+                            <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
+                                data-force-hide="true">Edit</th>
                         </tr>
                     </thead>
                 </table>
@@ -228,9 +243,13 @@
         return index + 1;
     }
 
-    ['#table', '#table1', '#table2', '#table3', '#table4', ].map((val => {
+    
+    ['#table' ].map((val => {
         var $table = $(val)
         var selectedRow = {}
+        var $button = $('.status-action-button')
+        
+
 
         $(function() {
             $table.on('click-row.bs.table', function(e, row, $element) {
@@ -240,27 +259,44 @@
             })
         })
 
+        $(function() {$button.click(function (val) {
+            let uidArray=[]
+            $table.bootstrapTable('getSelections').map((val)=>{
+                uidArray.push(val.uid);
+            })
+            axios.post("{{route('request.updateOrganisationStaffSecurityStatus')}}",{
+                uidArray,
+                status:val.target.id
+            }).then(
+                function(response) {
+                console.log(response.data);
+                $table.bootstrapTable('refresh');
+                }).catch(function(error) {console.log(error);})
+        }
+    )})
         function rowStyle(row) {
             if (row.id === selectedRow.id) {
                 return {
                     classes: 'active'
                 }
             }
-            return {}
         }
 
-        // $(val).bootstrapTable({
-        //     exportOptions: {
-        //         fileName: 'List Of All Organisation'
-        //     }
-        // });
+
         $(val).bootstrapTable({
-        // exportDataType: $(this).val(),
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {
-            fileName: 'List Of All Organisation',
+            fileName: 'List Of Staff',
             type: 'pdf',
-            jspdf: {orientation: 'l'}
+            jspdf: {
+                orientation: 'l',
+                autotable: {
+                    styles: {
+                        rowHeight: 100
+                    },
+                    tableWidth: 'auto'
+                }
+            }
         }
       })
     }

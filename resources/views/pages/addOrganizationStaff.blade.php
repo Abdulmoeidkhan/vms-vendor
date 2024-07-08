@@ -130,8 +130,7 @@
                                         <div class="mb-3">
                                             <label for="staff_contact" class="form-label">Contact Number</label>
                                             <input name="staff_contact" type="text" minlength='0' maxlength='14'
-                                                class="form-control" id="staff_contact"
-                                                placeholder="Contact Number"
+                                                class="form-control" id="staff_contact" placeholder="Contact Number"
                                                 value="{{isset($staff) ? $staff->staff_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"
                                                 title="14 DIGIT PHONE NUMBET" data-inputmask="'mask': '+99-9999999999'"
@@ -283,6 +282,78 @@
         <div class="card w-100">
             <div class="card-body p-4">
                 <livewire:image-upload-component :uid="$staff->uid" title="CNIC Back" name="cnic_back_picture" />
+            </div>
+        </div>
+    </div>
+</div>
+@else
+<div class="row" style="cursor: not-allowed;">
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card w-100">
+            <div class="card-body p-4">
+                <div class="mb-4">
+                    <h5 class="card-title fw-semibold">Image</h5>
+                </div>
+                <br />
+                <div>
+                    <img src="{{asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px"
+                        class="rounded mx-auto d-block" alt="User Profile Picture">
+                </div>
+                <form class=>
+                    <div class="mb-3 col-lg-10">
+                        <label for="dummyPicture" class="form-label">Picture</label>
+                        <input name="dummyPicture" type="file" class="form-control disabled" accept="image/png, image/jpeg"
+                            disabled>
+                        <br />
+                        <button class="btn btn-outline-danger disabled" type="submit" disabled>Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card w-100 disabled">
+            <div class="card-body p-4">
+                <div class="mb-4">
+                    <h5 class="card-title fw-semibold">CNIC Front</h5>
+                </div>
+                <br />
+                <div>
+                    <img src="{{asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px"
+                        class="rounded mx-auto d-block" alt="User Profile Picture">
+                </div>
+                <form>
+                    <div class="mb-3 col-lg-10">
+                        <label for="dummyPicture" class="form-label">Picture</label>
+                        <input name="dummyPicture" type="file" class="form-control" accept="image/png, image/jpeg"
+                            disabled>
+                        <br />
+                        <button class="btn btn-outline-danger disabled" type="submit" disabled>Upload</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 d-flex align-items-stretch">
+        <div class="card w-100 ">
+            <div class="card-body p-4">
+                <div class="mb-4">
+                    <h5 class="card-title fw-semibold">CNIC Back</h5>
+                </div>
+                <br />
+                <div>
+                    <img src="{{asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px"
+                        class="rounded mx-auto d-block" alt="User Profile Picture">
+                </div>
+                <form>
+                    <div class="mb-3 col-lg-10">
+                        <label for="dummyPicture" class="form-label">Picture</label>
+                        <input name="dummyPicture" type="file" class="form-control" accept="image/png, image/jpeg"
+                            disabled>
+                        <br />
+                        <button class="btn btn-outline-danger disabled" type="submit" disabled>Upload</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
