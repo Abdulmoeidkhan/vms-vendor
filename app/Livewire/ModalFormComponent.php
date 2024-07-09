@@ -2,9 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\CompanyCategory;
 use Livewire\Component;
-use ReflectionClass;
 
 class ModalFormComponent extends Component
 {
@@ -17,22 +15,31 @@ class ModalFormComponent extends Component
     public $field1 = '';
     public $field2 = '';
     public $field3 = '';
-    public $className;
+    public $modelClass;
+    public $savedField=0;
 
-    public function mount($modalId, $name, $field1Name, $field2Name, $field3Name, $className)
+    public function mount($modalId, $name, $field1Name, $field2Name, $field3Name, $modelClass)
     {
         $this->modalId = $modalId;
         $this->name = $name;
         $this->field1Name = $field1Name;
         $this->field2Name = $field2Name;
         $this->field3Name = $field3Name;
-        switch ($className) {
-            case "CompanyCategory":
-                $this->className = CompanyCategory::class;
-                break;
-            default:
-                echo "Your favorite color is neither red, blue, nor green!";
+        $this->modelClass = $modelClass->modelClass;
+    }
+
+    public function save(){
+        $field = new $this->modelClass;
+        $field->name = $this->field1Name;
+        $field->display_name = $this->field2Name;
+        $field->description = $this->field3Name;
+        $this->savedField = $field->save();
+        if ($this->savedField) {
+            $this->reset();
+            // $this->dispatch('Up')->to(UserListComponent::class);
+            $this->js("alert('Updated!')");
         }
+
     }
 
     public function render()

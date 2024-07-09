@@ -31,7 +31,8 @@
                 <div class="row">
                     <div class="d-flex">
                         <livewire:modal-form-component modalId="category-form" name="Add Category Form"
-                            field1Name="name" field2Name="display_name" field3Name="description" className="CompanyCategory"/>
+                            field1Name="name" field2Name="display_name" field3Name="description"
+                            className="CompanyCategory" />
                         &nbsp;
                     </div>
                 </div>
