@@ -110,6 +110,8 @@
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
                             </th>
+                            <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
+                            data-formatter="operateText" data-force-hide="true">Security Status</th>
                             <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company
                                 Name</th>
@@ -144,8 +146,7 @@
                                 data-formatter="operateText" data-force-hide="true">DOJ</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
-                            <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Security Status</th>
+
                             <th data-field="picture.img_blob" data-width="150" data-width-unit="px"
                                 data-formatter="operatepicture">
                                 Picture</th>

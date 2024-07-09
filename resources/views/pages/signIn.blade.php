@@ -49,10 +49,10 @@
                 </div>
                 @csrf
                 <input type="submit" name="Sign In" value="Sign In" class="btn btn-badar w-100 py-8 fs-4 mb-4 rounded-2" />
-                <div class="d-flex align-items-center justify-content-center">
+                {{-- <div class="d-flex align-items-center justify-content-center">
                   <p class="fs-4 mb-0 fw-bold">Activate Account?</p>
                   <a class="text-badar fw-bold ms-2" href="{{route('accountActivation')}}">Activate</a>
-                </div>
+                </div> --}}
               </form>
               <br />
               <img style="width:445px;width:-webkit-fill-available;" src="{{asset('assets/images/icons/Partners.png')}}" alt="Partners LOGO" />

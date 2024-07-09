@@ -107,9 +107,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_identity" class="form-label">Identity</label>
+                                            <label for="staff_identity" class="form-label">CNIC/Passport</label>
                                             <input name="staff_identity" type="text" class="form-control"
-                                                id="staff_identity" placeholder="Identity "
+                                                id="staff_identity" placeholder="Identity" maxlength='13'
                                                 value="{{isset($staff) ? $staff->staff_identity : ''}}" required />
                                         </div>
                                     </div>
@@ -118,7 +118,7 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_identity_expiry" class="form-label">Identity
+                                            <label for="staff_identity_expiry" class="form-label">CNIC/Passport
                                                 Expiry</label>
                                             <input name="staff_identity_expiry" type="date" class="form-control"
                                                 id="staff_identity_expiry" placeholder="Identity Expiry "
@@ -129,7 +129,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_contact" class="form-label">Contact Number</label>
-                                            <input name="staff_contact" type="text" minlength='0' maxlength='14'
+                                            <input name="staff_contact" type="text" minlength='0' maxlength='11'
                                                 class="form-control" id="staff_contact" placeholder="Contact Number"
                                                 value="{{isset($staff) ? $staff->staff_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"
@@ -170,13 +170,13 @@
                                                 value="{{isset($staff) ? $staff->staff_dob : ''}}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    {{-- <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_doj" class="form-label">Date Of Joining</label>
                                             <input name="staff_doj" type="date" class="form-control" id="staff_doj"
                                                 value="{{isset($staff) ? $staff->staff_doj : ''}}" required />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="employee_type" class="form-label">Employee Type</label>
@@ -204,10 +204,10 @@
                                                 @if(!$functionaryStaffSaturated)
                                                 <option value="Functionary" {{isset($staff->
                                                     staff_type)?$staff->staff_type ==
-                                                    'Functionary'?'selected':'':''}}>Functionary</option>
+                                                    'Functionary'?'selected':'':''}}>Functionary Pass</option>
                                                 @endif
                                                 <option value="Temporary" {{isset($staff->staff_type)?$staff->staff_type
-                                                    == 'Temporary'?'selected':'':''}}>Temporary</option>
+                                                    == 'Temporary'?'selected':'':''}}>Temporary Pass</option>
                                             </select>
                                         </div>
                                     </div>
@@ -302,8 +302,8 @@
                 <form class=>
                     <div class="mb-3 col-lg-10">
                         <label for="dummyPicture" class="form-label">Picture</label>
-                        <input name="dummyPicture" type="file" class="form-control disabled" accept="image/png, image/jpeg"
-                            disabled>
+                        <input name="dummyPicture" type="file" class="form-control disabled"
+                            accept="image/png, image/jpeg" disabled>
                         <br />
                         <button class="btn btn-outline-danger disabled" type="submit" disabled>Upload</button>
                     </div>

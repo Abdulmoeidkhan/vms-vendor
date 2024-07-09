@@ -40,6 +40,8 @@
 <body class="antialiased">
     <div class="container">
         <h2>THANK YOU FOR Signing In {{$user->name}}</h2>
+        <h3>Welcome to IDEAS 2024 as official vendor / service provider.</h3>
+        <p>Kindly find below the login details to enter your staff’s data for the security clearance and badges.</p>
         <p>
             Please check your details.
         </p>
@@ -53,15 +55,19 @@
                 <td>Email Id</td>
                 <td>{{$user->email}}</td>
             </tr>
-            <tr>
+            {{-- <tr>
                 <td>Otp</td>
                 <td>{{$user->activation_code}}</td>
-            </tr>
+            </tr> --}}
             <tr>
                 <td>Portal</td>
                 <td>{{url('')}}</td>
             </tr>
         </table>
+        <h3>Note :</h3>
+        <p>In order to facilitate you, we have introduced Badar Expo Mobile App so you may download it from Google play
+            and App store, and get yourself and your friends / colleagues and customers for obtaining the visitor badges
+            for all the events of Badar Expo Solutions.</p>
     </div>
 </body>
 

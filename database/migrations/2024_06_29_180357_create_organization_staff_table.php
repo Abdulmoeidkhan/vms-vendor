@@ -32,7 +32,7 @@ return new class extends Migration
             $table->date('staff_doj');
             $table->string('employee_type');
             $table->string('staff_status');
-            $table->string('staff_security_status');
+            $table->string('staff_security_status')->default('pending');
             $table->string('staff_remarks')->nullable();
             $table->uuid('company_uid');
             $table->timestamps();

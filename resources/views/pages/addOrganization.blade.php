@@ -27,6 +27,16 @@
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
+                @if(session()->get('user')->roles[0]->name === "admin")
+                <div class="row">
+                    <div class="d-flex">
+                        <livewire:modal-form-component modalId="category-form" name="Add Category Form"
+                            field1Name="name" field2Name="display_name" field3Name="description" className="CompanyCategory"/>
+                        &nbsp;
+                    </div>
+                </div>
+                <br />
+                @endif
                 <h5 class="card-ti tle fw-semibold mb-4">New Organization</h5>
                 <div class="table-responsive">
                     <form name="organizationInfo" id="organizationInfo" method="POST"
@@ -250,7 +260,7 @@
                                                 required {{isset($organization) ? 'disabled' : '' }} />
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="company_rep_phone" class="form-label">Company Rep Phone</label>
                                             <input name="company_rep_phone" type="text" class="form-control"
@@ -258,7 +268,7 @@
                                                 value="{{isset($organization) ? $organization->company_rep_phone : ''}}"
                                                 required />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <br />
                                 <br />

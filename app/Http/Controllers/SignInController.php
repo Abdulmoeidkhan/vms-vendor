@@ -48,9 +48,10 @@ class SignInController extends Controller
                 } else {
                     return redirect()->route('login')->with('error', "Password credentials do not match our records.");
                 }
-            } else {
-                return redirect()->route('accountActivation')->with('error', "User is not activated");
-            }
+            } 
+            // else {
+            //     return redirect()->route('accountActivation')->with('error', "User is not activated");
+            // }
         } else {
             return redirect()->route('login')->with('error', "User does not exist");
         }

@@ -44,6 +44,7 @@ class SignUpController extends Controller
         $user->email = $req->email;
         $user->password = Hash::make($req->password);
         $user->activation_code = $this->badge(8, "");
+        $user->status = 1;
         $savedUser = 0;
         try {
             $savedUser = $user->save();

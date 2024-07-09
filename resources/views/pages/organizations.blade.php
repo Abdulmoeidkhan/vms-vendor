@@ -77,30 +77,32 @@
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
+                            <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
+                                data-formatter="operateText">Allowed Quantity</th>
                             <th data-filter-control="input" data-field="company_category" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateSpecialText">Company Category</th>
-                            <th data-filter-control="input" data-field="company_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company Name</th>
-                            <th data-filter-control="input" data-field="company_address" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company Address </th>
                             <th data-filter-control="input" data-field="company_type" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Type</th>
-                            <th data-filter-control="input" data-field="company_city" data-sortable="true"
-                                data-formatter="operateText">City</th>
-                            <th data-filter-control="input" data-field="company_country" data-sortable="true"
-                                data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="company_contact" data-sortable="true"
-                                data-formatter="operateText">Contact</th>
-                            <th data-filter-control="input" data-field="company_ntn" data-sortable="true"
-                                data-formatter="operateText">NTN</th>
-                            <th data-filter-control="input" data-field="company_owner" data-formatter="operateSelf">
+                            <th data-filter-control="input" data-field="company_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Company Name</th>
+                            <th data-filter-control="input" data-field="company_rep_email" data-formatter="operateText">
+                                Registered Email</th>
+                            <th data-filter-control="input" data-field="company_owner" data-formatter="operateText">
                                 Company Owner Name</th>
                             <th data-filter-control="input" data-field="company_owner_designation" data-sortable="true"
                                 data-formatter="operateText">Company Owner Designation</th>
                             <th data-filter-control="input" data-field="company_owner_contact" data-sortable="true"
-                                data-formatter="statusFormatter">Company Owner Contact</th>
-                            <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
-                                data-formatter="operateText">Allowed Quantity</th>
+                                data-formatter="operateText">Company Owner Contact</th>
+                            <th data-filter-control="input" data-field="company_address" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Company Address </th>
+                            <th data-filter-control="input" data-field="company_country" data-sortable="true"
+                                data-formatter="operateText">Country</th>
+                            <th data-filter-control="input" data-field="company_city" data-sortable="true"
+                                data-formatter="operateText">City</th>
+                            <th data-filter-control="input" data-field="company_contact" data-sortable="true"
+                                data-formatter="operateText">Contact</th>
+                            <th data-filter-control="input" data-field="company_ntn" data-sortable="true"
+                                data-formatter="operateText">NTN</th>
                             <th data-filter-control="input" data-field="company_rep_name" data-sortable="true"
                                 data-formatter="operateText">Company Rep Name</th>
                             <th data-filter-control="input" data-field="company_rep_designation" data-sortable="true"
@@ -109,10 +111,9 @@
                                 Company Rep Department</th>
                             <th data-filter-control="input" data-field="company_rep_contact"
                                 data-formatter="operateText">Company Rep Contact</th>
-                            <th data-filter-control="input" data-field="company_rep_email" data-formatter="operateText">
-                                Company Rep Email</th>
-                            <th data-filter-control="input" data-field="company_rep_phone" data-formatter="operateText">
-                                Company Rep Phone</th>
+                            {{-- <th data-filter-control="input" data-field="company_rep_phone"
+                                data-formatter="operateText">
+                                Company Rep Phone</th> --}}
                             <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated
                             </th>

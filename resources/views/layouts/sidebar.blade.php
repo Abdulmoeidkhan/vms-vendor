@@ -44,6 +44,22 @@
                         <span class="hide-menu">Vendor & Staff</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-user-star"></i>
+                        </div>
+                        <span class="hide-menu">HR</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-video"></i>
+                        </div>
+                        <span class="hide-menu">Media</span>
+                    </a>
+                </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="orgRep")
                 <li class="sidebar-item">

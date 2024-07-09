@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+{{-- @extends('layouts.layout')
 @section("content")
 <style>
     .gradient-class {
@@ -46,4 +46,4 @@
             </div>
         </div>
     </div>
-    @endsection
+    @endsection --}}
