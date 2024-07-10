@@ -28,17 +28,6 @@
         <div class="card w-100">
             <div class="card-body p-4">
                 @if(session()->get('user')->roles[0]->name === "admin")
-                <div class="row">
-                    <div class="d-flex">
-
-                        &nbsp;
-
-                        &nbsp;
-
-                        &nbsp;
-                    </div>
-                </div>
-                <br />
                 @endif
                 <h5 class="card-ti tle fw-semibold mb-4">New Organization</h5>
                 <div class="table-responsive">
@@ -51,6 +40,7 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="row">
+                                            @if(session()->get('user')->roles[0]->name === "admin")
                                             <div class="col-md-9">
                                                 <div class="mb-3">
                                                     <label for="company_category" class="form-label">Company
@@ -81,6 +71,26 @@
                                                         mykey="1" title="+" colorClass="primary" />
                                                 </div>
                                             </div>
+                                            @else
+                                            <div class="mb-3">
+                                                <label for="company_category" class="form-label">Company
+                                                    Category</label>
+                                                <select name="company_category" id="company_category"
+                                                    class="form-select">
+                                                    <option value="" selected disabled hidden> Select Company
+                                                        Category
+                                                    </option>
+                                                    @foreach (\App\Models\CompanyCategory::all() as $category)
+                                                    <option value="{{$category->display_name}}" {{isset($organization->
+                                                        company_category) ? ($organization->company_category ==
+                                                        $category->display_name ? 'selected' : '')
+                                                        : ''}}>{{isset($organization->company_category)
+                                                        ?$organization->company_category:$category->display_name}}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-4">

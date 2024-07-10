@@ -42,6 +42,7 @@ class ModalFormComponent extends Component
         } else {
             $this->js("alert('SomeThing Went Wrong!')");
         }
+
     }
 
     #[On('category-updated')]
