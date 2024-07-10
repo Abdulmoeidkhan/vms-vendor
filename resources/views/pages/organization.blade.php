@@ -67,8 +67,7 @@
                     @if(session()->get('user')->roles[0]->name === "admin")
                     <button id="sent" class="status-action-button btn btn-danger">Sent For
                         Approval</button>&nbsp;
-                    <button id="pending" class="status-action-button btn btn-warning">Not Sent For
-                        Approval</button>&nbsp;
+                    <button id="pending" class="status-action-button btn btn-warning">Status Pending</button>&nbsp;
                     <button id="approved" class="status-action-button btn btn-success">Approved</button>&nbsp;
                     <button id="rejected" class="status-action-button btn btn-badar">Rejected</button>
                     @endif

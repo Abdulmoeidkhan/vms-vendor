@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('company_rep_dept')->unique();
             $table->string('company_rep_contact')->unique();
             $table->string('company_rep_email')->unique();
-            $table->string('company_rep_phone')->unique();
+            $table->string('company_rep_phone')->nullable();
             $table->uuid('company_rep_uid')->unique();
             $table->timestamps();
         });

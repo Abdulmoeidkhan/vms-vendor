@@ -52,6 +52,7 @@ class OrganizationController extends Controller
         $user->email = $email;
         $user->password = Hash::make($pass);
         $user->activation_code = $this->badge(8, "");
+        $user->activated = 1;
         $savedUser = 0;
         try {
             $savedUser = $user->save();

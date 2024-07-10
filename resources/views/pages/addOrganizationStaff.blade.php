@@ -109,7 +109,7 @@
                                         <div class="mb-3">
                                             <label for="staff_identity" class="form-label">CNIC/Passport</label>
                                             <input name="staff_identity" type="text" class="form-control"
-                                                id="staff_identity" placeholder="Identity" maxlength='13'
+                                                id="staff_identity" placeholder="Identity" minlength='7' maxlength='13'
                                                 value="{{isset($staff) ? $staff->staff_identity : ''}}" required />
                                         </div>
                                     </div>
@@ -129,7 +129,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_contact" class="form-label">Contact Number</label>
-                                            <input name="staff_contact" type="text" minlength='0' maxlength='11'
+                                            <input name="staff_contact" type="text" minlength='11' maxlength='11'
                                                 class="form-control" id="staff_contact" placeholder="Contact Number"
                                                 value="{{isset($staff) ? $staff->staff_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"

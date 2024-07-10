@@ -39,59 +39,60 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="row">
-                                            @if(session()->get('user')->roles[0]->name === "admin")
-                                            <div class="col-md-9">
-                                                <div class="mb-3">
-                                                    <label for="company_category" class="form-label">Company
-                                                        Category</label>
-                                                    <select name="company_category" id="company_category"
-                                                        class="form-select">
-                                                        <option value="" selected disabled hidden> Select Company
-                                                            Category
-                                                        </option>
-                                                        @foreach (\App\Models\CompanyCategory::all() as $category)
-                                                        <option value="{{$category->display_name}}"
-                                                            {{isset($organization->
-                                                            company_category) ? ($organization->company_category ==
-                                                            $category->display_name ? 'selected' : '')
-                                                            : ''}}>{{isset($organization->company_category)
-                                                            ?$organization->company_category:$category->display_name}}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
+                                        @if(session()->get('user')->roles[0]->name === "admin")
+                                        <div class="mb-3">
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <div class="mb-3">
+                                                        <label for="company_category" class="form-label">Company
+                                                            Category</label>
+                                                        <select name="company_category" id="company_category"
+                                                            class="form-select">
+                                                            <option value="" selected disabled hidden> Select Company
+                                                                Category
+                                                            </option>
+                                                            @foreach (\App\Models\CompanyCategory::all() as $category)
+                                                            <option value="{{$category->display_name}}"
+                                                                {{isset($organization->
+                                                                company_category) ? ($organization->company_category ==
+                                                                $category->display_name ? 'selected' : '')
+                                                                : ''}}>{{isset($organization->company_category)
+                                                                ?$organization->company_category:$category->display_name}}
+                                                            </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Add Category</label>
+                                                        <livewire:modal-form-component modalId="category-form"
+                                                            name="Add Category"
+                                                            :className="$modelClass=App\Models\CompanyCategory::class"
+                                                            mykey="1" title="+" colorClass="primary" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Add Category</label>
-                                                    <livewire:modal-form-component modalId="category-form"
-                                                        name="Add Category"
-                                                        :className="$modelClass=App\Models\CompanyCategory::class"
-                                                        mykey="1" title="+" colorClass="primary" />
-                                                </div>
-                                            </div>
-                                            @else
-                                            <div class="mb-3">
-                                                <label for="company_category" class="form-label">Company
-                                                    Category</label>
-                                                <select name="company_category" id="company_category"
-                                                    class="form-select">
-                                                    <option value="" selected disabled hidden> Select Company
-                                                        Category
-                                                    </option>
-                                                    @foreach (\App\Models\CompanyCategory::all() as $category)
-                                                    <option value="{{$category->display_name}}" {{isset($organization->
-                                                        company_category) ? ($organization->company_category ==
-                                                        $category->display_name ? 'selected' : '')
-                                                        : ''}}>{{isset($organization->company_category)
-                                                        ?$organization->company_category:$category->display_name}}
-                                                    </option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            @endif
                                         </div>
+                                        @else
+                                        <div class="mb-3">
+                                            <label for="company_category" class="form-label">Company
+                                                Category</label>
+                                            <select name="company_category" id="company_category" class="form-select">
+                                                <option value="" selected disabled hidden> Select Company
+                                                    Category
+                                                </option>
+                                                @foreach (\App\Models\CompanyCategory::all() as $category)
+                                                <option value="{{$category->display_name}}" {{isset($organization->
+                                                    company_category) ? ($organization->company_category ==
+                                                    $category->display_name ? 'selected' : '')
+                                                    : ''}}>{{isset($organization->company_category)
+                                                    ?$organization->company_category:$category->display_name}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @endif
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -115,6 +116,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
+                                        @if(session()->get('user')->roles[0]->name === "admin")
                                         <div class="mb-3">
                                             <div class="row">
                                                 <div class="col-md-9">
@@ -140,13 +142,29 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @else
+                                        <div class="mb-3">
+                                            <label for="company_type" class="form-label">Company Type</label>
+                                            <select name="company_type" id="company_type" class="form-select">
+                                                <option value="" selected disabled hidden> Select Company Type
+                                                </option>
+                                                @foreach (\App\Models\CompanyType::all() as $type)
+                                                <option value="{{$type->display_name}}" {{isset($organization->
+                                                    company_type) ? ($organization->company_type ==
+                                                    $type->display_name ? 'selected' : '')
+                                                    : ''}}>{{isset($organization->company_type)
+                                                    ?$organization->company_type:$type->display_name}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @endif
                                     </div>
                                     <div class="col-md-4">
+                                        @if(session()->get('user')->roles[0]->name === "admin")
                                         <div class="mb-3">
                                             <div class="row">
                                                 <div class="col-md-9">
                                                     <label for="company_country" class="form-label">Country</label>
-                                                    <!-- <input name="company_country" type="text" class="form-control" id="company_country" placeholder="Pakistan" value="{{isset($organization) ? $organization->company_country : ''}}" required /> -->
                                                     <select name="company_country" id="company_country"
                                                         class="form-select">
                                                         <option value="" selected disabled hidden> Select Country
@@ -171,6 +189,23 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @else
+                                        <div class="mb-3">
+                                            <label for="company_country" class="form-label">Country</label>
+                                            <select name="company_country" id="company_country" class="form-select">
+                                                <option value="" selected disabled hidden> Select Country
+                                                </option>
+                                                @foreach (\App\Models\Country::all() as $country)
+                                                <option value="{{$country->display_name}}" {{isset($organization->
+                                                    company_country) ? ($organization->company_country ==
+                                                    $country->display_name ? 'selected' : '')
+                                                    : ''}}>{{isset($organization->company_country)
+                                                    ?$organization->company_country:$country->display_name}}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        @endif
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -185,10 +220,9 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-4">
-
                                         <div class="mb-3">
                                             <label for="company_contact" class="form-label">Contact Number</label>
-                                            <input name="company_contact" type="text" minlength='0' maxlength='14'
+                                            <input name="company_contact" type="text" minlength='11' maxlength='11'
                                                 class="form-control" id="company_contact"
                                                 placeholder="Company Contact Number"
                                                 value="{{isset($organization) ? $organization->company_contact : ''}}"
@@ -251,7 +285,7 @@
                                             <input name="company_owner_contact" type="number" class="form-control"
                                                 id="company_owner_contact" placeholder="Company Owner Contact"
                                                 value="{{isset($organization) ? $organization->company_owner_contact: ''}}"
-                                                required />
+                                                minlength='11' maxlength='11' required />
                                         </div>
 
                                     </div>
@@ -298,7 +332,7 @@
                                             <input name="company_rep_contact" type="text" class="form-control"
                                                 id="company_rep_contact" placeholder="Company Rep Contact"
                                                 value="{{isset($organization) ? $organization->company_rep_contact : ''}}"
-                                                required />
+                                                minlength='11' maxlength='11' required />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
