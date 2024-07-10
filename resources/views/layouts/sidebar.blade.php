@@ -47,7 +47,7 @@
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-user-star"></i>
+                            <i class="ti ti-user-circle"></i>
                         </div>
                         <span class="hide-menu">HR</span>
                     </a>

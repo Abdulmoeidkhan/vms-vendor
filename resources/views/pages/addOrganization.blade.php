@@ -30,8 +30,11 @@
                 @if(session()->get('user')->roles[0]->name === "admin")
                 <div class="row">
                     <div class="d-flex">
-                        <livewire:modal-form-component modalId="category-form" name="Add Category Form"
-                            field1Name="name" field2Name="display_name" field3Name="description" className="CompanyCategory"/>
+
+                        &nbsp;
+
+                        &nbsp;
+
                         &nbsp;
                     </div>
                 </div>
@@ -47,23 +50,37 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="company_category" class="form-label">Company Category</label>
-                                            <select name="company_category" id="company_category" class="form-select">
-                                                @if(isset($organization->uid))
-                                                <option value="Test" {{$organization->company_category ==
-                                                    'Test'?'selected':''}}> Test 1</option>
-                                                <option value="Test2" {{$organization->company_category ==
-                                                    'Test2'?'selected':''}}> Test 2</option>
-                                                @else
-                                                <option value="" selected disabled hidden> Select Category </option>
-                                                <option value="Test"> Test 1</option>
-                                                <option value="Test2"> Test 2</option>
-                                                @endif
-                                                <!-- foreach (\App\Models\Rank::all() as $renderRank) -->
-                                                <!-- <option value="renderRank->ranks_uid" {{isset($organization->company_category) ? ($organization->company_category ? 'selected' : '') : ''}}>{{isset($organization->company_category) ?$organization->company_category:''}}</option> -->
-                                                <!-- endforeach -->
-                                            </select>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="mb-3">
+                                                    <label for="company_category" class="form-label">Company
+                                                        Category</label>
+                                                    <select name="company_category" id="company_category"
+                                                        class="form-select">
+                                                        <option value="" selected disabled hidden> Select Company
+                                                            Category
+                                                        </option>
+                                                        @foreach (\App\Models\CompanyCategory::all() as $category)
+                                                        <option value="{{$category->display_name}}"
+                                                            {{isset($organization->
+                                                            company_category) ? ($organization->company_category ==
+                                                            $category->display_name ? 'selected' : '')
+                                                            : ''}}>{{isset($organization->company_category)
+                                                            ?$organization->company_category:$category->display_name}}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Add Category</label>
+                                                    <livewire:modal-form-component modalId="category-form"
+                                                        name="Add Category"
+                                                        :className="$modelClass=App\Models\CompanyCategory::class"
+                                                        mykey="1" title="+" colorClass="primary" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -89,38 +106,61 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="company_type" class="form-label">Type</label>
-                                            <select name="company_type" id="company_type" class="form-select"
-                                                {{isset($organization->company_type)?$organization->company_type:''}}>
-                                                @if(isset($organization->uid))
-                                                <option value="Test" {{$organization->company_type ==
-                                                    'Test'?'selected':''}}> Test 1</option>
-                                                <option value="Test2" {{$organization->company_type ==
-                                                    'Test2'?'selected':''}}> Test 2</option>
-                                                @else
-                                                <option value="" selected disabled hidden> Select Type </option>
-                                                <option value="Test"> Test 1</option>
-                                                <option value="Test2"> Test 2</option>
-                                                @endif
-                                                <!-- foreach (\App\Models\Rank::all() as $renderRank) -->
-                                                <!-- <option value="{{isset($organization->company_type) ? $organization->company_type  : ''}}"> {{isset($organization->company_type) ?$organization->company_type:""}} </option> -->
-                                                <!-- endforeach -->
-                                            </select>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <label for="company_type" class="form-label">Company Type</label>
+                                                    <select name="company_type" id="company_type" class="form-select">
+                                                        <option value="" selected disabled hidden> Select Company Type
+                                                        </option>
+                                                        @foreach (\App\Models\CompanyType::all() as $type)
+                                                        <option value="{{$type->display_name}}" {{isset($organization->
+                                                            company_type) ? ($organization->company_type ==
+                                                            $type->display_name ? 'selected' : '')
+                                                            : ''}}>{{isset($organization->company_type)
+                                                            ?$organization->company_type:$type->display_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Add Type</label>
+                                                    <livewire:modal-form-component modalId="type-form"
+                                                        name="Add Company Type"
+                                                        :className="$modelClass=App\Models\CompanyType::class" mykey="2"
+                                                        title="+" colorClass="success" />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="company_country" class="form-label">Country</label>
-                                            <!-- <input name="company_country" type="text" class="form-control" id="company_country" placeholder="Pakistan" value="{{isset($organization) ? $organization->company_country : ''}}" required /> -->
-                                            <select name="company_country" id="company_country" class="form-select"
-                                                {{isset($organization->company_country)?$organization->company_country:''}}>
-                                                <option value="" selected disabled hidden> Select Type </option>
-                                                @foreach (\App\Models\Country::all() as $country)
-                                                <option value="{{$country->name}}"> {{$country->value}} </option>
-                                                @endforeach
-                                            </select>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <label for="company_country" class="form-label">Country</label>
+                                                    <!-- <input name="company_country" type="text" class="form-control" id="company_country" placeholder="Pakistan" value="{{isset($organization) ? $organization->company_country : ''}}" required /> -->
+                                                    <select name="company_country" id="company_country"
+                                                        class="form-select">
+                                                        <option value="" selected disabled hidden> Select Country
+                                                        </option>
+                                                        @foreach (\App\Models\Country::all() as $country)
+                                                        <option value="{{$country->display_name}}"
+                                                            {{isset($organization->
+                                                            company_country) ? ($organization->company_country ==
+                                                            $country->display_name ? 'selected' : '')
+                                                            : ''}}>{{isset($organization->company_country)
+                                                            ?$organization->company_country:$country->display_name}}
+                                                        </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Add Country</label>
+                                                    <livewire:modal-form-component modalId="country-form"
+                                                        name="Add Country"
+                                                        :className="$modelClass=App\Models\Country::class" mykey="3"
+                                                        title="+" colorClass="warning" />
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">

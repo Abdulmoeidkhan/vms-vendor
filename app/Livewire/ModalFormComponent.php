@@ -2,41 +2,52 @@
 
 namespace App\Livewire;
 
-use App\Models\CompanyCategory;
 use Livewire\Component;
-use ReflectionClass;
+use Livewire\Attributes\On;
 
 class ModalFormComponent extends Component
 {
 
     public $modalId;
     public $name;
-    public $field1Name;
-    public $field2Name;
-    public $field3Name;
+    public $mykey;
     public $field1 = '';
     public $field2 = '';
     public $field3 = '';
     public $className;
+    public $colorClass;
+    public $title;
 
-    public function mount($modalId, $name, $field1Name, $field2Name, $field3Name, $className)
+    public function mount($modalId, $name, $className, $mykey,$colorClass,$title)
     {
         $this->modalId = $modalId;
         $this->name = $name;
-        $this->field1Name = $field1Name;
-        $this->field2Name = $field2Name;
-        $this->field3Name = $field3Name;
-        switch ($className) {
-            case "CompanyCategory":
-                $this->className = CompanyCategory::class;
-                break;
-            default:
-                echo "Your favorite color is neither red, blue, nor green!";
+        $this->mykey = $mykey;
+        $this->className = $className;
+        $this->$colorClass = $colorClass;
+        $this->$title = $title;
+    }
+
+    public function save()
+    {
+        $field = new $this->className;
+        $field->name = $this->field1;
+        $field->display_name = $this->field2;
+        $field->description = $this->field3;
+        $fieldSaved = $field->save();
+        if ($fieldSaved) {
+            $this->js("alert('Updated!')");
+            $this->dispatch('category-updated')->self();
+            $this->js("location.reload()");
+        } else {
+            $this->js("alert('SomeThing Went Wrong!')");
         }
     }
 
+    #[On('category-updated')]
     public function render()
     {
-        return view('livewire.modal-form-component');
+        $data = $this->className::first();
+        return view('livewire.modal-form-component', ['data' => $data]);
     }
 }

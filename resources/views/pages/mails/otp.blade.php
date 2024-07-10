@@ -55,10 +55,6 @@
                 <td>Email Id</td>
                 <td>{{$user->email}}</td>
             </tr>
-            {{-- <tr>
-                <td>Otp</td>
-                <td>{{$user->activation_code}}</td>
-            </tr> --}}
             <tr>
                 <td>Portal</td>
                 <td>{{url('')}}</td>

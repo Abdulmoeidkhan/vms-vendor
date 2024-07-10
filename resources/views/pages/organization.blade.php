@@ -142,8 +142,8 @@
                                 data-formatter="operateText" data-force-hide="true">Country</th>
                             <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">DOB</th>
-                            <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">DOJ</th>
+                            {{-- <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">DOJ</th> --}}
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
 
