@@ -40,40 +40,15 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if(session()->get('user')->roles[0]->name === "admin")
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <div class="mb-3">
-                                                        <label for="company_category" class="form-label">Company
-                                                            Category</label>
-                                                        <select name="company_category" id="company_category"
-                                                            class="form-select">
-                                                            <option value="" selected disabled hidden> Select Company
-                                                                Category
-                                                            </option>
-                                                            @foreach (\App\Models\CompanyCategory::all() as $category)
-                                                            <option value="{{$category->display_name}}"
-                                                                {{isset($organization->
-                                                                company_category) ? ($organization->company_category ==
-                                                                $category->display_name ? 'selected' : '')
-                                                                : ''}}>{{isset($organization->company_category)
-                                                                ?$organization->company_category:$category->display_name}}
-                                                            </option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Add Category</label>
-                                                        <livewire:modal-form-component modalId="category-form"
-                                                            name="Add Category"
-                                                            :className="$modelClass=App\Models\CompanyCategory::class"
-                                                            mykey="1" title="+" colorClass="primary" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @if(isset($organization))
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="category" name="Category"
+                                            :className="$modelClass=App\Models\CompanyCategory::class"
+                                            colorClass="danger" :oldData='$organization->company_category' />
+                                        @else
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="category" name="Category"
+                                            :className="$modelClass=App\Models\CompanyCategory::class"
+                                            colorClass="primary" :oldData='null' />
+                                        @endif
                                         @else
                                         <div class="mb-3">
                                             <label for="company_category" class="form-label">Company
@@ -93,6 +68,7 @@
                                             </select>
                                         </div>
                                         @endif
+
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -117,31 +93,15 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if(session()->get('user')->roles[0]->name === "admin")
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <label for="company_type" class="form-label">Company Type</label>
-                                                    <select name="company_type" id="company_type" class="form-select">
-                                                        <option value="" selected disabled hidden> Select Company Type
-                                                        </option>
-                                                        @foreach (\App\Models\CompanyType::all() as $type)
-                                                        <option value="{{$type->display_name}}" {{isset($organization->
-                                                            company_type) ? ($organization->company_type ==
-                                                            $type->display_name ? 'selected' : '')
-                                                            : ''}}>{{isset($organization->company_type)
-                                                            ?$organization->company_type:$type->display_name}}</option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label class="form-label">Add Type</label>
-                                                    <livewire:modal-form-component modalId="type-form"
-                                                        name="Add Company Type"
-                                                        :className="$modelClass=App\Models\CompanyType::class" mykey="2"
-                                                        title="+" colorClass="success" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @if(isset($organization))
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="type" name="Type"
+                                            :className="$modelClass=App\Models\CompanyType::class" colorClass="success"
+                                            :oldData='$organization->company_type' />
+                                        @else
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="type" name="Type"
+                                            :className="$modelClass=App\Models\CompanyType::class" colorClass="success"
+                                            :oldData='null' />
+                                        @endif
                                         @else
                                         <div class="mb-3">
                                             <label for="company_type" class="form-label">Company Type</label>
@@ -161,34 +121,14 @@
                                     </div>
                                     <div class="col-md-4">
                                         @if(session()->get('user')->roles[0]->name === "admin")
-                                        <div class="mb-3">
-                                            <div class="row">
-                                                <div class="col-md-9">
-                                                    <label for="company_country" class="form-label">Country</label>
-                                                    <select name="company_country" id="company_country"
-                                                        class="form-select">
-                                                        <option value="" selected disabled hidden> Select Country
-                                                        </option>
-                                                        @foreach (\App\Models\Country::all() as $country)
-                                                        <option value="{{$country->display_name}}"
-                                                            {{isset($organization->
-                                                            company_country) ? ($organization->company_country ==
-                                                            $country->display_name ? 'selected' : '')
-                                                            : ''}}>{{isset($organization->company_country)
-                                                            ?$organization->company_country:$country->display_name}}
-                                                        </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <label class="form-label">Add Country</label>
-                                                    <livewire:modal-form-component modalId="country-form"
-                                                        name="Add Country"
-                                                        :className="$modelClass=App\Models\Country::class" mykey="3"
-                                                        title="+" colorClass="warning" />
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @if(isset($organization))
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="country" name="Country"
+                                            :className="$modelClass=App\Models\Country::class" colorClass="warning"
+                                            :oldData='$organization->company_country' />
+                                        @else
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="country" name="Country"
+                                            :className="$modelClass=App\Models\Country::class" colorClass="warning"
+                                            :oldData='null' /> @endif
                                         @else
                                         <div class="mb-3">
                                             <label for="company_country" class="form-label">Country</label>

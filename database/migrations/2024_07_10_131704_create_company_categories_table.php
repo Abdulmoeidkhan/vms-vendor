@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('company_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->unique();
-            $table->string('display_name')->nullable();
+            $table->string('display_name')->unique();
             $table->string('description')->nullable();
             $table->timestamps();
         });

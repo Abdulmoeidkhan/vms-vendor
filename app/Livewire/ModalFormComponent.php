@@ -10,22 +10,20 @@ class ModalFormComponent extends Component
 
     public $modalId;
     public $name;
-    public $mykey;
     public $field1 = '';
     public $field2 = '';
     public $field3 = '';
     public $className;
     public $colorClass;
-    public $title;
+    public $oldData;
 
-    public function mount($modalId, $name, $className, $mykey,$colorClass,$title)
+    public function mount($modalId, $name, $className, $colorClass, $oldData)
     {
         $this->modalId = $modalId;
         $this->name = $name;
-        $this->mykey = $mykey;
         $this->className = $className;
         $this->$colorClass = $colorClass;
-        $this->$title = $title;
+        $this->$oldData = $oldData;
     }
 
     public function save()
@@ -38,17 +36,16 @@ class ModalFormComponent extends Component
         if ($fieldSaved) {
             $this->js("alert('Updated!')");
             $this->dispatch('category-updated')->self();
-            $this->js("location.reload()");
+            $this->pull(['field1', 'field2', 'field3']);
         } else {
             $this->js("alert('SomeThing Went Wrong!')");
         }
-
     }
 
     #[On('category-updated')]
     public function render()
     {
-        $data = $this->className::first();
-        return view('livewire.modal-form-component', ['data' => $data]);
+        $categories = $this->className::all();
+        return view('livewire.modal-form-component', ['categories' => $categories]);
     }
 }
