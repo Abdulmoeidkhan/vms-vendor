@@ -87,10 +87,11 @@ class OrganizationController extends Controller
     // Organization and staff render page 
     public function renderOrganisation($id)
     {
+        $companyName = Organization::where('uid', $id)->first('company_name');
         $functionaryStaffLimit = Organization::where('uid', $id)->first('staff_quantity');
         $functionaryStaffUpdated = OrganizationStaff::where('company_uid', $id)->where('staff_type', 'Functionary')->count();
         $functionaryStaffRemaing = $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated;
-        return view('pages.organization', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing]);
+        return view('pages.organization', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'companyName' => $companyName]);
     }
 
     public function getOrganizationStaff($id)

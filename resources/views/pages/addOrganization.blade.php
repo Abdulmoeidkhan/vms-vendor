@@ -27,25 +27,25 @@
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
-                @if(session()->get('user')->roles[0]->name === "admin")
-                @endif
-                <h5 class="card-ti tle fw-semibold mb-4">New Organization</h5>
+                {{-- <h5 class="card-ti tle fw-semibold mb-4">New Organization</h5> --}}
                 <div class="table-responsive">
                     <form name="organizationInfo" id="organizationInfo" method="POST"
                         action="{{isset($organization->uid)? route('request.updateOrganization',$organization->uid):route('request.addOrganization')}}">
                         <fieldset>
-                            <legend>Add Organization Form</legend>
+                            <legend>Add Organization</legend>
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($organization))
-                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="category" name="Category"
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                            modalId="category" name="Category"
                                             :className="$modelClass=App\Models\CompanyCategory::class"
                                             colorClass="danger" :oldData='$organization->company_category' />
                                         @else
-                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="category" name="Category"
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                            modalId="category" name="Category"
                                             :className="$modelClass=App\Models\CompanyCategory::class"
                                             colorClass="primary" :oldData='null' />
                                         @endif
@@ -68,7 +68,6 @@
                                             </select>
                                         </div>
                                         @endif
-
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
@@ -91,14 +90,16 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($organization))
-                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="type" name="Type"
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                            modalId="type" name="Type"
                                             :className="$modelClass=App\Models\CompanyType::class" colorClass="success"
                                             :oldData='$organization->company_type' />
                                         @else
-                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="type" name="Type"
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                            modalId="type" name="Type"
                                             :className="$modelClass=App\Models\CompanyType::class" colorClass="success"
                                             :oldData='null' />
                                         @endif
@@ -118,15 +119,17 @@
                                             </select>
                                         </div>
                                         @endif
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-4">
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($organization))
-                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="country" name="Country"
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                            modalId="country" name="Country"
                                             :className="$modelClass=App\Models\Country::class" colorClass="warning"
                                             :oldData='$organization->company_country' />
                                         @else
-                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}" modalId="country" name="Country"
+                                        <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                            modalId="country" name="Country"
                                             :className="$modelClass=App\Models\Country::class" colorClass="warning"
                                             :oldData='null' /> @endif
                                         @else
@@ -147,7 +150,7 @@
                                         </div>
                                         @endif
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="company_city" class="form-label">City</label>
                                             <input name="company_city" type="text" class="form-control"
@@ -157,11 +160,10 @@
                                         </div>
 
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="company_contact" class="form-label">Contact Number</label>
+                                            <label for="company_contact" class="form-label">Company Phone/Mobile
+                                                Number</label>
                                             <input name="company_contact" type="text" minlength='11' maxlength='11'
                                                 class="form-control" id="company_contact"
                                                 placeholder="Company Contact Number"
@@ -171,18 +173,7 @@
                                                 required />
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="company_ntn" class="form-label">NTN Number</label>
-                                            <input name="company_ntn" type="number" class="form-control"
-                                                id="company_ntn" placeholder="Company NTN"
-                                                value="{{isset($organization) ? $organization->company_ntn : ''}}"
-                                                onchange="isNumeric('identity')" title="NTN Number" required
-                                                maxlength="15" required />
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-2">
                                         <div class="mb-3">
                                             <label for="staff_quantity" class="form-label">Functionary Staff
                                                 Quantity</label>
@@ -192,6 +183,19 @@
                                                 title="Staff Quanity" min="1" max="500" maxlength="3" required />
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row">
+                                    {{-- <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="company_ntn" class="form-label">NTN Number</label>
+                                            <input name="company_ntn" type="number" class="form-control"
+                                                id="company_ntn" placeholder="Company NTN"
+                                                value="{{isset($organization) ? $organization->company_ntn : ''}}"
+                                                onchange="isNumeric('identity')" title="NTN Number" required
+                                                maxlength="15" required />
+                                        </div>
+                                    </div> --}}
+
                                 </div>
                                 <br />
                                 <br />
@@ -231,19 +235,19 @@
                                     </div>
                                 </div>
                                 <br />
-                                <br />
+                                <h4>Account Details</h4>
                                 <br />
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="company_rep_name" class="form-label">Company Rep Name</label>
+                                            <label for="company_rep_name" class="form-label">Account Name</label>
                                             <input name="company_rep_name" type="text" class="form-control"
                                                 id="company_rep_name" placeholder="Company Rep Name"
                                                 value="{{isset($organization) ? $organization->company_rep_name : ''}}"
                                                 required />
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="company_rep_designation" class="form-label">Company Rep
                                                 Designation</label>
@@ -262,13 +266,14 @@
                                                 value="{{isset($organization) ? $organization->company_rep_dept : ''}}"
                                                 required />
                                         </div>
-                                    </div>
+                                    </div> --}}
+                                    {{--
                                 </div>
-                                <div class="row">
+                                <div class="row"> --}}
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="company_rep_contact" class="form-label">Company Rep
-                                                Contact</label>
+                                            <label for="company_rep_contact" class="form-label">Account
+                                                Contact Number</label>
                                             <input name="company_rep_contact" type="text" class="form-control"
                                                 id="company_rep_contact" placeholder="Company Rep Contact"
                                                 value="{{isset($organization) ? $organization->company_rep_contact : ''}}"
@@ -277,7 +282,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="company_rep_email" class="form-label">Company Rep Email</label>
+                                            <label for="company_rep_email" class="form-label">Account Email</label>
                                             <input name="company_rep_email" type="text" class="form-control"
                                                 id="company_rep_email" placeholder="Company Rep Email"
                                                 value="{{isset($organization) ? $organization->company_rep_email  : ''}}"

@@ -19,8 +19,20 @@
     }
 
     .active {
-        color: green;
+        background-color: var(--bs-success);
         font-weight: bold;
+    }
+
+    .rejected {
+        background-color: var(--bs-badar);
+        font-weight: bold;
+        color:black;
+    }
+
+    .approved {
+        background-color: var(--bs-success);
+        font-weight: bold;
+        color:white;
     }
 
     /* Style the buttons inside the tab */
@@ -103,14 +115,17 @@
                     data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
                     data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
                     data-show-pagination-switch="true" data-show-columns-toggle-all="true"
-                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}">
+                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}"
+                    data-row-style="rowStyle">
                     <thead>
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
                             </th>
+                            <th data-filter-control="input" data-field="uid" data-sortable="true"
+                                data-formatter="operateBadge" data-force-hide="true">Badge Print</th>
                             <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
-                            data-formatter="operateText" data-force-hide="true">Security Status</th>
+                                data-formatter="operateText" data-force-hide="true">Security Status</th>
                             <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company
                                 Name</th>
@@ -150,19 +165,18 @@
                                 data-formatter="operatepicture">
                                 Picture</th>
                             <th data-field="cnicfront.img_blob" data-width="200" data-width-unit="px"
-                                data-formatter="operatecnic">
+                                data-formatter="operatecnic" data-force-hide="true">
                                 CNIC front</th>
                             <th data-field="cnicback.img_blob" data-width="200" data-width-unit="px"
-                                data-formatter="operatecnic">
+                                data-formatter="operatecnic" data-force-hide="true">
                                 CNIC back</th>
                             <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Remarks</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
-                                data-force-hide="true">Created At
+                                data-force-hide="true" data-formatter="operateDate">Created At
                             </th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
-                                data-force-hide="true">Last
-                                Updated
+                                data-force-hide="true" data-formatter="operateDate">Last Updated
                             </th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
                                 data-force-hide="true">Edit</th>
@@ -177,6 +191,10 @@
 <script>
     function operateText(value, row, index) {
         return value ? value : "N/A"
+    }
+
+    function operateDate(value, row, index) {
+        return value ? value.slice(0,10) : "N/A"
     }
 
     function operateFirstAndLastName(value, row, index) {
@@ -233,6 +251,18 @@
         }
     }
 
+    function operateBadge(value, row, index) {
+        if (value == "approved") {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-primary" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',
+                '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-id-badge-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 12h3v4h-3z" /><path d="M10 6h-6a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1 -1v-12a1 1 0 0 0 -1 -1h-6" /><path d="M10 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 16h2" /><path d="M14 12h4" /></svg>',
+                '</a>',
+                '</div>'
+            ].join('')
+        }
+    }
+
     function operateSelf(value, row, index) {
         if (value != null) {
             return !value ? 'Rep' : 'Self';
@@ -243,21 +273,37 @@
         return index + 1;
     }
 
+    function rowStyle(row) {
+            if(row.staff_security_status == 'rejected'){
+                return {classes: 'rejected'}
+            }
+            else if(row.staff_security_status == 'approved'){
+                return {classes: 'approved'}
+            }
+            else{
+                return {classes: ''}
+            }
+        }
+
+
     
     ['#table' ].map((val => {
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
         
+        // function rowStyle(row) {
+        //     console.log(row);
+        //     selectedRow&&row.id === selectedRow?.id ? {classes: 'active'}:'';
+        // }
 
-
-        $(function() {
-            $table.on('click-row.bs.table', function(e, row, $element) {
-                selectedRow = row
-                $('.active').removeClass('active')
-                $($element).addClass('active')
-            })
-        })
+        // $(function() {
+        //     $table.on('click-row.bs.table', function(e, row, $element) {
+        //         selectedRow = row
+        //         $('.active').removeClass('active')
+        //         $($element).addClass('active')
+        //     })
+        // })
 
         $(function() {$button.click(function (val) {
             let uidArray=[]
@@ -273,20 +319,12 @@
                 $table.bootstrapTable('refresh');
                 }).catch(function(error) {console.log(error);})
         }
-    )})
-        function rowStyle(row) {
-            if (row.id === selectedRow.id) {
-                return {
-                    classes: 'active'
-                }
-            }
-        }
-
-
+    )}
+)
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {
-            fileName: 'List Of Staff',
+            fileName: '{{$companyName->company_name}}',
             type: 'pdf',
             jspdf: {
                 orientation: 'l',

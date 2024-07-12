@@ -56,6 +56,10 @@
                 <td>{{$user->email}}</td>
             </tr>
             <tr>
+                <td>Password</td>
+                <td>{{$pass}}</td>
+            </tr>
+            <tr>
                 <td>Portal</td>
                 <td>{{url('')}}</td>
             </tr>

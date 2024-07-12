@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('staff_identity')->unique();
             $table->date('staff_identity_expiry');
             $table->bigInteger('staff_contact')->unique();
-            $table->string('staff_type');
+            $table->string('staff_type')->nullable();
             $table->string('staff_address');
             $table->string('staff_city');
             $table->string('staff_country');

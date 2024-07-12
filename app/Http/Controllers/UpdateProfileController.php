@@ -68,7 +68,8 @@ class UpdateProfileController extends Controller
     {
         $password = Hash::make($req->userInputPassword);
         $activation_code = $this->badge(8, "");
-        User::where('uid', $req->uid)->update(['password' => $password, 'activation_code' => $activation_code, 'activated' => 0]);
+        // return $req->userInputPassword;
+        User::where('uid', $req->uid)->update(['password' => $password, 'activation_code' => $activation_code, 'activated' => 1]);
         return "Profile has been updated";
     }
 }

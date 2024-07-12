@@ -81,11 +81,12 @@
                                 data-formatter="operateText">Allowed Quantity</th>
                             <th data-filter-control="input" data-field="company_category" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateSpecialText">Company Category</th>
-                            <th data-filter-control="input" data-field="company_type" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company Type</th>
+                            {{-- <th data-filter-control="input" data-field="company_type" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Company Type</th> --}}
                             <th data-filter-control="input" data-field="company_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Name</th>
-                            <th data-filter-control="input" data-field="company_rep_email" data-formatter="operateText">
+                            <th data-filter-control="input" data-field="company_rep_email"
+                                data-formatter="operateEmail">
                                 Registered Email</th>
                             <th data-filter-control="input" data-field="company_owner" data-formatter="operateText">
                                 Company Owner Name</th>
@@ -101,21 +102,23 @@
                                 data-formatter="operateText">City</th>
                             <th data-filter-control="input" data-field="company_contact" data-sortable="true"
                                 data-formatter="operateText">Contact</th>
-                            <th data-filter-control="input" data-field="company_ntn" data-sortable="true"
-                                data-formatter="operateText">NTN</th>
+                            {{-- <th data-filter-control="input" data-field="company_ntn" data-sortable="true"
+                                data-formatter="operateText">NTN</th> --}}
                             <th data-filter-control="input" data-field="company_rep_name" data-sortable="true"
-                                data-formatter="operateText">Company Rep Name</th>
-                            <th data-filter-control="input" data-field="company_rep_designation" data-sortable="true"
-                                data-formatter="operateText">Company Rep Designation</th>
+                                data-formatter="operateText">Account Name</th>
+                            {{-- <th data-filter-control="input" data-field="company_rep_designation"
+                                data-sortable="true" data-formatter="operateText">Company Rep Designation</th>
                             <th data-filter-control="input" data-field="company_rep_dept" data-formatter="operateText">
-                                Company Rep Department</th>
+                                Company Rep Department</th> --}}
                             <th data-filter-control="input" data-field="company_rep_contact"
-                                data-formatter="operateText">Company Rep Contact</th>
+                                data-formatter="operateText">Account Contact Number</th>
                             {{-- <th data-filter-control="input" data-field="company_rep_phone"
                                 data-formatter="operateText">
                                 Company Rep Phone</th> --}}
-                            <th data-filter-control="input" data-field="created_at" data-sortable="true">Created At</th>
-                            <th data-filter-control="input" data-field="updated_at" data-sortable="true">Last Updated
+                            <th data-filter-control="input" data-field="created_at" data-sortable="true"
+                                data-formatter="operateDate">Created At</th>
+                            <th data-filter-control="input" data-field="updated_at" data-sortable="true"
+                                data-formatter="operateDate">Last Updated
                             </th>
                             @if(session()->get('user')->roles[0]->name === "admin")
                             <th data-field="uid" data-formatter="operateEdit">Staff</th>
@@ -130,8 +133,18 @@
 </div>
 @include("layouts.tableFoot")
 <script>
+
     function operateText(value, row, index) {
         return value ? `<span style="text-capitalize">${value.toString().replace(/[^\w ]/, " ")}</span>` : "N/A"
+    }
+
+    function operateDate(value, row, index) {
+        return value ? value.slice(0,10) : "N/A"
+    }
+
+
+    function operateEmail(value, row, index) {
+        return value ? `<span style="text-capitalize">${value.toString()}</span>` : "N/A"
     }
 
     function operateSpecialText(value, row, index) {

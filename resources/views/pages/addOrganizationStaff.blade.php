@@ -198,7 +198,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="staff_type" class="form-label">Pass Type</label>
-                                            <select name="staff_type" id="staff_type" class="form-select">
+                                            <select name="staff_type" id="staff_type" class="form-select" required>
                                                 <option value="" {{isset($staff->staff_type)?'':'selected'}} disabled
                                                     hidden> Pass Type </option>
                                                 @if(!$functionaryStaffSaturated)

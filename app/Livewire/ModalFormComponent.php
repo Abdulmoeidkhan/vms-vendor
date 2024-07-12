@@ -4,18 +4,20 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use Livewire\Attributes\On;
+use Livewire\Attributes\Lazy;
 
+#[Lazy]
 class ModalFormComponent extends Component
 {
 
-    public $modalId;
-    public $name;
+    public $modalId = '';
+    public $name = '';
     public $field1 = '';
     public $field2 = '';
     public $field3 = '';
-    public $className;
-    public $colorClass;
-    public $oldData;
+    public $className = '';
+    public $colorClass = '';
+    public $oldData = '';
 
     public function mount($modalId, $name, $className, $colorClass, $oldData)
     {
@@ -24,6 +26,32 @@ class ModalFormComponent extends Component
         $this->className = $className;
         $this->$colorClass = $colorClass;
         $this->$oldData = $oldData;
+    }
+
+    public function placeholder()
+    {
+        return <<<'HTML'
+                <div class="mb-3">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="mb-3">
+                            <label class="form-label">Company {{$name}} </label>
+                            <select class="form-select">
+                                <option value="" selected disabled hidden> Select Company
+                                    {{$name}}
+                                </option>
+                            </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                        <div class="mb-3">
+                            <label class="form-label">Add {{$name}}</label>
+                            <button type="button" class="btn btn-{{$colorClass}}">+</button>
+                        </div>
+                        </div>
+                    </div>  
+                </div>
+        HTML;
     }
 
     public function save()
