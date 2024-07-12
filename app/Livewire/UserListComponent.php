@@ -15,15 +15,13 @@ class UserListComponent extends Component
 {
     public $users;
 
-    public function mount()
-    {
-        $this->users = User::with('roles')->where('id', '!=', Auth::user()->id)->get();
-    }
-
     #[On('addUser')]
     public function render()
     {
-        // $this->users->companyName = $this->users->roles[0]->display_name == 'OrgRep' ? Organization::where('uid', $this->users->uid)->get('company_name') : '';
+        $this->users = User::with('roles')->where('id', '!=', Auth::user()->id)->get();
+        foreach ($this->users as $key => $user) {
+            $this->users[$key]->organizationName = $this->users[$key]->roles[0]->display_name == 'OrgRep' ? Organization::where('uid', $user->uid)->first('company_name') : '';
+        }
         return view('livewire.user-list-component');
     }
 }

@@ -78,7 +78,11 @@
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
-                                data-formatter="operateText">Allowed Quantity</th>
+                                data-formatter="operateDigits">Allowed Quantity</th>
+                            <th data-filter-control="input" data-field="functionaryCount" data-sortable="true"
+                                data-formatter="operateDigits">Functionaries</th>
+                            <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
+                                data-formatter="operateDigits">Temporaries</th>
                             <th data-filter-control="input" data-field="company_category" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateSpecialText">Company Category</th>
                             {{-- <th data-filter-control="input" data-field="company_type" data-sortable="true"
@@ -93,7 +97,7 @@
                             <th data-filter-control="input" data-field="company_owner_designation" data-sortable="true"
                                 data-formatter="operateText">Company Owner Designation</th>
                             <th data-filter-control="input" data-field="company_owner_contact" data-sortable="true"
-                                data-formatter="operateText">Company Owner Contact</th>
+                                data-formatter="operateDigits">Company Owner Contact</th>
                             <th data-filter-control="input" data-field="company_address" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Address </th>
                             <th data-filter-control="input" data-field="company_country" data-sortable="true"
@@ -136,6 +140,10 @@
 
     function operateText(value, row, index) {
         return value ? `<span style="text-capitalize">${value.toString().replace(/[^\w ]/, " ")}</span>` : "N/A"
+    }
+
+    function operateDigits(value, row, index) {
+        return value ? value : 0
     }
 
     function operateDate(value, row, index) {
@@ -207,11 +215,6 @@
         }
     }
 
-    function operateSelf(value, row, index) {
-        if (value != null) {
-            return !value ? 'Rep' : 'Self';
-        }
-    }
 
     function operateSerial(value, row, index) {
         return index + 1;

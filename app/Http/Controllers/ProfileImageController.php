@@ -15,7 +15,7 @@ class ProfileImageController extends Controller
         if ($uid == auth()->user()->uid) {
             $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
             $user->images = ImageBlob::where('uid', Auth::user()->uid)->first();
-            session()->put('user', $user);
+            session(['user'=> $user]);
             return true;
         } else {
             return false;

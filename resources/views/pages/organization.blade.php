@@ -70,13 +70,13 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ===
+            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
             "orgRep")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add
                         Staff</a>&nbsp;
-                    @if(session()->get('user')->roles[0]->name === "admin")
+                    @if(session('user')->roles[0]->name === "admin")
                     <button id="sent" class="status-action-button btn btn-danger">Sent For
                         Approval</button>&nbsp;
                     <button id="pending" class="status-action-button btn btn-warning">Status Pending</button>&nbsp;
@@ -122,7 +122,7 @@
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
                             </th>
-                            <th data-filter-control="input" data-field="uid" data-sortable="true"
+                            <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
                                 data-formatter="operateBadge" data-force-hide="true">Badge Print</th>
                             <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>

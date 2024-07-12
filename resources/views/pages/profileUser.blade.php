@@ -87,7 +87,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="contact" class="form-label">Your Contact Number</label>
-                                <input type="text" minlength='0' maxlength='13' name="inputContactNumber" class="form-control" id="contact" placeholder="Contact Number" aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="13" maxlength="13" required>
+                                <input type="text" name="inputContactNumber" class="form-control" id="contact" placeholder="Contact Number" aria-describedby="userHelp" value="{{$user->contact_number}}" minlength="14" maxlength="14" required>
                             </div>
                             <input type="hidden" name="uid" value="{{$user->uid}}" />
                             <input type="submit" name="submit" class="btn btn-primary" value="Update" />

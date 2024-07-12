@@ -80,8 +80,12 @@ class OrganizationController extends Controller
 
     public function getOrganizations()
     {
-        $organization = Organization::all();
-        return $organization;
+        $organizations = Organization::all();
+        foreach ($organizations as $key => $organization) {
+            $organizations[$key]->functionaryCount = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->count();
+            $organizations[$key]->temporaryCount = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Temporary')->count();
+        }
+        return $organizations;
     }
 
     // Organization and staff render page 
@@ -109,8 +113,8 @@ class OrganizationController extends Controller
     public function addOrganizationStaffRender($id, $staffId = null)
     {
         $staff = $staffId ? OrganizationStaff::where('uid', $staffId)->first() : null;
-        $functionaryStaffLimit = Organization::where('uid', $id)->first('staff_quantity');
-        $functionaryStaffSaturated = OrganizationStaff::where('company_uid', $id)->where('staff_type', 'Functionary')->count() < $functionaryStaffLimit->staff_quantity ? false : true;
+        $functionaryStaffLimit = $id ? Organization::where('uid', $id)->first('staff_quantity') : null;
+        $functionaryStaffSaturated = $id ? (OrganizationStaff::where('company_uid', $id)->where('staff_type', 'Functionary')->count() < $functionaryStaffLimit->staff_quantity ? false : true) : null;
         return view('pages.addOrganizationStaff', ['company_uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
     }
 

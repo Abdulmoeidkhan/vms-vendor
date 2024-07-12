@@ -26,7 +26,7 @@ class UserFullProfileController extends Controller
         $roles = Role::all();
         $selectiveRoles = Role::all();
         $permissions = Permission::all();
-        $user = session()->get('user');
+        $user = session('user');
         return view('pages.profileUser', ['user' => $user,  'roles' => $roles, 'permissions' => $permissions, 'selectiveRoles' => $selectiveRoles]);
     }
 

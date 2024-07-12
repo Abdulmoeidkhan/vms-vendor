@@ -183,9 +183,9 @@
                                             <select name="employee_type" id="employee_type" class="form-select">
                                                 <option value="" {{isset($staff->employee_type)?'':'selected'}} disabled
                                                     hidden> Select Employee Type </option>
-                                                <option value="Permanent" {{isset($staff->
+                                                <option value="Functionary" {{isset($staff->
                                                     employee_type)?$staff->employee_type ==
-                                                    'Permanent'?'selected':'':''}}>Permanent</option>
+                                                    'Functionary'?'selected':'':''}}>Permanent</option>
                                                 <option value="Temporary" {{isset($staff->
                                                     employee_type)?$staff->employee_type ==
                                                     'Temporary'?'selected':'':''}}>Temporary</option>

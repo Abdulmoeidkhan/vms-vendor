@@ -17,7 +17,7 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // $isAdmin = session()->get('user')->roles[0]->name === 'admin' ? true : false;
+        // $isAdmin = session('user')->roles[0]->name === 'admin' ? true : false;
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
         $isAdmin = $user->roles[0]->name == 'admin' ? true : false;
         if (!$isAdmin) {

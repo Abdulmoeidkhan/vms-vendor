@@ -25,8 +25,8 @@ class ActivateProfileController extends Controller
                 $rolesAdded = $user->addRole($role);
                 $newdPermissions = $user->givePermissions(['read', 'create']);
                 $updatedUser = User::with('roles', 'permissions')->where('uid', $uid)->first();
-                session()->forget('user');
-                session()->put('user', $updatedUser);
+                session(['user' => '']);
+                session(['user' => $updatedUser]);
                 return true;
             } catch (\Illuminate\Database\QueryException $exception) {
                 if ($exception->errorInfo[2]) {

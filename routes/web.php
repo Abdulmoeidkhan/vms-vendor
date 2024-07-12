@@ -15,6 +15,11 @@ use App\Http\Controllers\UserFullProfileController;
 
 // use Illuminate\Support\Facades\Mail;
 
+
+Route::get('/offline', function () {
+    return view('vendor.laravelpwa.offline');
+});
+
 Route::get('/login', function () {
     if (auth()?->user()?->uid) {
         return redirect()->route('pages.dashboard');
@@ -43,7 +48,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('/profileUser/{id}', [UserFullProfileController::class, 'render'])->name('pages.profileUser');
-    Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.dashboard');
+    // Route::get('/userProfile/profileActivation', [ActivateProfileController::class, 'renderProfileActivation'])->name('pages.dashboard');
     Route::get('/userProfile/myProfile', [UserFullProfileController::class, 'renderMyProfile'])->name('pages.myProfile');
     Route::post('/imageUpload', [ProfileImageController::class, 'imageBlobUpload'])->name('request.imageUpload');
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');

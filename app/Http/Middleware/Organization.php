@@ -17,7 +17,7 @@ class Organization
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // $isOrg = session()->get('user')->roles[0]->name === 'orgRep' || session()->get('user')->roles[0]->name === 'admin' ? true : false;
+        // $isOrg = session('user')->roles[0]->name === 'orgRep' || session('user')->roles[0]->name === 'admin' ? true : false;
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
         $isOrg = $user->roles[0]->name == 'orgRep' ||$user->roles[0]->name == 'admin'? true : false;
         if (!$isOrg) {

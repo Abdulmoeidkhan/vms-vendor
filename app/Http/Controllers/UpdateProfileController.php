@@ -30,12 +30,13 @@ class UpdateProfileController extends Controller
     }
     public function updateProflie(Request $req)
     {
-        User::where('uid', $req->uid)->update(['name' => $req->inputUserName, 'contact_number' => $req->inputContactNumber]);
+        $contact_number = str_replace(['+', '-'], '', $req->inputContactNumber);
+        User::where('uid', $req->uid)->update(['name' => $req->inputUserName, 'contact_number' => $contact_number]);
         $user = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
         $user->images = ImageBlob::where('uid', $req->uid)->first();
         if ($req->uid === Auth::user()->uid) {
-            session()->forget('user');
-            session()->put('user', $user);
+            session(['user' => '']);
+            session(['user' => $user]);
         }
         return "Profile has been updated";
         // return $user;
