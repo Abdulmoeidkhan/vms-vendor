@@ -22,7 +22,7 @@ return new class extends Migration
             $table->json('interested')->nullable();
             $table->integer('activation_code')->nullable();
             $table->bigInteger('contact_number')->nullable();
-            $table->integer('activated')->default(0);
+            $table->integer('activated')->default(1);
             $table->integer('status')->default(1);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();

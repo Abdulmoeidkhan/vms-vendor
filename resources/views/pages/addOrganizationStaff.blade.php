@@ -139,7 +139,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_address" class="form-label">Address</label>
+                                            <label for="staff_address" class="form-label">Home Address</label>
                                             <input name="staff_address" type="text" class="form-control"
                                                 id="staff_address"
                                                 value="{{isset($staff) ? $staff->staff_address : ''}}" required />

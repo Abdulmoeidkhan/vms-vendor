@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Organizations
         Route::get('/organizations', [OrganizationController::class, 'render'])->name('pages.organizations');
         Route::get('/getOrganizations', [OrganizationController::class, 'getOrganizations'])->name('request.getOrganizations');
+        Route::get('/getOrganizationStats', [OrganizationController::class, 'getOrganizationStats'])->name('request.getOrganizationStats');
         Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
         Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
         Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
@@ -80,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/organization/{id}', [OrganizationController::class, 'renderOrganisation'])->name('pages.organization');
         Route::get('/getOrganizationStaff/{id}', [OrganizationController::class, 'getOrganizationStaff'])->name('request.getOrganizationStaff');
         Route::get('/organization/{id}/addOrganizationStaff/{staffId?}', [OrganizationController::class, 'addOrganizationStaffRender'])->name('pages.addOrganizationStaff');
+        Route::get('/getSpecificOrganizationStats', [OrganizationController::class, 'getSpecificOrganizationStats'])->name('request.getSpecificOrganizationStats');
         Route::post('/addOrganizationStaffRequest/{id}', [OrganizationController::class, 'addOrganizationStaff'])->name('request.addOrganizationStaff');
         Route::post('/updateOrganizationStaffRequest/{staffId?}', [OrganizationController::class, 'updateOrganizationStaff'])->name('request.updateOrganizationStaff');
         Route::post('/updateOrganisationStaffSecurityStatus', [OrganizationController::class, 'updateOrganisationStaffSecurityStatus'])->name('request.updateOrganisationStaffSecurityStatus');

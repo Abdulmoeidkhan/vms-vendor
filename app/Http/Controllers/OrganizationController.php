@@ -88,6 +88,30 @@ class OrganizationController extends Controller
         return $organizations;
     }
 
+    public function getOrganizationStats()
+    {
+        $organizations = Organization::all(['company_name', 'uid']);
+        foreach ($organizations as $key => $organization) {
+            $organizations[$key]->sent = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'sent')->count();
+            $organizations[$key]->pending = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'pending')->count();
+            $organizations[$key]->rejected = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'rejected')->count();
+            $organizations[$key]->approved = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'approved')->count();
+        }
+        return $organizations;
+    }
+
+    public function getSpecificOrganizationStats()
+    {
+        $organizations = Organization::where('uid', session('user')->uid)->get(['company_name', 'uid']);
+        foreach ($organizations as $key => $organization) {
+            $organizations[$key]->sent = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'sent')->count();
+            $organizations[$key]->pending = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'pending')->count();
+            $organizations[$key]->rejected = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'rejected')->count();
+            $organizations[$key]->approved = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'approved')->count();
+        }
+        return $organizations;
+    }
+
     // Organization and staff render page 
     public function renderOrganisation($id)
     {

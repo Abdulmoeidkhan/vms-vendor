@@ -26,13 +26,13 @@
     .rejected {
         background-color: var(--bs-badar);
         font-weight: bold;
-        color:black;
+        color: black;
     }
 
     .approved {
         background-color: var(--bs-success);
         font-weight: bold;
-        color:white;
+        color: white;
     }
 
     /* Style the buttons inside the tab */
@@ -73,23 +73,23 @@
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
             "orgRep")
             <div class="row">
-                <div class="d-flex">
-                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary">Add
+                <div class="d-flex flex-wrap">
+                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary mb-2">Add
                         Staff</a>&nbsp;
                     @if(session('user')->roles[0]->name === "admin")
-                    <button id="sent" class="status-action-button btn btn-danger">Sent For
+                    <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
-                    <button id="pending" class="status-action-button btn btn-warning">Status Pending</button>&nbsp;
-                    <button id="approved" class="status-action-button btn btn-success">Approved</button>&nbsp;
-                    <button id="rejected" class="status-action-button btn btn-badar">Rejected</button>
+                    <button id="pending" class="status-action-button btn btn-warning mb-2">Status Pending</button>&nbsp;
+                    <button id="approved" class="status-action-button btn btn-success mb-2">Approved</button>&nbsp;
+                    <button id="rejected" class="status-action-button btn btn-badar mb-2">Rejected</button>
                     @endif
                 </div>
             </div>
             <br />
             <div class="row">
-                <div class="d-flex col-4">
+                <div class="d-flex col-md-4 col-sm-2">
                 </div>
-                <div class="d-flex col-4">
+                <div class="d-flex col-md-4 col-sm-10">
                     <div class="card overflow-hidden">
                         <div class="card-body p-4">
                             <h5 class="card-title text-center mb-9 fw-semibold">Functionary Pass Limit</h5>
@@ -110,50 +110,55 @@
             @endif
             {{-- <br /> --}}
             <div class="table-responsive text-capitalize">
-                <table id="table" data-filter-control-multiple-search="true" data-click-to-select="true"
-                    data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
-                    data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
-                    data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
-                    data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                <table id="table" data-filter-control-multiple-search="true"
+                    data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
+                    data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
+                    data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}"
                     data-row-style="rowStyle">
                     <thead>
+                        {{-- <tr>
+                            <th data-field="companyTitle" colspan="27" data-force-export="true">
+                                {{$companyName->company_name}}</th>
+                        </tr> --}}
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
                             </th>
-                            <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
-                                data-formatter="operateBadge" data-force-hide="true">Badge Print</th>
+                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
+                                Print</th>
                             <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>
-                            <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company
-                                Name</th>
                             <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
+                            <th data-filter-control="input" data-field="staff_father_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateFirstAndLastName">Father Name</th>
+                            <th data-filter-control="input" data-field="staff_address" data-sortable="true"
+                                data-formatter="operateText">Home Address</th>
+                            <th data-filter-control="input" data-field="staff_city" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">City</th>
+                            <th data-filter-control="input" data-field="staff_country" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">Country</th>
                             <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
                             <th data-filter-control="input" data-field="staff_department" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
                             </th>
+                            <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Company
+                                Name</th>
                             <th data-filter-control="input" data-field="staff_job_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Job Type</th>
                             <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Nationality</th>
                             <th data-filter-control="input" data-field="staff_identity" data-sortable="true"
-                                data-formatter="operateText">Identity</th>
+                                data-formatter="operateDigits">Identity</th>
                             <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
                             <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
-                                data-formatter="operateText">Contact</th>
+                                data-formatter="operateDigits">Contact</th>
                             <th data-filter-control="input" data-field="staff_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Pass Type</th>
-                            <th data-filter-control="input" data-field="staff_address" data-sortable="true"
-                                data-formatter="operateText">Address</th>
-                            <th data-filter-control="input" data-field="staff_city" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">City</th>
-                            <th data-filter-control="input" data-field="staff_country" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Country</th>
                             <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">DOB</th>
                             {{-- <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
@@ -191,6 +196,10 @@
 <script>
     function operateText(value, row, index) {
         return value ? value : "N/A"
+    }
+
+    function operateDigits(value, row, index) {
+        return value ? value : 0
     }
 
     function operateDate(value, row, index) {
@@ -252,7 +261,7 @@
     }
 
     function operateBadge(value, row, index) {
-        if (value == "approved") {
+        if (row.staff_security_status == "approved") {
             return [
                 '<div class="left">',
                 '<a class="btn btn-primary" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',
@@ -332,11 +341,63 @@
                     styles: {
                         rowHeight: 100
                     },
-                    tableWidth: 'auto'
-                }
+                    tableWidth: 'auto',
+                    // beforePageContent: function (data) {
+                    //     var doc = data.table; // Internal jspdf instance
+                    //     console.log(doc);
+                    //     doc.setFontSize(20);
+                    //     doc.setTextColor(40);
+                    //     doc.setFontStyle('normal');
+                    //     doc.text("Table Title", data.settings.margin.left, 60);
+                    // }   
+                },
             }
         }
-      })
+        })
+      $(val).bootstrapTable({
+      printPageBuilder: function (val) {
+        return `
+<html>
+  <head>
+  <style type="text/css" media="print">
+  @page {
+    size: auto;
+    margin: 25px 0 25px 0;
+  }
+  </style>
+  <style type="text/css" media="all">
+  table {
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  table, th, td {
+    border: 1px solid grey;
+  }
+  th, td {
+    text-align: center;
+    vertical-align: middle;
+  }
+  p {
+    font-weight: bold;
+    margin-left:20px;
+  }
+  table {
+    width:94%;
+    margin-left:3%;
+    margin-right:3%;
+  }
+  div.bs-table-print {
+    text-align:center;
+  }
+  </style>
+  </head>
+  <title>Print Table</title>
+  <body>
+  <div class="bs-table-print">${val}</div>
+  </body>
+</html>`
+      }
+    })
     }
     ))
 </script>

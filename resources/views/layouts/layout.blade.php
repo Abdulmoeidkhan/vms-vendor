@@ -6,7 +6,7 @@
     @livewireStyles
     <!-- just remove arrow (->) to make it PWA  @->laravelPWA -->
     @laravelPWA
-    <title>DHS</title>
+    <title>VMS</title>
 </head>
 
 <body>
