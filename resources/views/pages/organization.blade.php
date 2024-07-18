@@ -119,7 +119,7 @@
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}"
-                    data-row-style="rowStyle">
+                    data-row-style="rowStyle" data-header-style="headerStyle">
                     <thead>
                         {{-- <tr>
                             <th data-field="companyTitle" colspan="27" data-force-export="true">
@@ -127,12 +127,13 @@
                         </tr> --}}
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
-                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.
+                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
                             </th>
                             <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
                                 Print</th>
                             <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>
+                            <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
                             <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="staff_father_name" data-sortable="true"
@@ -142,7 +143,8 @@
                             <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
                             <th data-filter-control="input" data-field="staff_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department</th>
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
+                            </th>
                             <th data-filter-control="input" data-field="staff_address" data-sortable="true"
                                 data-formatter="operateText">Home Address</th>
                             <th data-filter-control="input" data-field="staff_city" data-sortable="true"
@@ -168,9 +170,6 @@
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
 
-                            <th data-field="picture.img_blob" data-width="150" data-width-unit="px"
-                                data-formatter="operatepicture">
-                                Picture</th>
                             <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC front</th>
@@ -236,7 +235,7 @@
 
     function operatepicture(value, row, index) {
         if (value != null) {
-            return value ? `<img width="100px" height="120px" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+            return value ? `<img width="100" height="120" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
     }
     function operatecnic(value, row, index) {
@@ -282,6 +281,12 @@
 
     function operateSerial(value, row, index) {
         return index + 1;
+    }
+
+    function headerStyle(column){
+    //     return {
+    //   css: { 'font-weight': 900 },
+    // }
     }
 
     function rowStyle(row) {
@@ -341,7 +346,14 @@
                 orientation: 'l',
                 autotable: {
                     styles: {
-                        rowHeight: 100
+                        rowHeight: 100,
+                        overflow: 'linebreak',
+                        valign: 'middle',
+                        halign: 'center'
+                    },
+                    headerStyles:{
+                        fontSize:12,
+                        fontStyle: 'bold'
                     },
                     tableWidth: 'auto',
                     // beforePageContent: function (data) {
