@@ -74,8 +74,6 @@
             "orgRep")
             <div class="row">
                 <div class="d-flex flex-wrap">
-                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary mb-2">Add
-                        Staff</a>&nbsp;
                     @if(session('user')->roles[0]->name === "admin")
                     <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
@@ -107,6 +105,12 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="d-flex flex-wrap">
+                    <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary mb-2">Add
+                        Staff</a>&nbsp;
+                </div>
+            </div>
             @endif
             {{-- <br /> --}}
             <div class="table-responsive text-capitalize">
@@ -133,20 +137,18 @@
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="staff_father_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Father Name</th>
+                            <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Company Name</th>
+                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
+                            <th data-filter-control="input" data-field="staff_department" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department</th>
                             <th data-filter-control="input" data-field="staff_address" data-sortable="true"
                                 data-formatter="operateText">Home Address</th>
                             <th data-filter-control="input" data-field="staff_city" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">City</th>
                             <th data-filter-control="input" data-field="staff_country" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Country</th>
-                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
-                            <th data-filter-control="input" data-field="staff_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
-                            </th>
-                            <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company
-                                Name</th>
                             <th data-filter-control="input" data-field="staff_job_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Job Type</th>
                             <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
@@ -169,10 +171,10 @@
                             <th data-field="picture.img_blob" data-width="150" data-width-unit="px"
                                 data-formatter="operatepicture">
                                 Picture</th>
-                            <th data-field="cnicfront.img_blob" data-width="200" data-width-unit="px"
+                            <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC front</th>
-                            <th data-field="cnicback.img_blob" data-width="200" data-width-unit="px"
+                            <th data-field="cnicback.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC back</th>
                             <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"

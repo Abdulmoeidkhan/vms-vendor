@@ -81,20 +81,33 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
+                                            @if(session()->get('user')->roles[0]->name === "admin")
+                                            @if(isset($staff))
+                                            <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                                modalId="staff_job_type" name="Job Type"
+                                                :className="$modelClass=App\Models\JobType::class" colorClass="danger"
+                                                :oldData='$staff->staff_job_type' btnName="Add Job" />
+                                            @else
+                                            <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
+                                                modalId="staff_job_type" name="Job Type"
+                                                :className="$modelClass=App\Models\JobType::class" colorClass="primary"
+                                                :oldData='null' btnName="Add Job" />
+                                            @endif
+                                            @else
                                             <label for="staff_job_type" class="form-label">Job Type</label>
                                             <select name="staff_job_type" id="staff_job_type" class="form-select">
                                                 <option value="" {{isset($staff->staff_job_type)?'':'selected'}}
                                                     disabled hidden> Select Job Type </option>
-                                                <option value="Labour" {{isset($staff->
-                                                    staff_job_type)?$staff->staff_job_type ==
-                                                    'Labour'?'selected':'':''}}> Labour</option>
-                                                <option value="Freelance" {{isset($staff->
-                                                    staff_job_type)?$staff->staff_job_type ==
-                                                    'Freelance'?'selected':'':''}}> Freelance</option>
-                                                <option value="Manager" {{isset($staff->
-                                                    staff_job_type)?$staff->staff_job_type ==
-                                                    'Manager'?'selected':'':''}}> Manager</option>
+                                                @foreach (\App\Models\JobType::all() as $jobType)
+                                                <option value="{{$jobType->display_name}}" {{isset($staff->
+                                                    staff_job_type) ? ($staff->staff_job_type ==
+                                                    $country->display_name ? 'selected' : '')
+                                                    : ''}}>{{isset($staff->staff_job_type)
+                                                    ?$staff->staff_job_type:$jobType->display_name}}
+                                                </option>
+                                                @endforeach
                                             </select>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -122,8 +135,8 @@
                                                 Expiry</label>
                                             <input name="staff_identity_expiry" type="date" class="form-control"
                                                 id="staff_identity_expiry" placeholder="Identity Expiry "
-                                                value="{{isset($staff) ? $staff->staff_identity_expiry : ''}}"
-                                                required />
+                                                value="{{isset($staff) ? $staff->staff_identity_expiry : '<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10) ?>'}}"
+                                                min="<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10) ?>" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -133,7 +146,7 @@
                                                 class="form-control" id="staff_contact" placeholder="Contact Number"
                                                 value="{{isset($staff) ? $staff->staff_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"
-                                                title="14 DIGIT PHONE NUMBET" data-inputmask="'mask': '+99-9999999999'"
+                                                title="14 DIGIT PHONE NUMBER" data-inputmask="'mask': '+99-9999999999'"
                                                 required />
                                         </div>
                                     </div>
@@ -167,7 +180,8 @@
                                         <div class="mb-3">
                                             <label for="staff_dob" class="form-label">Date Of Birth</label>
                                             <input name="staff_dob" type="date" class="form-control" id="staff_dob"
-                                                value="{{isset($staff) ? $staff->staff_dob : ''}}" required />
+                                                value="{{isset($staff) ? $staff->staff_dob : '<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                m")), (date("d")), (date("Y") - 17))), 0, 10) ?>'}}" min="1900-01-01" max="<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y") - 17))), 0, 10) ?>" required />
                                         </div>
                                     </div>
                                     {{-- <div class="col-md-3">
@@ -247,7 +261,7 @@
                                         <div class="mb-3">
                                             <input type="submit" name="submitMore"
                                                 class="btn {{isset($staff->uid )?'btn-primary':'btn-success'}}"
-                                                value="{{isset($staff->uid)?'Update & More':'Add & More'}}" />
+                                                value="{{isset($staff->uid)?'Update & Next':'Add & Next'}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-8">

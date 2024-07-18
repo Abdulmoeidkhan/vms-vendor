@@ -40,14 +40,14 @@
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($organization))
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="category" name="Category"
+                                            modalId="company_category" name="Company Category"
                                             :className="$modelClass=App\Models\CompanyCategory::class"
-                                            colorClass="danger" :oldData='$organization->company_category' />
+                                            colorClass="danger" :oldData='$organization->company_category' btnName="Add Category"/>
                                         @else
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="category" name="Category"
+                                            modalId="company_category" name="Company Category"
                                             :className="$modelClass=App\Models\CompanyCategory::class"
-                                            colorClass="primary" :oldData='null' />
+                                            colorClass="primary" :oldData='null' btnName="Add Category" />
                                         @endif
                                         @else
                                         <div class="mb-3">
@@ -124,14 +124,15 @@
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($organization))
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="country" name="Country"
+                                            modalId="company_country" name="Company Country"
                                             :className="$modelClass=App\Models\Country::class" colorClass="warning"
-                                            :oldData='$organization->company_country' />
+                                            :oldData='$organization->company_country' btnName="Add Country" />
                                         @else
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="country" name="Country"
+                                            modalId="company_country" name="Company Country"
                                             :className="$modelClass=App\Models\Country::class" colorClass="warning"
-                                            :oldData='null' /> @endif
+                                            :oldData='null' btnName="Add Country" /> 
+                                            @endif
                                         @else
                                         <div class="mb-3">
                                             <label for="company_country" class="form-label">Country</label>

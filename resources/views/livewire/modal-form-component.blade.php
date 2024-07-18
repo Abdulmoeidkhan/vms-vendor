@@ -2,11 +2,10 @@
     <div class="row">
         <div class="col-md-9">
             <div class="mb-3">
-                <label class="form-label">Company
+                <label class="form-label">
                     {{$name}}</label>
-                <select name="company_{{$modalId}}" class="form-select">
-                    <option value="" selected disabled hidden> Select Company
-                        {{$name}}
+                <select name="{{$modalId}}" class="form-select">
+                    <option value="" selected disabled hidden> Select {{$name}}
                     </option>
                     @foreach ($categories as $categorys)
                     <option wire:key="{{ $categorys->id }}" value="{{$categorys->display_name}}" {{isset($oldData) ?
@@ -21,7 +20,7 @@
         </div>
         <div class="col-md-3">
             <div class="mb-3">
-                <label class="form-label">Add {{$name}}</label>
+                <label class="form-label">{{$btnName}}</label>
                 <button type="button" class="btn btn-{{$colorClass}}" data-bs-toggle="modal"
                     data-bs-target="#{{$modalId}}">
                     +
@@ -59,7 +58,7 @@
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">Close</button>
                                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add
-                                            Company {{$name}}</button>
+                                            {{$name}}</button>
                                     </div>
                                 </form>
                             </div>

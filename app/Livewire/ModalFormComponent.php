@@ -18,14 +18,16 @@ class ModalFormComponent extends Component
     public $className = '';
     public $colorClass = '';
     public $oldData = '';
+    public $btnName = '';
 
-    public function mount($modalId, $name, $className, $colorClass, $oldData)
+    public function mount($modalId, $name, $className, $colorClass, $oldData,$btnName)
     {
         $this->modalId = $modalId;
         $this->name = $name;
         $this->className = $className;
         $this->$colorClass = $colorClass;
         $this->$oldData = $oldData;
+        $this->$btnName = $btnName;
     }
 
     public function placeholder()
@@ -35,17 +37,16 @@ class ModalFormComponent extends Component
                     <div class="row">
                         <div class="col-md-9">
                             <div class="mb-3">
-                            <label class="form-label">Company {{$name}} </label>
+                            <label class="form-label">{{$name}} </label>
                             <select class="form-select">
-                                <option value="" selected disabled hidden> Select Company
-                                    {{$name}}
+                                <option value="" selected disabled hidden> Select {{$name}}
                                 </option>
                             </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                         <div class="mb-3">
-                            <label class="form-label">Add {{$name}}</label>
+                            <label class="form-label">{{$btnName}}</label>
                             <button type="button" class="btn btn-{{$colorClass}}">+</button>
                         </div>
                         </div>

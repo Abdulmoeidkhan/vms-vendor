@@ -4,16 +4,17 @@
     </div>
     <br />
     <div>
-        <img src="{{$picture?$picture->img_blob:asset('assets/images/profile/user-1.jpg')}}" width="200px"
-            height="200px" class="rounded mx-auto d-block" alt="User Profile Picture">
+        <img src="{{$picture?$picture->img_blob:asset('assets/images/profile/user-1.jpg')}}"
+            width="{{$name == 'cnic_back_picture' ||$name == 'cnic_front_picture'?'400px':'200px'}}" height="200px"
+            class="rounded mx-auto d-block" alt="User Profile Picture">
     </div>
     <form name="picture_upload" id="{{$name}}_picture_upload" wire:submit="save">
         <div class="mb-3 col-lg-10">
             <label for="{{$name}}" class="form-label">Picture</label>
-            <input name="{{$name}}" type="file" class="form-control" id="{{$name}}"
-                wire:model='pictureToBeUpdate' accept="image/png, image/jpeg" required>
-            <input name="{{$name}}_savedpicture" type="hidden" class="form-control" id="{{$name}}_savedpicture" wire:model="savedpicture"
-                required>
+            <input name="{{$name}}" type="file" class="form-control" id="{{$name}}" wire:model='pictureToBeUpdate'
+                accept="image/png, image/jpeg" required>
+            <input name="{{$name}}_savedpicture" type="hidden" class="form-control" id="{{$name}}_savedpicture"
+                wire:model="savedpicture" required>
             <div class="box-2" wire:ignore>
                 <div class="{{$name}}_result"></div>
                 <div class="box-2 {{$name}}_img-result">
