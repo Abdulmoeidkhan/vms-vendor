@@ -33,18 +33,18 @@
                                 <h5 class="modal-title" id="ModalFormLabel_{{$modalId}}">Add {{$name}}</h5>
                             </div>
                             <div class="modal-body">
-                                <form id="{{$name}}_form_id" name="{{$name}}_form" wire:submit="save" >
-                                    <div class="form-group">
-                                        <label for="name_{{$modalId}}" class="col-form-label">Name</label>
-                                        <input type="text" wire:model='field1' class="form-control"
-                                            id="name_{{$modalId}}">
-                                    </div>
+                                <form id="{{$name}}_form_id" name="{{$name}}_form" wire:submit="save">
                                     <div class="form-group">
                                         <label for="display_name_{{$modalId}}" class="col-form-label">
                                             Display Name
                                         </label>
                                         <input type="text" wire:model='field2' class="form-control"
                                             id="display_name_{{$modalId}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name_{{$modalId}}" class="col-form-label">Name</label>
+                                        <input type="text" wire:model='field1' class="form-control"
+                                            id="name_{{$modalId}}">
                                     </div>
                                     <div class="form-group">
                                         <label for="description_{{$modalId}}" class="col-form-label">

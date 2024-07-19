@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('staff_department');
             $table->string('staff_job_type');
             $table->string('staff_nationality');
+            $table->int('staff_gender');
             $table->string('staff_identity')->unique();
             $table->date('staff_identity_expiry');
             $table->bigInteger('staff_contact')->unique();

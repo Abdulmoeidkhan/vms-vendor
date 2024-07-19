@@ -303,13 +303,13 @@
                                 <br />
                                 <br />
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    {{-- <div class="col-md-2">
                                         <div class="mb-3">
                                             <input type="submit" name="submit"
                                                 class="btn {{isset($organization->uid )?'btn-success':'btn-primary'}}"
                                                 value="{{isset($organization->uid)?'Update Organization':'Add Organization'}}" />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-2">
                                         <div class="mb-3">
                                             <input type="submit" name="submitMore"

@@ -81,7 +81,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            @if(session()->get('user')->roles[0]->name === "admin")
+                                            {{-- if(session()->get('user')->roles[0]->name === "admin") --}}
                                             @if(isset($staff))
                                             <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
                                                 modalId="staff_job_type" name="Job Type"
@@ -93,7 +93,7 @@
                                                 :className="$modelClass=App\Models\JobType::class" colorClass="primary"
                                                 :oldData='null' btnName="Add Job" />
                                             @endif
-                                            @else
+                                            {{-- else
                                             <label for="staff_job_type" class="form-label">Job Type</label>
                                             <select name="staff_job_type" id="staff_job_type" class="form-select">
                                                 <option value="" {{isset($staff->staff_job_type)?'':'selected'}}
@@ -107,7 +107,7 @@
                                                 </option>
                                                 @endforeach
                                             </select>
-                                            @endif
+                                            endif --}}
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -135,8 +135,8 @@
                                                 Expiry</label>
                                             <input name="staff_identity_expiry" type="date" class="form-control"
                                                 id="staff_identity_expiry" placeholder="Identity Expiry "
-                                                value="{{isset($staff) ? $staff->staff_identity_expiry : '<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10) ?>'}}"
-                                                min="<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10) ?>" required />
+                                                value='{{isset($staff) ? date("Y-m-d",strtotime($staff->staff_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                m")), (date("d")), (date("Y")))), 0, 10);}}' min='{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10);}}' required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -180,8 +180,10 @@
                                         <div class="mb-3">
                                             <label for="staff_dob" class="form-label">Date Of Birth</label>
                                             <input name="staff_dob" type="date" class="form-control" id="staff_dob"
-                                                value="{{isset($staff) ? $staff->staff_dob : '<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
-                                                m")), (date("d")), (date("Y") - 17))), 0, 10) ?>'}}" min="1900-01-01" max="<?php echo substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y") - 17))), 0, 10) ?>" required />
+                                                value="{{isset($staff) ? date('Y-m-d',strtotime($staff->staff_dob)):substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                m")), (date("d")), (date("Y") - 17))), 0, 10);}}" min="1900-01-01"
+                                                max="{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date(" m")), (date("d")),
+                                                (date("Y") - 17))), 0, 10);}}" required />
                                         </div>
                                     </div>
                                     {{-- <div class="col-md-3">
@@ -203,6 +205,21 @@
                                                 <option value="Temporary" {{isset($staff->
                                                     employee_type)?$staff->employee_type ==
                                                     'Temporary'?'selected':'':''}}>Temporary</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="staff_gender" class="form-label">Employee Gender</label>
+                                            <select name="staff_gender" id="staff_gender" class="form-select">
+                                                <option value="" {{isset($staff->staff_gender)?'':'selected'}} disabled
+                                                    hidden> Select Employee Gender </option>
+                                                <option value="Male" {{isset($staff->
+                                                    staff_gender)?$staff->staff_gender ==
+                                                    'Male'?'selected':'':''}}>Male</option>
+                                                <option value="Female" {{isset($staff->
+                                                    staff_gender)?$staff->staff_gender ==
+                                                    'Female'?'selected':'':''}}>Female</option>
                                             </select>
                                         </div>
                                     </div>
@@ -250,13 +267,13 @@
 
                                 <br />
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    {{-- <div class="col-md-2">
                                         <div class="mb-3">
                                             <input type="submit" name="submit"
                                                 class="btn {{isset($staff->uid )?'btn-success':'btn-primary'}}"
                                                 value="{{isset($staff->uid)?'Update Staff':'Add Staff'}}" />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-md-2">
                                         <div class="mb-3">
                                             <input type="submit" name="submitMore"
