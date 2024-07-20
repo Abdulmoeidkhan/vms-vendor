@@ -133,7 +133,6 @@
                                 Print</th>
                             <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>
-                            <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
                             <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="staff_father_name" data-sortable="true"
@@ -156,7 +155,7 @@
                             <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Nationality</th>
                             <th data-filter-control="input" data-field="staff_identity" data-sortable="true"
-                                data-formatter="operateDigits">Identity</th>
+                                data-formatter="operateDigits">CNIC/Passport</th>
                             <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
                             <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
@@ -169,7 +168,7 @@
                                 data-formatter="operateText" data-force-hide="true">DOJ</th> --}}
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
-
+                            <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
                             <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC front</th>
@@ -331,7 +330,7 @@
                 status:val.target.id
             }).then(
                 function(response) {
-                console.log(response.data);
+                // console.log(response.data);
                 $table.bootstrapTable('refresh');
                 }).catch(function(error) {console.log(error);})
         }
@@ -346,14 +345,15 @@
                 orientation: 'l',
                 autotable: {
                     styles: {
-                        rowHeight: 100,
+                        rowHeight: 60,
                         overflow: 'linebreak',
                         valign: 'middle',
-                        halign: 'center'
+                        // halign: 'left'
                     },
                     headerStyles:{
                         fontSize:12,
-                        fontStyle: 'bold'
+                        fontStyle: 'bold',
+                        // halign: 'left'
                     },
                     tableWidth: 'auto',
                     // beforePageContent: function (data) {

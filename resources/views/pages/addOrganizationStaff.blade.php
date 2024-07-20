@@ -214,12 +214,12 @@
                                             <select name="staff_gender" id="staff_gender" class="form-select">
                                                 <option value="" {{isset($staff->staff_gender)?'':'selected'}} disabled
                                                     hidden> Select Employee Gender </option>
-                                                <option value="Male" {{isset($staff->
+                                                <option value="1" {{isset($staff->
                                                     staff_gender)?$staff->staff_gender ==
-                                                    'Male'?'selected':'':''}}>Male</option>
-                                                <option value="Female" {{isset($staff->
+                                                    '1'?'selected':'':''}}>Male</option>
+                                                <option value="0" {{isset($staff->
                                                     staff_gender)?$staff->staff_gender ==
-                                                    'Female'?'selected':'':''}}>Female</option>
+                                                    '0'?'selected':'':''}}>Female</option>
                                             </select>
                                         </div>
                                     </div>
@@ -350,7 +350,7 @@
                 </div>
                 <br />
                 <div>
-                    <img src="{{asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px"
+                    <img src="{{asset('assets/images/profile/CNIC_Front.jpg')}}" width="400px" height="200px"
                         class="rounded mx-auto d-block" alt="User Profile Picture">
                 </div>
                 <form>
@@ -373,7 +373,7 @@
                 </div>
                 <br />
                 <div>
-                    <img src="{{asset('assets/images/profile/user-1.jpg')}}" width="200px" height="200px"
+                    <img src="{{asset('assets/images/profile/CNIC_Back.jpg')}}" width="400px" height="200px"
                         class="rounded mx-auto d-block" alt="User Profile Picture">
                 </div>
                 <form>

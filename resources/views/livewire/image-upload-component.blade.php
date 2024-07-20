@@ -4,7 +4,12 @@
     </div>
     <br />
     <div>
-        <img src="{{$picture?$picture->img_blob && $name != 'staff_picture'?($name != 'cnic_back_picture'?asset('assets/images/profile/CNIC_Front.jpg'):asset('assets/images/profile/CNIC_Back.jpg')):asset('assets/images/profile/user-1.jpg'))}}"
+        <img src="{{
+            $picture?
+            $picture->img_blob : 
+            ($name != 'staff_picture'?
+            ($name != 'cnic_back_picture'?asset('assets/images/profile/CNIC_Front.jpg'):
+            asset('assets/images/profile/CNIC_Back.jpg')):asset('assets/images/profile/user-1.jpg'))}}"
             width="{{$name == 'cnic_back_picture' ||$name == 'cnic_front_picture'?'400px':'200px'}}" height="200px"
             class="rounded mx-auto d-block" alt="User Profile Picture">
     </div>
