@@ -42,7 +42,7 @@ class OrganizationController extends Controller
 
     // User Creatuib on request
 
-    public function newUserCreate($username, $email, $uid)
+    protected function newUserCreate($username, $email, $uid)
     {
         // $uid = (string) Str::uuid();
         $pass = Str::password(12, true, true, true, false);

@@ -71,7 +71,7 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "orgRep")
+            "medRep")
             <div class="row">
                 <div class="d-flex flex-wrap">
                     @if(session('user')->roles[0]->name === "admin")
@@ -108,23 +108,18 @@
             <div class="row">
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary mb-2">Add
-                        Staff</a>&nbsp;
+                        Media Staff</a>&nbsp;
                 </div>
             </div>
             @endif
-            {{-- <br /> --}}
             <div class="table-responsive text-capitalize">
                 <table id="table" data-filter-control-multiple-search="true"
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
-                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}"
+                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getMediaStaff',$id)}}"
                     data-row-style="rowStyle" data-header-style="headerStyle">
                     <thead>
-                        {{-- <tr>
-                            <th data-field="companyTitle" colspan="27" data-force-export="true">
-                                {{$companyName->company_name}}</th>
-                        </tr> --}}
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
@@ -164,8 +159,6 @@
                                 data-formatter="operateText" data-force-hide="true">Pass Type</th>
                             <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">DOB</th>
-                            {{-- <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">DOJ</th> --}}
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
                             <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
@@ -306,19 +299,6 @@
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
-        
-        // function rowStyle(row) {
-        //     console.log(row);
-        //     selectedRow&&row.id === selectedRow?.id ? {classes: 'active'}:'';
-        // }
-
-        // $(function() {
-        //     $table.on('click-row.bs.table', function(e, row, $element) {
-        //         selectedRow = row
-        //         $('.active').removeClass('active')
-        //         $($element).addClass('active')
-        //     })
-        // })
 
         $(function() {$button.click(function (val) {
             let uidArray=[]
@@ -330,7 +310,6 @@
                 status:val.target.id
             }).then(
                 function(response) {
-                // console.log(response.data);
                 $table.bootstrapTable('refresh');
                 }).catch(function(error) {console.log(error);})
         }
@@ -348,22 +327,12 @@
                         rowHeight: 60,
                         overflow: 'linebreak',
                         valign: 'middle',
-                        // halign: 'left'
                     },
                     headerStyles:{
                         fontSize:12,
                         fontStyle: 'bold',
-                        // halign: 'left'
                     },
                     tableWidth: 'auto',
-                    // beforePageContent: function (data) {
-                    //     var doc = data.table; // Internal jspdf instance
-                    //     console.log(doc);
-                    //     doc.setFontSize(20);
-                    //     doc.setTextColor(40);
-                    //     doc.setFontStyle('normal');
-                    //     doc.text("Table Title", data.settings.margin.left, 60);
-                    // }   
                 },
             }
         }

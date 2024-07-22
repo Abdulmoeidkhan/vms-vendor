@@ -4,11 +4,11 @@ $(function () {
     // =====================================
     // ORG STATS 
     // =====================================
-    if (document.getElementById('chart')) {
+    if (document.getElementById('orgchart')) {
         axios.get('/getOrganizationStats')
             .then(function (response) {
                 let delegationData = response.data;
-                console.log(dataArray(delegationData, 'rejected'))
+                // console.log(dataArray(delegationData, 'rejected'))
                 var chart = {
                     series: [
                         { name: "Sent:", data: dataArray(delegationData, 'sent') },
@@ -108,7 +108,227 @@ $(function () {
 
                 };
 
-                var chart = new ApexCharts(document.querySelector("#chart"), chart);
+                var chart = new ApexCharts(document.querySelector("#orgchart"), chart);
+                chart.render();
+            })
+    }
+    else if (document.getElementById('orgRepchart')) {
+        axios.get('/getSpecificOrganizationStats')
+            .then(function (response) {
+                let delegationData = response.data;
+                var chart = {
+                    series: [
+                        { name: "Sent:", data: dataArray(delegationData, 'sent') },
+                        { name: "Approved:", data: dataArray(delegationData, 'approved') },
+                        { name: "Pending:", data: dataArray(delegationData, 'pending') },
+                        { name: "Rejected:", data: dataArray(delegationData, 'rejected') },
+                    ],
+
+                    chart: {
+                        type: "bar",
+                        height: 345,
+                        offsetX: -15,
+                        toolbar: { show: true },
+                        foreColor: "#adb0bb",
+                        fontFamily: 'inherit',
+                        sparkline: { enabled: false },
+                    },
+
+
+                    colors: ["#5D87FF", "#49BEFF", '#ffae1f', '#e32027'],
+
+
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "20%",
+                            borderRadius: [5],
+                            borderRadiusApplication: 'end',
+                            borderRadiusWhenStacked: 'all'
+                        },
+                    },
+                    markers: { size: 0 },
+
+                    dataLabels: {
+                        enabled: false,
+                    },
+
+
+                    legend: {
+                        show: true,
+                    },
+
+
+                    grid: {
+                        borderColor: "rgba(0,0,0,0.1)",
+                        strokeDashArray: 3,
+                        xaxis: {
+                            lines: {
+                                show: true,
+                            },
+                        },
+                    },
+
+                    xaxis: {
+                        type: "category",
+                        categories: dataArray(delegationData, 'company_name'),
+                        labels: {
+                            style: { cssClass: "grey--text lighten-2--text fill-color" },
+                        },
+                    },
+
+
+                    yaxis: {
+                        show: true,
+                        min: 0,
+                        max: 10,
+                        tickAmount: 4,
+                        labels: {
+                            style: {
+                                cssClass: "grey--text lighten-2--text fill-color",
+                            },
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        width: 3,
+                        lineCap: "butt",
+                        colors: ["transparent"],
+                    },
+
+
+                    tooltip: { theme: "light" },
+
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: {
+                                plotOptions: {
+                                    bar: {
+                                        borderRadius: 3,
+                                    }
+                                },
+                            }
+                        }
+                    ]
+
+
+                };
+
+                var chart = new ApexCharts(document.querySelector("#orgRepchart"), chart);
+                chart.render();
+            })
+    }
+
+
+    // =====================================
+    // MEDIA STATS 
+    // =====================================
+    if (document.getElementById('mediaChart')) {
+        axios.get('/getMediaStats')
+            .then(function (response) {
+                let delegationData = response.data;
+                // console.log(dataArray(delegationData, 'rejected'))
+                var chart = {
+                    series: [
+                        { name: "Sent:", data: dataArray(delegationData, 'sent') },
+                        { name: "Approved:", data: dataArray(delegationData, 'approved') },
+                        { name: "Pending:", data: dataArray(delegationData, 'pending') },
+                        { name: "Rejected:", data: dataArray(delegationData, 'rejected') },
+                    ],
+
+                    chart: {
+                        type: "bar",
+                        height: 345,
+                        offsetX: -15,
+                        toolbar: { show: true },
+                        foreColor: "#adb0bb",
+                        fontFamily: 'inherit',
+                        sparkline: { enabled: false },
+                    },
+
+
+                    colors: ["#5D87FF", "#49BEFF", '#ffae1f', '#e32027'],
+
+
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "20%",
+                            borderRadius: [5],
+                            borderRadiusApplication: 'end',
+                            borderRadiusWhenStacked: 'all'
+                        },
+                    },
+                    markers: { size: 0 },
+
+                    dataLabels: {
+                        enabled: false,
+                    },
+
+
+                    legend: {
+                        show: true,
+                    },
+
+
+                    grid: {
+                        borderColor: "rgba(0,0,0,0.1)",
+                        strokeDashArray: 3,
+                        xaxis: {
+                            lines: {
+                                show: true,
+                            },
+                        },
+                    },
+
+                    xaxis: {
+                        type: "category",
+                        categories: dataArray(delegationData, 'media_name'),
+                        labels: {
+                            style: { cssClass: "grey--text lighten-2--text fill-color" },
+                        },
+                    },
+
+
+                    yaxis: {
+                        show: true,
+                        min: 0,
+                        max: 10,
+                        tickAmount: 4,
+                        labels: {
+                            style: {
+                                cssClass: "grey--text lighten-2--text fill-color",
+                            },
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        width: 3,
+                        lineCap: "butt",
+                        colors: ["transparent"],
+                    },
+
+
+                    tooltip: { theme: "light" },
+
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: {
+                                plotOptions: {
+                                    bar: {
+                                        borderRadius: 3,
+                                    }
+                                },
+                            }
+                        }
+                    ]
+
+
+                };
+
+                var chart = new ApexCharts(document.querySelector("#mediaChart"), chart);
                 chart.render();
             })
     }
@@ -530,24 +750,28 @@ $(function () {
     window.addEventListener('beforeinstallprompt', (event) => {
         event.preventDefault();
         deferredPrompt = event;
+
         showInstallButton();
     });
 
     function showInstallButton() {
-        const installButton = document.getElementById('installButton'); // Replace with your button ID
-        installButton.style.display = 'block';
-        installButton.addEventListener('click', () => {
-            installButton.style.display = 'none';
-            deferredPrompt.prompt();
-            deferredPrompt.userChoice.then((choiceResult) => {
-                if (choiceResult.outcome === 'accepted') {
-                    console.log('User accepted the install prompt');
-                } else {
-                    console.log('User dismissed the install prompt');
-                }
-                deferredPrompt = null;
+        let installButton = document.getElementById('installButton'); // Replace with your button ID
+        if (installButton) {
+
+            installButton.style.display = 'block';
+            installButton.addEventListener('click', () => {
+                installButton.style.display = 'none';
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
             });
-        });
+        }
     }
 });
 

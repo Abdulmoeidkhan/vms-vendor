@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\MediaGroup;
 use App\Http\Middleware\Organization;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,6 +17,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup('orgCheck', [
             Organization::class,
+        ]);
+        $middleware->appendToGroup('mediaCheck', [
+            MediaGroup::class,
         ]);
         $middleware->appendToGroup('adminCheck', [
             Admin::class,

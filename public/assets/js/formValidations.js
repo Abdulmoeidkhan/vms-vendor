@@ -16,10 +16,9 @@ function getValues(event) {
         .post("/updateProfile", reqObj)
         .then(function (response) {
             appendAlert(response.data, "success");
-            // console.log(response)
         })
         .catch(function (error) {
-            console.log(error);
+            appendAlert(error.message, "badar");
         });
 }
 
@@ -46,7 +45,7 @@ function getPasswords(event) {
                 location.reload();
             })
             .catch(function (error) {
-                console.log(error);
+                appendAlert(error.message, "badar");
             });
     } else {
         alert("Password Does not match");
@@ -80,11 +79,10 @@ function getAuthority(event) {
     axios
         .post("/updateAuthority", reqObj)
         .then(function (response) {
-            // console.log(response)
             appendAlert(response.data, "success");
         })
         .catch(function (error) {
-            console.log(error);
+            appendAlert(error.message, "badar");
         });
 }
 
@@ -93,7 +91,6 @@ function getAuthority(event) {
 const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
 const appendAlert = (message, type) => {
     const wrapper = document.createElement("div");
-    console.log(message)
     wrapper.innerHTML = [
         `<div class="alert alert-${type} alert-dismissible fade show" role="alert">`,
         `   <div>${message}</div>`,

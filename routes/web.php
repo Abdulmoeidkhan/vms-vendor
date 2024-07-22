@@ -6,6 +6,7 @@ use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\UserPanelController;
@@ -70,10 +71,18 @@ Route::group(['middleware' => 'auth'], function () {
         // Organizations
         Route::get('/organizations', [OrganizationController::class, 'render'])->name('pages.organizations');
         Route::get('/getOrganizations', [OrganizationController::class, 'getOrganizations'])->name('request.getOrganizations');
-        Route::get('/getOrganizationStats', [OrganizationController::class, 'getOrganizationStats'])->name('request.getOrganizationStats');
-        Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
         Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
+        Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
+        Route::get('/getOrganizationStats', [OrganizationController::class, 'getOrganizationStats'])->name('request.getOrganizationStats');
         Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
+
+        // Media
+        Route::get('/mediaGroups', [MediaController::class, 'render'])->name('pages.mediaGroups');
+        Route::get('/getMedia', [MediaController::class, 'getMedia'])->name('request.getMedia');
+        Route::get('/addMedia/{id?}', [MediaController::class, 'addMedia'])->name('pages.addMedia');
+        Route::get('/getMediaStats', [MediaController::class, 'getMediaStats'])->name('request.getMediaStats');
+        Route::post('/addMediaRequest', [MediaController::class, 'addMediaRequest'])->name('request.addMediaRequest');
+        Route::post('/updateMediaRequest/{id}', [MediaController::class, 'updateMedia'])->name('request.updateMediaRequest');
     });
 
     Route::middleware('orgCheck')->group(function () {
@@ -85,6 +94,17 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/addOrganizationStaffRequest/{id}', [OrganizationController::class, 'addOrganizationStaff'])->name('request.addOrganizationStaff');
         Route::post('/updateOrganizationStaffRequest/{staffId?}', [OrganizationController::class, 'updateOrganizationStaff'])->name('request.updateOrganizationStaff');
         Route::post('/updateOrganisationStaffSecurityStatus', [OrganizationController::class, 'updateOrganisationStaffSecurityStatus'])->name('request.updateOrganisationStaffSecurityStatus');
+    });
+
+    Route::middleware('mediaCheck')->group(function () {
+        // Media
+        Route::get('/mediaGroup/{id}', [MediaController::class, 'rendermediaGroup'])->name('pages.mediaGroup');
+        Route::get('/getMediaStaff/{id}', [MediaController::class, 'getMediaStaff'])->name('request.getMediaStaff');
+        Route::post('/addMediaStaffRequest/{id}', [MediaController::class, 'addMediaStaff'])->name('request.addMediaStaff');
+        Route::get('/getSpecificMediaStats', [MediaController::class, 'getSpecificMediaStats'])->name('request.getSpecificMediaStats');
+        Route::post('/updateMediaStaffRequest/{staffId?}', [MediaController::class, 'updateMediaStaff'])->name('request.updateMediaStaffRequest');
+        Route::get('/mediaGroup/{id}/addMediaStaff/{staffId?}', [MediaController::class, 'addMediaStaffRender'])->name('pages.addMediaStaffRender');
+        Route::post('/updateMediaStaffSecurityStatus', [MediaController::class, 'updateMediaStaffSecurityStatus'])->name('request.updateMediaStaffSecurityStatus');
     });
 });
 
