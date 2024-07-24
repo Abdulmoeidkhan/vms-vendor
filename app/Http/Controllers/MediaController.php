@@ -40,7 +40,7 @@ class MediaController extends Controller
         $user->givePermissions(['read', 'create', 'update', 'delete']);
     }
 
-    // User Creatuib on request
+    // User Create on request
 
     protected function newUserCreate($username, $email, $uid)
     {
@@ -69,7 +69,7 @@ class MediaController extends Controller
         }
     }
 
-
+    // Media Groups
     public function render()
     {
         return view('pages.mediaGroups');
@@ -79,15 +79,20 @@ class MediaController extends Controller
     {
         $mediaGroups = MediaGroup::all();
         foreach ($mediaGroups as $key => $mediaGroup) {
-            $mediaGroups[$key]->functionaryCount = MediaGroup::where('uid', $mediaGroup->uid)->where('staff_type', 'Functionary')->count();
-            $mediaGroups[$key]->temporaryCount = MediaGroup::where('uid', $mediaGroup->uid)->where('staff_type', 'Temporary')->count();
+            $mediaGroups[$key]->functionaryCount = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_type', 'Functionary')->count();
+            $mediaGroups[$key]->temporaryCount = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_type', 'Temporary')->count();
         }
         return $mediaGroups;
     }
 
-    public function addMedia()
+    public function addMedia($id = null)
     {
-        return view('pages.addMediaGroup');
+        if ($id) {
+            $mediaGroup = MediaGroup::where('uid', $id)->firstOrFail();
+            return view('pages.addMediaGroup', ['mediagroup' => $mediaGroup]);
+        } else {
+            return view('pages.addMediaGroup');
+        }
     }
 
     public function getMediaStats()
@@ -106,7 +111,7 @@ class MediaController extends Controller
     {
         $mediaGroup = new MediaGroup();
         $mediaGroup->uid = (string) Str::uuid();
-        $mediaGroup->company_rep_uid = (string) Str::uuid();
+        $mediaGroup->media_rep_uid = (string) Str::uuid();
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $mediaGroup[$key] = $value;
@@ -114,9 +119,9 @@ class MediaController extends Controller
         }
         try {
             $mediaGroupSaved = $mediaGroup->save();
-            $userCreated = $this->newUserCreate($mediaGroup->company_rep_name, $mediaGroup->company_rep_email, $mediaGroup->uid);
+            $userCreated = $this->newUserCreate($mediaGroup->media_rep_name, $mediaGroup->media_rep_email, $mediaGroup->uid);
             if ($mediaGroupSaved && $userCreated) {
-                return $req->submitMore ? redirect()->route('pages.addMedia')->with('message', 'Media Group has been updated Successfully') : redirect()->route('pages.media')->with('message', 'Organization has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addMedia')->with('message', 'Media Group has been updated Successfully') : redirect()->route('pages.media')->with('message', 'Media Group has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -127,7 +132,7 @@ class MediaController extends Controller
         }
     }
 
-    public function updateMediaRequest(Request $req, $id)
+    public function updateMedia(Request $req, $id)
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
@@ -138,8 +143,99 @@ class MediaController extends Controller
         try {
             $updatedMedia = MediaGroup::where('uid', $id)->update($arrayToBeUpdate);
             if ($updatedMedia) {
-                return $req->submitMore ? redirect()->route('pages.addMedia', $id)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.mediaGroups')->with('message', 'Organization has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addMedia', $id)->with('message', 'Media has been updated Successfully') : redirect()->route('pages.mediaGroups')->with('message', 'Media has been updated Successfully');
             }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    // Media staff render page 
+    public function rendermediaGroup($id)
+    {
+        $mediaName = MediaGroup::where('uid', $id)->first('media_name');
+        $functionaryStaffLimit = MediaGroup::where('uid', $id)->first('staff_quantity');
+        $functionaryStaffUpdated = MediaStaff::where('media_uid', $id)->where('media_staff_type', 'Functionary')->count();
+        $functionaryStaffRemaing = $functionaryStaffLimit ? $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated : 0;
+        return view('pages.mediaGroup', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'mediaName' => $mediaName]);
+    }
+
+    public function getMediaStaff($id)
+    {
+        $mediaStaff = MediaStaff::where('media_uid', $id)->get();
+        foreach ($mediaStaff as $key => $staff) {
+            $mediaStaff[$key]->mediaName = MediaGroup::where('uid', $staff->media_uid)->first('media_name');
+            $mediaStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
+            $mediaStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
+            $mediaStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
+        }
+        return $mediaStaff;
+    }
+
+    public function addMediaStaffRender($id, $staffId = null)
+    {
+        $staff = $staffId ? MediaStaff::where('uid', $staffId)->first() : null;
+        $functionaryStaffLimit = $id ? MediaGroup::where('uid', $id)->first('staff_quantity') : null;
+        $functionaryStaffSaturated = $id ? (MediaStaff::where('media_uid', $id)->where('staff_type', 'Functionary')->count() < $functionaryStaffLimit->staff_quantity ? false : true) : null;
+        return view('pages.addMediaStaff', ['media_uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
+    }
+
+    public function addMediaStaff(Request $req, $id, $staffId = null)
+    {
+        $mediaStaff = new MediaStaff();
+        $mediaStaff->uid = (string) Str::uuid();
+        $mediaStaff->media_uid = $id;
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                $mediaStaff[$key] = $value;
+            }
+        }
+        try {
+            $mediaStaffSaved = $mediaStaff->save();
+            if ($mediaStaffSaved) {
+                return $req->submitMore ? redirect('organization/' . $id . '/' . 'addMediaStaff/' . $mediaStaff->uid)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $id)->with('message', 'Staff has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    public function updateMediaStaff(Request $req, $staffId)
+    {
+        $arrayToBeUpdate = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                $arrayToBeUpdate[$key] = $value;
+            }
+        }
+        try {
+            $updatedOrganisationStaff = MediaStaff::where('uid', $staffId)->update($arrayToBeUpdate);
+            $media_uid = MediaStaff::where('uid', $staffId)->first('media_uid');
+            if ($updatedOrganisationStaff) {
+                return $req->submitMore ? redirect()->route('pages.addMediaStaff', ['id' => $media_uid->media_uid, 'staffId' => $staffId])->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $media_uid->media_uid)->with('message', 'Staff has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    public function updateMediaStaffSecurityStatus(Request $req)
+    {
+        try {
+            $updatedMediaStaff = MediaStaff::whereIn('uid', $req->uidArray)->update(['media_staff_security_status' => $req->status]);
+            return $updatedMediaStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);

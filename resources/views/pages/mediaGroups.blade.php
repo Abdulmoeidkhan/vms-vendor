@@ -61,7 +61,7 @@
             @if(session()->get('user')->roles[0]->name === "admin")
             <div class="row">
                 <div class="d-flex">
-                    <a type="button" href="{{route('pages.addOrganization')}}" class="btn btn-primary">Add
+                    <a type="button" href="{{route('pages.addMedia')}}" class="btn btn-primary">Add
                         Media</a>&nbsp;
                 </div>
             </div>
@@ -177,7 +177,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-primary" href="organization/' + value + '">',
+                '<a class="btn btn-primary" href="mediaGroup/' + value + '">',
                 '<i class="ti ti-users" style="font-size:22px; widht:24px; height:24px;"></i>',
                 '</a>',
                 '</div>'

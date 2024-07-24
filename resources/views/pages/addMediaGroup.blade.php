@@ -29,7 +29,7 @@
             <div class="card-body p-4">
                 <div class="table-responsive">
                     <form name="mediaGroupinfo" id="mediaGroupinfo" method="POST"
-                        action="{{isset($mediagroup->uid)? route('request.updateOrganization',$mediagroup->uid):route('request.addOrganization')}}">
+                        action="{{isset($mediagroup->uid)? route('request.updateMediaRequest',$mediagroup->uid):route('request.addMediaRequest')}}">
                         <fieldset>
                             <legend>Add Media Group</legend>
                             @csrf
@@ -41,12 +41,12 @@
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
                                             modalId="media_category" name="Media Group Category"
                                             :className="$modelClass=App\Models\MediaCategory::class" colorClass="danger"
-                                            :oldData='$mediagroup->media_category' btnName="Add Media Group" />
+                                            :oldData='$mediagroup->media_category' btnName="Add Category" />
                                         @else
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
                                             modalId="media_category" name="Media Group Category"
                                             :className="$modelClass=App\Models\MediaCategory::class"
-                                            colorClass="primary" :oldData='null' btnName="Add Media Group" />
+                                            colorClass="primary" :oldData='null' btnName="Add Category" />
                                         @endif
                                         @else
                                         <div class="mb-3">

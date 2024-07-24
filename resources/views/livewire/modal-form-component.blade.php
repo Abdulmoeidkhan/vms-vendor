@@ -2,8 +2,7 @@
     <div class="row">
         <div class="col-md-9">
             <div class="mb-3">
-                <label class="form-label">
-                    {{$name}}</label>
+                <label class="form-label">{{$name}}</label>
                 <select name="{{$modalId}}" class="form-select">
                     <option value="" selected disabled hidden> Select {{$name}}
                     </option>
@@ -41,7 +40,7 @@
                                         <input type="text" wire:model='field2' class="form-control"
                                             id="display_name_{{$modalId}}">
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="name_{{$modalId}}" class="col-form-label">Name</label>
                                         <input type="text" wire:model='field1' class="form-control"
                                             id="name_{{$modalId}}">
@@ -52,7 +51,7 @@
                                         </label>
                                         <input type="text" wire:model='field3' class="form-control"
                                             id="description_{{$modalId}}">
-                                    </div>
+                                    </div> --}}
                                     <br />
                                     <div class="form-group">
                                         <button type="button" class="btn btn-secondary"

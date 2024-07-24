@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('media_rep_name');
             $table->string('media_rep_contact');
             $table->string('media_rep_email')->unique();
-            $table->string('media_rep_phone');
+            $table->string('media_rep_phone')->nullable();
             $table->uuid('media_rep_uid')->unique();
             $table->timestamps();
         });

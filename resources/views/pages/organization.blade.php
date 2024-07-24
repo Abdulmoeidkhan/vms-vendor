@@ -131,6 +131,8 @@
                             </th>
                             <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
                                 Print</th>
+                            <th data-filter-control="input" data-field="staff_type" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">Pass Type</th>
                             <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>
                             <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
@@ -160,8 +162,6 @@
                                 data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
                             <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
                                 data-formatter="operateDigits">Contact</th>
-                            <th data-filter-control="input" data-field="staff_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Pass Type</th>
                             <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">DOB</th>
                             {{-- <th data-filter-control="input" data-field="staff_doj" data-sortable="true"
@@ -261,7 +261,16 @@
     }
 
     function operateBadge(value, row, index) {
-        if (row.staff_security_status == "approved") {
+        if (row.staff_security_status == "approved" && row.staff_type == "Functionary") {
+            return [
+                '<div class="left">',
+                '<a class="btn btn-primary" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',
+                '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-id-badge-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 12h3v4h-3z" /><path d="M10 6h-6a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1 -1v-12a1 1 0 0 0 -1 -1h-6" /><path d="M10 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 16h2" /><path d="M14 12h4" /></svg>',
+                '</a>',
+                '</div>'
+            ].join('')
+        }
+        else if(row.staff_type == "Temporary"){
             return [
                 '<div class="left">',
                 '<a class="btn btn-primary" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',

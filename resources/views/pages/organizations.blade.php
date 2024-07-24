@@ -83,6 +83,12 @@
                                 data-formatter="operateDigits">Functionaries</th>
                             <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
                                 data-formatter="operateDigits">Temporaries</th>
+                            <th data-filter-control="input" data-field="functionaryPending" data-sortable="true"
+                                data-formatter="operateDigits">Pending</th>
+                            <th data-filter-control="input" data-field="functionaryApproved" data-sortable="true"
+                                data-formatter="operateDigits">Approved</th>
+                            <th data-filter-control="input" data-field="functionaryRejection" data-sortable="true"
+                                data-formatter="operateDigits">Rejected</th>
                             <th data-filter-control="input" data-field="company_category" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateSpecialText">Company Category</th>
                             {{-- <th data-filter-control="input" data-field="company_type" data-sortable="true"

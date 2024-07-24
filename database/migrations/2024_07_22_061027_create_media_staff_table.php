@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('media_staff_status');
             $table->string('media_staff_security_status')->default('pending');
             $table->string('media_staff_remarks')->nullable();
-            $table->uuid('company_uid');
+            $table->uuid('media_uid');
             $table->timestamps();
         });
     }
