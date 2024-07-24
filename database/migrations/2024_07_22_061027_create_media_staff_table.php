@@ -25,12 +25,10 @@ return new class extends Migration
             $table->string('media_staff_identity')->unique();
             $table->date('media_staff_identity_expiry');
             $table->bigInteger('media_staff_contact')->unique();
-            $table->string('media_staff_type')->nullable();
             $table->string('media_staff_address');
             $table->string('media_staff_city');
             $table->string('media_staff_country');
             $table->date('media_staff_dob');
-            $table->date('media_staff_doj');
             $table->string('employee_type');
             $table->string('media_staff_status');
             $table->string('media_staff_security_status')->default('pending');

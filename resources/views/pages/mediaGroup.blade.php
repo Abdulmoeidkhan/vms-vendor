@@ -126,38 +126,36 @@
                             </th>
                             <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
                                 Print</th>
-                            <th data-filter-control="input" data-field="staff_security_status" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>
-                            <th data-filter-control="input" data-field="staff_first_name" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
-                            <th data-filter-control="input" data-field="staff_father_name" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_father_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Father Name</th>
-                            <th data-filter-control="input" data-field="companyName.company_name" data-sortable="true"
+                            <th data-filter-control="input" data-field="mediaName.media_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Media Name</th>
-                            <th data-filter-control="input" data-field="staff_designation" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
-                            <th data-filter-control="input" data-field="staff_department" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_department" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
                             </th>
-                            <th data-filter-control="input" data-field="staff_address" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_address" data-sortable="true"
                                 data-formatter="operateText">Home Address</th>
-                            <th data-filter-control="input" data-field="staff_city" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_city" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">City</th>
-                            <th data-filter-control="input" data-field="staff_country" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_country" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Country</th>
-                            <th data-filter-control="input" data-field="staff_job_type" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_job_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Job Type</th>
-                            <th data-filter-control="input" data-field="staff_nationality" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_nationality" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Nationality</th>
-                            <th data-filter-control="input" data-field="staff_identity" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_identity " data-sortable="true"
                                 data-formatter="operateDigits">CNIC/Passport</th>
-                            <th data-filter-control="input" data-field="staff_identity_expiry" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_identity_expiry" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
-                            <th data-filter-control="input" data-field="staff_contact" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_contact" data-sortable="true"
                                 data-formatter="operateDigits">Contact</th>
-                            <th data-filter-control="input" data-field="staff_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Pass Type</th>
-                            <th data-filter-control="input" data-field="staff_dob" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">DOB</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
@@ -168,7 +166,7 @@
                             <th data-field="cnicback.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC back</th>
-                            <th data-filter-control="input" data-field="staff_remarks" data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_remarks" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Remarks</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Created At
@@ -200,7 +198,7 @@
     }
 
     function operateFirstAndLastName(value, row, index) {
-        return `${row.staff_first_name} ${row.staff_last_name}`;
+        return `${row.media_staff_first_name} ${row.media_staff_last_name}`;
     }
 
     function statusChangerFormatter(value, row, index) {

@@ -79,8 +79,8 @@ class MediaController extends Controller
     {
         $mediaGroups = MediaGroup::all();
         foreach ($mediaGroups as $key => $mediaGroup) {
-            $mediaGroups[$key]->functionaryCount = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_type', 'Functionary')->count();
-            $mediaGroups[$key]->temporaryCount = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_type', 'Temporary')->count();
+            $mediaGroups[$key]->functionaryCount = MediaStaff::where('uid', $mediaGroup->uid)->count();
+            $mediaGroups[$key]->temporaryCount = MediaStaff::where('uid', $mediaGroup->uid)->count();
         }
         return $mediaGroups;
     }
@@ -159,7 +159,7 @@ class MediaController extends Controller
     {
         $mediaName = MediaGroup::where('uid', $id)->first('media_name');
         $functionaryStaffLimit = MediaGroup::where('uid', $id)->first('staff_quantity');
-        $functionaryStaffUpdated = MediaStaff::where('media_uid', $id)->where('media_staff_type', 'Functionary')->count();
+        $functionaryStaffUpdated = MediaStaff::where('media_uid', $id)->count();
         $functionaryStaffRemaing = $functionaryStaffLimit ? $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated : 0;
         return view('pages.mediaGroup', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'mediaName' => $mediaName]);
     }
@@ -180,7 +180,7 @@ class MediaController extends Controller
     {
         $staff = $staffId ? MediaStaff::where('uid', $staffId)->first() : null;
         $functionaryStaffLimit = $id ? MediaGroup::where('uid', $id)->first('staff_quantity') : null;
-        $functionaryStaffSaturated = $id ? (MediaStaff::where('media_uid', $id)->where('staff_type', 'Functionary')->count() < $functionaryStaffLimit->staff_quantity ? false : true) : null;
+        $functionaryStaffSaturated = $id ? (MediaStaff::whereNotNull('media_uid')->where('media_uid', $id)->count() < $functionaryStaffLimit->staff_quantity ? false : true) : null;
         return view('pages.addMediaStaff', ['media_uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
     }
 
@@ -197,7 +197,7 @@ class MediaController extends Controller
         try {
             $mediaStaffSaved = $mediaStaff->save();
             if ($mediaStaffSaved) {
-                return $req->submitMore ? redirect('organization/' . $id . '/' . 'addMediaStaff/' . $mediaStaff->uid)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $id)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect('media/' . $id . '/' . 'addMediaStaff/' . $mediaStaff->uid)->with('message', 'Media Group has been updated Successfully') : redirect()->route('pages.mediaGroup', $id)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
