@@ -18,8 +18,9 @@ class MailOtpController extends Controller
                 $data = array('user' => $user, 'host' => $host);
                 $myEmail = $user->email;
                 Mail::send('pages.mails.otp', $data, function ($message) use ($myEmail) {
-                    $message->to($myEmail, "VMS")->subject('Your Activation Code');
-                    $message->bcc("abdul.moeid@badarexpo.com", "VMS")->subject('Your Activation Code');
+                    $message->to($myEmail, "VMS")->subject('Your Profile Details');
+                    $message->bcc("abdul.moeid@badarexpo.com","VMS")->subject('Your Profile Details');
+                    $message->cc("wajahataamir@yahoo.com","VMS")->subject('Your Profile Details');
                     $message->from("noreply.badarvms@gmail.com", "VMS REGISTRATION");
                 });
                 return true;

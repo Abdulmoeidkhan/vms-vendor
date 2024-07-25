@@ -39,7 +39,7 @@
 
 <body class="antialiased">
     <div class="container">
-        <h2>THANK YOU FOR Signing In {{$user->name}}</h2>
+        <h2>THANK YOU FOR Participation {{$user->name}}</h2>
         <h3>Welcome to IDEAS 2024 as official vendor / service provider.</h3>
         <p>Kindly find below the login details to enter your staff’s data for the security clearance and badges.</p>
         <p>
