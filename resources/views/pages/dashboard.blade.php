@@ -8,8 +8,9 @@
             <div class="card-body">
                 <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                     <div class="mb-3 mb-sm-0">
-                        <h5 class="card-title fw-semibold">Organization</h5>
-                    </div>
+                        {{-- foreach (\App\Models\Organizations::where('',)->get() as $category) --}}
+                        {{-- <h5 class="card-title fw-semibold"></h5> --}}
+                    {{-- </div> --}}
                     {{-- <div>
                         <select class="form-select">
                             <option value="1">March 2023</option>
