@@ -71,7 +71,7 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "medRep")
+            "mediaRep")
             <div class="row">
                 <div class="d-flex flex-wrap">
                     @if(session('user')->roles[0]->name === "admin")
@@ -149,7 +149,7 @@
                                 data-formatter="operateText" data-force-hide="true">Job Type</th>
                             <th data-filter-control="input" data-field="media_staff_nationality" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Nationality</th>
-                            <th data-filter-control="input" data-field="media_staff_identity " data-sortable="true"
+                            <th data-filter-control="input" data-field="media_staff_identity" data-sortable="true"
                                 data-formatter="operateDigits">CNIC/Passport</th>
                             <th data-filter-control="input" data-field="media_staff_identity_expiry" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Identity Expiry</th>

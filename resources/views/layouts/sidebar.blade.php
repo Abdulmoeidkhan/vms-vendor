@@ -57,7 +57,7 @@
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-video"></i>
                         </div>
-                        <span class="hide-menu">Media</span>
+                        <span class="hide-menu">Media & Staff</span>
                     </a>
                 </li>
                 @endif
@@ -68,6 +68,16 @@
                             <i class="ti ti-building"></i>
                         </div>
                         <span class="hide-menu">Organization</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="mediaRep")
+                <li class="sidebar-item">
+                    <a href="{{route('pages.mediaGroup',session()->get('user')->uid)}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-video"></i>
+                        </div>
+                        <span class="hide-menu">Media</span>
                     </a>
                 </li>
                 @endif

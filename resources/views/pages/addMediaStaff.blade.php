@@ -41,7 +41,7 @@
                                             <label for="media_staff_first_name" class="form-label">First Name</label>
                                             <input name="media_staff_first_name" type="text" class="form-control"
                                                 id="media_staff_first_name" placeholder="First Name"
-                                                value="{{isset($staff) ? $staff->media_first_name : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_first_name : ''}}" required />
                                         </div>
                                     </div>
 
@@ -50,7 +50,7 @@
                                             <label for="media_staff_last_name" class="form-label">Last Name</label>
                                             <input name="media_staff_last_name" type="text" class="form-control"
                                                 id="media_staff_last_name" placeholder="Last Name"
-                                                value="{{isset($staff) ? $staff->media_last_name : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_last_name : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -58,7 +58,7 @@
                                             <label for="media_staff_father_name" class="form-label">Father Name</label>
                                             <input name="media_staff_father_name" type="text" class="form-control"
                                                 id="media_staff_father_name" placeholder="Father Name"
-                                                value="{{isset($staff) ? $staff->media_father_name : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_father_name : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -66,7 +66,7 @@
                                             <label for="media_staff_designation" class="form-label">Designation</label>
                                             <input name="media_staff_designation" type="text" class="form-control"
                                                 id="media_staff_designation" placeholder="Designation"
-                                                value="{{isset($staff) ? $staff->media_designation : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_designation : ''}}" required />
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                             <label for="media_staff_department" class="form-label">Department</label>
                                             <input name="media_staff_department" type="text" class="form-control"
                                                 id="media_staff_department" placeholder="Department"
-                                                value="{{isset($staff) ? $staff->media_department : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_department : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -85,7 +85,7 @@
                                             <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
                                                 modalId="media_staff_job_type" name="Job Type"
                                                 :className="$modelClass=App\Models\JobType::class" colorClass="danger"
-                                                :oldData='$staff->media_job_type' btnName="Add Job" />
+                                                :oldData='$staff->media_staff_job_type' btnName="Add Job" />
                                             @else
                                             <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
                                                 modalId="media_staff_job_type" name="Job Type"
@@ -99,7 +99,7 @@
                                             <label for="media_staff_nationality" class="form-label">Nationality</label>
                                             <input name="media_staff_nationality" type="text" class="form-control"
                                                 id="media_staff_nationality"
-                                                value="{{isset($staff) ? $staff->media_nationality : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_nationality : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -107,7 +107,7 @@
                                             <label for="media_staff_identity" class="form-label">CNIC/Passport</label>
                                             <input name="media_staff_identity" type="text" class="form-control"
                                                 id="media_staff_identity" placeholder="Identity" minlength='7' maxlength='13'
-                                                value="{{isset($staff) ? $staff->media_identity : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_identity : ''}}" required />
                                         </div>
                                     </div>
 
@@ -118,7 +118,7 @@
                                             <label for="media_staff_identity_expiry" class="form-label">CNIC/Passport
                                                 Expiry</label>
                                             <input name="media_staff_identity_expiry" type="date" class="form-control"
-                                                id="media_staff_identity_expiry" placeholder="Identity Expiry " value='{{isset($staff) ? date("Y-m-d",strtotime($staff->media_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                id="media_staff_identity_expiry" placeholder="Identity Expiry " value='{{isset($staff) ? date("Y-m-d",strtotime($staff->media_staff_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
                                                 m")), (date("d")), (date("Y")))), 0, 10);}}'
                                                 min='{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10);}}'
                                                 required />
@@ -129,7 +129,7 @@
                                             <label for="media_staff_contact" class="form-label">Contact Number</label>
                                             <input name="media_staff_contact" type="text" minlength='11' maxlength='11'
                                                 class="form-control" id="media_staff_contact" placeholder="Contact Number"
-                                                value="{{isset($staff) ? $staff->media_contact : ''}}" minlength='0'
+                                                value="{{isset($staff) ? $staff->media_staff_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"
                                                 title="14 DIGIT PHONE NUMBER" data-inputmask="'mask': '+99-9999999999'"
                                                 required />
@@ -140,14 +140,14 @@
                                             <label for="media_staff_address" class="form-label">Home Address</label>
                                             <input name="media_staff_address" type="text" class="form-control"
                                                 id="media_staff_address"
-                                                value="{{isset($staff) ? $staff->media_address : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_address : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_city" class="form-label">City</label>
                                             <input name="media_staff_city" type="text" class="form-control" id="media_staff_city"
-                                                value="{{isset($staff) ? $staff->media_city : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_city : ''}}" required />
                                         </div>
                                     </div>
 
@@ -158,14 +158,14 @@
                                             <label for="media_staff_country" class="form-label">Country</label>
                                             <input name="media_staff_country" type="text" class="form-control"
                                                 id="media_staff_country"
-                                                value="{{isset($staff) ? $staff->media_country : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_country : ''}}" required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_dob" class="form-label">Date Of Birth</label>
                                             <input name="media_staff_dob" type="date" class="form-control" id="media_staff_dob"
-                                                value="{{isset($staff) ? date('Y-m-d',strtotime($staff->media_dob)):substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                value="{{isset($staff) ? date('Y-m-d',strtotime($staff->media_staff_dob)):substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
                                                 m")), (date("d")), (date("Y") - 17))), 0, 10);}}" min="1900-01-01"
                                                 max="{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date(" m")), (date("d")),
                                                 (date("Y") - 17))), 0, 10);}}" required />
@@ -190,13 +190,13 @@
                                         <div class="mb-3">
                                             <label for="media_staff_gender" class="form-label">Employee Gender</label>
                                             <select name="media_staff_gender" id="media_staff_gender" class="form-select">
-                                                <option value="" {{isset($staff->media_gender)?'':'selected'}} disabled
+                                                <option value="" {{isset($staff->media_staff_gender)?'':'selected'}} disabled
                                                     hidden> Select Employee Gender </option>
                                                 <option value="1" {{isset($staff->
-                                                    media_gender)?$staff->media_gender ==
+                                                    media_gender)?$staff->media_staff_gender ==
                                                     '1'?'selected':'':''}}>Male</option>
                                                 <option value="0" {{isset($staff->
-                                                    media_gender)?$staff->media_gender ==
+                                                    media_gender)?$staff->media_staff_gender ==
                                                     '0'?'selected':'':''}}>Female</option>
                                             </select>
                                         </div>
@@ -207,14 +207,14 @@
                                         <div class="mb-3">
                                             <label for="media_staff_type" class="form-label">Pass Type</label>
                                             <select name="media_staff_type" id="media_staff_type" class="form-select" required>
-                                                <option value="" {{isset($staff->media_type)?'':'selected'}} disabled
+                                                <option value="" {{isset($staff->media_staff_type)?'':'selected'}} disabled
                                                     hidden> Pass Type </option>
                                                 @if(!$functionaryStaffSaturated)
                                                 <option value="Functionary" {{isset($staff->
-                                                    media_type)?$staff->media_type ==
+                                                    media_type)?$staff->media_staff_type ==
                                                     'Functionary'?'selected':'':''}}>Functionary Pass</option>
                                                 @endif
-                                                <option value="Temporary" {{isset($staff->media_type)?$staff->media_type
+                                                <option value="Temporary" {{isset($staff->media_staff_type)?$staff->media_staff_type
                                                     == 'Temporary'?'selected':'':''}}>Temporary Pass</option>
                                             </select>
                                         </div>
@@ -224,10 +224,10 @@
                                             <label for="media_staff_status" class="form-label">Staus</label>
                                             <select name="media_staff_status" id="media_staff_status" class="form-select">
                                                 <option value="Active" {{isset($staff->
-                                                    media_status)?$staff->media_status ==
+                                                    media_status)?$staff->media_staff_status ==
                                                     'Active'?'selected':'':''}}>Active</option>
                                                 <option value="InActive" {{isset($staff->
-                                                    media_status)?$staff->media_status ==
+                                                    media_status)?$staff->media_staff_status ==
                                                     'InActive'?'selected':'':''}}>InActive</option>
                                             </select>
                                         </div>
@@ -236,7 +236,7 @@
                                         <div class="mb-3">
                                             <label for="media_staff_remarks" class="form-label">Remarks</label>
                                             <textarea name="media_staff_remarks" class="form-control"
-                                                id="media_staff_remarks">{{isset($staff) ? $staff->media_remarks : ''}}</textarea>
+                                                id="media_staff_remarks">{{isset($staff) ? $staff->media_staff_remarks : ''}}</textarea>
                                         </div>
                                     </div>
                                 </div>

@@ -54,7 +54,27 @@
     }
 </style>
 
-
+<div class="row">
+    <div class="d-flex col-md-4 col-sm-2">
+    </div>
+    <div class="d-flex col-md-4 col-sm-10">
+        <div class="card overflow-hidden">
+            <div class="card-body p-4">
+                <h5 class="card-title text-center mb-9 fw-semibold">Functionary Pass Limit</h5>
+                <h4 class="d-flex justify-content-center mb-9 fw-semibold">
+                    {{$functionaryStaffLimit->staff_quantity}}</h4>
+                <div class="align-items-center">
+                    <div class="d-flex justify-content-center">
+                        {{-- <br /> --}}
+                        <p>
+                            You have <b>{{$functionaryStaffRemaing}}</b> Remaining Functionary Pass(es) Left
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
@@ -87,8 +107,8 @@
                                 data-fixed-columns="true" data-formatter="operateSpecialText">Media Category</th>
                             <th data-filter-control="input" data-field="media_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Media Name</th>
-                            <th data-filter-control="input" data-field="media_rep_email"
-                                data-formatter="operateEmail">Registered Email</th>
+                            <th data-filter-control="input" data-field="media_rep_email" data-formatter="operateEmail">
+                                Registered Email</th>
                             <th data-filter-control="input" data-field="media_owner" data-formatter="operateText">
                                 Media Owner Name</th>
                             <th data-filter-control="input" data-field="media_owner_designation" data-sortable="true"
@@ -105,8 +125,8 @@
                                 data-formatter="operateText">Contact</th>
                             <th data-filter-control="input" data-field="media_rep_name" data-sortable="true"
                                 data-formatter="operateText">Account Name</th>
-                            <th data-filter-control="input" data-field="media_rep_contact"
-                                data-formatter="operateText">Account Contact Number</th>
+                            <th data-filter-control="input" data-field="media_rep_contact" data-formatter="operateText">
+                                Account Contact Number</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-formatter="operateDate">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"

@@ -332,8 +332,8 @@ $(function () {
                 chart.render();
             })
     }
-    else if (document.getElementById('orgRepchart')) {
-        axios.get('/getSpecificOrganizationStats')
+    else if (document.getElementById('mediaRepchart')) {
+        axios.get('/getSpecificMediaStats')
             .then(function (response) {
                 let delegationData = response.data;
                 var chart = {
@@ -391,7 +391,7 @@ $(function () {
 
                     xaxis: {
                         type: "category",
-                        categories: dataArray(delegationData, 'company_name'),
+                        categories: dataArray(delegationData, 'media_name'),
                         labels: {
                             style: { cssClass: "grey--text lighten-2--text fill-color" },
                         },
@@ -435,7 +435,7 @@ $(function () {
 
                 };
 
-                var chart = new ApexCharts(document.querySelector("#orgRepchart"), chart);
+                var chart = new ApexCharts(document.querySelector("#mediaRepchart"), chart);
                 chart.render();
             })
     }

@@ -162,6 +162,7 @@ class MediaController extends Controller
         $functionaryStaffUpdated = MediaStaff::where('media_uid', $id)->count();
         $functionaryStaffRemaing = $functionaryStaffLimit ? $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated : 0;
         return view('pages.mediaGroup', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'mediaName' => $mediaName]);
+        // return $functionaryStaffLimit;
     }
 
     public function getMediaStaff($id)
@@ -176,12 +177,25 @@ class MediaController extends Controller
         return $mediaStaff;
     }
 
+    public function getSpecificMediaStats()
+    {
+        $mediagroups = MediaGroup::where('uid', session('user')->uid)->get(['media_name', 'uid']);
+        foreach ($mediagroups as $key => $media) {
+            $mediagroups[$key]->sent = MediaStaff::where('media_uid', $media->uid)->where('media_staff_security_status', 'sent')->count();
+            $mediagroups[$key]->pending = MediaStaff::where('media_uid', $media->uid)->where('media_staff_security_status', 'pending')->count();
+            $mediagroups[$key]->rejected = MediaStaff::where('media_uid', $media->uid)->where('media_staff_security_status', 'rejected')->count();
+            $mediagroups[$key]->approved = MediaStaff::where('media_uid', $media->uid)->where('media_staff_security_status', 'approved')->count();
+        }
+        return $mediagroups;
+    }
+
     public function addMediaStaffRender($id, $staffId = null)
     {
         $staff = $staffId ? MediaStaff::where('uid', $staffId)->first() : null;
         $functionaryStaffLimit = $id ? MediaGroup::where('uid', $id)->first('staff_quantity') : null;
         $functionaryStaffSaturated = $id ? (MediaStaff::whereNotNull('media_uid')->where('media_uid', $id)->count() < $functionaryStaffLimit->staff_quantity ? false : true) : null;
         return view('pages.addMediaStaff', ['media_uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
+        // return $staff;
     }
 
     public function addMediaStaff(Request $req, $id, $staffId = null)
@@ -207,6 +221,8 @@ class MediaController extends Controller
             }
         }
     }
+
+    
 
     public function updateMediaStaff(Request $req, $staffId)
     {
