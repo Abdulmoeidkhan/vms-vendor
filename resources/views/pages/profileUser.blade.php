@@ -74,7 +74,7 @@
                 <div class="table-responsive">
                     <form name="userBasicInfo" id="userBasicInfo">
                         <fieldset>
-                            <legend>Generarl Information</legend>
+                            <legend>General Information</legend>
                             @csrf
                             <div class="mb-3">
                                 <label for="disabledInputEmail1" class="form-label">Registered Email Address</label>

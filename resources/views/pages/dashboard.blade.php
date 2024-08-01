@@ -55,7 +55,9 @@
             <div class="card-body">
                 <div class="d-sm-flex d-block align-items-center justify-content-between mb-9">
                     <div class="mb-3 mb-sm-0">
-                        <h5 class="card-title fw-semibold">Organization</h5>
+                        @foreach (\App\Models\Organization::where('uid',session()->get('user')->uid)->get() as $organization)
+                        <h5 class="card-title fw-semibold">{{$organization->company_name}}</h5>
+                        @endforeach
                     </div>
                     {{-- <div>
                         <select class="form-select">
