@@ -211,7 +211,7 @@ class MediaController extends Controller
         try {
             $mediaStaffSaved = $mediaStaff->save();
             if ($mediaStaffSaved) {
-                return $req->submitMore ? redirect('media/' . $id . '/' . 'addMediaStaff/' . $mediaStaff->uid)->with('message', 'Media Group has been updated Successfully') : redirect()->route('pages.mediaGroup', $id)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect('mediaGroup/' . $id . '/' . 'addMediaStaff/' . $mediaStaff->uid)->with('message', 'Media Group has been updated Successfully') : redirect()->route('pages.mediaGroup', $id)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
