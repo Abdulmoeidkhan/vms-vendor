@@ -75,7 +75,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
         Route::get('/getOrganizationStats', [OrganizationController::class, 'getOrganizationStats'])->name('request.getOrganizationStats');
         Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
-
+    });
+    Route::middleware('mediaUserCheck')->group(function () {
         // Media
         Route::get('/mediaGroups', [MediaController::class, 'render'])->name('pages.mediaGroups');
         Route::get('/getMedia', [MediaController::class, 'getMedia'])->name('request.getMedia');

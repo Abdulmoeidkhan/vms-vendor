@@ -244,7 +244,7 @@
     }
 
     function operateEdit(value, row, index) {
-        if (value) {
+        if (row.staff_security_status != 'pending') {
             return [
                 '<div class="left">',
                 '<a class="btn btn-success" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',

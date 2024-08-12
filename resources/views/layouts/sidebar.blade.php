@@ -51,7 +51,8 @@
                         </div>
                         <span class="hide-menu">HR</span>
                     </a>
-                </li>
+                </li>@endif
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="media")
                 <li class="sidebar-item">
                     <a href="{{route('pages.mediaGroups')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">

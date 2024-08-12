@@ -57,7 +57,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "media")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addMedia')}}" class="btn btn-primary">Add

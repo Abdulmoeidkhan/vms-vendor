@@ -3,6 +3,7 @@
 use App\Http\Middleware\Admin;
 use App\Http\Middleware\MediaGroup;
 use App\Http\Middleware\Organization;
+use App\Http\Middleware\Media;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -23,6 +24,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->appendToGroup('adminCheck', [
             Admin::class,
+        ]);
+        $middleware->appendToGroup('mediaUserCheck', [
+            Media::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
