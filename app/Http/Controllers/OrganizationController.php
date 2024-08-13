@@ -80,7 +80,7 @@ class OrganizationController extends Controller
 
     public function getOrganizations()
     {
-        $organizations = Organization::all();
+        $organizations = Organization::orderBy('company_name', 'asc')->get();
         foreach ($organizations as $key => $organization) {
             $organizations[$key]->functionaryCount = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->count();
             $organizations[$key]->functionaryPending = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'pending')->count();

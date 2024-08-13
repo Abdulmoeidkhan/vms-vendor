@@ -23,6 +23,11 @@
         font-weight: bold;
     }
 
+    .pending {
+        background-color: var(--bs-warning);
+        font-weight: bold;
+    }
+
     /* Style the buttons inside the tab */
     .tab button {
         background-color: inherit;
@@ -72,7 +77,7 @@
                     data-filter-control-multiple-search-delimiter="," data-virtual-scroll="true"
                     data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
                     data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
-                    data-show-pagination-switch="true" data-show-columns-toggle-all="true"
+                    data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle"
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizations')}}">
                     <thead>
                         <tr>
@@ -143,7 +148,6 @@
 </div>
 @include("layouts.tableFoot")
 <script>
-
     function operateText(value, row, index) {
         return value ? `<span style="text-capitalize">${value.toString().replace(/[^\w ]/, " ")}</span>` : "N/A"
     }
@@ -226,6 +230,14 @@
         return index + 1;
     }
 
+    function rowStyle(row) {
+            if(row.functionaryPending != 0){
+                return {
+                    classes: 'pending'
+                }
+            }
+            return {}
+        }
 
     ['#table' ].map((val => {
         var $table = $(val)
@@ -238,15 +250,6 @@
                 $($element).addClass('active')
             })
         })
-
-        function rowStyle(row) {
-            if (row.id === selectedRow.id) {
-                return {
-                    classes: 'active'
-                }
-            }
-            return {}
-        }
 
         $(val).bootstrapTable({
             exportOptions: {

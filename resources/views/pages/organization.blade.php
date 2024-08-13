@@ -307,6 +307,17 @@
             else{
                 return {classes: ''}
             }
+            console.log(row)
+            if (row.id === selectedRow.id) {
+                return {
+                    classes: 'active'
+                }
+            }
+            else if(row.functionaryPending != 0){
+                return {
+                    classes: 'pending'
+                }
+            }
         }
 
 
@@ -315,6 +326,7 @@
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
+
         
         // function rowStyle(row) {
         //     console.log(row);
