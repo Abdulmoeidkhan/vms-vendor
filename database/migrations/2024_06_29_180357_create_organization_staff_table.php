@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('organization_staff', function (Blueprint $table) {
             $table->id()->primary();
             $table->uuid('uid')->unique();
+            $table->string('code')->unique();
             $table->string('staff_first_name');
             $table->string('staff_last_name');
             $table->string('staff_father_name');

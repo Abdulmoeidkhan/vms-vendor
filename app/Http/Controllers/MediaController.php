@@ -202,6 +202,7 @@ class MediaController extends Controller
     {
         $mediaStaff = new MediaStaff();
         $mediaStaff->uid = (string) Str::uuid();
+        $mediaStaff->code = $this->badge(8, "ME");
         $mediaStaff->media_uid = $id;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {

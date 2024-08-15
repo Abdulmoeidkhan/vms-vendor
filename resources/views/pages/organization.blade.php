@@ -92,7 +92,7 @@
                         <div class="card-body p-4">
                             <h5 class="card-title text-center mb-9 fw-semibold">Functionary Pass Limit</h5>
                             <h4 class="d-flex justify-content-center mb-9 fw-semibold">
-                                {{$functionaryStaffLimit->staff_quantity}}</h4>
+                                {{$functionaryStaffLimit?->staff_quantity}}</h4>
                             <div class="align-items-center">
                                 <div class="d-flex justify-content-center">
                                     {{-- <br /> --}}
@@ -114,17 +114,18 @@
             @endif
             {{-- <br /> --}}
             <div class="table-responsive text-capitalize">
-                <table id="table" data-filter-control-multiple-search="true"
+                <table id="table" data-filter-control-multiple-search="true" data-header-style="headerStyle"
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
-                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getOrganizationStaff',$id)}}"
-                    data-row-style="rowStyle" data-header-style="headerStyle">
+                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]"
+                    data-url="{{route('request.getOrganizationStaff',$id)}}">
                     <thead>
                         {{-- <tr>
                             <th data-field="companyTitle" colspan="27" data-force-export="true">
                                 {{$companyName->company_name}}</th>
                         </tr> --}}
+
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>

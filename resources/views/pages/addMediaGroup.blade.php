@@ -36,7 +36,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        @if(session()->get('user')->roles[0]->name === "admin")
+                                        @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "media")
                                         @if(isset($mediagroup))
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
                                             modalId="media_category" name="Media Group Category"

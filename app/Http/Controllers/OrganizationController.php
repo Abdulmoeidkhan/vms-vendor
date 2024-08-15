@@ -149,6 +149,7 @@ class OrganizationController extends Controller
     {
         $organizationStaff = new OrganizationStaff();
         $organizationStaff->uid = (string) Str::uuid();
+        $organizationStaff->code =  $this->badge(8, "OR");;
         $organizationStaff->company_uid = $id;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {

@@ -92,7 +92,7 @@
                         <div class="card-body p-4">
                             <h5 class="card-title text-center mb-9 fw-semibold">Functionary Pass Limit</h5>
                             <h4 class="d-flex justify-content-center mb-9 fw-semibold">
-                                {{$functionaryStaffLimit->staff_quantity}}</h4>
+                                {{$functionaryStaffLimit?->staff_quantity}}</h4>
                             <div class="align-items-center">
                                 <div class="d-flex justify-content-center">
                                     {{-- <br /> --}}
@@ -316,7 +316,7 @@
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {
-            fileName: '{{$mediaName->media_name}}',
+            fileName: '{{$mediaName?->media_name}}',
             type: 'pdf',
             jspdf: {
                 orientation: 'l',

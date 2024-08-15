@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('media_staff', function (Blueprint $table) {
             $table->id()->primary();
             $table->uuid('uid')->unique();
+            $table->string('code')->unique();
             $table->string('media_staff_first_name');
             $table->string('media_staff_last_name');
             $table->string('media_staff_father_name');
