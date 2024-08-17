@@ -58,7 +58,7 @@ class ModalFormComponent extends Component
     public function save()
     {
         $field = new $this->className;
-        // $field->name = $this->field1;
+        $field->name = $this->field2;
         $field->display_name = $this->field2;
         // $field->description = $this->field3;
         $fieldSaved = $field->save();

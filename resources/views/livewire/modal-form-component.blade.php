@@ -10,8 +10,7 @@
                     <option wire:key="{{ $categorys->id }}" value="{{$categorys->display_name}}" {{isset($oldData) ?
                         ($oldData==$categorys->display_name ?
                         'selected' : '')
-                        : ''}}>{{isset($oldData)
-                        ?$oldData:$categorys->display_name}}
+                        : ''}}>{{$categorys->display_name}}
                     </option>
                     @endforeach
                 </select>
