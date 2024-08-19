@@ -223,8 +223,6 @@ class MediaController extends Controller
         }
     }
 
-    
-
     public function updateMediaStaff(Request $req, $staffId)
     {
         $arrayToBeUpdate = [];

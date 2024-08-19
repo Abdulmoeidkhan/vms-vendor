@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\HRGroup;
 use App\Http\Middleware\MediaGroup;
 use App\Http\Middleware\Organization;
 use App\Http\Middleware\Media;
@@ -18,6 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->appendToGroup('orgCheck', [
             Organization::class,
+        ]);
+        $middleware->appendToGroup('hrCheck', [
+            HRGroup::class,
         ]);
         $middleware->appendToGroup('mediaCheck', [
             MediaGroup::class,
