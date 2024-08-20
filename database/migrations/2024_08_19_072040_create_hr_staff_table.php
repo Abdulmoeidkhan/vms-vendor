@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('hr_status');
             $table->string('hr_security_status')->default('pending');
             $table->string('hr_remarks')->nullable();
-            $table->uuid('company_uid');
+            $table->uuid('hr_uid');
             $table->timestamps();
         });
     }

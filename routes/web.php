@@ -80,10 +80,10 @@ Route::group(['middleware' => 'auth'], function () {
         // Hr
         Route::get('/hrGroups', [HRController::class, 'render'])->name('pages.hrGroups');
         Route::get('/getHrGroups', [HRController::class, 'getHrGroups'])->name('request.getHrGroups');
-        Route::post('/addHrGroupsRequest', [HRController::class, 'addHRGroup'])->name('request.addHrGroups');
-        Route::get('/addHrGroups/{id?}', [HRController::class, 'addHRGroupRender'])->name('pages.addHrGroups');
+        Route::post('/addHrGroupsRequest', [HRController::class, 'addHrGroup'])->name('request.addHrGroups');
+        Route::get('/addHrGroups/{id?}', [HRController::class, 'addHrGroupRender'])->name('pages.addHrGroups');
         Route::get('/getHrGroupsStats', [HRController::class, 'getHrGroupsStats'])->name('request.getHrGroupsStats');
-        Route::post('/updateHrGroupsRequest/{id}', [HRController::class, 'updateHrGroups'])->name('request.updateHrGroups');
+        Route::post('/updateHrGroupsRequest/{id}', [HRController::class, 'updateHrGroup'])->name('request.updateHrGroups');
     });
 
     Route::middleware('mediaUserCheck')->group(function () {
@@ -120,7 +120,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::middleware('hrCheck')->group(function () {
         // Organization
-        Route::get('/hrGroup/{id}', [HRController::class, 'renderhrGroup'])->name('pages.hrGroup');
+        Route::get('/hrGroup/{id}', [HRController::class, 'renderHrGroup'])->name('pages.hrGroup');
         Route::get('/getHrGroupStaff/{id}', [HRController::class, 'getHrGroupStaff'])->name('request.getHrGroupStaff');
         Route::get('/hrGroup/{id}/addHrStaffRender/{staffId?}', [HRController::class, 'addHrGroupStaffRender'])->name('pages.addHrGroupStaffRender');
         Route::get('/getSpecificHrGroupStats', [HRController::class, 'getSpecificHrGroupStats'])->name('request.getSpecificHrGroupStats');

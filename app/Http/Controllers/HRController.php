@@ -7,7 +7,7 @@ use App\Models\StaffImages;
 use App\Models\CnicBack;
 use App\Models\CnicFront;
 use App\Models\HRGroup;
-use App\Models\HRStaff;
+use App\Models\HrStaff;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -79,56 +79,56 @@ class HRController extends Controller
 
     public function getHrGroups()
     {
-        $hrGroups = HRGroup::orderBy('hr_name', 'asc')->get();
-        foreach ($hrGroups as $key => $hrGroups) {
-            $hrGroups[$key]->functionaryCount = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_type', 'Functionary')->count();
-            $hrGroups[$key]->functionaryPending = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'pending')->count();
-            $hrGroups[$key]->functionaryApproved = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'approved')->count();
-            $hrGroups[$key]->functionaryRejection = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'rejected')->count();
-            $hrGroups[$key]->temporaryCount = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_type', 'Temporary')->count();
+        $hrGroups = HrGroup::orderBy('hr_name', 'asc')->get();
+        foreach ($hrGroups as $key => $hrGroup) {
+            $hrGroups[$key]->functionaryCount = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->count();
+            $hrGroups[$key]->functionaryPending = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->where('hr_security_status', 'pending')->count();
+            $hrGroups[$key]->functionaryApproved = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->where('hr_security_status', 'approved')->count();
+            $hrGroups[$key]->functionaryRejection = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->where('hr_security_status', 'rejected')->count();
+            $hrGroups[$key]->temporaryCount = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Temporary')->count();
         }
         return $hrGroups;
     }
 
-    public function getHRGroupStats()
+    public function getHrGroupsStats()
     {
-        $hrGroups = HRGroup::all(['hr_name', 'uid']);
-        foreach ($hrGroups as $key => $hrGroups) {
-            $hrGroups[$key]->sent = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'sent')->count();
-            $hrGroups[$key]->pending = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'pending')->count();
-            $hrGroups[$key]->rejected = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'rejected')->count();
-            $hrGroups[$key]->approved = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'approved')->count();
+        $hrGroups = HrGroup::all(['hr_name', 'uid']);
+        foreach ($hrGroups as $key => $hrGroup) {
+            $hrGroups[$key]->sent = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
+            $hrGroups[$key]->pending = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
+            $hrGroups[$key]->rejected = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
+            $hrGroups[$key]->approved = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
         }
         return $hrGroups;
     }
 
-    public function getSpecificHRGroupStats()
+    public function getSpecificHrGroupStats()
     {
-        $hrGroups = HRGroup::where('uid', session('user')->uid)->get(['hr_name', 'uid']);
-        foreach ($hrGroups as $key => $hrGroups) {
-            $hrGroups[$key]->sent = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'sent')->count();
-            $hrGroups[$key]->pending = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'pending')->count();
-            $hrGroups[$key]->rejected = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'rejected')->count();
-            $hrGroups[$key]->approved = HRStaff::where('hr_uid', $hrGroups->uid)->where('staff_security_status', 'approved')->count();
+        $hrGroups = HrGroup::where('uid', session('user')->uid)->get(['hr_name', 'uid']);
+        foreach ($hrGroups as $key => $hrGroup) {
+            $hrGroups[$key]->sent = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
+            $hrGroups[$key]->pending = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
+            $hrGroups[$key]->rejected = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
+            $hrGroups[$key]->approved = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
         }
         return $hrGroups;
     }
 
     // HRGroup and staff render page 
-    public function renderOrganisation($id)
+    public function renderHrGroup($id)
     {
-        $hrName = HRGroup::where('uid', $id)->first('hr_name');
-        $functionaryStaffLimit = HRGroup::where('uid', $id)->first('staff_quantity');
-        $functionaryStaffUpdated = HRStaff::where('hr_uid', $id)->where('staff_type', 'Functionary')->count();
+        $hrName = HrGroup::where('uid', $id)->first('hr_name');
+        $functionaryStaffLimit = HrGroup::where('uid', $id)->first('staff_quantity');
+        $functionaryStaffUpdated = HrStaff::where('uid', $id)->where('hr_type', 'Functionary')->count();
         $functionaryStaffRemaing = $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated;
-        return view('pages.hrGroups', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'hrName' => $hrName]);
+        return view('pages.hrGroup', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'hrName' => $hrName]);
     }
 
-    public function getHRGroupStaff($id)
+    public function getHrGroupStaff($id)
     {
-        $hrGroupsStaff = HRStaff::where('hr_uid', $id)->get();
+        $hrGroupsStaff = HrStaff::where('hr_uid', $id)->get();
         foreach ($hrGroupsStaff as $key => $staff) {
-            $hrGroupsStaff[$key]->hrName = HRGroup::where('uid', $staff->hr_uid)->first('hr_name');
+            $hrGroupsStaff[$key]->hrName = HrGroup::where('uid', $staff->uid)->first('hr_name');
             $hrGroupsStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
             $hrGroupsStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
             $hrGroupsStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
@@ -136,19 +136,19 @@ class HRController extends Controller
         return $hrGroupsStaff;
     }
 
-    public function addHRGroupStaffRender($id, $staffId = null)
+    public function addHrGroupStaffRender($id, $staffId = null)
     {
-        $staff = $staffId ? HRStaff::where('uid', $staffId)->first() : null;
-        $functionaryStaffLimit = $id ? HRGroup::where('uid', $id)->first('staff_quantity') : null;
-        $functionaryStaffSaturated = $id ? (HRStaff::where('hr_uid', $id)->where('staff_type', 'Functionary')->count() < $functionaryStaffLimit->staff_quantity ? false : true) : null;
-        return view('pages.addHRGroupStaff', ['hr_uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
+        $staff = $staffId ? HrStaff::where('uid', $staffId)->first() : null;
+        $functionaryStaffLimit = $id ? HrGroup::where('uid', $id)->first('staff_quantity') : null;
+        $functionaryStaffSaturated = $id ? (HrStaff::where('uid', $id)->where('hr_type', 'Functionary')->count() < $functionaryStaffLimit?->staff_quantity ? false : true) : null;
+        return view('pages.addHrGroupStaff', ['uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
     }
 
-    public function addHRGroupStaff(Request $req, $id, $staffId = null)
+    public function addHrGroupStaff(Request $req, $id, $staffId = null)
     {
-        $hrGroupsStaff = new HRStaff();
+        $hrGroupsStaff = new HrStaff();
         $hrGroupsStaff->uid = (string) Str::uuid();
-        $hrGroupsStaff->code =  $this->badge(8, "OR");;
+        $hrGroupsStaff->code =  $this->badge(8, "HR");;
         $hrGroupsStaff->hr_uid = $id;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
@@ -158,7 +158,7 @@ class HRController extends Controller
         try {
             $hrGroupsStaffSaved = $hrGroupsStaff->save();
             if ($hrGroupsStaffSaved) {
-                return $req->submitMore ? redirect('hrGroups/' . $id . '/' . 'addHRGroupStaff/' . $hrGroupsStaff->uid)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroups', $id)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect('hrGroup/' . $id . '/' . 'addHrStaffRender/' . $hrGroupsStaff->uid)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroup', $id)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -169,7 +169,7 @@ class HRController extends Controller
         }
     }
 
-    public function updateHRGroupStaff(Request $req, $staffId)
+    public function updateHrGroupStaff(Request $req, $staffId)
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
@@ -178,10 +178,10 @@ class HRController extends Controller
             }
         }
         try {
-            $updatedOrganisationStaff = HRStaff::where('uid', $staffId)->update($arrayToBeUpdate);
-            $hr_uid = HRStaff::where('uid', $staffId)->first('hr_uid');
+            $updatedOrganisationStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
+            $uid = HrStaff::where('uid', $staffId)->first('uid');
             if ($updatedOrganisationStaff) {
-                return $req->submitMore ? redirect()->route('pages.addHRGroupStaff', ['id' => $hr_uid->hr_uid, 'staffId' => $staffId])->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroups', $hr_uid->hr_uid)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->uid)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -192,10 +192,10 @@ class HRController extends Controller
         }
     }
 
-    public function updateOrganisationStaffSecurityStatus(Request $req)
+    public function updateHrGroupStaffSecurityStatus(Request $req)
     {
         try {
-            $updatedOrganisationStaff = HRStaff::whereIn('uid', $req->uidArray)->update(['staff_security_status' => $req->status]);
+            $updatedOrganisationStaff = HrStaff::whereIn('uid', $req->uidArray)->update(['hr_security_status' => $req->status]);
             return $updatedOrganisationStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -208,29 +208,30 @@ class HRController extends Controller
 
 
     // HRGroup Add/Update Form Render & Request
-    public function addHRGroupRender($id = null)
+    public function addHrGroupRender($id = null)
     {
         if ($id) {
-            $hrGroups = HRGroup::where('uid', $id)->firstOrFail();
-            return view('pages.addHRGroup', ['hrGroups' => $hrGroups]);
+            $hrGroups = HrGroup::where('uid', $id)->firstOrFail();
+            // return $hrGroups;
+            return view('pages.addHrGroup', ['hrGroups' => $hrGroups]);
         } else {
-            return view('pages.addHRGroup');
+            return view('pages.addHrGroup');
         }
     }
 
-    public function addHRGroup(Request $req)
+    public function addHrGroup(Request $req)
     {
-        $hrGroups = new HRGroup();
-        $hrGroups->uid = (string) Str::uuid();
-        $hrGroups->hr_rep_uid = (string) Str::uuid();
+        $hrGroup = new HRGroup();
+        $hrGroup->uid = (string) Str::uuid();
+        $hrGroup->hr_rep_uid = (string) Str::uuid();
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $hrGroups[$key] = $value;
             }
         }
         try {
-            $hrGroupsSaved = $hrGroups->save();
-            $userCreated = $this->newUserCreate($hrGroups->hr_rep_name, $hrGroups->hr_rep_email, $hrGroups->uid);
+            $hrGroupsSaved = $hrGroup->save();
+            $userCreated = $this->newUserCreate($hrGroup->hr_rep_name, $hrGroup->hr_rep_email, $hrGroup->uid);
             if ($hrGroupsSaved && $userCreated) {
                 return $req->submitMore ? redirect()->route('pages.addHRGroup')->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
             }
@@ -243,7 +244,7 @@ class HRController extends Controller
         }
     }
 
-    public function updateHRGroup(Request $req, $id)
+    public function updateHrGroup(Request $req, $id)
     {
         $arrayToBeUpdate = [];
         foreach ($req->all() as $key => $value) {
@@ -252,9 +253,9 @@ class HRController extends Controller
             }
         }
         try {
-            $updatedOrganisation = HRGroup::where('uid', $id)->update($arrayToBeUpdate);
+            $updatedOrganisation = HrGroup::where('uid', $id)->update($arrayToBeUpdate);
             if ($updatedOrganisation) {
-                return $req->submitMore ? redirect()->route('pages.addHRGroup', $id)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addHRGroup', $id)->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

@@ -196,7 +196,7 @@
         }
     }
 
-    function operateOrganization(value, row, index) {
+    function operateHR(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
