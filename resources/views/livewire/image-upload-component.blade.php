@@ -34,6 +34,17 @@
                 </div>
             </div>
             <button class="btn btn-outline-danger" type="submit" onclick="uploadFunc()">Upload</button>
+            @if($name == 'staff_picture')
+            <br />
+            <br />
+            <b>
+                <ol>
+                    <li>The Photograph should be 2X2.</li>
+                    <li>The Picture should have white/blue background.</li>
+                    <li>The Face should be focus and directly towards the camera.</li>
+                </ol>
+            </b>
+            @endif
         </div>
     </form>
     <script>

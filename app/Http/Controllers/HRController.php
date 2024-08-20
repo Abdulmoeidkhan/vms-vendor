@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\StaffImages;
 use App\Models\CnicBack;
 use App\Models\CnicFront;
-use App\Models\HRGroup;
+use App\Models\HrGroup;
 use App\Models\HrStaff;
 use App\Models\Permission;
 use App\Models\Role;
@@ -221,19 +221,20 @@ class HRController extends Controller
 
     public function addHrGroup(Request $req)
     {
-        $hrGroup = new HRGroup();
+        $hrGroup = new HrGroup();
         $hrGroup->uid = (string) Str::uuid();
         $hrGroup->hr_rep_uid = (string) Str::uuid();
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
-                $hrGroups[$key] = $value;
+                $hrGroup[$key] = $value;
             }
         }
+        // return $hrGroup;
         try {
             $hrGroupsSaved = $hrGroup->save();
             $userCreated = $this->newUserCreate($hrGroup->hr_rep_name, $hrGroup->hr_rep_email, $hrGroup->uid);
             if ($hrGroupsSaved && $userCreated) {
-                return $req->submitMore ? redirect()->route('pages.addHRGroup')->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addHrGroups')->with('message', 'HR Group has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -255,7 +256,7 @@ class HRController extends Controller
         try {
             $updatedOrganisation = HrGroup::where('uid', $id)->update($arrayToBeUpdate);
             if ($updatedOrganisation) {
-                return $req->submitMore ? redirect()->route('pages.addHRGroup', $id)->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addHrGroup', $id)->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
