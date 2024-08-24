@@ -82,8 +82,8 @@
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            {{-- <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
-                                data-formatter="operateDigits">Allowed Quantity</th> --}}
+                            <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
+                                data-formatter="operateDigits">Allowed Quantity</th>
                             {{-- <th data-filter-control="input" data-field="functionaryCount" data-sortable="true"
                                 data-formatter="operateDigits">Functionaries</th>
                             <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"

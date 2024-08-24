@@ -134,7 +134,7 @@
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="hr_father_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Father Name</th>
-                            <th data-filter-control="input" data-field="hrName.company_name" data-sortable="true"
+                            <th data-filter-control="input" data-field="hrName.hr_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Name</th>
                             <th data-filter-control="input" data-field="hr_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
@@ -323,7 +323,7 @@
             $table.bootstrapTable('getSelections').map((val)=>{
                 uidArray.push(val.uid);
             })
-            axios.post("{{route('request.updateOrganisationStaffSecurityStatus')}}",{
+            axios.post("{{route('request.updateHrGroupStaffSecurityStatus')}}",{
                 uidArray,
                 status:val.target.id
             }).then(

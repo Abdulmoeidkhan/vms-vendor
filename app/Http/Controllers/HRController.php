@@ -156,7 +156,7 @@ class HRController extends Controller
     {
         $hrGroupsStaff = HrStaff::where('hr_uid', $id)->get();
         foreach ($hrGroupsStaff as $key => $staff) {
-            $hrGroupsStaff[$key]->hrName = HrGroup::where('uid', $staff->uid)->first('hr_name');
+            $hrGroupsStaff[$key]->hrName = HrGroup::where('uid', $staff->hr_uid)->first('hr_name');
             $hrGroupsStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
             $hrGroupsStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
             $hrGroupsStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
