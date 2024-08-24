@@ -187,7 +187,7 @@ class HRController extends Controller
         try {
             $hrGroupsStaffSaved = $hrGroupsStaff->save();
             if ($hrGroupsStaffSaved) {
-                return $req->submitMore ? redirect('hrGroup/' . $id . '/' . 'addHrStaffRender/' . $hrGroupsStaff->uid)->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.hrGroup', $id)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect('hrGroup/' . $id . '/' . 'addHrStaffRender/' . $hrGroupsStaff->uid)->with('message', 'HR Group Staff has been updated Successfully') : redirect()->route('pages.hrGroup', $id)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -208,9 +208,9 @@ class HRController extends Controller
             }
         }
         try {
-            $updatedOrganisationStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
+            $updatedHRStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
             $uid = HrStaff::where('uid', $staffId)->first('hr_uid');
-            if ($updatedOrganisationStaff) {
+            if ($updatedHRStaff) {
                 return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->hr_uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->hr_uid)->with('message', 'Staff has been updated Successfully');            }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -224,8 +224,8 @@ class HRController extends Controller
     public function updateHrGroupStaffSecurityStatus(Request $req)
     {
         try {
-            $updatedOrganisationStaff = HrStaff::whereIn('uid', $req->uidArray)->update(['hr_security_status' => $req->status]);
-            return $updatedOrganisationStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
+            $updatedHRStaff = HrStaff::whereIn('uid', $req->uidArray)->update(['hr_security_status' => $req->status]);
+            return $updatedHRStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
@@ -283,8 +283,8 @@ class HRController extends Controller
             }
         }
         try {
-            $updatedOrganisation = HrGroup::where('uid', $id)->update($arrayToBeUpdate);
-            if ($updatedOrganisation) {
+            $updatedHR = HrGroup::where('uid', $id)->update($arrayToBeUpdate);
+            if ($updatedHR) {
                 return $req->submitMore ? redirect()->route('pages.addHrGroup', $id)->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
