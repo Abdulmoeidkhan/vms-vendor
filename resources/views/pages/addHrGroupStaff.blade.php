@@ -23,6 +23,19 @@
         max-width: 100%;
     }
 </style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/hrGroups">Home</a></li>
+        @if(isset($uid))
+        <li class="breadcrumb-item"><a href="/hrGroup/{{$uid}}">
+                @foreach (\App\Models\HrGroup::where('uid', $uid)->get('hr_name') as $item)
+                {{$item->hr_name}}
+                @endforeach
+            </a></li>
+        @endif
+        <li class="breadcrumb-item active" aria-current="page">Staff</li>
+    </ol>
+</nav>
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -105,7 +118,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="hr_identity" class="form-label">CNIC/Passport</label>
-                                            <input name="hr_identity" type="text" class="form-control"
+                                            <input name="hr_identity" type="text" pattern="[0-9]" class="form-control"
                                                 id="hr_identity" placeholder="Identity" minlength='7' maxlength='13'
                                                 value="{{isset($staff) ? $staff->hr_identity : ''}}" required />
                                         </div>
@@ -118,9 +131,10 @@
                                             <label for="hr_identity_expiry" class="form-label">CNIC/Passport
                                                 Expiry</label>
                                             <input name="hr_identity_expiry" type="date" class="form-control"
-                                                id="hr_identity_expiry" placeholder="Identity Expiry "
-                                                value='{{isset($staff) ? date("Y-m-d",strtotime($staff->hr_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
-                                                m")), (date("d")), (date("Y")))), 0, 10);}}' min='{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10);}}' required />
+                                                id="hr_identity_expiry" placeholder="Identity Expiry " value='{{isset($staff) ? date("Y-m-d",strtotime($staff->hr_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                m")), (date("d")), (date("Y")))), 0, 10);}}'
+                                                min='{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10);}}'
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -137,8 +151,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="hr_address" class="form-label">Home Address</label>
-                                            <input name="hr_address" type="text" class="form-control"
-                                                id="hr_address"
+                                            <input name="hr_address" type="text" class="form-control" id="hr_address"
                                                 value="{{isset($staff) ? $staff->hr_address : ''}}" required />
                                         </div>
                                     </div>
@@ -155,8 +168,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="hr_country" class="form-label">Country</label>
-                                            <input name="hr_country" type="text" class="form-control"
-                                                id="hr_country"
+                                            <input name="hr_country" type="text" class="form-control" id="hr_country"
                                                 value="{{isset($staff) ? $staff->hr_country : ''}}" required />
                                         </div>
                                     </div>
@@ -176,9 +188,9 @@
                                             <select name="employee_type" id="employee_type" class="form-select">
                                                 <option value="" {{isset($staff->employee_type)?'':'selected'}} disabled
                                                     hidden> Select Employee Type </option>
-                                                <option value="Functionary" {{isset($staff->
+                                                <option value="Permanent" {{isset($staff->
                                                     employee_type)?$staff->employee_type ==
-                                                    'Functionary'?'selected':'':''}}>Permanent</option>
+                                                    'Permanent'?'selected':'':''}}>Permanent</option>
                                                 <option value="Temporary" {{isset($staff->
                                                     employee_type)?$staff->employee_type ==
                                                     'Temporary'?'selected':'':''}}>Temporary</option>
@@ -207,14 +219,22 @@
                                             <label for="hr_type" class="form-label">Pass Type</label>
                                             <select name="hr_type" id="hr_type" class="form-select" required>
                                                 <option value="" {{isset($staff->hr_type)?'':'selected'}} disabled
-                                                    hidden> Pass Type </option>
-                                                @if(!$functionaryStaffSaturated)
-                                                <option value="Functionary" {{isset($staff->
+                                                    hidden> Select Pass Type </option>
+                                                <option value="Trade_visitor" {{isset($staff->
                                                     hr_type)?$staff->hr_type ==
-                                                    'Functionary'?'selected':'':''}}>Functionary Pass</option>
-                                                @endif
-                                                <option value="Temporary" {{isset($staff->hr_type)?$staff->hr_type
-                                                    == 'Temporary'?'selected':'':''}}>Temporary Pass</option>
+                                                    'Trade_visitor'?'selected':'':''}}>Trade Visitor</option>
+                                                <option value="Volunteer" {{isset($staff->
+                                                    hr_type)?$staff->hr_type ==
+                                                    'Volunteer'?'selected':'':''}}>Volunteer</option>
+                                                <option value="Local_delegate" {{isset($staff->
+                                                    hr_type)?$staff->hr_type ==
+                                                    'Local_delegate'?'selected':'':''}}>Local Delegate</option>
+                                                <option value="Organiser" {{isset($staff->
+                                                    hr_type)?$staff->hr_type ==
+                                                    'Organiser'?'selected':'':''}}>Organiser</option>
+                                                <option value="Event_manager" {{isset($staff->
+                                                    hr_type)?$staff->hr_type ==
+                                                    'Event_manager'?'selected':'':''}}>Event Manager</option>
                                             </select>
                                         </div>
                                     </div>

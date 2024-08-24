@@ -84,7 +84,7 @@
                 </div>
             </div>
             <br />
-            <div class="row">
+            {{-- <div class="row">
                 <div class="d-flex col-md-4 col-sm-2">
                 </div>
                 <div class="d-flex col-md-4 col-sm-10">
@@ -103,7 +103,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="row">
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addHrGroupStaffRender',$id)}}" class="btn btn-primary mb-2">Add
@@ -126,8 +126,8 @@
                             </th>
                             <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
                                 Print</th>
-                            <th data-filter-control="input" data-field="hr_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Pass Type</th>
+                            {{-- <th data-filter-control="input" data-field="hr_type" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">Pass Type</th> --}}
                             <th data-filter-control="input" data-field="hr_security_status" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Security Status</th>
                             <th data-filter-control="input" data-field="hr_first_name" data-sortable="true"

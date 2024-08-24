@@ -17,6 +17,34 @@ use Illuminate\Support\Str;
 class HRController extends Controller
 {
 
+    protected function codeIdentifier($type)
+    {
+
+        $code = '';
+        switch ($type) {
+            case 'Trade_visitor':
+                $code = 'TV';
+                break;
+            case 'Volunteer':
+                $code = 'VL';
+                break;
+            case 'Local_delegate':
+                $code = 'LD';
+                break;
+            case 'Organiser':
+                $code = 'OR';
+                break;
+            case 'Event_manager':
+                $code = 'EM';
+                break;
+            default:
+                $code = 'HR';
+                break;
+        }
+
+        return $code;
+    }
+
     protected function badge($characters, $prefix)
     {
         $possible = '0123456789';
@@ -146,9 +174,10 @@ class HRController extends Controller
 
     public function addHrGroupStaff(Request $req, $id, $staffId = null)
     {
+        // return $req->hr_type;
         $hrGroupsStaff = new HrStaff();
         $hrGroupsStaff->uid = (string) Str::uuid();
-        $hrGroupsStaff->code =  $this->badge(8, "HR");;
+        $hrGroupsStaff->code =  $this->badge(8, $this->codeIdentifier($req->hr_type));
         $hrGroupsStaff->hr_uid = $id;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
@@ -172,6 +201,7 @@ class HRController extends Controller
     public function updateHrGroupStaff(Request $req, $staffId)
     {
         $arrayToBeUpdate = [];
+        $arrayToBeUpdate['code'] =  $this->badge(8, $this->codeIdentifier($req->hr_type));
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $arrayToBeUpdate[$key] = $value;
@@ -179,10 +209,9 @@ class HRController extends Controller
         }
         try {
             $updatedOrganisationStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
-            $uid = HrStaff::where('uid', $staffId)->first('uid');
+            $uid = HrStaff::where('uid', $staffId)->first('hr_uid');
             if ($updatedOrganisationStaff) {
-                return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->uid)->with('message', 'Staff has been updated Successfully');
-            }
+                return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->hr_uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->hr_uid)->with('message', 'Staff has been updated Successfully');            }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);

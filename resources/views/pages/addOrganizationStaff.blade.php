@@ -23,6 +23,19 @@
         max-width: 100%;
     }
 </style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/organizations">Home</a></li>
+        @if(isset($company_uid))
+        <li class="breadcrumb-item"><a href="/organization/{{$company_uid}}">
+                @foreach (\App\Models\Organization::where('uid', $company_uid)->get('company_name') as $item)
+                {{$item->company_name}}
+                @endforeach
+            </a></li>
+        @endif
+        <li class="breadcrumb-item active" aria-current="page">Staff</li>
+    </ol>
+</nav>
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -121,8 +134,9 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="staff_identity" class="form-label">CNIC/Passport</label>
-                                            <input name="staff_identity" type="text" class="form-control"
-                                                id="staff_identity" placeholder="Identity" minlength='7' maxlength='13'
+                                            <input name="staff_identity" type="text" pattern="[0-9]"
+                                                class="form-control" id="staff_identity" placeholder="Identity"
+                                                minlength='7' maxlength='13'
                                                 value="{{isset($staff) ? $staff->staff_identity : ''}}" required />
                                         </div>
                                     </div>
@@ -134,9 +148,10 @@
                                             <label for="staff_identity_expiry" class="form-label">CNIC/Passport
                                                 Expiry</label>
                                             <input name="staff_identity_expiry" type="date" class="form-control"
-                                                id="staff_identity_expiry" placeholder="Identity Expiry "
-                                                value='{{isset($staff) ? date("Y-m-d",strtotime($staff->staff_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
-                                                m")), (date("d")), (date("Y")))), 0, 10);}}' min='{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10);}}' required />
+                                                id="staff_identity_expiry" placeholder="Identity Expiry " value='{{isset($staff) ? date("Y-m-d",strtotime($staff->staff_identity_expiry)) : substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
+                                                m")), (date("d")), (date("Y")))), 0, 10);}}'
+                                                min='{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date("m")), (date("d")), (date("Y")))), 0, 10);}}'
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">

@@ -235,7 +235,7 @@ class MediaController extends Controller
             $updatedOrganisationStaff = MediaStaff::where('uid', $staffId)->update($arrayToBeUpdate);
             $media_uid = MediaStaff::where('uid', $staffId)->first('media_uid');
             if ($updatedOrganisationStaff) {
-                return $req->submitMore ? redirect()->route('pages.addMediaStaff', ['id' => $media_uid->media_uid, 'staffId' => $staffId])->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $media_uid->media_uid)->with('message', 'Staff has been updated Successfully');
+                return $req->submitMore ? redirect()->route('pages.addMediaStaffRender', ['id' => $media_uid->media_uid, 'staffId' => $staffId])->with('message', 'Organisation has been updated Successfully') : redirect()->route('pages.organization', $media_uid->media_uid)->with('message', 'Staff has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

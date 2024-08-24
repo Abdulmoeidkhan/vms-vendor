@@ -23,6 +23,19 @@
         max-width: 100%;
     }
 </style>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/mediaGroups">Home</a></li>
+        @if(isset($media_uid))
+        <li class="breadcrumb-item"><a href="/mediaGroup/{{$media_uid}}">
+                @foreach (\App\Models\MediaGroup::where('uid', $media_uid)->get('media_name') as $item)
+                {{$item->media_name}}
+                @endforeach
+            </a></li>
+        @endif
+        <li class="breadcrumb-item active" aria-current="page">Staff</li>
+    </ol>
+</nav>
 <div class="row">
     <div class="col-lg-12 d-flex align-items-stretch">
         <div class="card w-100">
@@ -41,7 +54,8 @@
                                             <label for="media_staff_first_name" class="form-label">First Name</label>
                                             <input name="media_staff_first_name" type="text" class="form-control"
                                                 id="media_staff_first_name" placeholder="First Name"
-                                                value="{{isset($staff) ? $staff->media_staff_first_name : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_first_name : ''}}"
+                                                required />
                                         </div>
                                     </div>
 
@@ -50,7 +64,8 @@
                                             <label for="media_staff_last_name" class="form-label">Last Name</label>
                                             <input name="media_staff_last_name" type="text" class="form-control"
                                                 id="media_staff_last_name" placeholder="Last Name"
-                                                value="{{isset($staff) ? $staff->media_staff_last_name : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_last_name : ''}}"
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -58,7 +73,8 @@
                                             <label for="media_staff_father_name" class="form-label">Father Name</label>
                                             <input name="media_staff_father_name" type="text" class="form-control"
                                                 id="media_staff_father_name" placeholder="Father Name"
-                                                value="{{isset($staff) ? $staff->media_staff_father_name : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_father_name : ''}}"
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -66,7 +82,8 @@
                                             <label for="media_staff_designation" class="form-label">Designation</label>
                                             <input name="media_staff_designation" type="text" class="form-control"
                                                 id="media_staff_designation" placeholder="Designation"
-                                                value="{{isset($staff) ? $staff->media_staff_designation : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_designation : ''}}"
+                                                required />
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +93,8 @@
                                             <label for="media_staff_department" class="form-label">Department</label>
                                             <input name="media_staff_department" type="text" class="form-control"
                                                 id="media_staff_department" placeholder="Department"
-                                                value="{{isset($staff) ? $staff->media_staff_department : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_department : ''}}"
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -99,15 +117,18 @@
                                             <label for="media_staff_nationality" class="form-label">Nationality</label>
                                             <input name="media_staff_nationality" type="text" class="form-control"
                                                 id="media_staff_nationality"
-                                                value="{{isset($staff) ? $staff->media_staff_nationality : ''}}" required />
+                                                value="{{isset($staff) ? $staff->media_staff_nationality : ''}}"
+                                                required />
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_identity" class="form-label">CNIC/Passport</label>
-                                            <input name="media_staff_identity" type="text" class="form-control"
-                                                id="media_staff_identity" placeholder="Identity" minlength='7' maxlength='13'
-                                                value="{{isset($staff) ? $staff->media_staff_identity : ''}}" required />
+                                            <input name="media_staff_identity" type="text" pattern="[0-9]"
+                                                class="form-control" id="media_staff_identity" placeholder="Identity"
+                                                minlength='7' maxlength='13'
+                                                value="{{isset($staff) ? $staff->media_staff_identity : ''}}"
+                                                required />
                                         </div>
                                     </div>
 
@@ -128,9 +149,10 @@
                                         <div class="mb-3">
                                             <label for="media_staff_contact" class="form-label">Contact Number</label>
                                             <input name="media_staff_contact" type="text" minlength='11' maxlength='11'
-                                                class="form-control" id="media_staff_contact" placeholder="Contact Number"
-                                                value="{{isset($staff) ? $staff->media_staff_contact : ''}}" minlength='0'
-                                                maxlength='14' onchange="isContact('contact')"
+                                                class="form-control" id="media_staff_contact"
+                                                placeholder="Contact Number"
+                                                value="{{isset($staff) ? $staff->media_staff_contact : ''}}"
+                                                minlength='0' maxlength='14' onchange="isContact('contact')"
                                                 title="14 DIGIT PHONE NUMBER" data-inputmask="'mask': '+99-9999999999'"
                                                 required />
                                         </div>
@@ -146,7 +168,8 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_city" class="form-label">City</label>
-                                            <input name="media_staff_city" type="text" class="form-control" id="media_staff_city"
+                                            <input name="media_staff_city" type="text" class="form-control"
+                                                id="media_staff_city"
                                                 value="{{isset($staff) ? $staff->media_staff_city : ''}}" required />
                                         </div>
                                     </div>
@@ -164,7 +187,8 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_dob" class="form-label">Date Of Birth</label>
-                                            <input name="media_staff_dob" type="date" class="form-control" id="media_staff_dob"
+                                            <input name="media_staff_dob" type="date" class="form-control"
+                                                id="media_staff_dob"
                                                 value="{{isset($staff) ? date('Y-m-d',strtotime($staff->media_staff_dob)):substr(date(DATE_ATOM, mktime(0, 0, 0, (date("
                                                 m")), (date("d")), (date("Y") - 17))), 0, 10);}}" min="1900-01-01"
                                                 max="{{substr(date(DATE_ATOM, mktime(0, 0, 0, (date(" m")), (date("d")),
@@ -189,8 +213,10 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_gender" class="form-label">Employee Gender</label>
-                                            <select name="media_staff_gender" id="media_staff_gender" class="form-select">
-                                                <option value="" {{isset($staff->media_staff_gender)?'':'selected'}} disabled
+                                            <select name="media_staff_gender" id="media_staff_gender"
+                                                class="form-select">
+                                                <option value="" {{isset($staff->media_staff_gender)?'':'selected'}}
+                                                    disabled
                                                     hidden> Select Employee Gender </option>
                                                 <option value="1" {{isset($staff->
                                                     media_gender)?$staff->media_staff_gender ==
@@ -206,15 +232,18 @@
                                     {{-- <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="media_staff_type" class="form-label">Pass Type</label>
-                                            <select name="media_staff_type" id="media_staff_type" class="form-select" required>
-                                                <option value="" {{isset($staff->media_staff_type)?'':'selected'}} disabled
+                                            <select name="media_staff_type" id="media_staff_type" class="form-select"
+                                                required>
+                                                <option value="" {{isset($staff->media_staff_type)?'':'selected'}}
+                                                    disabled
                                                     hidden> Pass Type </option>
                                                 @if(!$functionaryStaffSaturated)
                                                 <option value="Functionary" {{isset($staff->
                                                     media_type)?$staff->media_staff_type ==
                                                     'Functionary'?'selected':'':''}}>Functionary Pass</option>
                                                 @endif
-                                                <option value="Temporary" {{isset($staff->media_staff_type)?$staff->media_staff_type
+                                                <option value="Temporary" {{isset($staff->
+                                                    media_staff_type)?$staff->media_staff_type
                                                     == 'Temporary'?'selected':'':''}}>Temporary Pass</option>
                                             </select>
                                         </div>
@@ -222,7 +251,8 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="media_staff_status" class="form-label">Staus</label>
-                                            <select name="media_staff_status" id="media_staff_status" class="form-select">
+                                            <select name="media_staff_status" id="media_staff_status"
+                                                class="form-select">
                                                 <option value="Active" {{isset($staff->
                                                     media_status)?$staff->media_staff_status ==
                                                     'Active'?'selected':'':''}}>Active</option>

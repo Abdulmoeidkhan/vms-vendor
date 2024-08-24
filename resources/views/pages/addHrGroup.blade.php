@@ -206,7 +206,7 @@
                                             <input name="hr_rep_contact" type="text" class="form-control"
                                                 id="hr_rep_contact" placeholder="Hr Rep Contact"
                                                 value="{{isset($hrGroups) ? $hrGroups->hr_rep_contact : ''}}" minlength='11'
-                                                maxlength='11' required />
+                                                maxlength='13' required />
                                         </div>
                                     </div>
                                     <div class="col-md-4">

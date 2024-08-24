@@ -278,7 +278,7 @@
                                             <input name="company_rep_contact" type="text" class="form-control"
                                                 id="company_rep_contact" placeholder="Company Rep Contact"
                                                 value="{{isset($organization) ? $organization->company_rep_contact : ''}}"
-                                                minlength='11' maxlength='11' required />
+                                                minlength='11' maxlength='14' required />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
