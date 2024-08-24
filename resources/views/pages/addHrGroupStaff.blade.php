@@ -118,7 +118,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="hr_identity" class="form-label">CNIC/Passport</label>
-                                            <input name="hr_identity" type="text" pattern="[0-9]" class="form-control"
+                                            <input name="hr_identity" type="text" pattern="^[0-9]{9,14}$" class="form-control"
                                                 id="hr_identity" placeholder="Identity" minlength='7' maxlength='13'
                                                 value="{{isset($staff) ? $staff->hr_identity : ''}}" required />
                                         </div>
