@@ -140,7 +140,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="hr_contact" class="form-label">Contact Number</label>
-                                            <input name="hr_contact" type="text" minlength='11' maxlength='11'
+                                            <input name="hr_contact" type="text" minlength='11' maxlength='12'
                                                 class="form-control" id="hr_contact" placeholder="Contact Number"
                                                 value="{{isset($staff) ? $staff->hr_contact : ''}}" minlength='0'
                                                 maxlength='14' onchange="isContact('contact')"
