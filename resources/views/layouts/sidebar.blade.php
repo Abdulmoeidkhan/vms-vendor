@@ -82,6 +82,16 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="hrRep")
+                <li class="sidebar-item">
+                    <a href="{{route('pages.hrGroup',session()->get('user')->uid)}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-video"></i>
+                        </div>
+                        <span class="hide-menu">HR</span>
+                    </a>
+                </li>
+                @endif
             </ul>
             <br />
             <br />

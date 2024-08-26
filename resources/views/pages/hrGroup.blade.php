@@ -70,8 +70,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "hrRep")
+            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "hrRep")
             <div class="row">
                 <div class="d-flex flex-wrap">
                     @if(session('user')->roles[0]->name === "admin")
@@ -323,7 +322,7 @@
             $table.bootstrapTable('getSelections').map((val)=>{
                 uidArray.push(val.uid);
             })
-            axios.post("{{route('request.updateOrganisationStaffSecurityStatus')}}",{
+            axios.post("{{route('request.updateHrGroupStaffSecurityStatus')}}",{
                 uidArray,
                 status:val.target.id
             }).then(

@@ -222,6 +222,226 @@ $(function () {
 
 
     // =====================================
+    // HR STATS 
+    // =====================================
+    if (document.getElementById('hrChart')) {
+        axios.get('/getHrGroupsStats')
+            .then(function (response) {
+                let delegationData = response.data;
+                // console.log(dataArray(delegationData, 'rejected'))
+                var chart = {
+                    series: [
+                        { name: "Sent:", data: dataArray(delegationData, 'sent') },
+                        { name: "Approved:", data: dataArray(delegationData, 'approved') },
+                        { name: "Pending:", data: dataArray(delegationData, 'pending') },
+                        { name: "Rejected:", data: dataArray(delegationData, 'rejected') },
+                    ],
+
+                    chart: {
+                        type: "bar",
+                        height: 345,
+                        offsetX: -15,
+                        toolbar: { show: true },
+                        foreColor: "#adb0bb",
+                        fontFamily: 'inherit',
+                        sparkline: { enabled: false },
+                    },
+
+
+                    colors: ["#5D87FF", "#49BEFF", '#ffae1f', '#e32027'],
+
+
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "20%",
+                            borderRadius: [5],
+                            borderRadiusApplication: 'end',
+                            borderRadiusWhenStacked: 'all'
+                        },
+                    },
+                    markers: { size: 0 },
+
+                    dataLabels: {
+                        enabled: false,
+                    },
+
+
+                    legend: {
+                        show: true,
+                    },
+
+
+                    grid: {
+                        borderColor: "rgba(0,0,0,0.1)",
+                        strokeDashArray: 3,
+                        xaxis: {
+                            lines: {
+                                show: true,
+                            },
+                        },
+                    },
+
+                    xaxis: {
+                        type: "category",
+                        categories: dataArray(delegationData, 'hr_name'),
+                        labels: {
+                            style: { cssClass: "grey--text lighten-2--text fill-color" },
+                        },
+                    },
+
+
+                    yaxis: {
+                        show: true,
+                        min: 0,
+                        max: 10,
+                        tickAmount: 4,
+                        labels: {
+                            style: {
+                                cssClass: "grey--text lighten-2--text fill-color",
+                            },
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        width: 3,
+                        lineCap: "butt",
+                        colors: ["transparent"],
+                    },
+
+
+                    tooltip: { theme: "light" },
+
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: {
+                                plotOptions: {
+                                    bar: {
+                                        borderRadius: 3,
+                                    }
+                                },
+                            }
+                        }
+                    ]
+
+
+                };
+
+                var chart = new ApexCharts(document.querySelector("#hrChart"), chart);
+                chart.render();
+            })
+    }
+    else if (document.getElementById('hrRepchart')) {
+        axios.get('/getSpecificHrGroupStats')
+            .then(function (response) {
+                let delegationData = response.data;
+                console.log(delegationData)
+                var chart = {
+                    series: [
+                        { name: "Sent:", data: dataArray(delegationData, 'sent') },
+                        { name: "Approved:", data: dataArray(delegationData, 'approved') },
+                        { name: "Pending:", data: dataArray(delegationData, 'pending') },
+                        { name: "Rejected:", data: dataArray(delegationData, 'rejected') },
+                    ],
+
+                    chart: {
+                        type: "bar",
+                        height: 345,
+                        offsetX: -15,
+                        toolbar: { show: true },
+                        foreColor: "#adb0bb",
+                        fontFamily: 'inherit',
+                        sparkline: { enabled: false },
+                    },
+
+
+                    colors: ["#5D87FF", "#49BEFF", '#ffae1f', '#e32027'],
+
+
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: "20%",
+                            borderRadius: [5],
+                            borderRadiusApplication: 'end',
+                            borderRadiusWhenStacked: 'all'
+                        },
+                    },
+                    markers: { size: 0 },
+
+                    dataLabels: {
+                        enabled: false,
+                    },
+
+
+                    legend: {
+                        show: true,
+                    },
+
+
+                    grid: {
+                        borderColor: "rgba(0,0,0,0.1)",
+                        strokeDashArray: 3,
+                        xaxis: {
+                            lines: {
+                                show: true,
+                            },
+                        },
+                    },
+
+                    xaxis: {
+                        type: "category",
+                        categories: dataArray(delegationData, 'hr_name'),
+                        labels: {
+                            style: { cssClass: "grey--text lighten-2--text fill-color" },
+                        },
+                    },
+
+
+                    yaxis: {
+                        show: true,
+                        min: 0,
+                        max: 10,
+                        tickAmount: 4,
+                        labels: {
+                            style: {
+                                cssClass: "grey--text lighten-2--text fill-color",
+                            },
+                        },
+                    },
+                    stroke: {
+                        show: true,
+                        width: 3,
+                        lineCap: "butt",
+                        colors: ["transparent"],
+                    },
+
+
+                    tooltip: { theme: "light" },
+
+                    responsive: [
+                        {
+                            breakpoint: 600,
+                            options: {
+                                plotOptions: {
+                                    bar: {
+                                        borderRadius: 3,
+                                    }
+                                },
+                            }
+                        }
+                    ]
+
+
+                };
+
+                var chart = new ApexCharts(document.querySelector("#hrRepchart"), chart);
+                chart.render();
+            })
+    }
+
+    // =====================================
     // MEDIA STATS 
     // =====================================
     if (document.getElementById('mediaChart')) {
