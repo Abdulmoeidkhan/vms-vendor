@@ -59,7 +59,35 @@
     }
 </style>
 
-
+<div class="row">
+    <div class="d-flex col-md-4 col-sm-2">
+        <div class="card overflow-hidden">
+            <div class="card-body p-4">
+                <h5 class="card-title text-center mb-9 fw-semibold">Total Staff Updated</h5>
+                <h4 class="d-flex justify-content-center mb-9 fw-semibold">
+                    {{$StaffCount}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex col-md-4 col-sm-2">
+        <div class="card overflow-hidden">
+            <div class="card-body p-4">
+                <h5 class="card-title text-center mb-9 fw-semibold">Total Functionary Staff</h5>
+                <h4 class="d-flex justify-content-center mb-9 fw-semibold">
+                    {{$FunctionaryCount}}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex col-md-4 col-sm-2">
+        <div class="card overflow-hidden">
+            <div class="card-body p-4">
+                <h5 class="card-title text-center mb-9 fw-semibold">Total Temporary Staff</h5>
+                <h4 class="d-flex justify-content-center mb-9 fw-semibold">
+                    {{$TemporaryCount}}</h4>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">

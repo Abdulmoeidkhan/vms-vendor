@@ -75,7 +75,10 @@ class OrganizationController extends Controller
 
     public function render()
     {
-        return view('pages.organizations');
+        $StaffCount = OrganizationStaff::count();
+        $FunctionaryCount = OrganizationStaff::where('staff_type', 'Functionary')->count();
+        $TemporaryCount = OrganizationStaff::where('staff_type', 'Temporary')->count();
+        return view('pages.organizations', ['StaffCount' => $StaffCount, 'FunctionaryCount' => $FunctionaryCount, 'TemporaryCount' => $TemporaryCount]);
     }
 
     public function getOrganizations()
