@@ -228,7 +228,7 @@ $(function () {
         axios.get('/getHrGroupsStats')
             .then(function (response) {
                 let delegationData = response.data;
-                // console.log(dataArray(delegationData, 'rejected'))
+                console.log(delegationData);
                 var chart = {
                     series: [
                         { name: "Sent:", data: dataArray(delegationData, 'sent') },

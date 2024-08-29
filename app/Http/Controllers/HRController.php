@@ -109,11 +109,11 @@ class HRController extends Controller
     {
         $hrGroups = HrGroup::orderBy('hr_name', 'asc')->get();
         foreach ($hrGroups as $key => $hrGroup) {
-            $hrGroups[$key]->functionaryCount = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->count();
-            $hrGroups[$key]->functionaryPending = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->where('hr_security_status', 'pending')->count();
-            $hrGroups[$key]->functionaryApproved = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->where('hr_security_status', 'approved')->count();
-            $hrGroups[$key]->functionaryRejection = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Functionary')->where('hr_security_status', 'rejected')->count();
-            $hrGroups[$key]->temporaryCount = HrStaff::where('uid', $hrGroup->uid)->where('hr_type', 'Temporary')->count();
+            $hrGroups[$key]->functionaryCount = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_type', 'Functionary')->count();
+            $hrGroups[$key]->functionaryPending = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
+            $hrGroups[$key]->functionaryApproved = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
+            $hrGroups[$key]->functionaryRejection = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
+            $hrGroups[$key]->temporaryCount = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_type', 'Temporary')->count();
         }
         return $hrGroups;
     }
@@ -122,10 +122,10 @@ class HRController extends Controller
     {
         $hrGroups = HrGroup::all(['hr_name', 'uid']);
         foreach ($hrGroups as $key => $hrGroup) {
-            $hrGroups[$key]->sent = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
-            $hrGroups[$key]->pending = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
-            $hrGroups[$key]->rejected = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
-            $hrGroups[$key]->approved = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
+            $hrGroups[$key]->sent = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
+            $hrGroups[$key]->pending = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
+            $hrGroups[$key]->rejected = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
+            $hrGroups[$key]->approved = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
         }
         return $hrGroups;
     }
@@ -134,10 +134,10 @@ class HRController extends Controller
     {
         $hrGroups = HrGroup::where('uid', session('user')->uid)->get(['hr_name', 'uid']);
         foreach ($hrGroups as $key => $hrGroup) {
-            $hrGroups[$key]->sent = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
-            $hrGroups[$key]->pending = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
-            $hrGroups[$key]->rejected = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
-            $hrGroups[$key]->approved = HrStaff::where('uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
+            $hrGroups[$key]->sent = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
+            $hrGroups[$key]->pending = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
+            $hrGroups[$key]->rejected = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
+            $hrGroups[$key]->approved = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
         }
         return $hrGroups;
     }
@@ -147,7 +147,7 @@ class HRController extends Controller
     {
         $hrName = HrGroup::where('uid', $id)->first('hr_name');
         $functionaryStaffLimit = HrGroup::where('uid', $id)->first('staff_quantity');
-        $functionaryStaffUpdated = HrStaff::where('uid', $id)->where('hr_type', 'Functionary')->count();
+        $functionaryStaffUpdated = HrStaff::where('hr_uid', $id)->where('hr_type', 'Functionary')->count();
         $functionaryStaffRemaing = $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated;
         return view('pages.hrGroup', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'hrName' => $hrName]);
     }
@@ -168,7 +168,7 @@ class HRController extends Controller
     {
         $staff = $staffId ? HrStaff::where('uid', $staffId)->first() : null;
         $functionaryStaffLimit = $id ? HrGroup::where('uid', $id)->first('staff_quantity') : null;
-        $functionaryStaffSaturated = $id ? (HrStaff::where('uid', $id)->where('hr_type', 'Functionary')->count() < $functionaryStaffLimit?->staff_quantity ? false : true) : null;
+        $functionaryStaffSaturated = $id ? (HrStaff::where('uid', $staffId)->where('hr_type', 'Functionary')->count() < $functionaryStaffLimit?->staff_quantity ? false : true) : null;
         return view('pages.addHrGroupStaff', ['uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
     }
 
@@ -211,7 +211,8 @@ class HRController extends Controller
             $updatedHRStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
             $uid = HrStaff::where('uid', $staffId)->first('hr_uid');
             if ($updatedHRStaff) {
-                return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->hr_uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->hr_uid)->with('message', 'Staff has been updated Successfully');            }
+                return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->hr_uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->hr_uid)->with('message', 'Staff has been updated Successfully');
+            }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
