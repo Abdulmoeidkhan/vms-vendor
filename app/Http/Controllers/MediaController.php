@@ -72,7 +72,8 @@ class MediaController extends Controller
     // Media Groups
     public function render()
     {
-        return view('pages.mediaGroups');
+        $StaffCount = MediaStaff::count();
+        return view('pages.mediaGroups', ['StaffCount' => $StaffCount]);
     }
 
     public function getMedia()
