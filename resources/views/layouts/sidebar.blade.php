@@ -62,6 +62,16 @@
                     </a>
                 </li>
                 @endif
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="depo")
+                <li class="sidebar-item">
+                    <a href="{{route('pages.depoGroups')}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-video"></i>
+                        </div>
+                        <span class="hide-menu">DEPO</span>
+                    </a>
+                </li>
+                @endif
                 @if(session()->get('user')->roles[0]->name =="orgRep")
                 <li class="sidebar-item">
                     <a href="{{route('pages.organization',session()->get('user')->uid)}}" class="sidebar-link">

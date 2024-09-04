@@ -124,7 +124,7 @@
                                     <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="media_staff_identity" class="form-label">CNIC/Passport</label>
-                                            <input name="media_staff_identity" type="text" pattern="^[0-9]{9,14}$"
+                                            <input name="media_staff_identity" type="text" pattern="^[a-zA-Z0-9]{9,14}$"
                                                 class="form-control" id="media_staff_identity" placeholder="Identity"
                                                 minlength='7' maxlength='13'
                                                 value="{{isset($staff) ? $staff->media_staff_identity : ''}}"

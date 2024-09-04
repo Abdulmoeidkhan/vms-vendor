@@ -102,7 +102,8 @@ class HRController extends Controller
 
     public function render()
     {
-        return view('pages.hrGroups');
+        $StaffCount = HrStaff::count();
+        return view('pages.hrGroups', ['StaffCount' => $StaffCount]);
     }
 
     public function getHrGroups()
