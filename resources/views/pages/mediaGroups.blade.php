@@ -122,7 +122,7 @@
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
-                            @if(session()->get('user')->roles[0]->name === "admin")
+                            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "media")
                             <th data-field="uid" data-formatter="operateEdit">Staff</th>
                             <th data-field="uid" data-formatter="operateMedia">Edit</th>
                             @endif
