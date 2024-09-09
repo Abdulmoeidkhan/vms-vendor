@@ -96,15 +96,15 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateMediaRequest/{id}', [MediaController::class, 'updateMedia'])->name('request.updateMediaRequest');
     });
 
-    Route::middleware('depoUserCheck')->group(function () {
-        // Media
-        Route::get('/depoGroups', [MediaController::class, 'render'])->name('pages.depoGroups');
-        Route::get('/getDepo', [MediaController::class, 'getDepo'])->name('request.getDepo');
-        Route::get('/addDepo/{id?}', [MediaController::class, 'addDepo'])->name('pages.addDepo');
-        Route::get('/getDepoStats', [MediaController::class, 'getDepoStats'])->name('request.getDepoStats');
-        Route::post('/addDepoRequest', [MediaController::class, 'addDepoRequest'])->name('request.addDepoRequest');
-        Route::post('/updateDepoRequest/{id}', [MediaController::class, 'updateDepo'])->name('request.updateDepoRequest');
-    });
+    // Route::middleware('depoUserCheck')->group(function () {
+    //     // Media
+    //     Route::get('/depoGroups', [MediaController::class, 'render'])->name('pages.depoGroups');
+    //     Route::get('/getDepo', [MediaController::class, 'getDepo'])->name('request.getDepo');
+    //     Route::get('/addDepo/{id?}', [MediaController::class, 'addDepo'])->name('pages.addDepo');
+    //     Route::get('/getDepoStats', [MediaController::class, 'getDepoStats'])->name('request.getDepoStats');
+    //     Route::post('/addDepoRequest', [MediaController::class, 'addDepoRequest'])->name('request.addDepoRequest');
+    //     Route::post('/updateDepoRequest/{id}', [MediaController::class, 'updateDepo'])->name('request.updateDepoRequest');
+    // });
 
     Route::middleware('mediaCheck')->group(function () {
         // Media

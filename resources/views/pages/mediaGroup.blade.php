@@ -71,7 +71,7 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "mediaRep")
+            "mediaRep"|| session('user')->roles[0]->name ==="media")
             <div class="row">
                 <div class="d-flex flex-wrap">
                     @if(session('user')->roles[0]->name === "admin")
