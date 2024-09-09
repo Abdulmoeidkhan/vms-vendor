@@ -6,6 +6,7 @@ use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\DepoGroupController;
 use App\Http\Controllers\HRController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\OrganizationController;
@@ -96,15 +97,16 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/updateMediaRequest/{id}', [MediaController::class, 'updateMedia'])->name('request.updateMediaRequest');
     });
 
-    // Route::middleware('depoUserCheck')->group(function () {
-    //     // Media
-    //     Route::get('/depoGroups', [MediaController::class, 'render'])->name('pages.depoGroups');
-    //     Route::get('/getDepo', [MediaController::class, 'getDepo'])->name('request.getDepo');
-    //     Route::get('/addDepo/{id?}', [MediaController::class, 'addDepo'])->name('pages.addDepo');
-    //     Route::get('/getDepoStats', [MediaController::class, 'getDepoStats'])->name('request.getDepoStats');
-    //     Route::post('/addDepoRequest', [MediaController::class, 'addDepoRequest'])->name('request.addDepoRequest');
-    //     Route::post('/updateDepoRequest/{id}', [MediaController::class, 'updateDepo'])->name('request.updateDepoRequest');
-    // });
+    Route::middleware('depoUserCheck')->group(function () {
+        // Media
+        // Route::get('/depoGroups', [MediaController::class, 'render'])->name('pages.depoGroups');
+        // Route::get('/getDepo', [MediaController::class, 'getDepo'])->name('request.getDepo');
+        // Route::get('/addDepo/{id?}', [MediaController::class, 'addDepo'])->name('pages.addDepo');
+        // Route::get('/getDepoStats', [MediaController::class, 'getDepoStats'])->name('request.getDepoStats');
+        // Route::post('/addDepoRequest', [MediaController::class, 'addDepoRequest'])->name('request.addDepoRequest');
+        // Route::post('/updateDepoRequest/{id}', [MediaController::class, 'updateDepo'])->name('request.updateDepoRequest');
+        Route::resource('photos', DepoGroupController::class);
+    });
 
     Route::middleware('mediaCheck')->group(function () {
         // Media

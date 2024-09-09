@@ -100,10 +100,10 @@ class MediaController extends Controller
     {
         $mediaGroups = MediaGroup::all(['media_name', 'uid']);
         foreach ($mediaGroups as $key => $mediaGroup) {
-            $mediaGroups[$key]->sent = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_security_status', 'sent')->count();
-            $mediaGroups[$key]->pending = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_security_status', 'pending')->count();
-            $mediaGroups[$key]->rejected = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_security_status', 'rejected')->count();
-            $mediaGroups[$key]->approved = MediaStaff::where('uid', $mediaGroup->uid)->where('media_staff_security_status', 'approved')->count();
+            $mediaGroups[$key]->sent = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'sent')->count();
+            $mediaGroups[$key]->pending = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'pending')->count();
+            $mediaGroups[$key]->rejected = MediaStaff::where('media_uid', $mediaGroup->media_uid)->where('media_staff_security_status', 'rejected')->count();
+            $mediaGroups[$key]->approved = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'approved')->count();
         }
         return $mediaGroups;
     }
