@@ -88,16 +88,12 @@
                     data-filter-control="true" data-toggle="table" data-flat="true" data-pagination="true"
                     data-show-toggle="true" data-show-export="true" data-show-columns="true" data-show-refresh="true"
                     data-show-pagination-switch="true" data-show-columns-toggle-all="true" data-row-style="rowStyle"
-                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getHrGroups')}}">
+                    data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getDepoGroups')}}">
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
                                 data-formatter="operateDigits">Allowed Quantity</th>
-                            {{-- <th data-filter-control="input" data-field="functionaryCount" data-sortable="true"
-                                data-formatter="operateDigits">Functionaries</th>
-                            <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
-                                data-formatter="operateDigits">Temporaries</th> --}}
                             <th data-filter-control="input" data-field="functionaryPending" data-sortable="true"
                                 data-formatter="operateDigits">Pending</th>
                             <th data-filter-control="input" data-field="functionaryApproved" data-sortable="true"
