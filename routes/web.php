@@ -105,7 +105,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Route::get('/getDepoStats', [MediaController::class, 'getDepoStats'])->name('request.getDepoStats');
         // Route::post('/addDepoRequest', [MediaController::class, 'addDepoRequest'])->name('request.addDepoRequest');
         // Route::post('/updateDepoRequest/{id}', [MediaController::class, 'updateDepo'])->name('request.updateDepoRequest');
-        Route::resource('photos', DepoGroupController::class);
+        Route::resource('depo', DepoGroupController::class);
     });
 
     Route::middleware('mediaCheck')->group(function () {

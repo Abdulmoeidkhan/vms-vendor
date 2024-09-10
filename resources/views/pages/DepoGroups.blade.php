@@ -63,7 +63,7 @@
     <div class="d-flex col-md-4 col-sm-2">
         <div class="card overflow-hidden">
             <div class="card-body p-4">
-                <h5 class="card-title text-center mb-9 fw-semibold">Total HR Staff Updated</h5>
+                <h5 class="card-title text-center mb-9 fw-semibold">Total Depo Guest Updated</h5>
                 <h4 class="d-flex justify-content-center mb-9 fw-semibold">
                     {{$StaffCount}}</h4>
             </div>
@@ -76,7 +76,7 @@
             @if(session()->get('user')->roles[0]->name === "admin")
             <div class="row">
                 <div class="d-flex">
-                    <a type="button" href="{{route('pages.addHrGroups')}}" class="btn btn-primary">Add Hr
+                    <a type="button" href="{{route('pages.addDepoGroups')}}" class="btn btn-primary">Add Depo
                         Group</a>&nbsp;
                 </div>
             </div>
