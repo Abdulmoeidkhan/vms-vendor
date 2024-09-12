@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
 use App\Models\DepoGroup;
 use App\Models\DepoGuest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\StaffImages;
+use App\Models\CnicBack;
+use App\Models\CnicFront;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -64,7 +68,6 @@ class DepoGroupController extends Controller
     }
 
     // User Creatuib on request
-
     protected function newUserCreate($username, $email, $uid)
     {
         $pass = Str::password(12, true, true, true, false);
@@ -94,22 +97,21 @@ class DepoGroupController extends Controller
 
 
     // Main Hr Groups Request
-
     public function render()
     {
         $StaffCount = DepoGuest::count();
         return view('pages.depoGroups', ['StaffCount' => $StaffCount]);
     }
 
-    public function getHrGroups()
+    public function getDepoGroups()
     {
         $depoGroups = DepoGroup::orderBy('depo_name', 'asc')->get();
         foreach ($depoGroups as $key => $depoGroup) {
             $depoGroups[$key]->guestCount = DepoGuest::where('depo_uid', $depoGroup->uid)->count();
-            $depoGroups[$key]->functionarySend = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'sent')->count();
-            $depoGroups[$key]->functionaryPending = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'pending')->count();
-            $depoGroups[$key]->functionaryApproved = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'approved')->count();
-            $depoGroups[$key]->functionaryRejection = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'rejected')->count();
+            $depoGroups[$key]->guestSend = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'sent')->count();
+            $depoGroups[$key]->guestPending = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'pending')->count();
+            $depoGroups[$key]->guestApproved = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'approved')->count();
+            $depoGroups[$key]->guestRejection = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'rejected')->count();
         }
         return $depoGroups;
     }
@@ -126,7 +128,7 @@ class DepoGroupController extends Controller
         return $depoGroups;
     }
 
-    public function getSpecificHrGroupStats()
+    public function getSpecificDepoGroupStats()
     {
         $depoGroups = DepoGroup::where('uid', session('user')->uid)->get(['hr_name', 'uid']);
         foreach ($depoGroups as $key => $depoGroup) {
@@ -138,52 +140,52 @@ class DepoGroupController extends Controller
         return $depoGroups;
     }
 
-    // HRGroup and staff render page 
-    public function renderHrGroup($id)
+    // DepoGroup and staff render page 
+    public function renderDepoGroup($id)
     {
-        $hrName = HrGroup::where('uid', $id)->first('hr_name');
-        $functionaryStaffLimit = HrGroup::where('uid', $id)->first('staff_quantity');
-        $functionaryStaffUpdated = HrStaff::where('hr_uid', $id)->where('hr_type', 'Functionary')->count();
-        $functionaryStaffRemaing = $functionaryStaffLimit->staff_quantity - $functionaryStaffUpdated;
-        return view('pages.hrGroup', ['id' => $id, 'functionaryStaffLimit' => $functionaryStaffLimit, 'functionaryStaffRemaing' => $functionaryStaffRemaing, 'hrName' => $hrName]);
+        $depoName = DepoGroup::where('uid', $id)->first('hr_name');
+        $depoGuestLimit = DepoGroup::where('uid', $id)->first('staff_quantity');
+        $depoGuestUpdated = DepoGuest::where('depo_uid', $id)->count();
+        $depoGuestRemaing = $depoGuestLimit->staff_quantity - $depoGuestUpdated;
+        return view('pages.depoGroup', ['id' => $id, 'depoGuestLimit' => $depoGuestLimit, 'depoGuestRemaing' => $depoGuestRemaing, 'depoName' => $depoName]);
     }
 
-    public function getHrGroupStaff($id)
+    public function getDepoGroupGuest($id)
     {
-        $hrGroupsStaff = HrStaff::where('hr_uid', $id)->get();
-        foreach ($hrGroupsStaff as $key => $staff) {
-            $hrGroupsStaff[$key]->hrName = HrGroup::where('uid', $staff->hr_uid)->first('hr_name');
-            $hrGroupsStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
-            $hrGroupsStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
-            $hrGroupsStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
+        $depoGroupsGuest = DepoGuest::where('depo_uid', $id)->get();
+        foreach ($depoGroupsGuest as $key => $guest) {
+            $depoGroupsGuest[$key]->depoName = DepoGroup::where('uid', $guest->depo_uid)->first('depo_rep_name');
+            $depoGroupsGuest[$key]->picture = StaffImages::where('uid', $guest->uid)->first('img_blob');
+            $depoGroupsGuest[$key]->cnicfront = CnicFront::where('uid', $guest->uid)->first('img_blob');
+            $depoGroupsGuest[$key]->cnicback = CnicBack::where('uid', $guest->uid)->first('img_blob');
         }
-        return $hrGroupsStaff;
+        return $depoGroupsGuest;
     }
 
-    public function addHrGroupStaffRender($id, $staffId = null)
+    public function addDepoGroupGuestRender($id, $guestId = null)
     {
-        $staff = $staffId ? HrStaff::where('uid', $staffId)->first() : null;
-        $functionaryStaffLimit = $id ? HrGroup::where('uid', $id)->first('staff_quantity') : null;
-        $functionaryStaffSaturated = $id ? (HrStaff::where('uid', $staffId)->where('hr_type', 'Functionary')->count() < $functionaryStaffLimit?->staff_quantity ? false : true) : null;
-        return view('pages.addHrGroupStaff', ['uid' => $id, 'staff' => $staff, 'functionaryStaffSaturated' => $functionaryStaffSaturated]);
+        $guest = $guestId ? DepoGuest::where('uid', $guestId)->first() : null;
+        $GuestLimit = $id ? DepoGroup::where('uid', $id)->first('guest_quantity') : null;
+        $GuestSaturated = $id ? (DepoGuest::where('uid', $guestId)->count() < $GuestLimit?->staff_quantity ? false : true) : null;
+        return view('pages.addDepoGroupStaff', ['uid' => $id, 'guest' => $guest, 'GuestSaturated' => $GuestSaturated]);
     }
 
-    public function addHrGroupStaff(Request $req, $id, $staffId = null)
+    public function addDepoGroupGuest(Request $req, $id, $guestId = null)
     {
         // return $req->hr_type;
-        $hrGroupsStaff = new HrStaff();
-        $hrGroupsStaff->uid = (string) Str::uuid();
-        $hrGroupsStaff->code =  $this->badge(8, $this->codeIdentifier($req->hr_type));
-        $hrGroupsStaff->hr_uid = $id;
+        $depoGroupsGuest = new DepoGroup();
+        $depoGroupsGuest->uid = (string) Str::uuid();
+        $depoGroupsGuest->code =  $this->badge(8, $this->codeIdentifier($req->hr_type));
+        $depoGroupsGuest->depo_uid = $id;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
-                $hrGroupsStaff[$key] = $value;
+                $depoGroupsGuest[$key] = $value;
             }
         }
         try {
-            $hrGroupsStaffSaved = $hrGroupsStaff->save();
-            if ($hrGroupsStaffSaved) {
-                return $req->submitMore ? redirect('hrGroup/' . $id . '/' . 'addHrStaffRender/' . $hrGroupsStaff->uid)->with('message', 'HR Group Staff has been updated Successfully') : redirect()->route('pages.hrGroup', $id)->with('message', 'Staff has been updated Successfully');
+            $depoGroupsGuestSaved = $depoGroupsGuest->save();
+            if ($depoGroupsGuestSaved) {
+                return $req->submitMore ? redirect('depoGroup/' . $id . '/' . 'addDepoGuestRender/' . $depoGroupsGuest->uid)->with('message', 'Depo Group Guest has been updated Successfully') : redirect()->route('pages.depoGroup', $id)->with('message', 'Guest has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
@@ -234,33 +236,32 @@ class DepoGroupController extends Controller
 
 
     // HRGroup Add/Update Form Render & Request
-    public function addHrGroupRender($id = null)
+    public function addDepoGroupRender($id = null)
     {
         if ($id) {
-            $hrGroups = HrGroup::where('uid', $id)->firstOrFail();
-            // return $hrGroups;
-            return view('pages.addHrGroup', ['hrGroups' => $hrGroups]);
+            $depoGroups = DepoGroup::where('uid', $id)->firstOrFail();
+            return view('pages.addDepoGroup', ['depoGroups' => $depoGroups]);
         } else {
-            return view('pages.addHrGroup');
+            return view('pages.addDepoGroup');
         }
     }
 
-    public function addHrGroup(Request $req)
+    public function addDepoGroup(Request $req)
     {
-        $hrGroup = new HrGroup();
-        $hrGroup->uid = (string) Str::uuid();
-        $hrGroup->hr_rep_uid = (string) Str::uuid();
+        $depoGroup = new DepoGroup();
+        $depoGroup->uid = (string) Str::uuid();
+        $depoGroup->depo_rep_uid = (string) Str::uuid();
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
-                $hrGroup[$key] = $value;
+                $depoGroup[$key] = $value;
             }
         }
         // return $hrGroup;
         try {
-            $hrGroupsSaved = $hrGroup->save();
-            $userCreated = $this->newUserCreate($hrGroup->hr_rep_name, $hrGroup->hr_rep_email, $hrGroup->uid);
-            if ($hrGroupsSaved && $userCreated) {
-                return $req->submitMore ? redirect()->route('pages.addHrGroups')->with('message', 'HR Group has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
+            $depoGroupsSaved = $depoGroup->save();
+            $userCreated = $this->newUserCreate($depoGroup->depo_rep_name, $depoGroup->depo_rep_email, $depoGroup->uid);
+            if ($depoGroupsSaved && $userCreated) {
+                return $req->submitMore ? redirect()->route('pages.addDepoGroups')->with('message', 'Depo Group has been updated Successfully') : redirect()->route('pages.depoGroups')->with('message', 'Depo Group has been updated Successfully');
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {

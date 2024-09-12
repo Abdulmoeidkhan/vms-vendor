@@ -70,9 +70,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="media_staff_father_name" class="form-label">Father Name</label>
+                                            <label for="media_staff_father_name" class="form-label">Father/Husband Name</label>
                                             <input name="media_staff_father_name" type="text" class="form-control"
-                                                id="media_staff_father_name" placeholder="Father Name"
+                                                id="media_staff_father_name" placeholder="Father/Husband Name"
                                                 value="{{isset($staff) ? $staff->media_staff_father_name : ''}}"
                                                 required />
                                         </div>

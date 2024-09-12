@@ -68,9 +68,9 @@
                                     </div>
                                     <div class="col-md-3">
                                         <div class="mb-3">
-                                            <label for="staff_father_name" class="form-label">Father Name</label>
+                                            <label for="staff_father_name" class="form-label">Father/Husband Name</label>
                                             <input name="staff_father_name" type="text" class="form-control"
-                                                id="staff_father_name" placeholder="Father Name"
+                                                id="staff_father_name" placeholder="Father/Husband Name"
                                                 value="{{isset($staff) ? $staff->staff_father_name : ''}}" required />
                                         </div>
                                     </div>

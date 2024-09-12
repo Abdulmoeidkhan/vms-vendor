@@ -112,7 +112,7 @@
                             <th data-filter-control="input" data-field="hr_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="hr_father_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Father Name</th>
+                                data-fixed-columns="true" data-formatter="operateText">Father/Husband Name</th>
                             <th data-filter-control="input" data-field="hrName.hr_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Name</th>
                             <th data-filter-control="input" data-field="hr_designation" data-sortable="true"

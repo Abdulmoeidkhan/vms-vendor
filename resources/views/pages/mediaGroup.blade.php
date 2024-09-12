@@ -131,7 +131,7 @@
                             <th data-filter-control="input" data-field="media_staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="media_staff_father_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Father Name</th>
+                                data-fixed-columns="true" data-formatter="operateText">Father/Husband Name</th>
                             <th data-filter-control="input" data-field="mediaName.media_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Media Name</th>
                             <th data-filter-control="input" data-field="media_staff_designation" data-sortable="true"

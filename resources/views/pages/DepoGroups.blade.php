@@ -92,45 +92,21 @@
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
-                            <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
-                                data-formatter="operateDigits">Allowed Quantity</th>
-                            <th data-filter-control="input" data-field="functionaryPending" data-sortable="true"
-                                data-formatter="operateDigits">Pending</th>
-                            <th data-filter-control="input" data-field="functionaryApproved" data-sortable="true"
-                                data-formatter="operateDigits">Approved</th>
-                            <th data-filter-control="input" data-field="functionaryRejection" data-sortable="true"
-                                data-formatter="operateDigits">Rejected</th>
-                            <th data-filter-control="input" data-field="hr_category" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateSpecialText">HR Category</th>
-                            <th data-filter-control="input" data-field="hr_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">HR Name</th>
-                            <th data-filter-control="input" data-field="hr_rep_email" data-formatter="operateEmail">
+                            <th data-filter-control="input" data-field="depo_rep_name" data-sortable="true"
+                                data-fixed-columns="true" data-formatter="operateText">Host Name</th>
+                            <th data-filter-control="input" data-field="depo_rep_email" data-formatter="operateEmail">
                                 Registered Email</th>
-                            <th data-filter-control="input" data-field="hr_owner" data-formatter="operateText">
-                                Company Owner Name</th>
-                            <th data-filter-control="input" data-field="hr_owner_designation" data-sortable="true"
-                                data-formatter="operateText">HR Owner Designation</th>
-                            <th data-filter-control="input" data-field="hr_owner_contact" data-sortable="true"
-                                data-formatter="operateDigits">HR Owner Contact</th>
-                            <th data-filter-control="input" data-field="hr_address" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">HR Address </th>
-                            <th data-filter-control="input" data-field="hr_country" data-sortable="true"
-                                data-formatter="operateText">Country</th>
-                            <th data-filter-control="input" data-field="hr_city" data-sortable="true"
-                                data-formatter="operateText">City</th>
-                            <th data-filter-control="input" data-field="hr_contact" data-sortable="true"
-                                data-formatter="operateText">Contact</th>
-                            <th data-filter-control="input" data-field="hr_rep_name" data-sortable="true"
-                                data-formatter="operateText">Account Name</th>
-                            <th data-filter-control="input" data-field="hr_rep_contact" data-formatter="operateText">
-                                Account Contact Number</th>
+                            <th data-filter-control="input" data-field="depo_rep_contact" data-sortable="true"
+                                data-formatter="operateDigits">Host Contact</th>
+                            <th data-filter-control="input" data-field="depo_rep_phone" data-sortable="true"
+                                data-formatter="operateText">Phone</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-formatter="operateDate">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
                             @if(session()->get('user')->roles[0]->name === "admin")
-                            <th data-field="uid" data-formatter="operateEdit">Staff</th>
+                            <th data-field="uid" data-formatter="operateEdit">Guest</th>
                             <th data-field="uid" data-formatter="operateHR">Edit</th>
                             @endif
                         </tr>
@@ -206,7 +182,7 @@
         if (value) {
             return [
                 '<div class="left">',
-                '<a class="btn btn-success" href="addHrGroups/' + value + '">',
+                '<a class="btn btn-success" href="addDeooGroups/' + value + '">',
                 '<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-edit" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">',
                 '<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>',
                 '<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>',
