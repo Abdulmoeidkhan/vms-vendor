@@ -250,7 +250,7 @@ class DepoGroupController extends Controller
     {
         $depoGroup = new DepoGroup();
         $depoGroup->uid = (string) Str::uuid();
-        $depoGroup->depo_rep_uid = (string) Str::uuid();
+        $depoGroup->depo_rep_uid = $req->depo_rep_email?(string) Str::uuid():null;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $depoGroup[$key] = $value;
