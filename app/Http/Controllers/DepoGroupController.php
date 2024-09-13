@@ -105,13 +105,9 @@ class DepoGroupController extends Controller
 
     public function getDepoGroups()
     {
-        $depoGroups = DepoGroup::orderBy('depo_name', 'asc')->get();
+        $depoGroups = DepoGroup::orderBy('depo_rep_name', 'asc')->get();
         foreach ($depoGroups as $key => $depoGroup) {
             $depoGroups[$key]->guestCount = DepoGuest::where('depo_uid', $depoGroup->uid)->count();
-            $depoGroups[$key]->guestSend = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'sent')->count();
-            $depoGroups[$key]->guestPending = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'pending')->count();
-            $depoGroups[$key]->guestApproved = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'approved')->count();
-            $depoGroups[$key]->guestRejection = DepoGuest::where('depo_uid', $depoGroup->uid)->where('depoStaff_security_status', 'rejected')->count();
         }
         return $depoGroups;
     }
@@ -141,7 +137,7 @@ class DepoGroupController extends Controller
     }
 
     // DepoGroup and staff render page 
-    public function renderDepoGroup($id)
+    public function addDepoGuestRender($id)
     {
         $depoName = DepoGroup::where('uid', $id)->first('hr_name');
         $depoGuestLimit = DepoGroup::where('uid', $id)->first('staff_quantity');
@@ -250,16 +246,15 @@ class DepoGroupController extends Controller
     {
         $depoGroup = new DepoGroup();
         $depoGroup->uid = (string) Str::uuid();
-        $depoGroup->depo_rep_uid = $req->depo_rep_email?(string) Str::uuid():null;
+        $depoGroup->depo_rep_uid = $req->depo_rep_email !== null ?(string) Str::uuid():null;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
                 $depoGroup[$key] = $value;
             }
         }
-        // return $hrGroup;
         try {
             $depoGroupsSaved = $depoGroup->save();
-            $userCreated = $this->newUserCreate($depoGroup->depo_rep_name, $depoGroup->depo_rep_email, $depoGroup->uid);
+            $userCreated = $req->depo_rep_uid !== null ?$this->newUserCreate($depoGroup->depo_rep_name, $depoGroup->depo_rep_email, $depoGroup->uid):true;
             if ($depoGroupsSaved && $userCreated) {
                 return $req->submitMore ? redirect()->route('pages.addDepoGroups')->with('message', 'Depo Group has been updated Successfully') : redirect()->route('pages.depoGroups')->with('message', 'Depo Group has been updated Successfully');
             }

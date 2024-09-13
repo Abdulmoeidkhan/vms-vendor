@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('depo_guests', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('uid')->primary();
+            $table->string('depo_guest_name');
+            $table->string('depo_guest_contact');
+            $table->string('hr_identity')->unique();
+            $table->string('depo_guest_email')->nullable();
+            $table->uuid('depo_uid')->unique();
             $table->timestamps();
         });
     }
