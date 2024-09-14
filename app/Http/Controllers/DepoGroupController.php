@@ -61,13 +61,13 @@ class DepoGroupController extends Controller
 
     protected function basicRolesAndTeams($user)
     {
-        $role = Role::where('name', 'DepoRep')->first();
+        $role = Role::where('name', 'Depo')->first();
         $permission = Permission::where('name', 'read')->first();
         $user->addRole($role);
         $user->givePermissions(['read', 'create', 'update', 'delete']);
     }
 
-    // User Creatuib on request
+    // User Creat user on request
     protected function newUserCreate($username, $email, $uid)
     {
         $pass = Str::password(12, true, true, true, false);
@@ -96,13 +96,14 @@ class DepoGroupController extends Controller
     }
 
 
-    // Main Hr Groups Request
+    // Main Depo Groups Request
     public function render()
     {
         $StaffCount = DepoGuest::count();
         return view('pages.depoGroups', ['StaffCount' => $StaffCount]);
     }
 
+    //  Main Depo Group Data
     public function getDepoGroups()
     {
         $depoGroups = DepoGroup::orderBy('depo_rep_name', 'asc')->get();
@@ -112,6 +113,7 @@ class DepoGroupController extends Controller
         return $depoGroups;
     }
 
+    //  Main Depo Group Stats
     public function getDepoGroupsStats()
     {
         $depoGroups = DepoGroup::all(['depo_name', 'uid']);
@@ -124,6 +126,74 @@ class DepoGroupController extends Controller
         return $depoGroups;
     }
 
+    // DepoGroup Add/Update Form Render
+    public function addDepoGroupRender($id = null)
+    {
+        if ($id) {
+            $depoGroups = DepoGroup::where('uid', $id)->firstOrFail();
+            return view('pages.addDepoGroup', ['depoGroups' => $depoGroups]);
+        } else {
+            return view('pages.addDepoGroup');
+        }
+    }
+
+    // DepoGroup Add Request
+    public function addDepoGroup(Request $req)
+    {
+        $depoGroup = new DepoGroup();
+        $depoGroup->uid = (string) Str::uuid();
+        $depoGroup->depo_rep_uid = $req->depo_rep_email !== null ? (string) Str::uuid() : null;
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                $depoGroup[$key] = $value;
+            }
+        }
+        try {
+            $depoGroupsSaved = $depoGroup->save();
+            $userCreated = $req->depo_rep_uid !== null ? $this->newUserCreate($depoGroup->depo_rep_name, $depoGroup->depo_rep_email, $depoGroup->uid) : true;
+            if ($depoGroupsSaved && $userCreated) {
+                return $req->submitMore ? redirect()->route('pages.addDepoGroup')->with('message', 'Depo Group has been updated Successfully') : redirect()->route('pages.depoGroups')->with('message', 'Depo Group has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+    // DepoGroup Update Request
+    public function updateDepoGroup(Request $req, $id)
+    {
+        $arrayToBeUpdate = [];
+        foreach ($req->all() as $key => $value) {
+            if ($key != 'submit' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+                $arrayToBeUpdate[$key] = $value;
+            }
+        }
+        try {
+            $emailExist = DepoGroup::where('uid', $id)->first();
+            // return $req;
+            if ($emailExist->depo_rep_email == null) {
+                $arrayToBeUpdate['depo_rep_uid']=$emailExist->uid;
+                $this->newUserCreate($req->depo_rep_name, $req->depo_rep_email, $emailExist->uid);
+            }
+            $updatedDepo = DepoGroup::where('uid', $id)->update($arrayToBeUpdate);
+            if ($updatedDepo) {
+                return $req->submitMore ? redirect()->route('pages.addDepoGroup', $id)->with('message', 'Depo Group has been updated Successfully') : redirect()->route('pages.addDepoGroup')->with('message', 'Depo Group has been updated Successfully');
+            }
+        } catch (\Illuminate\Database\QueryException $exception) {
+            if ($exception->errorInfo[2]) {
+                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+            } else {
+                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+            }
+        }
+    }
+
+
+    //  Specefic Depo Group Stats
     public function getSpecificDepoGroupStats()
     {
         $depoGroups = DepoGroup::where('uid', session('user')->uid)->get(['hr_name', 'uid']);
@@ -136,7 +206,7 @@ class DepoGroupController extends Controller
         return $depoGroups;
     }
 
-    // DepoGroup and staff render page 
+    //Add DepoGroup Page render
     public function addDepoGuestRender($id)
     {
         $depoName = DepoGroup::where('uid', $id)->first('hr_name');
@@ -221,65 +291,6 @@ class DepoGroupController extends Controller
         try {
             $updatedHRStaff = HrStaff::whereIn('uid', $req->uidArray)->update(['hr_security_status' => $req->status]);
             return $updatedHRStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
-        } catch (\Illuminate\Database\QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
-        }
-    }
-
-
-    // HRGroup Add/Update Form Render & Request
-    public function addDepoGroupRender($id = null)
-    {
-        if ($id) {
-            $depoGroups = DepoGroup::where('uid', $id)->firstOrFail();
-            return view('pages.addDepoGroup', ['depoGroups' => $depoGroups]);
-        } else {
-            return view('pages.addDepoGroup');
-        }
-    }
-
-    public function addDepoGroup(Request $req)
-    {
-        $depoGroup = new DepoGroup();
-        $depoGroup->uid = (string) Str::uuid();
-        $depoGroup->depo_rep_uid = $req->depo_rep_email !== null ?(string) Str::uuid():null;
-        foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
-                $depoGroup[$key] = $value;
-            }
-        }
-        try {
-            $depoGroupsSaved = $depoGroup->save();
-            $userCreated = $req->depo_rep_uid !== null ?$this->newUserCreate($depoGroup->depo_rep_name, $depoGroup->depo_rep_email, $depoGroup->uid):true;
-            if ($depoGroupsSaved && $userCreated) {
-                return $req->submitMore ? redirect()->route('pages.addDepoGroups')->with('message', 'Depo Group has been updated Successfully') : redirect()->route('pages.depoGroups')->with('message', 'Depo Group has been updated Successfully');
-            }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
-        }
-    }
-
-    public function updateHrGroup(Request $req, $id)
-    {
-        $arrayToBeUpdate = [];
-        foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' && $key !=  'hr_rep_email' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
-                $arrayToBeUpdate[$key] = $value;
-            }
-        }
-        try {
-            $updatedHR = HrGroup::where('uid', $id)->update($arrayToBeUpdate);
-            if ($updatedHR) {
-                return $req->submitMore ? redirect()->route('pages.addHrGroup', $id)->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups')->with('message', 'HRGroup has been updated Successfully');
-            }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
                 return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
