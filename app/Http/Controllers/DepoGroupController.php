@@ -176,7 +176,7 @@ class DepoGroupController extends Controller
             $emailExist = DepoGroup::where('uid', $id)->first();
             // return $req;
             if ($emailExist->depo_rep_email == null) {
-                $arrayToBeUpdate['depo_rep_uid']=$emailExist->uid;
+                $arrayToBeUpdate['depo_rep_uid'] = $emailExist->uid;
                 $this->newUserCreate($req->depo_rep_name, $req->depo_rep_email, $emailExist->uid);
             }
             $updatedDepo = DepoGroup::where('uid', $id)->update($arrayToBeUpdate);
@@ -206,17 +206,20 @@ class DepoGroupController extends Controller
         return $depoGroups;
     }
 
-    //Add DepoGroup Page render
-    public function addDepoGuestRender($id)
+
+    // Depo Guest Page render
+    public function depoGuestRender($id)
     {
-        $depoName = DepoGroup::where('uid', $id)->first('hr_name');
+        $GuestCount = DepoGuest::where('depo_uid', $id)->get();
+        $depo = DepoGroup::where('uid', $id)->first();
         $depoGuestLimit = DepoGroup::where('uid', $id)->first('staff_quantity');
         $depoGuestUpdated = DepoGuest::where('depo_uid', $id)->count();
         $depoGuestRemaing = $depoGuestLimit->staff_quantity - $depoGuestUpdated;
-        return view('pages.depoGroup', ['id' => $id, 'depoGuestLimit' => $depoGuestLimit, 'depoGuestRemaing' => $depoGuestRemaing, 'depoName' => $depoName]);
+        return view('pages.depoGroup', ['GuestCount' => $GuestCount, 'id' => $id, 'depo' => $depo, 'depoGuestRemaing' => $depoGuestRemaing]);
     }
 
-    public function getDepoGroupGuest($id)
+    //  Main Depo Guest Data
+    public function getDepoGuest($id)
     {
         $depoGroupsGuest = DepoGuest::where('depo_uid', $id)->get();
         foreach ($depoGroupsGuest as $key => $guest) {
@@ -226,6 +229,16 @@ class DepoGroupController extends Controller
             $depoGroupsGuest[$key]->cnicback = CnicBack::where('uid', $guest->uid)->first('img_blob');
         }
         return $depoGroupsGuest;
+    }
+
+
+    //Add DepoGroup Page render
+    public function addDepoGuestRender($id, $guestId = null)
+    {
+        $guest = $guestId ? DepoGuest::where('uid', $guestId)->first() : null;
+        $GuestLimit = $id ? DepoGroup::where('uid', $id)->first('staff_quantity') : null;
+        $GuestSaturated = $id ? (DepoGuest::where('uid', $guestId)->count() < $GuestLimit?->staff_quantity ? false : true) : null;
+        return view('pages.addDepoGroupGuest', ['uid' => $id, 'guest' => $guest, 'GuestSaturated' => $GuestSaturated]);
     }
 
     public function addDepoGroupGuestRender($id, $guestId = null)
@@ -239,9 +252,9 @@ class DepoGroupController extends Controller
     public function addDepoGroupGuest(Request $req, $id, $guestId = null)
     {
         // return $req->hr_type;
-        $depoGroupsGuest = new DepoGroup();
+        $depoGroupsGuest = new DepoGuest();
         $depoGroupsGuest->uid = (string) Str::uuid();
-        $depoGroupsGuest->code =  $this->badge(8, $this->codeIdentifier($req->hr_type));
+        $depoGroupsGuest->badge_type =  $this->badge(8, $this->codeIdentifier($req->badge_type));
         $depoGroupsGuest->depo_uid = $id;
         foreach ($req->all() as $key => $value) {
             if ($key != 'submit' && $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
@@ -262,41 +275,41 @@ class DepoGroupController extends Controller
         }
     }
 
-    public function updateHrGroupStaff(Request $req, $staffId)
-    {
-        $arrayToBeUpdate = [];
-        $arrayToBeUpdate['code'] =  $this->badge(8, $this->codeIdentifier($req->hr_type));
-        foreach ($req->all() as $key => $value) {
-            if ($key != 'submit' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
-                $arrayToBeUpdate[$key] = $value;
-            }
-        }
-        try {
-            $updatedHRStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
-            $uid = HrStaff::where('uid', $staffId)->first('hr_uid');
-            if ($updatedHRStaff) {
-                return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->hr_uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->hr_uid)->with('message', 'Staff has been updated Successfully');
-            }
-        } catch (\Illuminate\Database\QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
-        }
-    }
+    // public function updateHrGroupStaff(Request $req, $staffId)
+    // {
+    //     $arrayToBeUpdate = [];
+    //     $arrayToBeUpdate['code'] =  $this->badge(8, $this->codeIdentifier($req->hr_type));
+    //     foreach ($req->all() as $key => $value) {
+    //         if ($key != 'submit' &&  $key != 'submitMore' && $key != '_token' && strlen($value) > 0) {
+    //             $arrayToBeUpdate[$key] = $value;
+    //         }
+    //     }
+    //     try {
+    //         $updatedHRStaff = HrStaff::where('uid', $staffId)->update($arrayToBeUpdate);
+    //         $uid = HrStaff::where('uid', $staffId)->first('hr_uid');
+    //         if ($updatedHRStaff) {
+    //             return $req->submitMore ? redirect()->route('pages.addHrGroupStaffRender', ['id' => $uid->hr_uid, 'staffId' => $staffId])->with('message', 'HR has been updated Successfully') : redirect()->route('pages.hrGroups', $uid->hr_uid)->with('message', 'Staff has been updated Successfully');
+    //         }
+    //     } catch (\Illuminate\Database\QueryException $exception) {
+    //         if ($exception->errorInfo[2]) {
+    //             return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+    //         } else {
+    //             return  redirect()->back()->with('error', $exception->errorInfo[2]);
+    //         }
+    //     }
+    // }
 
-    public function updateHrGroupStaffSecurityStatus(Request $req)
-    {
-        try {
-            $updatedHRStaff = HrStaff::whereIn('uid', $req->uidArray)->update(['hr_security_status' => $req->status]);
-            return $updatedHRStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
-        } catch (\Illuminate\Database\QueryException $exception) {
-            if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
-            } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
-            }
-        }
-    }
+    // public function updateHrGroupStaffSecurityStatus(Request $req)
+    // {
+    //     try {
+    //         $updatedHRStaff = HrStaff::whereIn('uid', $req->uidArray)->update(['hr_security_status' => $req->status]);
+    //         return $updatedHRStaff ? 'Staff Status Updated Successfully' : 'Something Went Wrong';
+    //     } catch (\Illuminate\Database\QueryException $exception) {
+    //         if ($exception->errorInfo[2]) {
+    //             return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+    //         } else {
+    //             return  redirect()->back()->with('error', $exception->errorInfo[2]);
+    //         }
+    //     }
+    // }
 }

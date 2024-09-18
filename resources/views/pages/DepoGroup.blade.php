@@ -86,7 +86,7 @@
             <div class="row">
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addDepoGuestRender',$id)}}" class="btn btn-primary mb-2">Add
-                       Depo Guest</a>&nbsp;
+                        Depo Guest</a>&nbsp;
                 </div>
             </div>
             @endif
@@ -105,50 +105,14 @@
                             </th>
                             <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
                                 Print</th>
-                            {{-- <th data-filter-control="input" data-field="hr_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Pass Type</th> --}}
-                            <th data-filter-control="input" data-field="hr_security_status" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Security Status</th>
-                            <th data-filter-control="input" data-field="hr_first_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
-                            <th data-filter-control="input" data-field="hr_father_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Father/Husband Name</th>
-                            <th data-filter-control="input" data-field="hrName.hr_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Company Name</th>
-                            <th data-filter-control="input" data-field="hr_designation" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
-                            <th data-filter-control="input" data-field="hr_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
-                            </th>
-                            <th data-filter-control="input" data-field="hr_address" data-sortable="true"
-                                data-formatter="operateText">Home Address</th>
-                            <th data-filter-control="input" data-field="hr_city" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">City</th>
-                            <th data-filter-control="input" data-field="hr_country" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Country</th>
-                            <th data-filter-control="input" data-field="hr_job_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Job Type</th>
-                            <th data-filter-control="input" data-field="hr_nationality" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Nationality</th>
-                            <th data-filter-control="input" data-field="hr_identity" data-sortable="true"
-                                data-formatter="operateDigits">CNIC/Passport</th>
-                            <th data-filter-control="input" data-field="hr_identity_expiry" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
-                            <th data-filter-control="input" data-field="hr_contact" data-sortable="true"
-                                data-formatter="operateDigits">Contact</th>
-                            <th data-filter-control="input" data-field="hr_dob" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">DOB</th>
-                            <th data-filter-control="input" data-field="employee_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Employee Type</th>
-                            <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
-                            <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
-                                data-formatter="operatecnic" data-force-hide="true">
-                                CNIC front</th>
-                            <th data-field="cnicback.img_blob" data-width="250" data-width-unit="px"
-                                data-formatter="operatecnic" data-force-hide="true">
-                                CNIC back</th>
-                            <th data-filter-control="input" data-field="hr_remarks" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Remarks</th>
+                            <th data-filter-control="input" data-field="depo_guest_name" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">Guest Name</th>
+                            <th data-filter-control="input" data-field="depo_guest_contact" data-sortable="true"
+                                data-formatter="operateDigits">Depo Guest Contact</th>
+                            <th data-filter-control="input" data-field="depo_identity" data-sortable="true"
+                                data-formatter="operateText">Identity</th>
+                            <th data-filter-control="input" data-field="depo_guest_email" data-sortable="true"
+                                data-formatter="operateText" data-force-hide="true">Depo Guest Email</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Created At
                             </th>
@@ -293,20 +257,13 @@
             $table.bootstrapTable('getSelections').map((val)=>{
                 uidArray.push(val.uid);
             })
-            axios.post("{{route('request.updateDepoGuestStaffSecurityStatus')}}",{
-                uidArray,
-                status:val.target.id
-            }).then(
-                function(response) {
-                $table.bootstrapTable('refresh');
-                }).catch(function(error) {console.log(error);})
         }
     )}
 )
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {
-            fileName: '{{$depoName->depo_name}}',
+            fileName: '{{$depo->depo_rep_name}}',
             type: 'pdf',
             jspdf: {
                 orientation: 'l',

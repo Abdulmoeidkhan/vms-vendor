@@ -15,8 +15,9 @@ return new class extends Migration
             $table->uuid('uid')->primary();
             $table->string('depo_guest_name');
             $table->string('depo_guest_contact');
-            $table->string('hr_identity')->unique();
+            $table->string('depo_identity')->unique();
             $table->string('depo_guest_email')->nullable();
+            $table->string('badge_type');
             $table->uuid('depo_uid')->unique();
             $table->timestamps();
         });

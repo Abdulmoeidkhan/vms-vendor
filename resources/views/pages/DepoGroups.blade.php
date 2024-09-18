@@ -106,8 +106,8 @@
                                 data-formatter="operateDate">Last Updated
                             </th>
                             @if(session()->get('user')->roles[0]->name === "admin")
-                            <th data-field="uid" data-formatter="operateEdit">Guest</th>
-                            <th data-field="uid" data-formatter="operateHR">Edit</th>
+                            <th data-field="uid" data-formatter="operateGuest">Guest</th>
+                            <th data-field="uid" data-formatter="operateEdit">Edit</th>
                             @endif
                         </tr>
                     </thead>
@@ -143,30 +143,8 @@
         return `${row.first_Name} ${row.last_Name}`;
     }
 
-    function statusChangerFormatter(value, row, index) {
-        if (value) {
-            return [
-                '<div class="left">',
-                '<a class="btn btn-danger" href="statusChanger/' + row.uid + '">',
-                '<span><i class="ti ti-users" style="font-size:24px;"></i></span>',
-                '</a>',
-                '</div>',
-            ].join('')
-        } else {
-            return [
-                '-',
-            ].join('')
-        }
-    }
 
-    function statusFormatter(value, row, index) {
-        if (value != null) {
-            return value ? ['<div class="left">', 'Yes', '</div>'].join('') : ['<div class="left">', 'No', '</div>'].join('');
-        }
-    }
-
-
-    function operateEdit(value, row, index) {
+    function operateGuest(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',
@@ -178,7 +156,7 @@
         }
     }
 
-    function operateHR(value, row, index) {
+    function operateEdit(value, row, index) {
         if (value) {
             return [
                 '<div class="left">',

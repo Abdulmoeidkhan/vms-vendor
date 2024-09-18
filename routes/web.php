@@ -117,7 +117,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addDepoGroup/{id?}', [DepoGroupController::class, 'addDepoGroupRender'])->name('pages.addDepoGroup');
         Route::post('/addDepoRequest', [DepoGroupController::class, 'addDepoGroup'])->name('request.addDepoGroup');
         Route::post('/updateDepoGroup/{id}', [DepoGroupController::class, 'updateDepoGroup'])->name('request.updateDepoGroup');
+
+        Route::get('/depoGroup/{id}', [DepoGroupController::class, 'depoGuestRender'])->name('pages.addDepoGuestRender');
+        Route::get('/getDepoGuest/{id}', [DepoGroupController::class, 'getDepoGuest'])->name('request.getDepoGuest');
         Route::get('/depoGroup/{id}/addDepoGuestRender/{guestId?}', [DepoGroupController::class, 'addDepoGuestRender'])->name('pages.addDepoGuestRender');
+        Route::post('/addDepoGuestRequest/{id}', [DepoGroupController::class, 'addDepoGroupGuest'])->name('request.addDepoGuest');
+        Route::post('/updateDepoGuest/{id}', [DepoGroupController::class, 'updateDepoGuest'])->name('request.updateDepoGuest');
         
     });
 
