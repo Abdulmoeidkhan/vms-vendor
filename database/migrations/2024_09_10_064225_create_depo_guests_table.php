@@ -14,7 +14,10 @@ return new class extends Migration
         Schema::create('depo_guests', function (Blueprint $table) {
             $table->uuid('uid')->primary();
             $table->string('depo_guest_name');
+            $table->string('depo_guest_rank');
+            $table->string('depo_guest_designation');
             $table->string('depo_guest_contact');
+            $table->string('depo_guest_service');
             $table->string('depo_identity')->unique();
             $table->string('depo_guest_email')->nullable();
             $table->string('badge_type');

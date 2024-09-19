@@ -49,16 +49,28 @@
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="depo_guest_rank" class="form-label">Rank</label>
+                                            <select name="depo_guest_rank" id="depo_guest_rank" class="form-select"
+                                                required>
+                                                <option value="" disabled hidden> Select Pass Type </option>
+                                                @foreach (\App\Models\Rank::all() as $key=>$rank)
+                                                <option value="{{$rank->id}}" {{isset($guest)&& $guest->depo_guest_rank
+                                                    == $rank->id ? 'selected' : ''}} > {{$rank->ranks_name}} </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="depo_guest_name" class="form-label">Name</label>
                                             <input name="depo_guest_name" type="text" class="form-control"
                                                 id="depo_guest_name" placeholder="Name"
-                                                value="{{isset($guest) ? $guest->depo_guest_name : ''}}"
-                                                required />
+                                                value="{{isset($guest) ? $guest->depo_guest_name : ''}}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="depo_guest_contact" class="form-label">Contact Number</label>
                                             <input name="depo_guest_contact" type="text" minlength='11' maxlength='12'
@@ -70,9 +82,27 @@
                                                 required />
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="depo_guest_service" class="form-label">Service Number</label>
+                                            <input name="depo_guest_service" type="text" minlength='4' maxlength='12'
+                                                class="form-control" id="depo_guest_service"
+                                                placeholder="Service Number"
+                                                value="{{isset($guest) ? $guest->depo_guest_service : ''}}" required />
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
+                                        <div class="mb-3">
+                                            <label for="depo_guest_designation" class="form-label">Designation</label>
+                                            <input name="depo_guest_designation" type="text" class="form-control"
+                                                id="depo_guest_designation" placeholder="Designation"
+                                                value="{{isset($guest) ? $guest->depo_guest_designation : ''}}"
+                                                required />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="depo_identity" class="form-label">CNIC/Passport</label>
                                             <input name="depo_identity" type="text" pattern="^[a-zA-Z0-9]{9,14}$"
@@ -81,21 +111,36 @@
                                                 value="{{isset($guest) ? $guest->depo_identity : ''}}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="depo_guest_email" class="form-label">Account Email</label>
                                             <input name="depo_guest_email" type="text" class="form-control"
                                                 id="depo_guest_email" placeholder="Media Rep Email"
-                                                value="{{isset($guest) ? $guest->depo_guest_email  : ''}}"
-                                                required />
+                                                value="{{isset($guest) ? $guest->depo_guest_email  : ''}}" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="badge_type" class="form-label">Badge Type</label>
-                                            <input name="badge_type" type="text" class="form-control" id="badge_type"
-                                                 placeholder="Badge Type" value="{{isset($guest) ? $guest->badge_type  : ''}}"
-                                                required />
+                                            <select name="badge_type" id="badge_type" class="form-select" required>
+                                                <option value="" {{isset($guest->badge_type)?'':'selected'}} disabled
+                                                    hidden> Select Pass Type </option>
+                                                <option value="Trade_visitor" {{isset($guest->
+                                                    badge_type)?$guest->badge_type ==
+                                                    'Trade_visitor'?'selected':'':''}}>Trade Visitor</option>
+                                                <option value="Volunteer" {{isset($guest->badge_type)?$guest->badge_type
+                                                    ==
+                                                    'Volunteer'?'selected':'':''}}>Volunteer</option>
+                                                <option value="Local_delegate" {{isset($guest->
+                                                    badge_type)?$guest->badge_type ==
+                                                    'Local_delegate'?'selected':'':''}}>Local Delegate</option>
+                                                <option value="Organiser" {{isset($guest->badge_type)?$guest->badge_type
+                                                    ==
+                                                    'Organiser'?'selected':'':''}}>Organiser</option>
+                                                <option value="Event_manager" {{isset($guest->
+                                                    badge_type)?$guest->badge_type ==
+                                                    'Event_manager'?'selected':'':''}}>Event Manager</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
