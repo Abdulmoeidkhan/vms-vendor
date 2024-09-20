@@ -149,8 +149,8 @@ class DepoGroupController extends Controller
             }
         }
         try {
+            $userCreated = $req->depo_rep_email !== null ? $this->newUserCreate($req->depo_rep_name, $req->depo_rep_email, $depoGroup->uid) : true;
             $depoGroupsSaved = $depoGroup->save();
-            $userCreated = $req->depo_rep_uid !== null ? $this->newUserCreate($depoGroup->depo_rep_name, $depoGroup->depo_rep_email, $depoGroup->uid) : true;
             if ($depoGroupsSaved && $userCreated) {
                 return $req->submitMore ? redirect()->route('pages.addDepoGroup')->with('message', 'Depo Group has been updated Successfully') : redirect()->route('pages.depoGroups')->with('message', 'Depo Group has been updated Successfully');
             }

@@ -86,6 +86,7 @@ class OrganizationController extends Controller
         $organizations = Organization::orderBy('company_name', 'asc')->get();
         foreach ($organizations as $key => $organization) {
             $organizations[$key]->functionaryCount = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->count();
+            $organizations[$key]->functionarySent = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'sent')->count();
             $organizations[$key]->functionaryPending = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'pending')->count();
             $organizations[$key]->functionaryApproved = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'approved')->count();
             $organizations[$key]->functionaryRejection = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_type', 'Functionary')->where('staff_security_status', 'rejected')->count();

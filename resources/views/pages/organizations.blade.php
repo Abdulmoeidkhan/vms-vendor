@@ -116,6 +116,8 @@
                                 data-formatter="operateDigits">Functionaries</th>
                             <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
                                 data-formatter="operateDigits">Temporaries</th>
+                                <th data-filter-control="input" data-field="functionarySent" data-sortable="true"
+                                data-formatter="operateDigits">Sent</th>
                             <th data-filter-control="input" data-field="functionaryPending" data-sortable="true"
                                 data-formatter="operateDigits">Pending</th>
                             <th data-filter-control="input" data-field="functionaryApproved" data-sortable="true"

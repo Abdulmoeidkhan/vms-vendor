@@ -111,6 +111,7 @@ class HRController extends Controller
         $hrGroups = HrGroup::orderBy('hr_name', 'asc')->get();
         foreach ($hrGroups as $key => $hrGroup) {
             $hrGroups[$key]->functionaryCount = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_type', 'Functionary')->count();
+            $hrGroups[$key]->functionarySent = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
             $hrGroups[$key]->functionaryPending = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
             $hrGroups[$key]->functionaryApproved = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
             $hrGroups[$key]->functionaryRejection = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
