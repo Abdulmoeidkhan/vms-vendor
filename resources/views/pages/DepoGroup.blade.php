@@ -86,7 +86,7 @@
             <div class="row">
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addDepoGuestRender',$id)}}" class="btn btn-primary mb-2">Add
-                        Depo Guest</a>&nbsp;
+                        Depo Staff</a>&nbsp;
                 </div>
             </div>
             @endif
@@ -103,22 +103,24 @@
                             <th data-field="state" data-checkbox="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
                             </th>
-                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
-                                Print</th>
+                            {{-- <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">
+                                Badge
+                                Print</th> --}}
                             <th data-filter-control="input" data-field="depo_guest_name" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Guest Name</th>
+                                data-formatter="operateText" data-force-hide="true">Name</th>
                             <th data-filter-control="input" data-field="depo_guest_contact" data-sortable="true"
-                                data-formatter="operateDigits">Depo Guest Contact</th>
+                                data-formatter="operateDigits">Depo Contact</th>
                             <th data-filter-control="input" data-field="depo_identity" data-sortable="true"
                                 data-formatter="operateText">Identity</th>
                             <th data-filter-control="input" data-field="depo_guest_email" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Depo Guest Email</th>
+                                data-formatter="operateText" data-force-hide="true">Depo Email</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Created At
                             </th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Last Updated
                             </th>
+                            <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
                                 data-force-hide="true">Edit</th>
                         </tr>

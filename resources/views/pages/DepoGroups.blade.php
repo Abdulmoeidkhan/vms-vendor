@@ -93,11 +93,11 @@
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="depo_rep_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Host Name</th>
+                                data-fixed-columns="true" data-formatter="operateText">Group Name</th>
                             <th data-filter-control="input" data-field="depo_rep_email" data-formatter="operateEmail">
                                 Registered Email</th>
                             <th data-filter-control="input" data-field="depo_rep_contact" data-sortable="true"
-                                data-formatter="operateDigits">Host Contact</th>
+                                data-formatter="operateDigits">Group Contact</th>
                             <th data-filter-control="input" data-field="depo_rep_phone" data-sortable="true"
                                 data-formatter="operateText">Phone</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
@@ -106,7 +106,7 @@
                                 data-formatter="operateDate">Last Updated
                             </th>
                             @if(session()->get('user')->roles[0]->name === "admin")
-                            <th data-field="uid" data-formatter="operateGuest">Guest</th>
+                            <th data-field="uid" data-formatter="operateGuest">Group</th>
                             <th data-field="uid" data-formatter="operateEdit">Edit</th>
                             @endif
                         </tr>

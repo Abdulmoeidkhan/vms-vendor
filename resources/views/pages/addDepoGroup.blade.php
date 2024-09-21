@@ -110,7 +110,7 @@
                                                 title="Guest Quanity" min="1" max="500" maxlength="3" required />
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    {{-- <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="hr_owner_contact" class="form-label">Depo Rep
                                                 Contact</label>
@@ -119,7 +119,7 @@
                                                 value="{{isset($depoGroups) ? $depoGroups->depo_rep_phone: ''}}"
                                                 minlength='11' maxlength='11' required />
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
                                 <br />
                                 <br />

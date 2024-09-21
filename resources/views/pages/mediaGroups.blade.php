@@ -68,7 +68,8 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "media")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ===
+            "media")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addMedia')}}" class="btn btn-primary">Add
@@ -93,6 +94,14 @@
                                 data-formatter="operateDigits">Functionaries</th>
                             <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
                                 data-formatter="operateDigits">Temporaries</th>
+                            <th data-filter-control="input" data-field="functionarySent" data-sortable="true"
+                                data-formatter="operateDigits">Sent</th>
+                            <th data-filter-control="input" data-field="functionaryPending" data-sortable="true"
+                                data-formatter="operateDigits">Pending</th>
+                            <th data-filter-control="input" data-field="functionaryApproved" data-sortable="true"
+                                data-formatter="operateDigits">Approved</th>
+                            <th data-filter-control="input" data-field="functionaryRejection" data-sortable="true"
+                                data-formatter="operateDigits">Rejected</th>
                             <th data-filter-control="input" data-field="media_category" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateSpecialText">Media Category</th>
                             <th data-filter-control="input" data-field="media_name" data-sortable="true"
@@ -122,7 +131,8 @@
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
-                            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "media")
+                            @if(session()->get('user')->roles[0]->name === "admin" ||
+                            session()->get('user')->roles[0]->name === "media")
                             <th data-field="uid" data-formatter="operateEdit">Staff</th>
                             <th data-field="uid" data-formatter="operateMedia">Edit</th>
                             @endif

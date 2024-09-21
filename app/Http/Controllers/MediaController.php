@@ -80,8 +80,12 @@ class MediaController extends Controller
     {
         $mediaGroups = MediaGroup::all();
         foreach ($mediaGroups as $key => $mediaGroup) {
-            $mediaGroups[$key]->functionaryCount = MediaStaff::where('uid', $mediaGroup->uid)->count();
-            $mediaGroups[$key]->temporaryCount = MediaStaff::where('uid', $mediaGroup->uid)->count();
+            $mediaGroups[$key]->functionaryCount = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type','Functionary')->count();
+            $mediaGroups[$key]->temporaryCount = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type','Temporary')->count();
+            $mediaGroups[$key]->functionarySent = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'sent')->count();
+            $mediaGroups[$key]->functionaryPending = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'pending')->count();
+            $mediaGroups[$key]->functionaryApproved = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'approved')->count();
+            $mediaGroups[$key]->functionaryRejection = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'rejected')->count();
         }
         return $mediaGroups;
     }
