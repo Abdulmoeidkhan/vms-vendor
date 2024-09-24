@@ -13,6 +13,7 @@ use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfileImageController;
 use App\Http\Controllers\UserPanelController;
 use App\Http\Controllers\SignUpController;
+use App\Http\Controllers\SummaryPanelController;
 use App\Http\Controllers\UpdateProfileController;
 use App\Http\Controllers\UserFullProfileController;
 
@@ -66,6 +67,9 @@ Route::group(['middleware' => 'auth'], function () {
         // User Panel Routes
         Route::get('/userPanel', [UserPanelController::class, 'render'])->name("pages.userPanel");
 
+        // Summary Panel Routes
+        Route::get('/summary', [SummaryPanelController::class, 'render'])->name("pages.summaryPanel");
+
 
         // My profile
         Route::post('/updateAuthority', [UpdateProfileController::class, 'updateAuthority'])->name('request.updateAuthority');
@@ -85,7 +89,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addHrGroups/{id?}', [HRController::class, 'addHrGroupRender'])->name('pages.addHrGroups');
         Route::get('/getHrGroupsStats', [HRController::class, 'getHrGroupsStats'])->name('request.getHrGroupsStats');
         Route::post('/updateHrGroupsRequest/{id}', [HRController::class, 'updateHrGroup'])->name('request.updateHrGroups');
-
     });
 
     Route::middleware('mediaUserCheck')->group(function () {
@@ -117,13 +120,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/addDepoGroup/{id?}', [DepoGroupController::class, 'addDepoGroupRender'])->name('pages.addDepoGroup');
         Route::post('/addDepoRequest', [DepoGroupController::class, 'addDepoGroup'])->name('request.addDepoGroup');
         Route::post('/updateDepoGroup/{id}', [DepoGroupController::class, 'updateDepoGroup'])->name('request.updateDepoGroup');
+    });
 
-        Route::get('/depoGroup/{id}', [DepoGroupController::class, 'depoGuestRender'])->name('pages.addDepoGuestRender');
+    Route::middleware('depoCheck')->group(function () {
+        Route::get('/depoGroup/{id}', [DepoGroupController::class, 'depoGuestRender'])->name('pages.depoGroup');
         Route::get('/getDepoGuest/{id}', [DepoGroupController::class, 'getDepoGuest'])->name('request.getDepoGuest');
         Route::get('/depoGroup/{id}/addDepoGuestRender/{guestId?}', [DepoGroupController::class, 'addDepoGuestRender'])->name('pages.addDepoGuestRender');
         Route::post('/addDepoGuestRequest/{id}', [DepoGroupController::class, 'addDepoGroupGuest'])->name('request.addDepoGuest');
         Route::post('/updateDepoGuest/{id}', [DepoGroupController::class, 'updateDepoGuest'])->name('request.updateDepoGuest');
-        
     });
 
     Route::middleware('orgCheck')->group(function () {

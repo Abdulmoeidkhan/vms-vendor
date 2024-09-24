@@ -51,7 +51,16 @@
                         </div>
                         <span class="hide-menu">HR</span>
                     </a>
-                </li>@endif
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{route('pages.summaryPanel')}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-chart-bar"></i>
+                        </div>
+                        <span class="hide-menu">Summary</span>
+                    </a>
+                </li>
+                @endif
                 @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="media")
                 <li class="sidebar-item">
                     <a href="{{route('pages.mediaGroups')}}" class="sidebar-link">
@@ -68,7 +77,7 @@
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-shield-checkered"></i>
                         </div>
-                        <span class="hide-menu">DEPO</span>
+                        <span class="hide-menu">DEPO & Staff</span>
                     </a>
                 </li>
                 @endif
@@ -89,6 +98,16 @@
                             <i class="ti ti-video"></i>
                         </div>
                         <span class="hide-menu">Media</span>
+                    </a>
+                </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name =="depoRep")
+                <li class="sidebar-item">
+                    <a href="{{route('pages.depoGroup',session()->get('user')->uid)}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-video"></i>
+                        </div>
+                        <span class="hide-menu">DEPO</span>
                     </a>
                 </li>
                 @endif

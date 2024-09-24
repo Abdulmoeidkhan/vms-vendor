@@ -73,7 +73,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "depo")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addDepoGroup')}}" class="btn btn-primary">Add Depo
@@ -100,12 +100,14 @@
                                 data-formatter="operateDigits">Group Contact</th>
                             <th data-filter-control="input" data-field="depo_rep_phone" data-sortable="true"
                                 data-formatter="operateText">Phone</th>
+                            <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
+                                data-formatter="operateText">No Of Person</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-formatter="operateDate">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
-                            @if(session()->get('user')->roles[0]->name === "admin")
+                            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "depo")
                             <th data-field="uid" data-formatter="operateGuest">Group</th>
                             <th data-field="uid" data-formatter="operateEdit">Edit</th>
                             @endif

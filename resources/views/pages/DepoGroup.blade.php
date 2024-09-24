@@ -120,6 +120,8 @@
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Last Updated
                             </th>
+                            <th data-filter-control="input" data-field="picture.img_blob" data-sortable="true"
+                                data-formatter="operateBool">Image Uploaded</th>
                             <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
                                 data-force-hide="true">Edit</th>
@@ -175,10 +177,15 @@
             return value ? `<img width="100" height="120" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
     }
+    
     function operatecnic(value, row, index) {
         if (value != null) {
             return value ? `<img width="150px" height="100px" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
+    }
+
+    function operateBool(value, row, index){
+        return value?'Yes':'No';
     }
 
     function operateEdit(value, row, index) {

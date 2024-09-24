@@ -6,6 +6,7 @@ use App\Http\Middleware\MediaGroup;
 use App\Http\Middleware\Organization;
 use App\Http\Middleware\Media;
 use App\Http\Middleware\Depo;
+use App\Http\Middleware\DepoGroup;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -35,6 +36,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->appendToGroup('depoUserCheck', [
             Depo::class,
+        ]);
+        $middleware->appendToGroup('depoCheck', [
+            DepoGroup::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

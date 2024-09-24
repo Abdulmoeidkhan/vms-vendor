@@ -99,11 +99,24 @@ class OrganizationController extends Controller
     {
         $organizations = Organization::all(['company_name', 'uid']);
         foreach ($organizations as $key => $organization) {
+            $organizations[$key]->total = OrganizationStaff::where('company_uid', $organization->uid)->count();
             $organizations[$key]->sent = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'sent')->count();
             $organizations[$key]->pending = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'pending')->count();
             $organizations[$key]->rejected = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'rejected')->count();
             $organizations[$key]->approved = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'approved')->count();
         }
+        if ($organizations->count() > 0) {
+            $organizations[$organizations->count()] = [
+                'company_name' => 'Total',
+                'uid' => '',
+                'sent' => $organizations->sum('sent'),
+                'total' => $organizations->sum('total'),
+                'pending' => $organizations->sum('pending'),
+                'rejected' => $organizations->sum('rejected'),
+                'approved' => $organizations->sum('approved'),
+            ];
+        }
+
         return $organizations;
     }
 
