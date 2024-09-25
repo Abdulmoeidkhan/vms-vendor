@@ -8,13 +8,14 @@ class SummaryPanelController extends Controller
 {
     public function render()
     {
-        $categories = ['organisation' => new OrganizationController];
+        $categories = ['Vendor' => new OrganizationController,'HR'=> new HRController,'Media'=> new MediaController,'Depo'=> new DepoGroupController];
         $categoriesToBePush = [];
         foreach ($categories as $key => $value) {
-            $values = $value->getOrganizationStats();
+            $values = $value->getStats();
             $array = ['name' => $key, 'value' => $values];
             array_push($categoriesToBePush, $array);
         }
-        return view('pages.summaryPanel', ['categories' => $categoriesToBePush[0]['value']]);
+        // return $categoriesToBePush;
+        return view('pages.summaryPanel', ['majorcategories' => $categoriesToBePush]);
     }
 }

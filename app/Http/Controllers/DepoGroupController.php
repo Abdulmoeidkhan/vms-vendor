@@ -114,7 +114,7 @@ class DepoGroupController extends Controller
     }
 
     //  Main Depo Group Stats
-    public function getDepoGroupsStats()
+    public function getStats()
     {
         $depoGroups = DepoGroup::all(['depo_name', 'uid']);
         foreach ($depoGroups as $key => $depoGroup) {

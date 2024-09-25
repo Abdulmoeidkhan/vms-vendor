@@ -79,7 +79,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getOrganizations', [OrganizationController::class, 'getOrganizations'])->name('request.getOrganizations');
         Route::post('/addOrganizationRequest', [OrganizationController::class, 'addOrganization'])->name('request.addOrganization');
         Route::get('/addOrganization/{id?}', [OrganizationController::class, 'addOrganizationRender'])->name('pages.addOrganization');
-        Route::get('/getOrganizationStats', [OrganizationController::class, 'getOrganizationStats'])->name('request.getOrganizationStats');
+        Route::get('/getOrganizationStats', [OrganizationController::class, 'getStats'])->name('request.getOrganizationStats');
         Route::post('/updateOrganizationRequest/{id}', [OrganizationController::class, 'updateOrganization'])->name('request.updateOrganization');
 
         // Hr
@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getHrGroups', [HRController::class, 'getHrGroups'])->name('request.getHrGroups');
         Route::post('/addHrGroupsRequest', [HRController::class, 'addHrGroup'])->name('request.addHrGroups');
         Route::get('/addHrGroups/{id?}', [HRController::class, 'addHrGroupRender'])->name('pages.addHrGroups');
-        Route::get('/getHrGroupsStats', [HRController::class, 'getHrGroupsStats'])->name('request.getHrGroupsStats');
+        Route::get('/getHrGroupsStats', [HRController::class, 'getStats'])->name('request.getHrGroupsStats');
         Route::post('/updateHrGroupsRequest/{id}', [HRController::class, 'updateHrGroup'])->name('request.updateHrGroups');
     });
 
@@ -96,7 +96,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/mediaGroups', [MediaController::class, 'render'])->name('pages.mediaGroups');
         Route::get('/getMedia', [MediaController::class, 'getMedia'])->name('request.getMedia');
         Route::get('/addMedia/{id?}', [MediaController::class, 'addMedia'])->name('pages.addMedia');
-        Route::get('/getMediaStats', [MediaController::class, 'getMediaStats'])->name('request.getMediaStats');
+        Route::get('/getMediaStats', [MediaController::class, 'getStats'])->name('request.getMediaStats');
         Route::post('/addMediaRequest', [MediaController::class, 'addMediaRequest'])->name('request.addMediaRequest');
         Route::post('/updateMediaRequest/{id}', [MediaController::class, 'updateMedia'])->name('request.updateMediaRequest');
     });
@@ -116,7 +116,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Depo
         Route::get('/depoGroups', [DepoGroupController::class, 'render'])->name('pages.depoGroups');
         Route::get('/getDepo', [DepoGroupController::class, 'getDepoGroups'])->name('request.getDepoGroups');
-        Route::get('/getDepoStats', [DepoGroupController::class, 'getDepoStats'])->name('request.getDepoStats');
+        Route::get('/getDepoStats', [DepoGroupController::class, 'getStats'])->name('request.getDepoStats');
         Route::get('/addDepoGroup/{id?}', [DepoGroupController::class, 'addDepoGroupRender'])->name('pages.addDepoGroup');
         Route::post('/addDepoRequest', [DepoGroupController::class, 'addDepoGroup'])->name('request.addDepoGroup');
         Route::post('/updateDepoGroup/{id}', [DepoGroupController::class, 'updateDepoGroup'])->name('request.updateDepoGroup');

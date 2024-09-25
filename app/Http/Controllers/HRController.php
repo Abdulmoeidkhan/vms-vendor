@@ -120,14 +120,27 @@ class HRController extends Controller
         return $hrGroups;
     }
 
-    public function getHrGroupsStats()
+    public function getStats()
     {
-        $hrGroups = HrGroup::all(['hr_name', 'uid']);
+        $hrGroups = HrGroup::select('hr_name as entity_name','uid as uid')->get();
         foreach ($hrGroups as $key => $hrGroup) {
+            $hrGroups[$key]->total = HrStaff::where('hr_uid', $hrGroup->uid)->count();
             $hrGroups[$key]->sent = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'sent')->count();
             $hrGroups[$key]->pending = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'pending')->count();
             $hrGroups[$key]->rejected = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'rejected')->count();
             $hrGroups[$key]->approved = HrStaff::where('hr_uid', $hrGroup->uid)->where('hr_security_status', 'approved')->count();
+        }
+
+        if ($hrGroups->count() > 0) {
+            $hrGroups[$hrGroups->count()] = [
+                'entity_name' => 'Total',
+                'uid' => '',
+                'sent' => $hrGroups->sum('sent'),
+                'total' => $hrGroups->sum('total'),
+                'pending' => $hrGroups->sum('pending'),
+                'rejected' => $hrGroups->sum('rejected'),
+                'approved' => $hrGroups->sum('approved'),
+            ];
         }
         return $hrGroups;
     }

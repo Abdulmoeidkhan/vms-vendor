@@ -95,9 +95,9 @@ class OrganizationController extends Controller
         return $organizations;
     }
 
-    public function getOrganizationStats()
+    public function getStats()
     {
-        $organizations = Organization::all(['company_name', 'uid']);
+        $organizations = Organization::select('company_name as entity_name','uid as uid')->get();
         foreach ($organizations as $key => $organization) {
             $organizations[$key]->total = OrganizationStaff::where('company_uid', $organization->uid)->count();
             $organizations[$key]->sent = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'sent')->count();
@@ -107,7 +107,7 @@ class OrganizationController extends Controller
         }
         if ($organizations->count() > 0) {
             $organizations[$organizations->count()] = [
-                'company_name' => 'Total',
+                'entity_name' => 'Total',
                 'uid' => '',
                 'sent' => $organizations->sum('sent'),
                 'total' => $organizations->sum('total'),

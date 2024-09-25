@@ -7,60 +7,47 @@
     <div class="card w-100">
         <div class="card-body p-4">
             <h5 class="card-title fw-semibold mb-4">Summary Panel</h5>
-            <div class="accordion" id="accordionExample">
+            @foreach ($majorcategories as $key => $categories )
+            <div class="accordion mb-2" id="accordion{{$key}}">
                 <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <div class="table-responsive">
-                            <table class="table text-nowrap mb-0 align-middle">
-                                <tbody>
-                                    <tr>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-0">
-                                                <button class="accordion-button" style="width:inherit;" type="button"
-                                                    data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                                    aria-expanded="false" aria-controls="collapseOne">
-                                                </button>
-                                            </h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-1 text-capitalize">
-                                                Organizations</h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <h6 class="fw-semibold mb-1 text-capitalize">
-                                                {{$categories[count($categories)-1]['company_name']}}</h6>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span
-                                                    class="badge mx-auto bg-danger rounded-3 fw-semibold">{{$categories[count($categories)-1]['sent']}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span
-                                                    class="badge mx-auto bg-warning rounded-3 fw-semibold">{{$categories[count($categories)-1]['pending']}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span
-                                                    class="badge mx-auto bg-success rounded-3 fw-semibold">{{$categories[count($categories)-1]['approved']}}</span>
-                                            </div>
-                                        </td>
-                                        <td class="border-bottom-0">
-                                            <div class="d-flex align-items-center gap-2">
-                                                <span
-                                                    class="badge mx-auto bg-badar rounded-3 fw-semibold">{{$categories[count($categories)-1]['rejected']}}</span>
-                                            </div>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
+                    <h2 class="accordion-header bg-dark">
+                        <div class="row">
+                            <div class="col-md-2 bg-dark">
+                                <button class="accordion-button bg-dark" type="button"
+                                    data-bs-toggle="collapse" data-bs-target="#collapse{{$key}}" aria-expanded="true"
+                                    aria-controls="collapse{{$key}}">
+                                </button>
+                            </div>
+                            <div class="col-md-5 mt-2">
+                                <h3 class="text-white">
+                                    {{$categories['name']}}</h3>
+                            </div>
+                            <div class="col-md-1">
+                                <span
+                                    class="badge mx-auto bg-primary rounded-3 fw-semibold">{{$categories['value'][count($categories)-1]['total']}}
+                                </span>
+                            </div>
+                            <div class="col-md-1">
+                                <span
+                                    class="badge mx-auto bg-danger rounded-3 fw-semibold">{{$categories['value'][count($categories)-1]['sent']}}</span>
+                            </div>
+                            <div class="col-md-1">
+                                <span
+                                    class="badge mx-auto bg-warning rounded-3 fw-semibold">{{$categories['value'][count($categories)-1]['pending']}}</span>
+                            </div>
+                            <div class="col-md-1">
+                                <span
+                                    class="badge mx-auto bg-success rounded-3 fw-semibold">{{$categories['value'][count($categories)-1]['approved']}}</span>
+                            </div>
+                            <div class="col-md-1">
+                                <span
+                                    class="badge mx-auto bg-badar rounded-3 fw-semibold">{{$categories['value'][count($categories)-1]['rejected']}}</span>
+                            </div>
                         </div>
+
                     </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="collapse{{$key}}" class="accordion-collapse collapse show"
+                        data-bs-parent="#accordion{{$key}}">
                         <div class="accordion-body">
                             <div class="table-responsive">
                                 <table class="table text-nowrap mb-0 align-middle">
@@ -90,14 +77,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($categories as $index => $category)
+                                        @foreach($categories['value'] as $index => $category)
                                         <tr>
                                             <td class="border-bottom-0">
                                                 <h6 class="fw-semibold mb-0">{{$index+1}}</h6>
                                             </td>
                                             <td class="border-bottom-0">
                                                 <h6 class="fw-semibold mb-1 text-capitalize">
-                                                    {{$category['company_name']}}</h6>
+                                                    {{$category['entity_name']}}
                                             </td>
                                             <td class="border-bottom-0">
                                                 <span
@@ -136,7 +123,7 @@
                     </div>
                 </div>
             </div>
-
+            @endforeach
         </div>
     </div>
 </div>

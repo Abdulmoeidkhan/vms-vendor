@@ -100,14 +100,27 @@ class MediaController extends Controller
         }
     }
 
-    public function getMediaStats()
+    public function getStats()
     {
-        $mediaGroups = MediaGroup::all(['media_name', 'uid']);
+        $mediaGroups = MediaGroup::select('media_name as entity_name','uid as uid')->get();
         foreach ($mediaGroups as $key => $mediaGroup) {
+            $mediaGroups[$key]->total = MediaStaff::where('media_uid', $mediaGroup->uid)->count();
             $mediaGroups[$key]->sent = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'sent')->count();
             $mediaGroups[$key]->pending = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'pending')->count();
             $mediaGroups[$key]->rejected = MediaStaff::where('media_uid', $mediaGroup->media_uid)->where('media_staff_security_status', 'rejected')->count();
             $mediaGroups[$key]->approved = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'approved')->count();
+        }
+
+        if ($mediaGroups->count() > 0) {
+            $mediaGroups[$mediaGroups->count()] = [
+                'entity_name' => 'Total',
+                'uid' => '',
+                'sent' => $mediaGroups->sum('sent'),
+                'total' => $mediaGroups->sum('total'),
+                'pending' => $mediaGroups->sum('pending'),
+                'rejected' => $mediaGroups->sum('rejected'),
+                'approved' => $mediaGroups->sum('approved'),
+            ];
         }
         return $mediaGroups;
     }
