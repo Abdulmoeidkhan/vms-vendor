@@ -91,9 +91,9 @@
                             <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
                                 data-formatter="operateDigits">Allowed Quantity</th>
                             <th data-filter-control="input" data-field="functionaryCount" data-sortable="true"
-                                data-formatter="operateDigits">Functionaries</th>
-                            <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
-                                data-formatter="operateDigits">Temporaries</th>
+                                data-formatter="operateDigits">Media</th>
+                            {{-- <th data-filter-control="input" data-field="temporaryCount" data-sortable="true"
+                                data-formatter="operateDigits">Temporaries</th> --}}
                             <th data-filter-control="input" data-field="functionarySent" data-sortable="true"
                                 data-formatter="operateDigits">Sent</th>
                             <th data-filter-control="input" data-field="functionaryPending" data-sortable="true"

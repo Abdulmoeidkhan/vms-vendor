@@ -93,22 +93,24 @@
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
                             <th data-filter-control="input" data-field="depo_rep_name" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Group Name</th>
+                                data-fixed-columns="true" data-formatter="operateText">Org Name</th>
                             <th data-filter-control="input" data-field="depo_rep_email" data-formatter="operateEmail">
                                 Registered Email</th>
                             <th data-filter-control="input" data-field="depo_rep_contact" data-sortable="true"
-                                data-formatter="operateDigits">Group Contact</th>
+                                data-formatter="operateDigits">Org Contact</th>
                             <th data-filter-control="input" data-field="depo_rep_phone" data-sortable="true"
                                 data-formatter="operateText">Phone</th>
                             <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
-                                data-formatter="operateText">No Of Person</th>
+                                data-formatter="operateDigits">Allowed Quantity</th>
+                            <th data-filter-control="input" data-field="guestCount" data-sortable="true"
+                                data-formatter="operateDigits">No. Of Persons</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-formatter="operateDate">Created At</th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
                             @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "depo")
-                            <th data-field="uid" data-formatter="operateGuest">Group</th>
+                            <th data-field="uid" data-formatter="operateGuest">Staff</th>
                             <th data-field="uid" data-formatter="operateEdit">Edit</th>
                             @endif
                         </tr>

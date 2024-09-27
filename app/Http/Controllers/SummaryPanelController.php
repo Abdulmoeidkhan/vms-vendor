@@ -8,7 +8,7 @@ class SummaryPanelController extends Controller
 {
     public function render()
     {
-        $categories = ['Vendor' => new OrganizationController,'HR'=> new HRController,'Media'=> new MediaController,'Depo'=> new DepoGroupController];
+        $categories = ['Vendor' => new OrganizationController,'HR'=> new HRController,'Media'=> new MediaController];
         $categoriesToBePush = [];
         foreach ($categories as $key => $value) {
             $values = $value->getStats();
