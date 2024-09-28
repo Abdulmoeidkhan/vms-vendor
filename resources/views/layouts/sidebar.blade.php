@@ -105,9 +105,9 @@
                 <li class="sidebar-item">
                     <a href="{{route('pages.depoGroup',session()->get('user')->uid)}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-video"></i>
+                            <i class="ti ti-shield-checkered"></i>
                         </div>
-                        <span class="hide-menu">DEPO</span>
+                        <span class="hide-menu">Organization</span>
                     </a>
                 </li>
                 @endif

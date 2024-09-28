@@ -71,17 +71,17 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep")
-            <div class="row">
+            {{-- <div class="row">
                 <div class="d-flex flex-wrap">
-                    @if(session('user')->roles[0]->name === "admin")
+                    if(session('user')->roles[0]->name === "admin")
                     <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
                     <button id="pending" class="status-action-button btn btn-warning mb-2">Status Pending</button>&nbsp;
                     <button id="approved" class="status-action-button btn btn-success mb-2">Approved</button>&nbsp;
                     <button id="rejected" class="status-action-button btn btn-badar mb-2">Rejected</button>
-                    @endif
+                    endif
                 </div>
-            </div>
+            </div> --}}
             <br />
             <div class="row">
                 <div class="d-flex flex-wrap">
@@ -108,19 +108,23 @@
                                 Print</th> --}}
                             <th data-filter-control="input" data-field="depo_guest_name" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Name</th>
-                            <th data-filter-control="input" data-field="depo_guest_contact" data-sortable="true"
-                                data-formatter="operateDigits">Depo Contact</th>
+                            <th data-filter-control="input" data-field="depo_guest_designation" data-sortable="true"
+                                data-formatter="operateText">Designation</th>
                             <th data-filter-control="input" data-field="depo_identity" data-sortable="true"
-                                data-formatter="operateText">Identity</th>
+                                data-formatter="operateText">CNIC/Passport</th>
+                            <th data-filter-control="input" data-field="badge_type" data-sortable="true"
+                                data-formatter="operateText">Badge Category</th>
+                            <th data-filter-control="input" data-field="depo_guest_contact" data-sortable="true"
+                                data-formatter="operateDigits">Staff Contact</th>
                             <th data-filter-control="input" data-field="depo_guest_email" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Depo Email</th>
+                                data-formatter="operateText" data-force-hide="true">Staff Email</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Created At
                             </th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Last Updated
                             </th>
-                            <th data-filter-control="input" data-field="picture.img_blob" data-sortable="true"
+                            <th data-filter-control="input" data-field="picture" data-sortable="true"
                                 data-formatter="operateBool">Image Uploaded</th>
                             <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
@@ -185,7 +189,7 @@
     }
 
     function operateBool(value, row, index){
-        return value?'Yes':'No';
+        return value.img_blob?'Yes':'No';
     }
 
     function operateEdit(value, row, index) {

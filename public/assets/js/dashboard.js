@@ -64,7 +64,7 @@ $(function () {
 
                     xaxis: {
                         type: "category",
-                        categories: dataArray(delegationData, 'company_name'),
+                        categories: dataArray(delegationData, 'entity_name'),
                         labels: {
                             style: { cssClass: "grey--text lighten-2--text fill-color" },
                         },
@@ -171,7 +171,7 @@ $(function () {
 
                     xaxis: {
                         type: "category",
-                        categories: dataArray(delegationData, 'company_name'),
+                        categories: dataArray(delegationData, 'entity_name'),
                         labels: {
                             style: { cssClass: "grey--text lighten-2--text fill-color" },
                         },
@@ -284,7 +284,7 @@ $(function () {
 
                     xaxis: {
                         type: "category",
-                        categories: dataArray(delegationData, 'hr_name'),
+                        categories: dataArray(delegationData, 'entity_name'),
                         labels: {
                             style: { cssClass: "grey--text lighten-2--text fill-color" },
                         },
@@ -392,7 +392,7 @@ $(function () {
 
                     xaxis: {
                         type: "category",
-                        categories: dataArray(delegationData, 'hr_name'),
+                        categories: dataArray(delegationData, 'entity_name'),
                         labels: {
                             style: { cssClass: "grey--text lighten-2--text fill-color" },
                         },
@@ -504,7 +504,7 @@ $(function () {
 
                     xaxis: {
                         type: "category",
-                        categories: dataArray(delegationData, 'media_name'),
+                        categories: dataArray(delegationData, 'entity_name'),
                         labels: {
                             style: { cssClass: "grey--text lighten-2--text fill-color" },
                         },

@@ -61,7 +61,7 @@ class DepoGroupController extends Controller
 
     protected function basicRolesAndTeams($user)
     {
-        $role = Role::where('name', 'Depo')->first();
+        $role = Role::where('name', 'depoRep')->first();
         $permission = Permission::where('name', 'read')->first();
         $user->addRole($role);
         $user->givePermissions(['read', 'create', 'update', 'delete']);

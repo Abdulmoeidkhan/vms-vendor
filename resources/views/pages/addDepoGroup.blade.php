@@ -31,22 +31,22 @@
                     <form name="depoInfo" id="depoInfo" method="POST"
                         action="{{isset($depoGroups->uid)? route('request.updateDepoGroup',$depoGroups->uid):route('request.addDepoGroup')}}">
                         <fieldset>
-                            <legend>Add Depo Guest Group</legend>
+                            <legend>Add Organization</legend>
                             @csrf
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="depo_rep_name" class="form-label">Depo Rep Name</label>
+                                            <label for="depo_rep_name" class="form-label">Org Person Name</label>
                                             <input name="depo_rep_name" type="text" class="form-control"
-                                                id="depo_rep_name" placeholder="Depo Rep Name"
+                                                id="depo_rep_name" placeholder="Org Person Name"
                                                 value="{{isset($depoGroups) ? $depoGroups->depo_rep_name : ''}}"
                                                 required />
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="depo_rep_contact" class="form-label">Depo Rep Contact
+                                            <label for="depo_rep_contact" class="form-label">Org Person Contact
                                                 Number</label>
                                             <input name="depo_rep_contact" type="text" minlength='11'
                                                 class="form-control" id="depo_rep_contact"
@@ -59,9 +59,9 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="depo_rep_email" class="form-label">Depo Rep Email</label>
+                                            <label for="depo_rep_email" class="form-label">Org Person Email</label>
                                             <input name="depo_rep_email" type="text" class="form-control"
-                                                id="depo_rep_email" placeholder="Depo Rep Email"
+                                                id="depo_rep_email" placeholder="Org Person Email"
                                                 value="{{isset($depoGroups) ? $depoGroups->depo_rep_email : ''}}"
                                                 {{isset($depoGroups->depo_rep_email) ? 'disabled' : '' }} />
                                         </div>
@@ -72,21 +72,21 @@
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($depoGroups))
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="depo_category" name="Depo Category" colorClass="danger"
+                                            modalId="depo_category" name="Badge Category" colorClass="danger"
                                             :className="$modelClass=App\Models\HrCategory::class" btnName="Add Category"
                                             :oldData='$depoGroups->depo_category' />
                                         @else
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="depo_category" name="Depo Category" btnName="Add Category"
+                                            modalId="depo_category" name="Badge Category" btnName="Add Category"
                                             :className="$modelClass=App\Models\HrCategory::class" colorClass="primary"
                                             :oldData='null' />
                                         @endif
                                         @else
                                         <div class="mb-3">
-                                            <label for="depo_category" class="form-label">Depo
+                                            <label for="depo_category" class="form-label">Badge
                                                 Category</label>
                                             <select name="depo_category" id="depo_category" class="form-select">
-                                                <option value="" selected disabled hidden> Select Depo
+                                                <option value="" selected disabled hidden> Select Badge
                                                     Category
                                                 </option>
                                                 @foreach (\App\Models\HrCategory::all() as $category)
@@ -103,7 +103,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="staff_quantity" class="form-label">Depo Guest Quantity</label>
+                                            <label for="staff_quantity" class="form-label">Org Guest Quantity</label>
                                             <input name="staff_quantity" type="number" class="form-control"
                                                 id="staff_quantity" placeholder="5"
                                                 value="{{isset($depoGroups) ? $depoGroups->staff_quantity : ''}}"
@@ -112,10 +112,10 @@
                                     </div>
                                     {{-- <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="hr_owner_contact" class="form-label">Depo Rep
+                                            <label for="hr_owner_contact" class="form-label">Org Person
                                                 Contact</label>
                                             <input name="depo_rep_phone" type="number" class="form-control"
-                                                id="depo_rep_phone" placeholder="Depo Rep Contact"
+                                                id="depo_rep_phone" placeholder="Org Person Contact"
                                                 value="{{isset($depoGroups) ? $depoGroups->depo_rep_phone: ''}}"
                                                 minlength='11' maxlength='11' required />
                                         </div>
@@ -128,7 +128,7 @@
                                         <div class="mb-3">
                                             <input type="submit" name="submitMore"
                                                 class="btn {{isset($depoGroups->uid )?'btn-primary':'btn-success'}}"
-                                                value="{{isset($depoGroups->uid)?'Update Depo Group & More':'Add Depo Group & More'}}" />
+                                                value="{{isset($depoGroups->uid)?'Update Organization & More':'Add Organization & More'}}" />
                                         </div>
                                     </div>
                                     <div class="col-md-8">

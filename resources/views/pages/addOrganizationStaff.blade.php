@@ -252,8 +252,8 @@
                                                     staff_type)?$staff->staff_type ==
                                                     'Functionary'?'selected':'':''}}>Functionary Pass</option>
                                                 @endif
-                                                <option value="Temporary" {{isset($staff->staff_type)?$staff->staff_type
-                                                    == 'Temporary'?'selected':'':''}}>Temporary Pass</option>
+                                                {{-- <option value="Temporary" {{isset($staff->staff_type)?$staff->staff_type
+                                                    == 'Temporary'?'selected':'':''}}>Temporary Pass</option> --}}
                                             </select>
                                         </div>
                                     </div>
