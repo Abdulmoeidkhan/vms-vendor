@@ -49,7 +49,7 @@
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-user-circle"></i>
                         </div>
-                        <span class="hide-menu">HR</span>
+                        <span class="hide-menu">BXSS</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -61,7 +61,8 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="media")
+                @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name
+                =="media")
                 <li class="sidebar-item">
                     <a href="{{route('pages.mediaGroups')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
@@ -117,7 +118,7 @@
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-video"></i>
                         </div>
-                        <span class="hide-menu">HR</span>
+                        <span class="hide-menu">BXSS</span>
                     </a>
                 </li>
                 @endif
