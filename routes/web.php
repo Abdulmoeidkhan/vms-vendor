@@ -6,6 +6,7 @@ use App\Http\Controllers\SignInController;
 use App\Http\Controllers\ActivationRequest;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ActivateProfileController;
+use App\Http\Controllers\BadgeConotroller;
 use App\Http\Controllers\DepoGroupController;
 use App\Http\Controllers\HRController;
 use App\Http\Controllers\MediaController;
@@ -58,6 +59,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updateProfile', [UpdateProfileController::class, 'updateProflie'])->name('request.updateProfile');
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
     Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
+
+    Route::get('/badge/{ids}', [BadgeConotroller::class, 'render'])->name('pages.badge');
 
     // Logout Routes
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');

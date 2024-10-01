@@ -109,6 +109,9 @@
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary mb-2">Add
                         Staff</a>&nbsp;
+                    @if(session('user')->roles[0]->name === "admin")
+                    <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
+                    @endif
                 </div>
             </div>
             @endif
@@ -265,7 +268,7 @@
         if (row.staff_security_status == "approved" && row.staff_type == "Functionary") {
             return [
                 '<div class="left">',
-                '<a class="btn btn-primary" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',
+                // '<a class="btn btn-primary" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',
                 '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-id-badge-2"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 12h3v4h-3z" /><path d="M10 6h-6a1 1 0 0 0 -1 1v12a1 1 0 0 0 1 1h16a1 1 0 0 0 1 -1v-12a1 1 0 0 0 -1 -1h-6" /><path d="M10 3m0 1a1 1 0 0 1 1 -1h2a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-2a1 1 0 0 1 -1 -1z" /><path d="M14 16h2" /><path d="M14 12h4" /></svg>',
                 '</a>',
                 '</div>'
@@ -327,6 +330,7 @@
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
+        var $printButton = $('.print-action-button')
 
         
         // function rowStyle(row) {
@@ -355,7 +359,16 @@
                 // console.log(response.data);
                 $table.bootstrapTable('refresh');
                 }).catch(function(error) {console.log(error);})
-        }
+        })
+
+        $(function() {$printButton.click(function (val) {
+            let uidArray=[]
+            $table.bootstrapTable('getSelections').map((val)=>{
+                    uidArray.push(val.uid);
+                })
+                uidArray.length?window.location.href = "{{  url('') }}/badge/"+uidArray+"":alert("Please atleast select one");
+        })
+    }
     )}
 )
         $(val).bootstrapTable({
