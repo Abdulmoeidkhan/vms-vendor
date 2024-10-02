@@ -366,7 +366,7 @@
             $table.bootstrapTable('getSelections').map((val)=>{
                     uidArray.push(val.uid);
                 })
-                uidArray.length?window.location.href = "{{  url('') }}/badge/"+uidArray+"":alert("Please atleast select one");
+                uidArray.length?window.location.href = "{{  url('') }}/badge/org/"+uidArray+"":alert("Please atleast select one");
         })
     }
     )}

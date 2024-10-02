@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/updateProfilePassowrd', [UpdateProfileController::class, 'updatePassword'])->name('request.updatePassword');
     Route::post('/activateProfile', [ActivateProfileController::class, 'activateProfile'])->name('request.activateProfile');
 
-    Route::get('/badge/{ids}', [BadgeConotroller::class, 'render'])->name('pages.badge');
+    Route::get('/badge/{type}/{ids}', [BadgeConotroller::class, 'render'])->name('pages.badge');
 
     // Logout Routes
     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout.request');

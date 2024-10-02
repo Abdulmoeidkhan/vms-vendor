@@ -39,22 +39,20 @@
                                         @if(session()->get('user')->roles[0]->name === "admin")
                                         @if(isset($hrGroups))
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="hr_category" name="Hr Category" colorClass="danger"
+                                            modalId="hr_category" name="Category" colorClass="danger"
                                             :className="$modelClass=App\Models\HrCategory::class" btnName="Add Category"
                                             :oldData='$hrGroups->hr_category' />
                                         @else
                                         <livewire:modal-form-component wire:id="{{rand()}}" wire:key="{{rand()}}"
-                                            modalId="hr_category" name="Hr Category" btnName="Add Category"
+                                            modalId="hr_category" name="Category" btnName="Add Category"
                                             :className="$modelClass=App\Models\HrCategory::class" colorClass="primary"
                                             :oldData='null'  />
                                         @endif
                                         @else
                                         <div class="mb-3">
-                                            <label for="hr_category" class="form-label">Hr
-                                                Category</label>
+                                            <label for="hr_category" class="form-label">Category</label>
                                             <select name="hr_category" id="hr_category" class="form-select">
-                                                <option value="" selected disabled hidden> Select Hr
-                                                    Category
+                                                <option value="" selected disabled hidden> Select Category
                                                 </option>
                                                 @foreach (\App\Models\HrCategory::all() as $category)
                                                 <option value="{{$category->display_name}}" {{isset($hrGroups->

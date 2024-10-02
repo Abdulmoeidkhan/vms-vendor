@@ -11,9 +11,14 @@ class Badge extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct()
-    {
-        //
+    public $badgeData;
+    public $componentKey;
+    public function __construct(
+        $componentKey,
+        $badgeData
+    ) {
+        $this->componentKey = $componentKey;
+        $this->badgeData = $badgeData;
     }
 
     /**

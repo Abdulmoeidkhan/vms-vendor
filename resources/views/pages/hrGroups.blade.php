@@ -107,7 +107,7 @@
                             <th data-filter-control="input" data-field="functionaryRejection" data-sortable="true"
                                 data-formatter="operateDigits">Rejected</th>
                             <th data-filter-control="input" data-field="hr_category" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateSpecialText">HR Category</th>
+                                data-fixed-columns="true" data-formatter="operateSpecialText">Category</th>
                             <th data-filter-control="input" data-field="hr_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">HR Name</th>
                             <th data-filter-control="input" data-field="hr_rep_email" data-formatter="operateEmail">
