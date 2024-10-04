@@ -126,8 +126,9 @@
                             </th>
                             <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
                                 Print</th>
-                            <th data-filter-control="input" data-field="media_staff_security_status" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Security Status</th>
+                            <th data-filter-control="input" data-field="media_staff_security_status"
+                                data-sortable="true" data-formatter="operateText" data-force-hide="true">Security Status
+                            </th>
                             <th data-filter-control="input" data-field="media_staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="media_staff_father_name" data-sortable="true"
@@ -151,21 +152,22 @@
                                 data-formatter="operateText" data-force-hide="true">Nationality</th>
                             <th data-filter-control="input" data-field="media_staff_identity" data-sortable="true"
                                 data-formatter="operateDigits">CNIC/Passport</th>
-                            <th data-filter-control="input" data-field="media_staff_identity_expiry" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
+                            <th data-filter-control="input" data-field="media_staff_identity_expiry"
+                                data-sortable="true" data-formatter="operateText" data-force-hide="true">Identity Expiry
+                            </th>
                             <th data-filter-control="input" data-field="media_staff_contact" data-sortable="true"
                                 data-formatter="operateDigits">Contact</th>
                             <th data-filter-control="input" data-field="media_staff_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">DOB</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Employee Type</th>
-                            <th data-field="picture.img_blob" data-formatter="operatepicture">Picture</th>
-                            <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
+                            <th data-field="uid" data-formatter="operatepicture">Picture</th>
+                            {{-- <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC front</th>
                             <th data-field="cnicback.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
-                                CNIC back</th>
+                                CNIC back</th> --}}
                             <th data-filter-control="input" data-field="media_staff_remarks" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Remarks</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
@@ -223,11 +225,18 @@
         }
     }
 
+    // function operatepicture(value, row, index) {
+    //     if (value != null) {
+    //         return value ? `<img width="100" height="120" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+    //     }
+    // }
+
     function operatepicture(value, row, index) {
         if (value != null) {
-            return value ? `<img width="100" height="120" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+            return value ? `<img width="100" height="120" src="https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/${value}.png" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
     }
+
     function operatecnic(value, row, index) {
         if (value != null) {
             return value ? `<img width="150px" height="100px" src=${value} />` : ['<div class="left">', 'Not Available', '</div>'].join('');

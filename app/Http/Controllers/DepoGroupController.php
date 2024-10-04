@@ -8,9 +8,9 @@ use App\Models\DepoGuest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
-use App\Models\StaffImages;
-use App\Models\CnicBack;
-use App\Models\CnicFront;
+// use App\Models\StaffImages;
+// use App\Models\CnicBack;
+// use App\Models\CnicFront;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -224,9 +224,9 @@ class DepoGroupController extends Controller
         $depoGroupsGuest = DepoGuest::where('depo_uid', $id)->get();
         foreach ($depoGroupsGuest as $key => $guest) {
             $depoGroupsGuest[$key]->depoName = DepoGroup::where('uid', $guest->depo_uid)->first('depo_rep_name');
-            $depoGroupsGuest[$key]->picture = StaffImages::where('uid', $guest->uid)->first('img_blob');
-            $depoGroupsGuest[$key]->cnicfront = CnicFront::where('uid', $guest->uid)->first('img_blob');
-            $depoGroupsGuest[$key]->cnicback = CnicBack::where('uid', $guest->uid)->first('img_blob');
+            // $depoGroupsGuest[$key]->picture = StaffImages::where('uid', $guest->uid)->first('img_blob');
+            // $depoGroupsGuest[$key]->cnicfront = CnicFront::where('uid', $guest->uid)->first('img_blob');
+            // $depoGroupsGuest[$key]->cnicback = CnicBack::where('uid', $guest->uid)->first('img_blob');
         }
         return $depoGroupsGuest;
     }

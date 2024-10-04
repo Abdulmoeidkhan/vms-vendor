@@ -301,7 +301,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 d-flex align-items-stretch">
+    {{-- <div class="col-lg-4 d-flex align-items-stretch">
         <div class="card w-100">
             <div class="card-body p-4">
                 <livewire:image-upload-component :uid="$staff->uid" title="CNIC Front" name="cnic_front_picture" />
@@ -314,7 +314,7 @@
                 <livewire:image-upload-component :uid="$staff->uid" title="CNIC Back" name="cnic_back_picture" />
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @else
 <div class="row" style="cursor: not-allowed;">
@@ -341,7 +341,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-4 d-flex align-items-stretch">
+    {{-- <div class="col-lg-4 d-flex align-items-stretch">
         <div class="card w-100 disabled">
             <div class="card-body p-4">
                 <div class="mb-4">
@@ -386,7 +386,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endif
 @endsection

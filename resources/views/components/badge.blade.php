@@ -18,8 +18,8 @@
         <div class="card-border mx-4">
             <div class="logo-child mx-5">
                 @if($badgeData->image)
-                <img src="{{$badgeData->image?$badgeData->image->img_blob:''}}" style="height: 120px; width: 100px;"
-                    class="img-fluid" alt="" />
+                <img src="https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/{{$badgeData->uid}}.png" style="height: 120px; width: 100px;"
+                    class="img-fluid" alt="Picture" />
                 @endif
             </div>
         </div>

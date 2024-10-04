@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Middleware\Admin;
+use App\Http\Middleware\BxssUser;
 use App\Http\Middleware\HRGroup;
 use App\Http\Middleware\MediaGroup;
 use App\Http\Middleware\Organization;
@@ -39,6 +40,9 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
         $middleware->appendToGroup('depoCheck', [
             DepoGroup::class,
+        ]);
+        $middleware->appendToGroup('bxssCheck', [
+            BxssUser::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

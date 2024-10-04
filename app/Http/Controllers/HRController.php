@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\StaffImages;
-use App\Models\CnicBack;
-use App\Models\CnicFront;
+// use App\Models\StaffImages;
+// use App\Models\CnicBack;
+// use App\Models\CnicFront;
 use App\Models\HrGroup;
 use App\Models\HrStaff;
 use App\Models\Permission;
@@ -172,9 +172,9 @@ class HRController extends Controller
         $hrGroupsStaff = HrStaff::where('hr_uid', $id)->get();
         foreach ($hrGroupsStaff as $key => $staff) {
             $hrGroupsStaff[$key]->hrName = HrGroup::where('uid', $staff->hr_uid)->first('hr_name');
-            $hrGroupsStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
-            $hrGroupsStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
-            $hrGroupsStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
+            // $hrGroupsStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
+            // $hrGroupsStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
+            // $hrGroupsStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
         }
         return $hrGroupsStaff;
     }

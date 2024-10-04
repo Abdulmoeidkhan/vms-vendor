@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\MediaGroup;
 use App\Models\MediaStaff;
-use App\Models\StaffImages;
-use App\Models\CnicBack;
-use App\Models\CnicFront;
+// use App\Models\StaffImages;
+// use App\Models\CnicBack;
+// use App\Models\CnicFront;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Models\User;
@@ -188,9 +188,9 @@ class MediaController extends Controller
         $mediaStaff = MediaStaff::where('media_uid', $id)->get();
         foreach ($mediaStaff as $key => $staff) {
             $mediaStaff[$key]->mediaName = MediaGroup::where('uid', $staff->media_uid)->first('media_name');
-            $mediaStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
-            $mediaStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
-            $mediaStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
+            // $mediaStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
+            // $mediaStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
+            // $mediaStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
         }
         return $mediaStaff;
     }
