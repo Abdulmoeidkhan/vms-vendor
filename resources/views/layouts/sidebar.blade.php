@@ -27,7 +27,7 @@
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                @if(session()->get('user')->roles[0]->name =="admin")
+                @if(session()->get('user')->roles[0]->name =="admin" )
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{route('pages.userPanel')}}" aria-expanded="false">
                         <span>
@@ -36,6 +36,8 @@
                         <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
+                @endif
+                @if(session()->get('user')->roles[0]->name == 'bxssUser' || session()->get('user')->roles[0]->name =="admin" )
                 <li class="sidebar-item">
                     <a href="{{route('pages.organizations')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
@@ -60,9 +62,10 @@
                         <span class="hide-menu">Summary</span>
                     </a>
                 </li>
+                
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name
-                =="media")
+                =="media" || session()->get('user')->roles[0]->name == 'bxssUser')
                 <li class="sidebar-item">
                     <a href="{{route('pages.mediaGroups')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
@@ -92,7 +95,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="mediaRep")
+                @if(session()->get('user')->roles[0]->name =="mediaRep" )
                 <li class="sidebar-item">
                     <a href="{{route('pages.mediaGroup',session()->get('user')->uid)}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
@@ -112,7 +115,7 @@
                     </a>
                 </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name =="hrRep")
+                @if(session()->get('user')->roles[0]->name =="hrRep" )
                 <li class="sidebar-item">
                     <a href="{{route('pages.hrGroup',session()->get('user')->uid)}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">

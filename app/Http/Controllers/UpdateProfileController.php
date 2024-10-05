@@ -28,6 +28,7 @@ class UpdateProfileController extends Controller
         }
         return $code;
     }
+
     public function updateProflie(Request $req)
     {
         $contact_number = str_replace(['+', '-'], '', $req->inputContactNumber);
@@ -65,6 +66,7 @@ class UpdateProfileController extends Controller
         $updatedUser = User::with('roles', 'permissions')->where('uid', $req->uid)->first();
         return "Profile has been updated";
     }
+    
     public function updatePassword(Request $req)
     {
         $password = Hash::make($req->userInputPassword);

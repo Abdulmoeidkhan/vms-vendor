@@ -18,7 +18,7 @@ class MediaGroup
     public function handle(Request $request, Closure $next): Response
     {
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
-        $isMedia = $user->roles[0]->name == 'mediaRep' || $user->roles[0]->name == 'admin' || $user->roles[0]->name == 'media'? true : false;
+        $isMedia = $user->roles[0]->name == 'mediaRep' || $user->roles[0]->name == 'admin' || $user->roles[0]->name == 'media' || $user->roles[0]->name == 'bxssUser'? true : false;
         if (!$isMedia) {
             return abort(403);
         }

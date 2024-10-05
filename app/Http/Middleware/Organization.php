@@ -19,7 +19,7 @@ class Organization
     {
         // $isOrg = session('user')->roles[0]->name === 'orgRep' || session('user')->roles[0]->name === 'admin' ? true : false;
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
-        $isOrg = $user->roles[0]->name == 'orgRep' ||$user->roles[0]->name == 'admin'? true : false;
+        $isOrg = $user->roles[0]->name == 'orgRep' ||$user->roles[0]->name == 'admin' || $user->roles[0]->name == 'bxssUser'? true : false;
         if (!$isOrg) {
             return abort(403);
         }

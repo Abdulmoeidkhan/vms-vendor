@@ -1,8 +1,7 @@
 @auth
 @extends('layouts.layout')
 @section("content")
-
-@if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="media")
+@if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="media" || session()->get('user')->roles[0]->name =="bxssUser")
 <div class="row">
     <div class="col-lg-12 d-flex align-items-strech">
         <div class="card w-100">
@@ -17,7 +16,7 @@
         </div>
     </div>
 </div>
-@if(session()->get('user')->roles[0]->name =="admin")
+@if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="bxssUser")
 <div class="row">
     <div class="col-lg-12 d-flex align-items-strech">
         <div class="card w-100">
@@ -33,7 +32,7 @@
     </div>
 </div>
 @endif
-@if(session()->get('user')->roles[0]->name =="admin")
+@if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="bxssUser")
 <div class="row">
     <div class="col-lg-12 d-flex align-items-strech">
         <div class="card w-100">

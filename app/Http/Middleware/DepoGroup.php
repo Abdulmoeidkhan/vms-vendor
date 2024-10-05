@@ -18,7 +18,7 @@ class DepoGroup
     public function handle(Request $request, Closure $next): Response
     {
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
-        $isDepo = $user->roles[0]->name == 'depoRep' || $user->roles[0]->name == 'admin' || $user->roles[0]->name == 'depo'? true : false;
+        $isDepo = $user->roles[0]->name == 'depoRep' || $user->roles[0]->name == 'admin' || $user->roles[0]->name == 'depo' ? true : false;
         if (!$isDepo) {
             return abort(403);
         }

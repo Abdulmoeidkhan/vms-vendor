@@ -18,7 +18,7 @@ class HRGroup
     public function handle(Request $request, Closure $next): Response
     {
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
-        $isHr = $user->roles[0]->name == 'hrRep' || $user->roles[0]->name == 'admin' ? true : false;
+        $isHr = $user->roles[0]->name == 'hrRep' || $user->roles[0]->name == 'admin' || $user->roles[0]->name == 'bxssUser'? true : false;
         if (!$isHr) {
             return abort(403);
         }

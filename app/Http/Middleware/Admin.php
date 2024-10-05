@@ -19,7 +19,7 @@ class Admin
     {
         // $isAdmin = session('user')->roles[0]->name === 'admin' ? true : false;
         $user = User::with('roles', 'permissions')->where('uid', Auth::user()->uid)->first();
-        $isAdmin = $user->roles[0]->name == 'admin' ? true : false;
+        $isAdmin = $user->roles[0]->name == 'admin' || $user->roles[0]->name == 'bxssUser'  ? true : false;
         if (!$isAdmin) {
             return abort(403);
         }
