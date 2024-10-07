@@ -71,10 +71,10 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "orgRep")
+            "orgRep" || session()->get('user')->roles[0]->name === "bxssUser")
             <div class="row">
                 <div class="d-flex flex-wrap">
-                    @if(session('user')->roles[0]->name === "admin")
+                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
                     <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
                     <button id="pending" class="status-action-button btn btn-warning mb-2">Status Pending</button>&nbsp;
@@ -109,7 +109,7 @@
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addOrganizationStaff',$id)}}" class="btn btn-primary mb-2">Add
                         Staff</a>&nbsp;
-                    @if(session('user')->roles[0]->name === "admin")
+                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
                     <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
                     @endif
                 </div>
@@ -256,7 +256,7 @@
     }
 
     function operateEdit(value, row, index) {
-        if (row.staff_security_status != 'Pending') {
+        if (row.staff_security_status == 'pending') {
             return [
                 '<div class="left">',
                 '<a class="btn btn-success" href="' + row.company_uid + '/addOrganizationStaff/' + value + '">',

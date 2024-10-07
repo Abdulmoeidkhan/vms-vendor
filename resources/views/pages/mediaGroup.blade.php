@@ -71,10 +71,10 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "mediaRep"|| session('user')->roles[0]->name ==="media")
+            "mediaRep"|| session('user')->roles[0]->name ==="media" || session()->get('user')->roles[0]->name === "bxssUser")
             <div class="row">
                 <div class="d-flex flex-wrap">
-                    @if(session('user')->roles[0]->name === "admin")
+                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
                     <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
                     <button id="pending" class="status-action-button btn btn-warning mb-2">Status Pending</button>&nbsp;
@@ -244,7 +244,7 @@
     }
 
     function operateEdit(value, row, index) {
-        if (value) {
+        if (row.media_staff_security_status == 'pending') {
             return [
                 '<div class="left">',
                 '<a class="btn btn-success" href="' + row.media_uid + '/addMediaStaff/' + value + '">',

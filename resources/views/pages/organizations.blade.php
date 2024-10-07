@@ -91,7 +91,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addOrganization')}}" class="btn btn-primary">Add
@@ -165,7 +165,7 @@
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
-                            @if(session()->get('user')->roles[0]->name === "admin")
+                            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
                             <th data-field="uid" data-formatter="operateEdit">Staff</th>
                             <th data-field="uid" data-formatter="operateOrganization">Edit</th>
                             @endif

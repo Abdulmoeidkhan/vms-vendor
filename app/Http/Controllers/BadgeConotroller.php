@@ -6,7 +6,7 @@ use App\Models\DepoGuest;
 use App\Models\HrStaff;
 use App\Models\MediaStaff;
 use App\Models\OrganizationStaff;
-use App\Models\StaffImages;
+// use App\Models\StaffImages;
 use Illuminate\Http\Request;
 
 class BadgeConotroller extends Controller

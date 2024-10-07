@@ -69,7 +69,7 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ===
-            "media")
+            "media" || session()->get('user')->roles[0]->name === "bxssUser")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addMedia')}}" class="btn btn-primary">Add
@@ -132,7 +132,7 @@
                                 data-formatter="operateDate">Last Updated
                             </th>
                             @if(session()->get('user')->roles[0]->name === "admin" ||
-                            session()->get('user')->roles[0]->name === "media")
+                            session()->get('user')->roles[0]->name === "media" || session()->get('user')->roles[0]->name === "bxssUser")
                             <th data-field="uid" data-formatter="operateEdit">Staff</th>
                             <th data-field="uid" data-formatter="operateMedia">Edit</th>
                             @endif

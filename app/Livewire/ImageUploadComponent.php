@@ -56,7 +56,7 @@ class ImageUploadComponent extends Component
         // $imgBlob->img_blob = $imageBlob;
         // $imgBlob->uid = $uid;
         // $imgSaved = $imgBlob->save();
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid . '.png', $imageBlob);
+        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid, $imageBlob);
         return $imgSaved;
     }
 
@@ -64,14 +64,15 @@ class ImageUploadComponent extends Component
     protected function imageDeleteBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
-        $oldImageDelete = Storage::disk('cloudinary')->delete('path/to/store/' . $uid);
-        $imgSaved = Storage::disk('cloudinary')->put('Images/' . $uid . '.png', $imageBlob);
+        $oldImageDelete = Storage::disk('cloudinary')->delete('Images/' . $uid);
+        $imgSaved = Storage::disk('cloudinary')->put('Images/profile/' . $uid . '.png', $imageBlob);
         return $imgSaved;
     }
 
     protected function imageBlobUpdate($file, $uid)
     {
         $imageBlob = $file;
+        // $updateImageBlob = $imageBlob->storeOnCloudinaryAs('images', $uid);
         $updateImageBlob = Storage::disk('cloudinary')->exists($uid.'.png') ? $this->imageDeleteBlobUpdate($imageBlob, $uid) : $this->imageBlobUpload($file, $uid);
         // $updateImageBlob = $this->dbClassCall::where('uid', $uid)->first() ? $this->dbClassCall::where('uid', $uid)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $uid);
         return $updateImageBlob;
@@ -79,6 +80,7 @@ class ImageUploadComponent extends Component
 
     public function save()
     {
+        // $uploadOrUpdateImage = $this->imageBlobUpdate($this->savedpicture, $this->uid);
         $this->imageBlobUpdate($this->savedpicture, $this->uid) ? $this->js("alert('Image Updated Successfully!')") : $this->js("alert('Something Went Wrong!')");
         $this->dispatch('image-updated')->self();
     }

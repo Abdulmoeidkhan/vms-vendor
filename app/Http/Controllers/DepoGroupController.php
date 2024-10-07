@@ -156,9 +156,9 @@ class DepoGroupController extends Controller
             }
         } catch (\Illuminate\Database\QueryException $exception) {
             if ($exception->errorInfo[2]) {
-                return  redirect()->back()->with('error', 'Error : ' . $exception->errorInfo[2]);
+                return  redirect()->back()->withInput()->with('error', 'Error : ' . $exception->errorInfo[2]);
             } else {
-                return  redirect()->back()->with('error', $exception->errorInfo[2]);
+                return  redirect()->back()->withInput()->with('error', $exception->errorInfo[2]);
             }
         }
     }

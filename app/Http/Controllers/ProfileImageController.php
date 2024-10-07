@@ -15,7 +15,7 @@ class ProfileImageController extends Controller
         if ($uid == auth()->user()->uid) {
             $user = User::with('roles', 'permissions')->where('id', Auth::user()->id)->first();
             $user->images = ImageBlob::where('uid', Auth::user()->uid)->first();
-            session(['user'=> $user]);
+            session(['user' => $user]);
             return true;
         } else {
             return false;
@@ -32,8 +32,7 @@ class ProfileImageController extends Controller
             $imgBlob->img_blob = $imageBlob;
             $imgSaved = $imageAlreadyExist ? $this->imageBlobUpdate($imgBlob->img_blob, $imgBlob->uid) : $imgBlob->save();
             return $imgSaved ? redirect()->back()->with('message', 'Image Updated Successfully') : redirect()->back()->with('error', 'SomeThing Went Wrong');
-        }
-        else{
+        } else {
             return redirect()->back()->with('error', 'Please save and try to upload again');
         }
     }
@@ -44,5 +43,4 @@ class ProfileImageController extends Controller
         $updateImageBlob = ImageBlob::where('uid', $id)->first() ? ImageBlob::where('uid', $id)->update(['img_blob' => $imageBlob]) : $this->imageBlobUpload($file, $id);
         return $updateImageBlob ? redirect()->back()->with('message', 'Image Updated Successfully') : redirect()->back()->with('error', 'SomeThing Went Wrong');;
     }
-
 }

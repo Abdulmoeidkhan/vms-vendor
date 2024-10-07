@@ -70,7 +70,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep")
+            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep" || session()->get('user')->roles[0]->name === "bxssUser")
             {{-- <div class="row">
                 <div class="d-flex flex-wrap">
                     if(session('user')->roles[0]->name === "admin")
@@ -124,8 +124,8 @@
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate">Last Updated
                             </th>
-                            <th data-filter-control="input" data-field="picture" data-sortable="true"
-                                data-formatter="operateBool">Image Uploaded</th>
+                            {{-- <th data-filter-control="input" data-field="picture" data-sortable="true"
+                                data-formatter="operateBool">Image Uploaded</th> --}}
                             <th data-field="uid" data-formatter="operatepicture">Picture</th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
                                 data-force-hide="true">Edit</th>
@@ -194,12 +194,12 @@
         }
     }
 
-    function operateBool(value, row, index){
-        return value.img_blob?'Yes':'No';
-    }
+    // function operateBool(value, row, index){
+    //     return value.img_blob?'Yes':'No';
+    // }
 
     function operateEdit(value, row, index) {
-        if (row.depo_security_status != 'Pending') {
+        if (row.depo_uid) {
             return [
                 '<div class="left">',
                 '<a class="btn btn-success" href="' + row.depo_uid + '/addDepoGuestRender/' + value + '">',

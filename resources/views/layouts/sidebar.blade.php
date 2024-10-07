@@ -36,8 +36,17 @@
                         <span class="hide-menu">User Panel</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{route('pages.summaryPanel')}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-chart-bar"></i>
+                        </div>
+                        <span class="hide-menu">Summary</span>
+                    </a>
+                </li>
                 @endif
-                @if(session()->get('user')->roles[0]->name == 'bxssUser' || session()->get('user')->roles[0]->name =="admin" )
+                @if(session()->get('user')->roles[0]->name == 'bxssUser' || session()->get('user')->roles[0]->name
+                =="admin" )
                 <li class="sidebar-item">
                     <a href="{{route('pages.organizations')}}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
@@ -51,18 +60,9 @@
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-user-circle"></i>
                         </div>
-                        <span class="hide-menu">BXSS</span>
+                        <span class="hide-menu">BXSS & Staff</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a href="{{route('pages.summaryPanel')}}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-chart-bar"></i>
-                        </div>
-                        <span class="hide-menu">Summary</span>
-                    </a>
-                </li>
-                
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name
                 =="media" || session()->get('user')->roles[0]->name == 'bxssUser')

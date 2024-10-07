@@ -73,7 +73,7 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "depo")
+            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "depo" || session()->get('user')->roles[0]->name === "bxssUser")
             <div class="row">
                 <div class="d-flex">
                     <a type="button" href="{{route('pages.addDepoGroup')}}" class="btn btn-primary">Add
