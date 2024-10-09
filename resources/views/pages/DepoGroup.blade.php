@@ -126,7 +126,7 @@
                             </th>
                             {{-- <th data-filter-control="input" data-field="picture" data-sortable="true"
                                 data-formatter="operateBool">Image Uploaded</th> --}}
-                            <th data-field="uid" data-formatter="operatepicture">Picture</th>
+                            <th data-field="pictureUrl" data-formatter="operatepicture">Picture</th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
                                 data-force-hide="true">Edit</th>
                         </tr>
@@ -184,7 +184,7 @@
 
     function operatepicture(value, row, index) {
         if (value != null) {
-            return value ? `<img width="100" height="120" src="https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/${value}.png" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
+            return value ? `<img width="100" height="120" src="${value}" />` : ['<div class="left">', 'Not Available', '</div>'].join('');
         }
     }
     

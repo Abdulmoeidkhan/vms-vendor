@@ -80,8 +80,8 @@ class MediaController extends Controller
     {
         $mediaGroups = MediaGroup::all();
         foreach ($mediaGroups as $key => $mediaGroup) {
-            $mediaGroups[$key]->functionaryCount = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type','Functionary')->count();
-            $mediaGroups[$key]->temporaryCount = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type','Temporary')->count();
+            $mediaGroups[$key]->functionaryCount = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->count();
+            $mediaGroups[$key]->temporaryCount = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Temporary')->count();
             $mediaGroups[$key]->functionarySent = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'sent')->count();
             $mediaGroups[$key]->functionaryPending = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'pending')->count();
             $mediaGroups[$key]->functionaryApproved = MediaStaff::where('media_uid', $mediaGroup->uid)->where('employee_type', 'Functionary')->where('media_staff_security_status', 'approved')->count();
@@ -102,7 +102,7 @@ class MediaController extends Controller
 
     public function getStats()
     {
-        $mediaGroups = MediaGroup::select('media_name as entity_name','uid as uid')->get();
+        $mediaGroups = MediaGroup::select('media_name as entity_name', 'uid as uid')->get();
         foreach ($mediaGroups as $key => $mediaGroup) {
             $mediaGroups[$key]->total = MediaStaff::where('media_uid', $mediaGroup->uid)->count();
             $mediaGroups[$key]->sent = MediaStaff::where('media_uid', $mediaGroup->uid)->where('media_staff_security_status', 'sent')->count();
@@ -188,6 +188,7 @@ class MediaController extends Controller
         $mediaStaff = MediaStaff::where('media_uid', $id)->get();
         foreach ($mediaStaff as $key => $staff) {
             $mediaStaff[$key]->mediaName = MediaGroup::where('uid', $staff->media_uid)->first('media_name');
+            $mediaStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/' . $staff->uid . '.png';
             // $mediaStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
             // $mediaStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
             // $mediaStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');

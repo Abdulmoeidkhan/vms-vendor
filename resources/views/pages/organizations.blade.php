@@ -110,6 +110,10 @@
                     <thead>
                         <tr>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial">S.No.</th>
+                            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
+                            <th data-field="uid" data-formatter="operateEdit">Staff</th>
+                            <th data-field="uid" data-formatter="operateOrganization">Edit</th>
+                            @endif
                             <th data-filter-control="input" data-field="staff_quantity" data-sortable="true"
                                 data-formatter="operateDigits">Allowed Quantity</th>
                             <th data-filter-control="input" data-field="functionaryCount" data-sortable="true"
@@ -165,10 +169,7 @@
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
                                 data-formatter="operateDate">Last Updated
                             </th>
-                            @if(session()->get('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
-                            <th data-field="uid" data-formatter="operateEdit">Staff</th>
-                            <th data-field="uid" data-formatter="operateOrganization">Edit</th>
-                            @endif
+
                         </tr>
                     </thead>
                 </table>

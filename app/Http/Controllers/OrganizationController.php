@@ -41,7 +41,6 @@ class OrganizationController extends Controller
     }
 
     // User Creatuib on request
-
     protected function newUserCreate($username, $email, $uid)
     {
         // $uid = (string) Str::uuid();
@@ -70,9 +69,7 @@ class OrganizationController extends Controller
         }
     }
 
-
     // Main Organizations Request
-
     public function render()
     {
         $StaffCount = OrganizationStaff::count();
@@ -97,7 +94,7 @@ class OrganizationController extends Controller
 
     public function getStats()
     {
-        $organizations = Organization::select('company_name as entity_name','uid as uid')->get();
+        $organizations = Organization::select('company_name as entity_name', 'uid as uid')->get();
         foreach ($organizations as $key => $organization) {
             $organizations[$key]->total = OrganizationStaff::where('company_uid', $organization->uid)->count();
             $organizations[$key]->sent = OrganizationStaff::where('company_uid', $organization->uid)->where('staff_security_status', 'sent')->count();
@@ -147,6 +144,8 @@ class OrganizationController extends Controller
         $organizationStaff = OrganizationStaff::where('company_uid', $id)->get();
         foreach ($organizationStaff as $key => $staff) {
             $organizationStaff[$key]->companyName = Organization::where('uid', $staff->company_uid)->first('company_name');
+            $organizationStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/' . $staff->uid . '.png';
+            // $organizationStaff[$key]->companyName = Organization::where('uid', $staff->company_uid)->first('company_name');
             // $organizationStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
             // $organizationStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
             // $organizationStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');
@@ -223,7 +222,6 @@ class OrganizationController extends Controller
             }
         }
     }
-
 
     // Organization Add/Update Form Render & Request
     public function addOrganizationRender($id = null)
