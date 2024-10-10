@@ -137,7 +137,7 @@
                             <th data-filter-control="input" data-field="hrName.hr_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Name</th>
                             <th data-filter-control="input" data-field="hr_designation" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-print-ignore="true">Designation </th>
+                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
                             <th data-filter-control="input" data-field="hr_department" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Department
                             </th>

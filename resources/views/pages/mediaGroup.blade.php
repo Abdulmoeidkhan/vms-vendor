@@ -143,7 +143,7 @@
                             <th data-filter-control="input" data-field="mediaName.media_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Media Name</th>
                             <th data-filter-control="input" data-field="media_staff_designation" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-print-ignore="true">
+                                data-fixed-columns="true" data-formatter="operateText">
                                 Designation </th>
                             <th data-filter-control="input" data-field="media_staff_department" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText" data-force-hide="true"
