@@ -116,20 +116,20 @@
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
-                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]"
+                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]" data-print-as-filtered-and-sorted-on-ui="true"
                     data-url="{{route('request.getHrGroupStaff',$id)}}">
                     <thead>
 
-                        <tr>
-                            <th data-field="state" data-checkbox="true"></th>
+                        <tr> 
+                            <th data-field="state" data-checkbox="true" data-print-ignore="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
                             </th>
-                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
+                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true" data-print-ignore="true">Badge
                                 Print</th>
                             {{-- <th data-filter-control="input" data-field="hr_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Pass Type</th> --}}
                             <th data-filter-control="input" data-field="hr_security_status" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Security Status</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Security Status</th>
                             <th data-filter-control="input" data-field="hr_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="hr_father_name" data-sortable="true"
@@ -137,30 +137,30 @@
                             <th data-filter-control="input" data-field="hrName.hr_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Company Name</th>
                             <th data-filter-control="input" data-field="hr_designation" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
+                                data-fixed-columns="true" data-formatter="operateText" data-print-ignore="true">Designation </th>
                             <th data-filter-control="input" data-field="hr_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Department
                             </th>
                             <th data-filter-control="input" data-field="hr_address" data-sortable="true"
                                 data-formatter="operateText">Home Address</th>
                             <th data-filter-control="input" data-field="hr_city" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">City</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">City</th>
                             <th data-filter-control="input" data-field="hr_country" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Country</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Country</th>
                             <th data-filter-control="input" data-field="hr_job_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Job Type</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Job Type</th>
                             <th data-filter-control="input" data-field="hr_nationality" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Nationality</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Nationality</th>
                             <th data-filter-control="input" data-field="hr_identity" data-sortable="true"
                                 data-formatter="operateDigits">CNIC/Passport</th>
                             <th data-filter-control="input" data-field="hr_identity_expiry" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Identity Expiry</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Identity Expiry</th>
                             <th data-filter-control="input" data-field="hr_contact" data-sortable="true"
                                 data-formatter="operateDigits">Contact</th>
                             <th data-filter-control="input" data-field="hr_dob" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">DOB</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">DOB</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Employee Type</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Employee Type</th>
                             <th data-field="pictureUrl" data-formatter="operatepicture">Picture</th>
                             {{-- <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
@@ -169,15 +169,15 @@
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC back</th> --}}
                             <th data-filter-control="input" data-field="hr_remarks" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Remarks</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Remarks</th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
-                                data-force-hide="true" data-formatter="operateDate">Created At
+                                data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Created At
                             </th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
-                                data-force-hide="true" data-formatter="operateDate">Last Updated
+                                data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Last Updated
                             </th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
-                                data-force-hide="true">Edit</th>
+                                data-force-hide="true" data-print-ignore="true">Edit</th>
                         </tr>
                     </thead>
                 </table>

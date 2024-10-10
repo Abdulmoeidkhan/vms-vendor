@@ -95,13 +95,13 @@
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
-                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]"
+                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]" data-print-as-filtered-and-sorted-on-ui="true"
                     data-url="{{route('request.getDepoGuest',$id)}}">
                     <thead>
 
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
-                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
+                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial" data-print-ignore><b>S.No.</b>
                             </th>
                             {{-- <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">
                                 Badge

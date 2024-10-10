@@ -71,10 +71,12 @@
     <div class="card w-100">
         <div class="card-body p-4">
             @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name ===
-            "mediaRep"|| session('user')->roles[0]->name ==="media" || session()->get('user')->roles[0]->name === "bxssUser")
+            "mediaRep"|| session('user')->roles[0]->name ==="media" || session()->get('user')->roles[0]->name ===
+            "bxssUser")
             <div class="row">
                 <div class="d-flex flex-wrap">
-                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser")
+                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ===
+                    "bxssUser")
                     <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
                     <button id="pending" class="status-action-button btn btn-warning mb-2">Status Pending</button>&nbsp;
@@ -105,6 +107,7 @@
                     </div>
                 </div>
             </div>
+            @if($functionaryStaffRemaing>0)
             <div class="row">
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addMediaStaffRender',$id)}}" class="btn btn-primary mb-2">Add
@@ -112,22 +115,26 @@
                 </div>
             </div>
             @endif
+            @endif
             <div class="table-responsive text-capitalize">
                 <table id="table" data-filter-control-multiple-search="true"
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getMediaStaff',$id)}}"
-                    data-row-style="rowStyle" data-header-style="headerStyle">
+                    data-row-style="rowStyle" data-header-style="headerStyle"
+                    data-print-as-filtered-and-sorted-on-ui="true">
                     <thead>
                         <tr>
-                            <th data-field="state" data-checkbox="true"></th>
+                            <th data-field="state" data-checkbox="true" data-print-ignore="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
                             </th>
-                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">Badge
+                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true"
+                                data-print-ignore="true">Badge
                                 Print</th>
                             <th data-filter-control="input" data-field="media_staff_security_status"
-                                data-sortable="true" data-formatter="operateText" data-force-hide="true">Security Status
+                                data-sortable="true" data-formatter="operateText" data-force-hide="true"
+                                data-print-ignore="true">Security Status
                             </th>
                             <th data-filter-control="input" data-field="media_staff_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
@@ -136,31 +143,38 @@
                             <th data-filter-control="input" data-field="mediaName.media_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Media Name</th>
                             <th data-filter-control="input" data-field="media_staff_designation" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText">Designation </th>
+                                data-fixed-columns="true" data-formatter="operateText" data-print-ignore="true">
+                                Designation </th>
                             <th data-filter-control="input" data-field="media_staff_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true">Department
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true"
+                                data-print-ignore="true">Department
                             </th>
                             <th data-filter-control="input" data-field="media_staff_address" data-sortable="true"
                                 data-formatter="operateText">Home Address</th>
                             <th data-filter-control="input" data-field="media_staff_city" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">City</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">City</th>
                             <th data-filter-control="input" data-field="media_staff_country" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Country</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Country
+                            </th>
                             <th data-filter-control="input" data-field="media_staff_job_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Job Type</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Job Type
+                            </th>
                             <th data-filter-control="input" data-field="media_staff_nationality" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Nationality</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Nationality
+                            </th>
                             <th data-filter-control="input" data-field="media_staff_identity" data-sortable="true"
                                 data-formatter="operateDigits">CNIC/Passport</th>
                             <th data-filter-control="input" data-field="media_staff_identity_expiry"
-                                data-sortable="true" data-formatter="operateText" data-force-hide="true">Identity Expiry
+                                data-sortable="true" data-formatter="operateText" data-force-hide="true"
+                                data-print-ignore="true">Identity Expiry
                             </th>
                             <th data-filter-control="input" data-field="media_staff_contact" data-sortable="true"
                                 data-formatter="operateDigits">Contact</th>
                             <th data-filter-control="input" data-field="media_staff_dob" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">DOB</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">DOB</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Employee Type</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Employee
+                                Type</th>
                             <th data-field="pictureUrl" data-formatter="operatepicture">Picture</th>
                             {{-- <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
@@ -169,15 +183,17 @@
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC back</th> --}}
                             <th data-filter-control="input" data-field="media_staff_remarks" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true">Remarks</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Remarks
+                            </th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
-                                data-force-hide="true" data-formatter="operateDate">Created At
+                                data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Created At
                             </th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
-                                data-force-hide="true" data-formatter="operateDate">Last Updated
+                                data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Last
+                                Updated
                             </th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
-                                data-force-hide="true">Edit</th>
+                                data-force-hide="true" data-print-ignore="true">Edit</th>
                         </tr>
                     </thead>
                 </table>
