@@ -144,8 +144,8 @@ class OrganizationController extends Controller
         $organizationStaff = OrganizationStaff::where('company_uid', $id)->get();
         foreach ($organizationStaff as $key => $staff) {
             $organizationStaff[$key]->companyName = Organization::where('uid', $staff->company_uid)->first('company_name');
-            $organizationStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/' . $staff->uid . '.png';
-            // $organizationStaff[$key]->img_blob = base64_encode(file_get_contents('https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/' . $staff->uid . '.png'));
+            $organizationStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/Images/' . $staff->uid . '.png';
+            // $organizationStaff[$key]->img_blob = base64_encode(file_get_contents('https://res.cloudinary.com/dj6mfrbth/image/upload/Images/' . $staff->uid . '.png'));
             // $organizationStaff[$key]->companyName = Organization::where('uid', $staff->company_uid)->first('company_name');
             // $organizationStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
             // $organizationStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');

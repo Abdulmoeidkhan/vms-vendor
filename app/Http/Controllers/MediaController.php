@@ -188,7 +188,7 @@ class MediaController extends Controller
         $mediaStaff = MediaStaff::where('media_uid', $id)->get();
         foreach ($mediaStaff as $key => $staff) {
             $mediaStaff[$key]->mediaName = MediaGroup::where('uid', $staff->media_uid)->first('media_name');
-            $mediaStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/' . $staff->uid . '.png';
+            $mediaStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/Images/' . $staff->uid . '.png';
             // $mediaStaff[$key]->picture = StaffImages::where('uid', $staff->uid)->first('img_blob');
             // $mediaStaff[$key]->cnicfront = CnicFront::where('uid', $staff->uid)->first('img_blob');
             // $mediaStaff[$key]->cnicback = CnicBack::where('uid', $staff->uid)->first('img_blob');

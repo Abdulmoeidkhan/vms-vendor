@@ -224,7 +224,7 @@ class DepoGroupController extends Controller
         $depoGroupsGuest = DepoGuest::where('depo_uid', $id)->get();
         foreach ($depoGroupsGuest as $key => $guest) {
             $depoGroupsGuest[$key]->depoName = DepoGroup::where('uid', $guest->depo_uid)->first('depo_rep_name');
-            $depoGroupsGuest[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/v1727959664/Images/' . $guest->uid . '.png';
+            $depoGroupsGuest[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/Images/' . $guest->uid . '.png';
             // $depoGroupsGuest[$key]->picture = StaffImages::where('uid', $guest->uid)->first('img_blob');
             // $depoGroupsGuest[$key]->cnicfront = CnicFront::where('uid', $guest->uid)->first('img_blob');
             // $depoGroupsGuest[$key]->cnicback = CnicBack::where('uid', $guest->uid)->first('img_blob');
