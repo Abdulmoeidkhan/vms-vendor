@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Organization;
 use App\Models\DepoGuest;
 use App\Models\HrStaff;
 use App\Models\MediaStaff;
@@ -18,6 +19,9 @@ class BadgeConotroller extends Controller
         switch ($type) {
             case 'org':
                 $data = OrganizationStaff::whereIn('uid', $arr)->get();
+                foreach ($data as $key => $dataList) {
+                    $data[$key]->companyName = Organization::where('uid', $dataList->company_uid)->first('company_name');
+                }
                 break;
             case 'hr':
                 $data = HrStaff::whereIn('uid', $arr)->get();

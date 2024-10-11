@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="{{asset('assets/css/styles.min.css')}}" />
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,700&amp;family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&amp;display=swap">
-
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/badge.css') }}">
     <style>
 
