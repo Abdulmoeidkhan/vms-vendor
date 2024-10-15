@@ -52,7 +52,7 @@ class BadgeConotroller extends Controller
                 }
                 break;
             case 'depo':
-                $data = DepoGuest::whereIn('uid', $arr)->get(['depo_guest_name','depo_guest_designation','depo_identity','uid','depo_uid','depo_guest_service']);
+                $data = DepoGuest::whereIn('id', $arr)->get(['depo_guest_name','depo_guest_designation','depo_identity','uid','depo_uid','depo_guest_service']);
                 foreach ($data as $key => $dataList) {
                     $data[$key]->companyName = DepoGroup::where('uid', $dataList->depo_uid)->first('depo_rep_name');
                     $data[$key]->companyName->company_name = $data[$key]->companyName->depo_rep_name;
