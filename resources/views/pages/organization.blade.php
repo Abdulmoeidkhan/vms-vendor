@@ -386,15 +386,16 @@
                 }).catch(function(error) {console.log(error);})
         })
 
+
         $(function() {$printButton.click(function (val) {
             let uidArray=[]
             $table.bootstrapTable('getSelections').map((val)=>{
-                    uidArray.push(val.uid);
+                    uidArray.push(val.id);
                 })
                 uidArray.length?window.location.href = "{{  url('') }}/badge/org/"+uidArray+"":alert("Please atleast select one");
         })
-    }
-    )}
+    })
+}
 )
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],

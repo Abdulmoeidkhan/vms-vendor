@@ -70,7 +70,8 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep" || session()->get('user')->roles[0]->name === "bxssUser")
+            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep" ||
+            session()->get('user')->roles[0]->name === "bxssUser")
             {{-- <div class="row">
                 <div class="d-flex flex-wrap">
                     if(session('user')->roles[0]->name === "admin")
@@ -84,10 +85,13 @@
             </div> --}}
             <br />
             <div class="row">
+                @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ==="bxssUser")
                 <div class="d-flex flex-wrap">
                     <a type="button" href="{{route('pages.addDepoGuestRender',$id)}}" class="btn btn-primary mb-2">Add
                         Depo Staff</a>&nbsp;
+                    <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
                 </div>
+                @endif
             </div>
             @endif
             <div class="table-responsive text-capitalize">
@@ -95,13 +99,14 @@
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
-                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]" data-print-as-filtered-and-sorted-on-ui="true"
-                    data-url="{{route('request.getDepoGuest',$id)}}">
+                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]"
+                    data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getDepoGuest',$id)}}">
                     <thead>
 
                         <tr>
                             <th data-field="state" data-checkbox="true"></th>
-                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial" data-print-ignore><b>S.No.</b>
+                            <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"
+                                data-print-ignore><b>S.No.</b>
                             </th>
                             {{-- <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true">
                                 Badge
@@ -270,6 +275,7 @@
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
+        var $printButton = $('.print-action-button')
 
         $(function() {$button.click(function (val) {
             let uidArray=[]
@@ -277,8 +283,16 @@
                 uidArray.push(val.uid);
             })
         }
-    )}
-)
+    )
+    $(function() {$printButton.click(function (val) {
+            let uidArray=[]
+            $table.bootstrapTable('getSelections').map((val)=>{
+                    uidArray.push(val.id);
+                })
+                uidArray.length?window.location.href = "{{  url('') }}/badge/depo/"+uidArray+"":alert("Please atleast select one");
+                })
+        })
+})
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {

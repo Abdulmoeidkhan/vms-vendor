@@ -70,10 +70,12 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "hrRep" || session()->get('user')->roles[0]->name === "bxssUser")
+            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "hrRep" ||
+            session()->get('user')->roles[0]->name === "bxssUser")
             <div class="row">
                 <div class="d-flex flex-wrap">
-                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name === "bxssUser" || session()->get('user')->roles[0]->name === "hrRep")
+                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ===
+                    "bxssUser" || session()->get('user')->roles[0]->name === "hrRep")
                     <button id="sent" class="status-action-button btn btn-danger mb-2">Sent For
                         Approval</button>&nbsp;
                     <button id="pending" class="status-action-button btn btn-warning mb-2">Status Pending</button>&nbsp;
@@ -104,11 +106,16 @@
                 </div>
             </div> --}}
             <div class="row">
+                @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ==="bxssUser")
                 <div class="d-flex flex-wrap">
+                    @if($functionaryStaffRemaing>0)
                     <a type="button" href="{{route('pages.addHrGroupStaffRender',$id)}}"
                         class="btn btn-primary mb-2">Add
                         HR Staff</a>&nbsp;
+                    @endif
+                    <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
                 </div>
+                @endif
             </div>
             @endif
             <div class="table-responsive text-capitalize">
@@ -116,20 +123,22 @@
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
-                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]" data-print-as-filtered-and-sorted-on-ui="true"
-                    data-url="{{route('request.getHrGroupStaff',$id)}}">
+                    data-row-style="rowStyle" data-page-list="[10, 25, 50, 100]"
+                    data-print-as-filtered-and-sorted-on-ui="true" data-url="{{route('request.getHrGroupStaff',$id)}}">
                     <thead>
 
-                        <tr> 
+                        <tr>
                             <th data-field="state" data-checkbox="true" data-print-ignore="true"></th>
                             <th data-filter-control="input" data-field="SNO" data-formatter="operateSerial"><b>S.No.</b>
                             </th>
-                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true" data-print-ignore="true">Badge
+                            <th data-filter-control="input" data-formatter="operateBadge" data-force-hide="true"
+                                data-print-ignore="true">Badge
                                 Print</th>
                             {{-- <th data-filter-control="input" data-field="hr_type" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true">Pass Type</th> --}}
                             <th data-filter-control="input" data-field="hr_security_status" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Security Status</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Security
+                                Status</th>
                             <th data-filter-control="input" data-field="hr_first_name" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateFirstAndLastName">Name</th>
                             <th data-filter-control="input" data-field="hr_father_name" data-sortable="true"
@@ -139,28 +148,34 @@
                             <th data-filter-control="input" data-field="hr_designation" data-sortable="true"
                                 data-fixed-columns="true" data-formatter="operateText">Designation </th>
                             <th data-filter-control="input" data-field="hr_department" data-sortable="true"
-                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Department
+                                data-fixed-columns="true" data-formatter="operateText" data-force-hide="true"
+                                data-print-ignore="true">Department
                             </th>
                             <th data-filter-control="input" data-field="hr_address" data-sortable="true"
                                 data-formatter="operateText">Home Address</th>
                             <th data-filter-control="input" data-field="hr_city" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true" data-print-ignore="true">City</th>
                             <th data-filter-control="input" data-field="hr_country" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Country</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Country
+                            </th>
                             <th data-filter-control="input" data-field="hr_job_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Job Type</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Job Type
+                            </th>
                             <th data-filter-control="input" data-field="hr_nationality" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Nationality</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Nationality
+                            </th>
                             <th data-filter-control="input" data-field="hr_identity" data-sortable="true"
                                 data-formatter="operateDigits">CNIC/Passport</th>
                             <th data-filter-control="input" data-field="hr_identity_expiry" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Identity Expiry</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Identity
+                                Expiry</th>
                             <th data-filter-control="input" data-field="hr_contact" data-sortable="true"
                                 data-formatter="operateDigits">Contact</th>
                             <th data-filter-control="input" data-field="hr_dob" data-sortable="true"
                                 data-formatter="operateText" data-force-hide="true" data-print-ignore="true">DOB</th>
                             <th data-filter-control="input" data-field="employee_type" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Employee Type</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Employee
+                                Type</th>
                             <th data-field="pictureUrl" data-formatter="operatepicture">Picture</th>
                             {{-- <th data-field="cnicfront.img_blob" data-width="250" data-width-unit="px"
                                 data-formatter="operatecnic" data-force-hide="true">
@@ -169,12 +184,14 @@
                                 data-formatter="operatecnic" data-force-hide="true">
                                 CNIC back</th> --}}
                             <th data-filter-control="input" data-field="hr_remarks" data-sortable="true"
-                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Remarks</th>
+                                data-formatter="operateText" data-force-hide="true" data-print-ignore="true">Remarks
+                            </th>
                             <th data-filter-control="input" data-field="created_at" data-sortable="true"
                                 data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Created At
                             </th>
                             <th data-filter-control="input" data-field="updated_at" data-sortable="true"
-                                data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Last Updated
+                                data-force-hide="true" data-formatter="operateDate" data-print-ignore="true">Last
+                                Updated
                             </th>
                             <th data-field="uid" data-formatter="operateEdit" data-force-hide="true"
                                 data-force-hide="true" data-print-ignore="true">Edit</th>
@@ -324,6 +341,7 @@
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
+        var $printButton = $('.print-action-button')
 
         $(function() {$button.click(function (val) {
             let uidArray=[]
@@ -338,8 +356,16 @@
                 $table.bootstrapTable('refresh');
                 }).catch(function(error) {console.log(error);})
         }
-    )}
-)
+    )
+    $(function() {$printButton.click(function (val) {
+            let uidArray=[]
+            $table.bootstrapTable('getSelections').map((val)=>{
+                    uidArray.push(val.id);
+                })
+                uidArray.length?window.location.href = "{{  url('') }}/badge/hr/"+uidArray+"":alert("Please atleast select one");
+                })
+        })
+})
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {

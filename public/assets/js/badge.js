@@ -6,6 +6,7 @@ $('.barcode-list').each(function (index, item) {
         {
             showHRI: false,
             barWidth: 2,
+            barHeight: 30,
         }
     );
 })

@@ -85,6 +85,7 @@
                     @endif
                 </div>
             </div>
+            @endif
             <br />
             <div class="row">
                 <div class="d-flex col-md-4 col-sm-2">
@@ -107,15 +108,17 @@
                     </div>
                 </div>
             </div>
-            @if($functionaryStaffRemaing>0)
             <div class="row">
+                @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ==="bxssUser")
                 <div class="d-flex flex-wrap">
+                    @if($functionaryStaffRemaing>0)
                     <a type="button" href="{{route('pages.addMediaStaffRender',$id)}}" class="btn btn-primary mb-2">Add
                         Media Staff</a>&nbsp;
+                    @endif
+                    <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
                 </div>
+                @endif
             </div>
-            @endif
-            @endif
             <div class="table-responsive text-capitalize">
                 <table id="table" data-filter-control-multiple-search="true"
                     data-filter-control-multiple-search-delimiter="," data-click-to-select="true" data-show-print="true"
@@ -322,6 +325,7 @@
         var $table = $(val)
         var selectedRow = {}
         var $button = $('.status-action-button')
+        var $printButton = $('.print-action-button')
 
         $(function() {$button.click(function (val) {
             let uidArray=[]
@@ -335,9 +339,18 @@
                 function(response) {
                 $table.bootstrapTable('refresh');
                 }).catch(function(error) {console.log(error);})
-        }
-    )}
-)
+        })
+        
+        $(function() {$printButton.click(function (val) {
+            let uidArray=[]
+            $table.bootstrapTable('getSelections').map((val)=>{
+                    uidArray.push(val.id);
+                })
+                uidArray.length?window.location.href = "{{  url('') }}/badge/media/"+uidArray+"":alert("Please atleast select one");
+                })
+        })
+        })
+
         $(val).bootstrapTable({
         exportTypes: ['json', 'csv', 'txt', 'sql', 'excel', 'pdf'],
         exportOptions: {

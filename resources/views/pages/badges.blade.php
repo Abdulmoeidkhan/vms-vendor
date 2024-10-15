@@ -36,7 +36,7 @@
             <br />
         </div>
         @foreach ($data as $key=> $node)
-        <x-badge :componentKey="$key" :badgeData="$node" />
+            <x-badge :componentKey="$key" :badgeData="$node" />
         @endforeach
     </div>
 

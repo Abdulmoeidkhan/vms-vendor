@@ -8,6 +8,7 @@
     .operationClass {
         display: none !important;
     }
+
 }
 
 /* @page {
@@ -15,6 +16,7 @@
 } */
 
 .badge-parent {
-    width: 85.17mm;
+    width: 1255.17mm;
     height: 52.75mm;
+    padding: 120px 0px !important;
 }
