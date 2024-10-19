@@ -109,15 +109,16 @@
                 </div>
             </div>
             <div class="row">
-                @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ==="bxssUser")
                 <div class="d-flex flex-wrap">
                     @if($functionaryStaffRemaing>0)
                     <a type="button" href="{{route('pages.addMediaStaffRender',$id)}}" class="btn btn-primary mb-2">Add
                         Media Staff</a>&nbsp;
                     @endif
+                    @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name
+                    ==="bxssUser")
                     <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
+                    @endif
                 </div>
-                @endif
             </div>
             <div class="table-responsive text-capitalize">
                 <table id="table" data-filter-control-multiple-search="true"
