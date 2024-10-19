@@ -9,10 +9,8 @@ use App\Models\HrGroup;
 use App\Models\HrStaff;
 use App\Models\MediaGroup;
 use App\Models\MediaStaff;
-use App\Models\OrganizationStaff;
-// use App\Models\StaffImages;
+use App\Models\OrganizationStaff; 
 use Illuminate\Http\Request;
-use Termwind\Components\Hr;
 
 class BadgeConotroller extends Controller
 {
@@ -54,8 +52,9 @@ class BadgeConotroller extends Controller
             case 'depo':
                 $data = DepoGuest::whereIn('id', $arr)->get(['depo_guest_name','depo_guest_designation','depo_identity','uid','depo_uid','depo_guest_service']);
                 foreach ($data as $key => $dataList) {
-                    $data[$key]->companyName = DepoGroup::where('uid', $dataList->depo_uid)->first('depo_rep_name');
+                    $data[$key]->companyName = DepoGroup::where('uid', $dataList->depo_uid)->first(['depo_rep_name','depo_category']);
                     $data[$key]->companyName->company_name = $data[$key]->companyName->depo_rep_name;
+                    $data[$key]->companyName->badge_category = $data[$key]->companyName->depo_category;
                     $data[$key]->staff_first_name = $data[$key]->depo_guest_name;
                     $data[$key]->staff_last_name = '';
                     $data[$key]->code = 'DP'.$data[$key]->depo_guest_service;

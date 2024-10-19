@@ -74,6 +74,14 @@
                         <span class="hide-menu">Media & Staff</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="{{route('pages.mediaAllStaff')}}" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-camera"></i>
+                        </div>
+                        <span class="hide-menu">All Media Staff</span>
+                    </a>
+                </li>
                 @endif
                 @if(session()->get('user')->roles[0]->name =="admin" || session()->get('user')->roles[0]->name =="depo")
                 <li class="sidebar-item">

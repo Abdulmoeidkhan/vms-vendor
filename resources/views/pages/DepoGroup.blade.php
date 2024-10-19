@@ -87,8 +87,10 @@
             <div class="row">
                 @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ==="bxssUser")
                 <div class="d-flex flex-wrap">
+                    @if($depoGuestRemaing>0)
                     <a type="button" href="{{route('pages.addDepoGuestRender',$id)}}" class="btn btn-primary mb-2">Add
                         Depo Staff</a>&nbsp;
+                        @endif
                     <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
                 </div>
                 @endif
@@ -117,7 +119,7 @@
                                 data-formatter="operateText">Designation</th>
                             <th data-filter-control="input" data-field="depo_identity" data-sortable="true"
                                 data-formatter="operateText">CNIC/Passport</th>
-                            <th data-filter-control="input" data-field="badge_type" data-sortable="true"
+                            <th data-filter-control="input" data-field="depoName.depo_category" data-sortable="true"
                                 data-formatter="operateText">Badge Category</th>
                             <th data-filter-control="input" data-field="depo_guest_contact" data-sortable="true"
                                 data-formatter="operateDigits">Staff Contact</th>

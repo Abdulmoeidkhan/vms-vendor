@@ -120,7 +120,7 @@
                                                 value="{{isset($guest) ? $guest->depo_guest_email  : ''}}" />
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    {{-- <div class="col-md-3">
                                         <div class="mb-3">
                                             <label for="badge_type" class="form-label">Badge Type *</label>
                                             <select name="badge_type" id="badge_type" class="form-select" required>
@@ -143,7 +143,7 @@
                                                     'Event_manager'?'selected':'':''}}>Event Manager</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <br />

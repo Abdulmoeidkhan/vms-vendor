@@ -102,6 +102,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getMediaStats', [MediaController::class, 'getStats'])->name('request.getMediaStats');
         Route::post('/addMediaRequest', [MediaController::class, 'addMediaRequest'])->name('request.addMediaRequest');
         Route::post('/updateMediaRequest/{id}', [MediaController::class, 'updateMedia'])->name('request.updateMediaRequest');
+        Route::get('/mediaAllStaff', [MediaController::class, 'mediaAllStaff'])->name('pages.mediaAllStaff');
+        Route::get('/requestMediaAllStaff', [MediaController::class, 'requestMediaAllStaff'])->name('request.mediaAllStaff');
     });
 
     Route::middleware('mediaCheck')->group(function () {

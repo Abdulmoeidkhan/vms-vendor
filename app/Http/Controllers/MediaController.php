@@ -278,4 +278,18 @@ class MediaController extends Controller
             }
         }
     }
+
+    public function mediaAllStaff()
+    {
+        return view('pages.mediaAllStaff');
+    }
+
+    public function requestMediaAllStaff() {
+        $mediaStaff = MediaStaff::all();
+        foreach ($mediaStaff as $key => $staff) {
+            $mediaStaff[$key]->mediaName = MediaGroup::where('uid', $staff->media_uid)->first('media_name');
+            $mediaStaff[$key]->pictureUrl = 'https://res.cloudinary.com/dj6mfrbth/image/upload/Images/' . $staff->uid . '.png';
+        }
+        return $mediaStaff;
+    }
 }
