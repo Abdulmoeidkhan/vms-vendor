@@ -126,8 +126,7 @@
                     data-virtual-scroll="true" data-filter-control="true" data-pagination="true" data-show-export="true"
                     data-show-columns="true" data-show-refresh="true" data-show-pagination-switch="true"
                     data-page-list="[10, 25, 50, 100]" data-url="{{route('request.getMediaStaff',$id)}}"
-                    data-row-style="rowStyle" data-header-style="headerStyle"
-                    data-print-as-filtered-and-sorted-on-ui="true">
+                    data-row-style="rowStyle" data-header-style="headerStyle" data-print-as-filtered-and-sorted-on-ui="true">
                     <thead>
                         <tr>
                             <th data-field="state" data-checkbox="true" data-print-ignore="true"></th>

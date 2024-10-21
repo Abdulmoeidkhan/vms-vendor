@@ -70,7 +70,8 @@
 <div class="row">
     <div class="card w-100">
         <div class="card-body p-4">
-            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep" ||
+            @if(session('user')->roles[0]->name === "admin" || session('user')->roles[0]->name === "depoRep"
+            ||session('user')->roles[0]->name === "depo" ||
             session()->get('user')->roles[0]->name === "bxssUser")
             {{-- <div class="row">
                 <div class="d-flex flex-wrap">
@@ -85,12 +86,14 @@
             </div> --}}
             <br />
             <div class="row">
-                @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name ==="bxssUser")
+                @if(session('user')->roles[0]->name === "admin" || session()->get('user')->roles[0]->name
+                ==="bxssUser"|| session('user')->roles[0]->name === "depo" ||session()->get('user')->roles[0]->name ===
+                "bxssUser")
                 <div class="d-flex flex-wrap">
                     @if($depoGuestRemaing>0)
                     <a type="button" href="{{route('pages.addDepoGuestRender',$id)}}" class="btn btn-primary mb-2">Add
                         Depo Staff</a>&nbsp;
-                        @endif
+                    @endif
                     <button id="sent" class="print-action-button btn btn-primary mb-2">Print Bagde</button>&nbsp;
                 </div>
                 @endif
